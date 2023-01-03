@@ -8,15 +8,15 @@ www.ebepro.com
 <head><base href=""/>
     <title>{{ env('APP_NAME', 'BePro Team') }}</title>
     <meta charset="utf-8" />
-    <meta name="description" content="The most advanced Bootstrap Admin Theme on Themeforest trusted by 100,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue, Asp.Net Core, Rails, Spring, Blazor, Django, Flask & Laravel versions. Grab your copy now and get life-time updates for free." />
-    <meta name="keywords" content="metronic, bootstrap, bootstrap 5, angular, VueJs, React, Asp.Net Core, Rails, Spring, Blazor, Django, Flask & Laravel starter kits, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
+    <meta name="description" content="Property Management System - BePro Team" />
+    <meta name="keywords" content="bepro, team, property, management, system, quality, solution, php, laravel, livewire" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="Metronic - Bootstrap 5 HTML, VueJS, React, Angular. Laravel, Asp.Net Core, Ruby on Rails, Spring Boot, Blazor, Django, Express Node.js & Flask Admin Dashboard Theme" />
-    <meta property="og:url" content="https://keenthemes.com/metronic" />
-    <meta property="og:site_name" content="Keenthemes | Metronic" />
-    <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
+    <meta property="og:title" content="{{ env('APP_NAME', 'BePro Team') }}" />
+    <meta property="og:url" content="{{ env('APP_URL', 'https://www.ebepro.com') }}" />
+    <meta property="og:site_name" content="Property Management System" />
+    <link rel="canonical" href="{{ env('APP_URL', 'https://www.ebepro.com') }}" />
     <link rel="shortcut icon" href="{{ asset('admin-assets/media/logos/favicon.ico') }}" />
     <!--begin::Fonts(mandatory for all pages)-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
@@ -29,6 +29,9 @@ www.ebepro.com
     <link href="{{ asset('admin-assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('admin-assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
+
+    @livewireStyles
+
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -91,8 +94,6 @@ www.ebepro.com
 
 <!--end::Modals-->
 
-@livewireScripts
-
 <!--begin::Javascript-->
 <script>var hostUrl = "assets/";</script>
 <!--begin::Global Javascript Bundle(mandatory for all pages)-->
@@ -123,6 +124,8 @@ www.ebepro.com
 <script src="{{ asset('admin-assets/js/custom/utilities/modals/new-target.js') }}"></script>
 <script src="{{ asset('admin-assets/js/custom/utilities/modals/users-search.js') }}"></script>
 <!--end::Custom Javascript-->
+
+@livewireScripts
 
 @stack('js')
 
