@@ -24,6 +24,7 @@ Route::prefix('admin')->group(function () {
             'middleware' => 'auth:admin',
         ], function () {
             Route::get('/', Admin\Dashboard\Index::class)->name('admin.dashboard');
+            Route::get('/profile', Admin\Dashboard\Index::class)->name('admin.account-settings');
         });
 
 
