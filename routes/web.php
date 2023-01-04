@@ -17,7 +17,7 @@ include('admin.php');
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('index');
 
 Route::middleware([
     'auth:sanctum',
