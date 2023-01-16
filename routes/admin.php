@@ -21,10 +21,22 @@ Route::prefix('admin')->group(function () {
 
         Route::group([
             'prefix' => '',
-            'middleware' => 'auth:admin',
+            'middleware' => [
+                'auth:admin',
+            ],
         ], function () {
             Route::get('/', Admin\Dashboard\Index::class)->name('admin.dashboard');
             Route::get('/profile', Admin\Dashboard\Index::class)->name('admin.account-settings');
+        });
+
+        Route::group([
+            'prefix' => 'users',
+            'middleware' => [
+                'auth:admin',
+            ],
+        ], function () {
+            Route::get('/', Admin\Users\Index::class)->name('admin.users');
+            Route::get('/{user_id}/details', Admin\Users\Details::class)->name('admin.users.details');
         });
 
 
