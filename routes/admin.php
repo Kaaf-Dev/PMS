@@ -29,6 +29,8 @@ Route::prefix('admin')->group(function () {
             Route::get('/profile', Admin\Dashboard\Index::class)->name('admin.account-settings');
         });
 
+
+
         Route::group([
             'prefix' => 'users',
             'middleware' => [
@@ -37,6 +39,18 @@ Route::prefix('admin')->group(function () {
         ], function () {
             Route::get('/', Admin\Users\Index::class)->name('admin.users');
             Route::get('/{user_id}/details', Admin\Users\Details::class)->name('admin.users.details');
+        });
+
+
+
+        Route::group([
+            'prefix' => 'property',
+            'middleware' => [
+                'auth:admin',
+            ],
+        ], function () {
+            Route::get('/', Admin\Property\Index::class)->name('admin.property');
+//            Route::get('/{id}/details', Admin\Property\Details::class)->name('admin.property.details');
         });
 
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Livewire\Admin\Users;
+namespace App\Http\Livewire\Admin\Property;
 
-use App\Models\User;
+use App\Models\Property;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -31,11 +31,11 @@ class ListTable extends Component
 
     public function render()
     {
-        $users = ($this->ready_to_load) ? $this->loadUsers() : [];
+        $properties = ($this->ready_to_load) ? $this->loadProperties() : [];
         $view_data = [
-            'users' => $users,
+            'properties' => $properties,
         ];
-        return view('livewire.admin.users.list-table', $view_data);
+        return view('livewire.admin.property.list-table', $view_data);
     }
 
     public function load()
@@ -43,12 +43,9 @@ class ListTable extends Component
         $this->ready_to_load = true;
     }
 
-    public function loadUsers()
+    public function loadProperties()
     {
-        $users = User::where('name', 'like', '%'. $this->search .'%')
-            ->orWhere('username', 'like', '%'. $this->search .'%')
-            ->orWhere('email', 'like', '%'. $this->search .'%')
-        ;
-        return $users->paginate();
+        $properties = Property::where('name', 'like', '%'. $this->search .'%');
+        return $properties->paginate();
     }
 }
