@@ -16,8 +16,11 @@ class PropertyTableSeeder extends Seeder
     public function run()
     {
         Property::factory()
-            ->has(Apartment::factory()->count(10), 'apartments')
             ->count(25)
-            ->create();
+            ->create()->each(function ($property) {
+                //create 8 apartments for each Property
+                Apartment::factory()
+                    ->count(8)->create(['property_id'=>$property->id]);
+            });;
     }
 }
