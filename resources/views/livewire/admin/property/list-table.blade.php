@@ -275,10 +275,10 @@
                         <th class="w-10px pe-2">
                             #
                         </th>
-                        <th class="min-w-125px">User</th>
-                        <th class="min-w-125px">Email</th>
-                        <th class="min-w-125px">Joined Date</th>
-                        <th class="text-end min-w-100px">Actions</th>
+                        <th class="min-w-125px">العقار</th>
+                        <th class="min-w-125px">عدد الشقق</th>
+                        <th class="min-w-125px">عدد العقود الفعّالة</th>
+                        <th class="text-end min-w-100px">إدارة</th>
                     </tr>
                     <!--end::Table row-->
                     </thead>
@@ -288,44 +288,35 @@
 
                     @if($properties)
 
-                        @forelse($properties as $user)
+                        @forelse($properties as $property)
                             <!--begin::Table row-->
                             <tr>
                                 <!--begin::Checkbox-->
                                 <td>
-                                    {{ $user->id }}
+                                    {{ $property->id }}
                                 </td>
                                 <!--end::Checkbox-->
                                 <!--begin::User=-->
                                 <td class="d-flex align-items-center">
-                                    <!--begin:: Avatar -->
-                                    <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                        <a href="{{ route('admin.users.details', ['user_id' => $user->id]) }}">
-                                            <div class="symbol-label">
-                                                <img src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}" class="w-100" />
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <!--end::Avatar-->
                                     <!--begin::User details-->
                                     <div class="d-flex flex-column">
-                                        <a href="{{ route('admin.users.details', ['user_id' => $user->id]) }}" class="text-gray-800 text-hover-primary mb-1">{{ $user->name }}</a>
-                                        <span>{{ $user->username }}</span>
+                                        <a href="{{ route('admin.property.details', ['property_id' => $property->id]) }}" class="text-gray-800 text-hover-primary mb-1">{{ $property->name }}</a>
+                                        <span>{{ $property->username }}</span>
                                     </div>
                                     <!--begin::User details-->
                                 </td>
                                 <!--end::User=-->
                                 <!--begin::Role=-->
-                                <td>{{ $user->email }}</td>
+                                <td>{{ $property->email }}</td>
                                 <!--end::Role=-->
                                 <!--begin::Joined-->
-                                <td>{{ $user->created_at->format('Y/m/d') }}</td>
+                                <td>{{ $property->created_at->format('Y/m/d') }}</td>
                                 <!--begin::Joined-->
                                 <!--begin::Action=-->
                                 <td class="text-end">
 
 
-                                    <a href="{{ route('admin.users.details', ['user_id' => $user->id]) }}" class="btn btn-light btn-active-light-primary btn-sm">
+                                    <a href="{{ route('admin.property.details', ['property_id' => $property->id]) }}" class="btn btn-light btn-active-light-primary btn-sm">
                                         <i class="fa-solid fa-user-gear"></i>
                                     </a>
 

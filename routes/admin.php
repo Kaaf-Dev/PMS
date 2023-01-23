@@ -50,7 +50,7 @@ Route::prefix('admin')->group(function () {
             ],
         ], function () {
             Route::get('/', Admin\Property\Index::class)->name('admin.property');
-//            Route::get('/{id}/details', Admin\Property\Details::class)->name('admin.property.details');
+            Route::get('/{property_id}/details', Admin\Property\Index::class)->name('admin.property.details');
         });
 
 
