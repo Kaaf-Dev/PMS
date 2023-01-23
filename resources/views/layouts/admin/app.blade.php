@@ -3,7 +3,7 @@
 BePro Team
 www.ebepro.com
 -->
-<html lang="en">
+<html @if (App::isLocale('ar')) direction="rtl" dir="rtl" style="direction: rtl" @else lang="en" @endif>
 <!--begin::Head-->
 <head><base href=""/>
     <title>{{ env('APP_NAME', 'BePro Team') }}</title>
@@ -22,10 +22,22 @@ www.ebepro.com
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
     <!--end::Fonts-->
 
-    <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
-    <link href="{{ asset('admin-assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('admin-assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
-    <!--end::Global Stylesheets Bundle-->
+    @if (App::isLocale('ar'))
+        <!--begin::Page Vendor Stylesheets(used by this page)-->
+        <link href="{{ asset('admin-assets/plugins/custom/prismjs/prismjs.bundle.rtl.css') }}" rel="stylesheet" type="text/css" />
+        <!--end::Page Vendor Stylesheets-->
+
+        <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
+        <link href="{{ asset('admin-assets/plugins/global/plugins.bundle.rtl.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('admin-assets/css/style.bundle.rtl.css') }}" rel="stylesheet" type="text/css" />
+        <!--end::Global Stylesheets Bundle-->
+    @else
+        <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
+        <link href="{{ asset('admin-assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('admin-assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+        <!--end::Global Stylesheets Bundle-->
+    @endif
+
 
     @stack('css')
     @livewireStyles

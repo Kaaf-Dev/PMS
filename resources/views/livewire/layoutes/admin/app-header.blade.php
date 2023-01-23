@@ -30,7 +30,7 @@
                     <!--begin::Menu-->
                     <div class="menu menu-rounded menu-column menu-lg-row my-5 my-lg-0 align-items-stretch fw-semibold px-2 px-lg-0" id="kt_app_header_menu" data-kt-menu="true">
                         <!--begin:Menu item-->
-                        <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2">
+                        <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" @if (App::isLocale('ar')) data-kt-menu-placement="bottom-end" @else data-kt-menu-placement="bottom-start" @endif class="menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2">
                             <!--begin:Menu link-->
                             <span class="menu-link">
 											<span class="menu-title">Dashboards</span>
@@ -369,7 +369,7 @@
                         </div>
                         <!--end:Menu item-->
                         <!--begin:Menu item-->
-                        <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-0 me-lg-2">
+                        <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" @if (App::isLocale('ar')) data-kt-menu-placement="bottom-end" @else data-kt-menu-placement="bottom-start" @endif class="menu-item menu-lg-down-accordion me-0 me-lg-2">
                             <!--begin:Menu link-->
                             <span class="menu-link">
 											<span class="menu-title">Pages</span>
@@ -1613,7 +1613,7 @@
                         </div>
                         <!--end:Menu item-->
                         <!--begin:Menu item-->
-                        <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
+                        <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" @if (App::isLocale('ar')) data-kt-menu-placement="bottom-end" @else data-kt-menu-placement="bottom-start" @endif class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
                             <!--begin:Menu link-->
                             <span class="menu-link">
 											<span class="menu-title">Apps</span>
@@ -1623,7 +1623,7 @@
                             <!--begin:Menu sub-->
                             <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-250px">
                                 <!--begin:Menu item-->
-                                <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start" class="menu-item menu-lg-down-accordion">
+                                <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" @if (App::isLocale('ar')) data-kt-menu-placement="left-start" @else data-kt-menu-placement="right-start" @endif class="menu-item menu-lg-down-accordion">
                                     <!--begin:Menu link-->
                                     <span class="menu-link">
 													<span class="menu-icon">
@@ -1743,7 +1743,7 @@
                                 </div>
                                 <!--end:Menu item-->
                                 <!--begin:Menu item-->
-                                <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start" class="menu-item menu-lg-down-accordion">
+                                <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" @if (App::isLocale('ar')) data-kt-menu-placement="left-start" @else data-kt-menu-placement="right-start" @endif class="menu-item menu-lg-down-accordion">
                                     <!--begin:Menu link-->
                                     <span class="menu-link">
 													<span class="menu-icon">
@@ -1765,7 +1765,7 @@
                                     <!--begin:Menu sub-->
                                     <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg px-lg-2 py-lg-4 w-lg-225px">
                                         <!--begin:Menu item-->
-                                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start" class="menu-item menu-lg-down-accordion">
+                                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" @if (App::isLocale('ar')) data-kt-menu-placement="left-start" @else data-kt-menu-placement="right-start" @endif class="menu-item menu-lg-down-accordion">
                                             <!--begin:Menu link-->
                                             <span class="menu-link">
 															<span class="menu-bullet">
@@ -2053,7 +2053,7 @@
                                 </div>
                                 <!--end:Menu item-->
                                 <!--begin:Menu item-->
-                                <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start" class="menu-item menu-lg-down-accordion">
+                                <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" @if (App::isLocale('ar')) data-kt-menu-placement="left-start" @else data-kt-menu-placement="right-start" @endif class="menu-item menu-lg-down-accordion">
                                     <!--begin:Menu link-->
                                     <span class="menu-link">
 													<span class="menu-icon">
@@ -2085,7 +2085,7 @@
                                         </div>
                                         <!--end:Menu item-->
                                         <!--begin:Menu item-->
-                                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start" class="menu-item menu-lg-down-accordion">
+                                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" @if (App::isLocale('ar')) data-kt-menu-placement="left-start" @else data-kt-menu-placement="right-start" @endif class="menu-item menu-lg-down-accordion">
                                             <!--begin:Menu link-->
                                             <span class="menu-link">
 															<span class="menu-bullet">
@@ -2126,7 +2126,7 @@
                                         </div>
                                         <!--end:Menu item-->
                                         <!--begin:Menu item-->
-                                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start" class="menu-item menu-lg-down-accordion">
+                                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" @if (App::isLocale('ar')) data-kt-menu-placement="left-start" @else data-kt-menu-placement="right-start" @endif class="menu-item menu-lg-down-accordion">
                                             <!--begin:Menu link-->
                                             <span class="menu-link">
 															<span class="menu-bullet">
@@ -2207,7 +2207,7 @@
                                 </div>
                                 <!--end:Menu item-->
                                 <!--begin:Menu item-->
-                                <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start" class="menu-item menu-lg-down-accordion">
+                                <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" @if (App::isLocale('ar')) data-kt-menu-placement="left-start" @else data-kt-menu-placement="right-start" @endif class="menu-item menu-lg-down-accordion">
                                     <!--begin:Menu link-->
                                     <span class="menu-link">
 													<span class="menu-icon">
@@ -2227,7 +2227,7 @@
                                     <!--begin:Menu sub-->
                                     <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg px-lg-2 py-lg-4 w-lg-225px">
                                         <!--begin:Menu item-->
-                                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start" class="menu-item menu-lg-down-accordion">
+                                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" @if (App::isLocale('ar')) data-kt-menu-placement="left-start" @else data-kt-menu-placement="right-start" @endif class="menu-item menu-lg-down-accordion">
                                             <!--begin:Menu link-->
                                             <span class="menu-link">
 															<span class="menu-bullet">
@@ -2268,7 +2268,7 @@
                                         </div>
                                         <!--end:Menu item-->
                                         <!--begin:Menu item-->
-                                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start" class="menu-item menu-lg-down-accordion">
+                                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" @if (App::isLocale('ar')) data-kt-menu-placement="left-start" @else data-kt-menu-placement="right-start" @endif class="menu-item menu-lg-down-accordion">
                                             <!--begin:Menu link-->
                                             <span class="menu-link">
 															<span class="menu-bullet">
@@ -2325,7 +2325,7 @@
                                 </div>
                                 <!--end:Menu item-->
                                 <!--begin:Menu item-->
-                                <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start" class="menu-item menu-lg-down-accordion">
+                                <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" @if (App::isLocale('ar')) data-kt-menu-placement="left-start" @else data-kt-menu-placement="right-start" @endif class="menu-item menu-lg-down-accordion">
                                     <!--begin:Menu link-->
                                     <span class="menu-link">
 													<span class="menu-icon">
@@ -2398,7 +2398,7 @@
                                 </div>
                                 <!--end:Menu item-->
                                 <!--begin:Menu item-->
-                                <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start" class="menu-item menu-lg-down-accordion">
+                                <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" @if (App::isLocale('ar')) data-kt-menu-placement="left-start" @else data-kt-menu-placement="right-start" @endif class="menu-item menu-lg-down-accordion">
                                     <!--begin:Menu link-->
                                     <span class="menu-link">
 													<span class="menu-icon">
@@ -2471,7 +2471,7 @@
                                 </div>
                                 <!--end:Menu item-->
                                 <!--begin:Menu item-->
-                                <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start" class="menu-item menu-lg-down-accordion">
+                                <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" @if (App::isLocale('ar')) data-kt-menu-placement="left-start" @else data-kt-menu-placement="right-start" @endif class="menu-item menu-lg-down-accordion">
                                     <!--begin:Menu link-->
                                     <span class="menu-link">
 													<span class="menu-icon">
@@ -2531,7 +2531,7 @@
                                 </div>
                                 <!--end:Menu item-->
                                 <!--begin:Menu item-->
-                                <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start" class="menu-item menu-lg-down-accordion">
+                                <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" @if (App::isLocale('ar')) data-kt-menu-placement="left-start" @else data-kt-menu-placement="right-start" @endif class="menu-item menu-lg-down-accordion">
                                     <!--begin:Menu link-->
                                     <span class="menu-link">
 													<span class="menu-icon">
@@ -2551,7 +2551,7 @@
                                     <!--begin:Menu sub-->
                                     <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg px-lg-2 py-lg-4 w-lg-225px">
                                         <!--begin:Menu item-->
-                                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start" class="menu-item menu-lg-down-accordion">
+                                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" @if (App::isLocale('ar')) data-kt-menu-placement="left-start" @else data-kt-menu-placement="right-start" @endif class="menu-item menu-lg-down-accordion">
                                             <!--begin:Menu link-->
                                             <span class="menu-link">
 															<span class="menu-bullet">
@@ -2620,7 +2620,7 @@
                                 </div>
                                 <!--end:Menu item-->
                                 <!--begin:Menu item-->
-                                <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start" class="menu-item menu-lg-down-accordion">
+                                <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" @if (App::isLocale('ar')) data-kt-menu-placement="left-start" @else data-kt-menu-placement="right-start" @endif class="menu-item menu-lg-down-accordion">
                                     <!--begin:Menu link-->
                                     <span class="menu-link">
 													<span class="menu-icon">
@@ -2693,7 +2693,7 @@
                                 </div>
                                 <!--end:Menu item-->
                                 <!--begin:Menu item-->
-                                <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start" class="menu-item menu-lg-down-accordion">
+                                <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" @if (App::isLocale('ar')) data-kt-menu-placement="left-start" @else data-kt-menu-placement="right-start" @endif class="menu-item menu-lg-down-accordion">
                                     <!--begin:Menu link-->
                                     <span class="menu-link">
 													<span class="menu-icon">
@@ -2756,7 +2756,7 @@
                                 </div>
                                 <!--end:Menu item-->
                                 <!--begin:Menu item-->
-                                <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start" class="menu-item menu-lg-down-accordion">
+                                <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" @if (App::isLocale('ar')) data-kt-menu-placement="left-start" @else data-kt-menu-placement="right-start" @endif class="menu-item menu-lg-down-accordion">
                                     <!--begin:Menu link-->
                                     <span class="menu-link">
 													<span class="menu-icon">
@@ -2841,7 +2841,7 @@
                         </div>
                         <!--end:Menu item-->
                         <!--begin:Menu item-->
-                        <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-0 me-lg-2">
+                        <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" @if (App::isLocale('ar')) data-kt-menu-placement="bottom-end" @else data-kt-menu-placement="bottom-start" @endif class="menu-item menu-lg-down-accordion me-0 me-lg-2">
                             <!--begin:Menu link-->
                             <span class="menu-link">
 											<span class="menu-title">Layouts</span>
@@ -3008,7 +3008,7 @@
                         </div>
                         <!--end:Menu item-->
                         <!--begin:Menu item-->
-                        <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
+                        <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" @if (App::isLocale('ar')) data-kt-menu-placement="bottom-end" @else data-kt-menu-placement="bottom-start" @endif class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
                             <!--begin:Menu link-->
                             <span class="menu-link">
 											<span class="menu-title">Help</span>
