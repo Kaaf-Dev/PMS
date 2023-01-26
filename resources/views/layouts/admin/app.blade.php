@@ -114,6 +114,8 @@ www.ebepro.com
 @livewireScripts
 
 @stack('js')
+@stack('css')
+
 
 <!--end::Javascript-->
 </body>

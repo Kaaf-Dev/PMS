@@ -43,7 +43,7 @@
                                 </span>
                                 <!--end::Svg Icon-->
                             </span>
-                            <span class="menu-title">Dashboard</span>
+                            <span class="menu-title">لوحة التحكم</span>
                         </a>
                         <!--end:Menu link-->
                     </div>
@@ -62,7 +62,7 @@
                                 </span>
                                 <!--end::Svg Icon-->
                             </span>
-                            <span class="menu-title">Tenants</span>
+                            <span class="menu-title">المستأجرين</span>
                         </a>
                         <!--end:Menu link-->
                     </div>
@@ -83,7 +83,7 @@
                                 </span>
                                 <!--end::Svg Icon-->
                             </span>
-                            <span class="menu-title">Property</span>
+                            <span class="menu-title">العقارات</span>
                         </a>
                         <!--end:Menu link-->
                     </div>

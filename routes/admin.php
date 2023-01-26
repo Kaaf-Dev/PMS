@@ -1,5 +1,6 @@
 <?php
 
+
 Route::prefix('admin')->group(function () {
 
     Route::get('/auth/logout', function () {
@@ -30,7 +31,6 @@ Route::prefix('admin')->group(function () {
         });
 
 
-
         Route::group([
             'prefix' => 'users',
             'middleware' => [
@@ -42,7 +42,6 @@ Route::prefix('admin')->group(function () {
         });
 
 
-
         Route::group([
             'prefix' => 'property',
             'middleware' => [
@@ -52,9 +51,6 @@ Route::prefix('admin')->group(function () {
             Route::get('/', Admin\Property\Index::class)->name('admin.property');
             Route::get('/{property_id}/details', Admin\Property\Index::class)->name('admin.property.details');
         });
-
-
-
 
 
     });

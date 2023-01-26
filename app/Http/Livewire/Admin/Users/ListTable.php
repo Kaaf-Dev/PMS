@@ -9,6 +9,7 @@ use Livewire\WithPagination;
 class ListTable extends Component
 {
     use WithPagination;
+
     protected $paginationTheme = 'bootstrap';
 
     public $ready_to_load = false;
@@ -21,7 +22,7 @@ class ListTable extends Component
         ];
     }
 
-    public function updated($property, $value)
+    public function updated($property)
     {
         if ($property == 'search') {
             $this->resetPage();
@@ -45,10 +46,13 @@ class ListTable extends Component
 
     public function loadUsers()
     {
-        $users = User::where('name', 'like', '%'. $this->search .'%')
-            ->orWhere('username', 'like', '%'. $this->search .'%')
-            ->orWhere('email', 'like', '%'. $this->search .'%')
-        ;
+        $users = User::where('name', 'like', '%' . $this->search . '%')
+            ->orWhere('email', 'like', '%' . $this->search . '%');
         return $users->paginate();
+    }
+
+    public function showAddUser()
+    {
+        $this->emit('showAddUserModel');
     }
 }

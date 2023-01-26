@@ -14,9 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 include('admin.php');
 
-
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(route('admin.auth.login'));
 })->name('index');
 
 Route::middleware([
