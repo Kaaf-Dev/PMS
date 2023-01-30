@@ -2594,7 +2594,7 @@
                                         <label class="col-lg-4 col-form-label fw-semibold fs-6">
                                             <span class="required">الجنس</span>
                                             <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"
-                                               title="Country of origination"></i>
+                                               title="الجنس"></i>
                                         </label>
                                         <!--end::Label-->
                                         <!--begin::Col-->
