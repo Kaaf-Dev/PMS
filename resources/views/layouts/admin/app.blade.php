@@ -113,6 +113,9 @@ www.ebepro.com
 
 @livewireScripts
 
+<script src="{{ asset('admin-assets/js/livewire/swal-alert.js') }}"></script>
+
+
 @stack('js')
 @stack('css')
 
