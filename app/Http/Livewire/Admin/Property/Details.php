@@ -20,4 +20,5 @@ class Details extends Component
         return view('livewire.admin.property.details')
             ->layout('layouts.admin.app');
     }
+
 }

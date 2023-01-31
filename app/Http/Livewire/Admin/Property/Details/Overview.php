@@ -19,4 +19,10 @@ class Overview extends Component
     {
         return view('livewire.admin.property.details.overview');
     }
+
+    public function testt()
+    {
+
+    }
+
 }
