@@ -1,4 +1,3 @@
-<!--begin::Card-->
 <div class="card mb-5 mb-xl-8">
     <!--begin::Card body-->
     <div class="card-body">
@@ -6,7 +5,7 @@
         <!--begin::User Info-->
         <div class="d-flex flex-center flex-column py-5">
             <!--begin::Name-->
-            <a href="#" class="fs-3 text-gray-800 text-hover-primary fw-bold mb-3">{{ $property->name }}</a>
+            <a class="fs-3 text-gray-800 text-hover-primary fw-bold mb-3">{{ $this->property->name }}</a>
             <!--end::Name-->
             <!--begin::Position-->
             <div class="mb-9">
@@ -122,4 +121,3 @@
     </div>
     <!--end::Card body-->
 </div>
-<!--end::Card-->

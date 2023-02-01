@@ -15,6 +15,6 @@ class Property extends Model
 
     public function apartments()
     {
-        $this->hasMany(Apartment::class, 'property_id', 'id');
+        return $this->hasMany(Apartment::class, 'property_id', 'id');
     }
 }

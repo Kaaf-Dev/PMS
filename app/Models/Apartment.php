@@ -16,6 +16,6 @@ class Apartment extends Model
 
     public function Property()
     {
-        $this->belongsTo(Property::class);
+        return $this->belongsTo(Property::class);
     }
 }

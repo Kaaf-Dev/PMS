@@ -46,6 +46,8 @@ class ListTable extends Component
     public function loadProperties()
     {
         $properties = Property::where('name', 'like', '%'. $this->search .'%');
-        return $properties->paginate();
+        return $properties
+            ->withCount('apartments')
+            ->paginate();
     }
 }
