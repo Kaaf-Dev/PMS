@@ -20,7 +20,7 @@ class PropertyTableSeeder extends Seeder
             ->create()->each(function ($property) {
                 //create 8 apartments for each Property
                 Apartment::factory()
-                    ->count(8)->create(['property_id'=>$property->id]);
+                    ->count(rand(4, 24))->create(['property_id'=>$property->id]);
             });;
     }
 }

@@ -22,7 +22,10 @@ class PropertyFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->streetAddress,
+            'name' => $this->faker->streetSuffix . ' - ' . $this->faker->buildingNumber,
+            'floors_count' => $this->faker->randomNumber(1),
+            'area' => $this->faker->randomFloat(2, 70, 250),
+            'construction_date' => $this->faker->dateTimeBetween('-30 years', 'now'),
         ];
     }
 

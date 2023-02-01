@@ -11,6 +11,13 @@ class Property extends Model
 
     protected $fillable = [
         'name',
+        'floors_count',
+        'area',
+        'construction_date',
+    ];
+
+    protected $dates = [
+        'construction_date',
     ];
 
     public function apartments()
