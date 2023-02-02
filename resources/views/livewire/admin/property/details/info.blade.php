@@ -28,11 +28,11 @@
         <!--begin::Details content-->
         <div id="kt_user_view_details" class="collapse show">
 
-            <div class="pb-5 fs-6 mt-5">
+            <div class="mt-5">
                 <div class="row g-xl-5">
                     <div class="col-xl-6 col-md-12">
                         <!--begin::Stat-->
-                        <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3 text-center">
+                        <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mb-3 text-center">
                             <!--begin::Number-->
                             <div class="">
                                 <div class="fs-4 fw-bold">
@@ -56,7 +56,7 @@
                     </div>
                     <div class="col-xl-6 col-md-12">
                         <!--begin::Stat-->
-                        <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3 text-center">
+                        <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mb-3 text-center">
                             <!--begin::Number-->
                             <div class="">
                                 <div class="fs-4 fw-bold">
@@ -81,7 +81,7 @@
                     </div>
                     <div class="col-xl-12 col-md-12">
                         <!--begin::Stat-->
-                        <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3 text-center">
+                        <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mb-3 text-center">
                             <!--begin::Number-->
                             <div class="">
                                 <div class="fs-4 fw-bold">
