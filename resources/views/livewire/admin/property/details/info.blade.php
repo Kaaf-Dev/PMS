@@ -98,7 +98,7 @@
                             <!--end::Number-->
 
                             <!--begin::Label-->
-                            <div class="fw-semibold fs-4 text-dark-400">{{ $this->property->construction_date->year }}</div>
+                            <div class="fw-semibold fs-4 text-dark-400">{{ $this->property->construction_date }}</div>
                             <div class="fw-semibold fs-6 text-gray-400">سنة التأسيس</div>
                             <!--end::Label-->
                         </div>

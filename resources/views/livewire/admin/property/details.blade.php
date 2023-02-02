@@ -219,7 +219,9 @@
 
                         <!--begin:::Tab pane-->
                         <div class="tab-pane fade " id="kt_property_settings_tab" role="tabpanel">
-
+                            <!--begin::Card-->
+                            @livewire('admin.property.details.settings', ['property_id' => $this->property->id])
+                            <!--end::Card-->
                         </div>
                         <!--end:::Tab pane-->
 
