@@ -23,9 +23,9 @@ class PropertyFactory extends Factory
     {
         return [
             'name' => $this->faker->streetSuffix . ' - ' . $this->faker->buildingNumber,
-            'floors_count' => $this->faker->randomNumber(1),
+            'floors_count' => $this->faker->randomFloat(0, 1, 12),
             'area' => $this->faker->randomFloat(2, 70, 250),
-            'construction_date' => $this->faker->dateTimeBetween('-30 years', 'now'),
+            'construction_date' => $this->faker->randomFloat(0, 1970, 2020),
         ];
     }
 

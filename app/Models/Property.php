@@ -16,10 +16,6 @@ class Property extends Model
         'construction_date',
     ];
 
-    protected $dates = [
-        'construction_date',
-    ];
-
     public function apartments()
     {
         return $this->hasMany(Apartment::class, 'property_id', 'id');
