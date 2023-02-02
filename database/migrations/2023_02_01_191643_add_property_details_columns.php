@@ -21,7 +21,7 @@ class AddPropertyDetailsColumns extends Migration
             $table->unsignedFloat('area', 8, 2)
                 ->nullable();
 
-            $table->dateTime('construction_date')
+            $table->string('construction_date')
                 ->nullable();
         });
     }
