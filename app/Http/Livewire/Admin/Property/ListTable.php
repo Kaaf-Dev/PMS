@@ -29,6 +29,13 @@ class ListTable extends Component
 
     }
 
+    public function getListeners()
+    {
+        return [
+            'property-added' => '$refresh',
+        ];
+    }
+
     public function render()
     {
         $properties = ($this->ready_to_load) ? $this->loadProperties() : [];
@@ -45,9 +52,14 @@ class ListTable extends Component
 
     public function loadProperties()
     {
-        $properties = Property::where('name', 'like', '%'. $this->search .'%');
-        return $properties
+        return Property::where('name', 'like', '%'. $this->search .'%')
             ->withCount('apartments')
+            ->orderBy('id', 'desc')
             ->paginate();
+    }
+
+    public function showPropertyAddModal()
+    {
+        $this->emit('show-property-add-modal');
     }
 }

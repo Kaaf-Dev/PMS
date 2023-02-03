@@ -1,0 +1,116 @@
+<?php
+
+namespace App\Http\Livewire\Admin\Property;
+
+use App\Models\Apartment;
+use Livewire\Component;
+use App\Models\Property;
+use App\Traits\WithAlert;
+
+class CreateForm extends Component
+{
+    use WithAlert;
+
+    public $name;
+    public $area;
+    public $floors_count;
+    public $construction_date;
+    public $apartments_house_count;
+    public $apartments_market_count;
+
+    public function rules()
+    {
+        return [
+            'name' => 'required',
+            'area' => 'required|numeric',
+            'floors_count' => 'required|integer',
+            'construction_date' => 'required|integer',
+            'apartments_house_count' => 'nullable|integer',
+            'apartments_market_count' => 'nullable|integer',
+        ];
+    }
+
+    public function getMessages()
+    {
+        return [
+            'required' => 'هذا الحقل إجباري',
+            'integer' => 'الرقم غير صالح',
+            'numeric' => 'القيمة غير صالحة',
+        ];
+    }
+
+    public function getListeners()
+    {
+        return [
+            'show-property-add-modal' => 'resetFields'
+        ];
+    }
+
+    public function render()
+    {
+        return view('livewire.admin.property.create-form');
+    }
+
+    public function resetFields()
+    {
+        $this->reset([
+            'name',
+            'area',
+            'floors_count',
+            'construction_date',
+            'apartments_house_count',
+            'apartments_market_count',
+        ]);
+
+        $this->resetErrorBag();
+    }
+
+    public function closeModal()
+    {
+        $this->emit('hide-property-add-modal');
+    }
+
+    public function save()
+    {
+        $validated_data = $this->validate();
+        $property = Property::create($validated_data);
+        if ($property) {
+
+            $apartments = false;
+
+            if (isset($validated_data['apartments_house_count'])) { // create house
+
+                for ($i = 1; $i <= $validated_data['apartments_house_count']; $i++) {
+                    $apartments[] = [
+                        'property_id' => $property->id,
+                        'type' => Apartment::TYPE_HOUSE,
+                        'name' => 'شقة - ' . $i,
+                    ];
+                }
+
+            }
+
+            if (isset($validated_data['apartments_market_count'])) { // create house
+
+                for ($i = 1; $i <= $validated_data['apartments_market_count']; $i++) {
+                    $apartments[] = [
+                        'property_id' => $property->id,
+                        'type' => Apartment::TYPE_STORE,
+                        'name' => 'تجاري - ' . $i,
+                    ];
+                }
+
+            }
+
+            if ($apartments) {
+                $property->apartments()->insert($apartments);
+            }
+
+            $this->showSuccessAlert('تمت العملية بنجاح');
+            $this->closeModal();
+            $this->emit('property-added');
+        } else {
+            $this->showWarningAlert('عذرًا حدث خطأ ما');
+        }
+    }
+}

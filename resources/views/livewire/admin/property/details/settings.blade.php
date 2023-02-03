@@ -32,7 +32,7 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label required fw-semibold fs-6">المساحة</label>
+                            <label class="col-lg-4 col-form-label required fw-semibold fs-6">مساحة العقار</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row fv-plugins-icon-container">
@@ -81,7 +81,7 @@
                     <!--end::Card body-->
                     <!--begin::Actions-->
                     <div class="card-footer d-flex justify-content-end py-6 px-9">
-                        <button type="reset" class="btn btn-light btn-active-light-primary me-2">تجاهل</button>
+                        <button wire:click="discard" type="button" class="btn btn-light btn-active-light-primary me-2">تجاهل</button>
                         <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">حفظ التغييرات</button>
                     </div>
                     <!--end::Actions-->

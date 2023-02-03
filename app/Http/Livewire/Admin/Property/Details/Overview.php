@@ -14,8 +14,6 @@ class Overview extends Component
         return Property::whereId($this->property_id)
             ->withCount([
                 'apartments',
-                'apartments as available_apartments_count',
-                'apartments as rented_apartments_count',
             ])
             ->firstOr(function () {
                 abort(404);

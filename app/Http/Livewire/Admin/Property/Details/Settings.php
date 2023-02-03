@@ -22,19 +22,19 @@ class Settings extends Component
         ];
     }
 
-    public function getListeners()
-    {
-        return [
-            'property-updated' => '$refresh',
-        ];
-    }
-
     public function getMessages()
     {
         return [
             'required' => 'هذا الحقل إجباري',
             'numeric' => 'يرجى ادخال أرقام فقط',
             'integer' => 'يرجى ادخال أرقام فقط',
+        ];
+    }
+
+    public function getListeners()
+    {
+        return [
+            'property-updated' => '$refresh',
         ];
     }
 
@@ -66,6 +66,6 @@ class Settings extends Component
 
     public function discard()
     {
-//        $this->property->
+        $this->property->refresh();
     }
 }
