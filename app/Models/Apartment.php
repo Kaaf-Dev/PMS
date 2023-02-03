@@ -27,11 +27,6 @@ class Apartment extends Model
         return $this->belongsTo(Property::class);
     }
 
-    public function getIsAvailableAttribute()
-    {
-        return true;
-    }
-
     public function getTypeStringAttribute()
     {
         $strings = [
@@ -49,5 +44,17 @@ class Apartment extends Model
     public function getIsTypeStoreAttribute()
     {
         return $this->type == self::TYPE_STORE;
+    }
+
+    public function getIsRentedAttribute()
+    {
+        // todo: check if rented or not from contracts
+        return $this->id % 2 == 0;
+    }
+
+    public function getIsAvailableAttribute()
+    {
+        // todo: check if rented or not from contracts
+        return $this->id % 2 != 0;
     }
 }

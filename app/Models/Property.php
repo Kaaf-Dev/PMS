@@ -23,7 +23,7 @@ class Property extends Model
 
     public function getRentedApartmentsCountAttribute()
     {
-        //////// for test purpose ////////
+        // todo: calculate rented apartments from contracts
         $rented_apartments_count = 0;
         $rented_apartments_count = (int) ($this->apartments->count() * ($this->id % 100) / 100);
         return $rented_apartments_count;

@@ -7,7 +7,7 @@
             <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
                 <!--begin::Title-->
                 <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
-                    إدارة العقارات
+                    إدارة الوحدات
                 </h1>
                 <!--end::Title-->
                 <!--begin::Breadcrumb-->
@@ -33,8 +33,21 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">{{ $this->property->name }}</li>
+                    <li class="breadcrumb-item text-muted">
+                        <a href="{{ route('admin.property.details', ['property_id' => $this->apartment->Property->id]) }}" class="text-muted text-hover-primary">{{ $this->apartment->Property->name }}</a>
+                    </li>
                     <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item">
+                        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item text-muted">
+                        <a href="{{ route('admin.property') }}" class="text-muted text-hover-primary">إدارة الوحدات</a>
+                    </li>
+                    <!--end::Item-->
+
                 </ul>
                 <!--end::Breadcrumb-->
             </div>
@@ -58,7 +71,7 @@
                 <div class="flex-column flex-lg-row-auto w-lg-250px w-xl-350px mb-10">
                     <!--begin::Card-->
                     <div class="card mb-5 mb-xl-8">
-                        @livewire('admin.property.details.info', ['property_id' => $this->property->id])
+                        @livewire('admin.property.apartment.details.info', ['apartment_id' => $this->apartment->id])
                     </div>
                 </div>
                 <!--end::Sidebar-->
@@ -69,21 +82,14 @@
                         <!--begin:::Tab item-->
                         <li class="nav-item">
                             <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab"
-                               href="#kt_property_overview_tab">نظرة عامة</a>
-                        </li>
-                        <!--end:::Tab item-->
-
-                        <!--begin:::Tab item-->
-                        <li class="nav-item">
-                            <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab"
-                               href="#kt_property_apartments_tab">الوحدات السكنية</a>
+                               href="#kt_apartment_overview_tab">نظرة عامة</a>
                         </li>
                         <!--end:::Tab item-->
 
                         <!--begin:::Tab item-->
                         <li class="nav-item">
                             <a class="nav-link text-active-primary pb-4" data-kt-countup-tabs="true"
-                               data-bs-toggle="tab" href="#kt_property_settings_tab">الإعدادات</a>
+                               data-bs-toggle="tab" href="#kt_apartment_settings_tab">الإعدادات</a>
                         </li>
                         <!--end:::Tab item-->
 
@@ -202,25 +208,17 @@
                     <div class="tab-content" id="myTabContent">
 
                         <!--begin:::Tab pane-->
-                        <div class="tab-pane fade active show" id="kt_property_overview_tab" role="tabpanel">
+                        <div class="tab-pane fade active show" id="kt_apartment_overview_tab" role="tabpanel">
                             <!--begin::Card-->
-                            @livewire('admin.property.details.overview', ['property_id' => $this->property->id])
+{{--                            @livewire('admin.property.details.overview', ['property_id' => $this->property->id])--}}
                             <!--end::Card-->
                         </div>
                         <!--end:::Tab pane-->
 
                         <!--begin:::Tab pane-->
-                        <div class="tab-pane fade " id="kt_property_apartments_tab" role="tabpanel">
+                        <div class="tab-pane fade " id="kt_apartment_settings_tab" role="tabpanel">
                             <!--begin::Card-->
-                            @livewire('admin.property.details.apartments', ['property_id' => $this->property->id])
-                            <!--end::Card-->
-                        </div>
-                        <!--end:::Tab pane-->
-
-                        <!--begin:::Tab pane-->
-                        <div class="tab-pane fade " id="kt_property_settings_tab" role="tabpanel">
-                            <!--begin::Card-->
-                            @livewire('admin.property.details.settings', ['property_id' => $this->property->id])
+                            @livewire('admin.property.apartment.details.settings', ['apartment_id' => $this->apartment->id])
                             <!--end::Card-->
                         </div>
                         <!--end:::Tab pane-->

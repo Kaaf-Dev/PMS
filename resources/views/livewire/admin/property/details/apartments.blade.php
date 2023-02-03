@@ -72,7 +72,7 @@
                                         </span>
                                         </div>
                                         <div class="d-flex justify-content-start flex-column">
-                                            <a href="#" class="text-dark fw-bold text-hover-primary mb-1 fs-6">{{ $apartment->name }}</a>
+                                            <a href="{{ route('admin.property.apartment.details', ['property_id' => $this->property->id, 'apartment_id' => $apartment->id]) }}" class="text-dark fw-bold text-hover-primary mb-1 fs-6">{{ $apartment->name }}</a>
                                         </div>
                                     </div>
                                 </td>
