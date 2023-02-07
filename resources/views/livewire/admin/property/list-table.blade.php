@@ -175,7 +175,7 @@
 </div>
 
 @push('modals')
-    <!--begin::Modal - Invite Friends-->
+    <!--begin::Modal - Create Property-->
     <div class="modal fade" id="kt_modal_property_add" tabindex="-1" aria-hidden="true">
         <!--begin::Modal dialog-->
         <div class="modal-dialog mw-650px">
@@ -207,7 +207,7 @@
         </div>
         <!--end::Modal dialog-->
     </div>
-    <!--end::Modal - Invite Friend-->
+    <!--end::Modal - Create Property-->
 @endpush
 
 @push('js')

@@ -210,7 +210,7 @@
                         <!--begin:::Tab pane-->
                         <div class="tab-pane fade active show" id="kt_apartment_overview_tab" role="tabpanel">
                             <!--begin::Card-->
-{{--                            @livewire('admin.property.details.overview', ['property_id' => $this->property->id])--}}
+                            @livewire('admin.property.apartment.details.overview', ['apartment_id' => $this->apartment->id])
                             <!--end::Card-->
                         </div>
                         <!--end:::Tab pane-->
