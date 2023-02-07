@@ -99,6 +99,7 @@ www.ebepro.com
 <!--end::Scrolltop-->
 
 <!--begin::Modals-->
+@include('modals.admin')
 
 @stack('modals')
 
@@ -114,6 +115,7 @@ www.ebepro.com
 @livewireScripts
 
 <script src="{{ asset('admin-assets/js/livewire/swal-alert.js') }}"></script>
+<script src="{{ asset('admin-assets/js/livewire/modals.js') }}"></script>
 
 @stack('js')
 
