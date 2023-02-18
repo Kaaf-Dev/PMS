@@ -53,6 +53,16 @@ Route::prefix('admin')->group(function () {
             Route::get('/{property_id}/apartment/{apartment_id}/details', Admin\Property\Apartment\Details::class)->name('admin.property.apartment.details');
         });
 
+        Route::group([
+            'prefix' => 'contracts',
+            'middleware' => [
+                'auth:admin',
+            ],
+        ], function () {
+            Route::get('/', Admin\Property\Index::class)->name('admin.contracts');
+            Route::get('/{contract_id}/details', Admin\Property\Details::class)->name('admin.contracts.details');
+        });
+
 
     });
 });

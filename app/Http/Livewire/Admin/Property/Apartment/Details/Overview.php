@@ -37,8 +37,8 @@ class Overview extends Component
     public function showContractNewModal()
     {
         $this->emit('show-contract-new-modal', [
-            'property_id' => $this->apartment->Property->id,
-            'apartment_id' => $this->apartment->id,
+            'property' => $this->apartment->Property->id,
+            'apartment' => $this->apartment->id,
         ]);
     }
 }

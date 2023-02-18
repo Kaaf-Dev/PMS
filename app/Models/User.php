@@ -65,4 +65,16 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function contracts()
+    {
+        return $this->hasMany(Contract::class);
+    }
+
+    public function getProfilePhotoUrlAttribute()
+    {
+        return ($this->user_image_path)
+            ? asset('user-image/'.$this->user_image_path)
+            : $this->defaultProfilePhotoUrl();
+    }
 }
