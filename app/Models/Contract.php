@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -40,9 +41,14 @@ class Contract extends Model
         return $this->belongsTo(Apartment::class);
     }
 
-    public function activeScope($query)
+    public function scopeActive($query, Carbon $date = null)
     {
-        // todo: check active scope from date and flag
+        $current_date = $date ?? Carbon::now(); // get date from parameter or get now date
+        $query->where('active', '=', '1') // check activation flag
+        ->where(function($query) use ($current_date){ // check date flag
+            $query->whereRaw('? BETWEEN `start_at` AND `end_at`', [$current_date->format('Y-m-01')])
+                ->orWhereRaw('`start_at` <= ? and `end_at` IS NULL', [$current_date->format('Y-m-01')]);
+        });
         return $query;
     }
 }

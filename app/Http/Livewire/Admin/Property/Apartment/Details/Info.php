@@ -21,6 +21,7 @@ class Info extends Component
     {
         return [
             'apartment-updated' => '$refresh',
+            'contract_added' => '$refresh',
         ];
     }
 

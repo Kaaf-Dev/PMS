@@ -149,8 +149,6 @@ class CreateForm extends Component
     {
         $validated_data = $this->validate();
 
-//        dd( Carbon::make($validated_data['start_at']) );
-
         if ($this->step_no >= $this->max_step_no) {
             $Contract = new Contract();
             $Contract->user_id = $this->selected_user->id;
@@ -163,7 +161,7 @@ class CreateForm extends Component
 
             if ($Contract->save()) { // saved successfully
                 $this->contract_id = $Contract->id;
-
+                $this->emit('contract_added');
             } else {
                 $this->showWarningAlert('عذرًا حدث خطأ ما!');
             }

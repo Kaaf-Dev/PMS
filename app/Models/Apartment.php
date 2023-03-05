@@ -32,6 +32,11 @@ class Apartment extends Model
         return $this->hasMany(Contract::class);
     }
 
+    public function activeContracts()
+    {
+        return $this->hasMany(Contract::class)->active();
+    }
+
     public function getTypeStringAttribute()
     {
         $strings = [
@@ -53,14 +58,12 @@ class Apartment extends Model
 
     public function getIsRentedAttribute()
     {
-        // todo: check if rented or not from contracts
-        return $this->id % 2 == 0;
+        return $this->activeContracts()->exists();
     }
 
     public function getIsAvailableAttribute()
     {
-        // todo: check if rented or not from contracts
-        return $this->id % 2 != 0;
+        return $this->activeContracts()->doesntExist();
     }
 
     public function getIconSvgAttribute()

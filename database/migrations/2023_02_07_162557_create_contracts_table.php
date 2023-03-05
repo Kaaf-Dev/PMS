@@ -23,7 +23,8 @@ class CreateContractsTable extends Migration
             $table->boolean('active')
                 ->default(true);
             $table->dateTime('start_at');
-            $table->dateTime('end_at');
+            $table->dateTime('end_at')
+                ->nullable();
             $table->timestamps();
             $table->softDeletes();
 

@@ -25,7 +25,13 @@ class Property extends Model
     {
         // todo: calculate rented apartments from contracts
         $rented_apartments_count = 0;
-        $rented_apartments_count = (int) ($this->apartments->count() * ($this->id % 100) / 100);
+      //  $rented_apartments_count = (int) ($this->apartments->count() * ($this->id % 100) / 100);
+        $rented_apartments_count = $this->apartments()
+            ->withCount('activeContracts')
+            ->get()
+            ->filter(function ($apartment) {
+                return $apartment->active_contracts_count > 0;
+            })->count();
         return $rented_apartments_count;
     }
 
