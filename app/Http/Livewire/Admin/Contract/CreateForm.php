@@ -156,8 +156,10 @@ class CreateForm extends Component
             $Contract->cost = $this->cost;
             $Contract->notes = $this->notes;
             $Contract->active = true;
-            $Contract->start_at = Carbon::make($this->start_at);
-            $Contract->end_at = Carbon::make($this->end_at);
+            $start_at = Carbon::create(Date('Y-m-01', strtotime($this->start_at)));
+            $end_at = Carbon::create(Date('Y-m-t', strtotime($this->end_at)));
+            $Contract->start_at = $start_at;
+            $Contract->end_at = $end_at;
 
             if ($Contract->save()) { // saved successfully
                 $this->contract_id = $Contract->id;
