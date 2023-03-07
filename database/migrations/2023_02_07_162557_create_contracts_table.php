@@ -22,8 +22,8 @@ class CreateContractsTable extends Migration
                 ->nullable();
             $table->boolean('active')
                 ->default(true);
-            $table->dateTime('start_at');
-            $table->dateTime('end_at')
+            $table->date('start_at');
+            $table->date('end_at')
                 ->nullable();
             $table->timestamps();
             $table->softDeletes();
