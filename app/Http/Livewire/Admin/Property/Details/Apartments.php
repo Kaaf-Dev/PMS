@@ -25,6 +25,7 @@ class Apartments extends Component
     {
         return [
             'property-updated' => '$refresh',
+            'apartment-added' => '$refresh',
         ];
     }
 
@@ -36,5 +37,12 @@ class Apartments extends Component
     public function render()
     {
         return view('livewire.admin.property.details.apartments');
+    }
+
+    public function showApartmentAddModal()
+    {
+        $this->emit('show-apartment-add-modal', [
+            'property_id' => $this->property_id,
+        ]);
     }
 }
