@@ -37,6 +37,11 @@ class Apartment extends Model
         return $this->hasMany(Contract::class)->active();
     }
 
+    public function currentContract()
+    {
+        return $this->hasOne(Contract::class)->active();
+    }
+
     public function getTypeStringAttribute()
     {
         $strings = [

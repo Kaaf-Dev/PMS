@@ -17,6 +17,11 @@ class Overview extends Component
             });
     }
 
+    public function getContractProperty()
+    {
+        return $this->apartment->currentContract;
+    }
+
     public function getListeners()
     {
         return [
