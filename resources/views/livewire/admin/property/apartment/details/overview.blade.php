@@ -8,7 +8,7 @@
                 <div class="card-header">
                     <!--begin::Card title-->
                     <div class="card-title">
-                        <h2 class="fw-bold">نظرة عامة</h2>
+                        <h2 class="fw-bold">عقد الإيجار</h2>
                     </div>
                     <!--begin::Card title-->
                     <!--begin::Card toolbar-->
@@ -26,7 +26,7 @@
                     <!--begin::Section-->
                     <div class="mb-10">
                         <!--begin::Title-->
-                        <h5 class="mb-4">Billing Address:</h5>
+                        <h5 class="mb-4">بيانات المستأجر:</h5>
                         <!--end::Title-->
                         <!--begin::Details-->
                         <div class="d-flex flex-wrap py-5">
@@ -43,19 +43,25 @@
                                     <!--begin::Row-->
                                     <tr>
                                         <td class="text-gray-400">CPR</td>
-                                        <td class="text-gray-800">{{ $this->contract->user->name }}</td>
+                                        <td class="text-gray-800">{{ $this->contract->user->cpr }}</td>
                                     </tr>
                                     <!--end::Row-->
                                     <!--begin::Row-->
                                     <tr>
-                                        <td class="text-gray-400">Address:</td>
-                                        <td class="text-gray-800">Floor 10, 101 Avenue of the Light Square, New York, NY, 10050.</td>
+                                        <td class="text-gray-400">البريد الإلكتروني:</td>
+                                        <td class="text-gray-800">
+                                            @if($this->contract->user->email)
+                                                {{ $this->contract->user->email }}
+                                            @else
+                                                <span class="badge badge-secondary">لا يوجد</span>
+                                            @endif
+                                        </td>
                                     </tr>
                                     <!--end::Row-->
                                     <!--begin::Row-->
                                     <tr>
-                                        <td class="text-gray-400">Phone:</td>
-                                        <td class="text-gray-800">(555) 555-1234</td>
+                                        <td class="text-gray-400">رقم الهاتف:</td>
+                                        <td class="text-gray-800">{{ $this->contract->user->phone }}</td>
                                     </tr>
                                     <!--end::Row-->
                                 </table>
@@ -68,28 +74,26 @@
                                 <table class="table fs-6 fw-semibold gs-0 gy-2 gx-2 m-0">
                                     <!--begin::Row-->
                                     <tr>
-                                        <td class="text-gray-400 min-w-175px w-175px">Subscribed Product:</td>
-                                        <td class="text-gray-800 min-w-200px">
-                                            <a href="#" class="text-gray-800 text-hover-primary">Basic Bundle</a>
-                                        </td>
+                                        <td class="text-gray-400">العقار:</td>
+                                        <td class="text-gray-800">{{ $this->contract->apartment->name }}</td>
                                     </tr>
                                     <!--end::Row-->
                                     <!--begin::Row-->
                                     <tr>
-                                        <td class="text-gray-400">Subscription Fees:</td>
-                                        <td class="text-gray-800">$149.99 / Year</td>
+                                        <td class="text-gray-400">تاريخ البداية:</td>
+                                        <td class="text-gray-800">{{ $this->contract->start_at->format('Y-m') }}</td>
                                     </tr>
                                     <!--end::Row-->
                                     <!--begin::Row-->
                                     <tr>
-                                        <td class="text-gray-400">Billing method:</td>
-                                        <td class="text-gray-800">Annually</td>
+                                        <td class="text-gray-400">فعّال لغاية:</td>
+                                        <td class="text-gray-800">{{ $this->contract->end_at->format('Y-m') }}</td>
                                     </tr>
                                     <!--end::Row-->
                                     <!--begin::Row-->
                                     <tr>
-                                        <td class="text-gray-400">Currency:</td>
-                                        <td class="text-gray-800">USD - US Dollar</td>
+                                        <td class="text-gray-400">الإيجار: </td>
+                                        <td class="text-gray-800">{{ $this->contract->cost }}</td>
                                     </tr>
                                     <!--end::Row-->
                                 </table>
@@ -100,6 +104,26 @@
                         <!--end::Row-->
                     </div>
                     <!--end::Section-->
+                    @if($this->contract->notes)
+                        <!--begin::Section-->
+                        <div class="mb-10">
+                            <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed rounded-3 p-6">
+                                <!--begin::Wrapper-->
+                                <div class="d-flex flex-stack flex-grow-1">
+                                    <!--begin::Content-->
+                                    <div class="fw-semibold">
+                                        <h4 class="text-gray-900 fw-bold">ملاحظات:</h4>
+                                        <div class="fs-6 text-gray-700">
+                                            {{ $this->contract->notes }}
+                                        </div>
+                                    </div>
+                                    <!--end::Content-->
+                                </div>
+                                <!--end::Wrapper-->
+                            </div>
+                        </div>
+                        <!--end::Section-->
+                    @endif
                     <!--begin::Section-->
                     <div class="mb-0">
                         <!--begin::Title-->
