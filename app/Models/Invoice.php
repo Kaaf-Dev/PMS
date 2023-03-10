@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class Invoice extends Model
 {
@@ -34,19 +35,32 @@ class Invoice extends Model
         return $this->belongsTo(Contract::class);
     }
 
+    public function receipts()
+    {
+        return $this->hasMany(Receipt::class);
+    }
+
     public function scopePaid($query)
     {
-        // todo: check paid status
-        $query->whereRaw('1=1');
+        $query->whereExists(function ($query) {
+            $query->selectRaw('1')
+                ->from('receipts')
+                ->whereColumn('receipts.invoice_id', '=', 'invoices.id')
+                ->whereColumn('receipts.amount', '>=', 'invoices.amount');
+        });
+
     }
 
     public function getIsPaidAttribute()
     {
-        $is_paid = false;
+        return $this->paid_amount >= $this->amount;
+    }
 
-        // todo: get paid status
-
-        return $is_paid;
+    public function getPaidAmountAttribute()
+    {
+        return Receipt::where([
+            ['invoice_id', '=', $this->id],
+        ])->sum('amount');
     }
 
     public function getTypeStringAttribute()
