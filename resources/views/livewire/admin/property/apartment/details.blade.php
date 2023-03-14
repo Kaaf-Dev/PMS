@@ -44,7 +44,7 @@
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">
-                        <a href="{{ route('admin.property') }}" class="text-muted text-hover-primary">إدارة الوحدات</a>
+                        <a href="#" class="text-muted text-hover-primary">{{ $this->apartment->name }}</a>
                     </li>
                     <!--end::Item-->
 
