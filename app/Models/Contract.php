@@ -41,6 +41,11 @@ class Contract extends Model
         return $this->belongsTo(Apartment::class);
     }
 
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
+    }
+
     public function scopeActive($query, Carbon $date = null)
     {
         $current_date = $date ?? Carbon::now(); // get date from parameter or get now date
