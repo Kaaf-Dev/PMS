@@ -59,8 +59,8 @@ Route::prefix('admin')->group(function () {
                 'auth:admin',
             ],
         ], function () {
-            Route::get('/', Admin\Property\Index::class)->name('admin.contracts');
-            Route::get('/{contract_id}/details', Admin\Property\Details::class)->name('admin.contracts.details');
+            Route::get('/', Admin\Contract\Index::class)->name('admin.contracts');
+            Route::get('/{contract_id}/details', Admin\Contract\Details::class)->name('admin.contracts.details');
         });
 
 

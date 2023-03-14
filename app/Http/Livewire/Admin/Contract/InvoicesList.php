@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Livewire\Admin\Property\Apartment\Details;
+namespace App\Http\Livewire\Admin\Contract;
 
 use App\Models\Invoice;
 use Livewire\Component;
 
-class Invoices extends Component
+class InvoicesList extends Component
 {
     public $contract_id;
 
@@ -16,7 +16,7 @@ class Invoices extends Component
 
     public function render()
     {
-        return view('livewire.admin.property.apartment.details.invoices');
+        return view('livewire.admin.contract.invoices-list');
     }
 
     public function getInvoicesProperty()

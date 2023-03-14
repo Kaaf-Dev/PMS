@@ -56,6 +56,15 @@ class Invoice extends Model
         return $this->paid_amount >= $this->amount;
     }
 
+    public function getIsPartialPaidAttribute()
+    {
+        $paid_amount = $this->paid_amount;
+        $amount = $this->amount;
+        return (
+            0 < $paid_amount and $paid_amount  < $amount
+        );
+    }
+
     public function getPaidAmountAttribute()
     {
         return Receipt::where([
@@ -78,9 +87,15 @@ class Invoice extends Model
     {
         if ($this->is_paid) {
             $status_class = 'success';
+
+        } elseif($this->is_partial_paid) {
+            $status_class = 'warning';
+
         } else {
             $status_class = 'danger';
+
         }
+
         return $status_class;
     }
 
@@ -88,9 +103,15 @@ class Invoice extends Model
     {
         if ($this->is_paid) {
             $paid_string = 'مدفوعة';
+
+        } elseif($this->is_partial_paid) {
+            $paid_string = 'مدفوعة جزئيًا';
+
         } else {
             $paid_string = 'غير مدفوعة';
+
         }
+
         return $paid_string;
     }
 }
