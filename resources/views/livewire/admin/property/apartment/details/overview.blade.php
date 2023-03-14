@@ -137,7 +137,7 @@
             <!--end::Card-->
 
             <!--begin::Card-->
-            @livewire('admin.contract.invoices-list', ['contract_id' => $this->contract->id])
+            @livewire('admin.contract.details.invoices-list', ['contract_id' => $this->contract->id])
             <!--end::Card-->
         @else
             <!--begin::Card-->

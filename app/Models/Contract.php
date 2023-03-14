@@ -56,4 +56,21 @@ class Contract extends Model
         });
         return $query;
     }
+
+    public function getActiveStatusAttribute()
+    {
+        $current_date = Carbon::now();
+        $start_at = $this->start_at;
+        $end_at = $this->end_at;
+        $is_active = false;
+
+        if ($this->active) {
+            if ($start_at and $end_at) {
+                $is_active = $current_date->between($start_at, $end_at);
+            } elseif ($start_at) {
+                $is_active = $current_date->lte($start_at);
+            }
+        }
+        return $is_active;
+    }
 }
