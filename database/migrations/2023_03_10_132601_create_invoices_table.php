@@ -22,8 +22,8 @@ class CreateInvoicesTable extends Migration
             $table->string('type')
                 ->nullable();
             $table->float('amount', '8', '2');
-            $table->timestamp('date');
-            $table->timestamp('due');
+            $table->timestamp('date')->nullable();
+            $table->timestamp('due')->nullable();
             $table->string('notes')
                 ->nullable();
             $table->timestamps();
