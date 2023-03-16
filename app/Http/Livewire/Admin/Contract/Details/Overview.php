@@ -13,19 +13,29 @@ class Overview extends Component
     public $show_user;
     public $show_contract_link;
     public $show_notes;
+    public $show_edit_notes;
 
     public $presets = [
         'contract_page' => [
             'show_user' => false,
             'show_contract_link' => false,
             'show_notes' => true,
+            'show_edit_notes' => true,
         ],
         'invoice_page' => [
             'show_user' => true,
             'show_contract_link' => true,
             'show_notes' => true,
+            'show_edit_notes' => false,
         ],
     ];
+
+    public function getListeners()
+    {
+        return [
+            'contract-updated-notes' => '$refresh',
+        ];
+    }
 
     public function mount($contract_id, $show_user = true, $show_contract_link = true, $show_notes = true, $preset = null)
     {
@@ -56,5 +66,12 @@ class Overview extends Component
     public function getContractProperty()
     {
         return Contract::findOrFail($this->contract_id);
+    }
+
+    public function editNotes()
+    {
+        $this->emit('show-contract-update-notes-modal', [
+            'contract_id' => $this->contract_id,
+        ]);
     }
 }
