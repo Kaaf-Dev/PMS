@@ -2,7 +2,7 @@
     <!--begin::Modal - Create Property-->
     <div class="modal fade" id="{{ $modal['modal_id'] }}" tabindex="-1" aria-hidden="true">
         <!--begin::Modal dialog-->
-        <div class="modal-dialog modal-dialog-centered mw-900px">
+        <div class="modal-dialog {{ $modal['details']['modal_dialog_class'] ?? '' }}">
             <!--begin::Modal content-->
             <div class="modal-content">
                 <!--begin::Modal header-->

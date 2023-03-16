@@ -14,6 +14,7 @@ function getAdminGlobalModals()
             'emit_hide' => 'hide-contract-new-modal',
             'details' => [
                 'title' => 'تسجيل عقد تأجير',
+                'modal_dialog_class' => 'modal-dialog-centered mw-900px',
             ]
         ], [
             'modal_id' => 'contract_update_notes_modal',
@@ -22,6 +23,7 @@ function getAdminGlobalModals()
             'emit_hide' => 'hide-contract-update-notes-modal',
             'details' => [
                 'title' => 'الملاحظات',
+                'modal_dialog_class' => 'mw-650px',
             ]
         ],
     ];
