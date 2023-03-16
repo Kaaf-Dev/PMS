@@ -1,6 +1,6 @@
 @foreach( getAdminGlobalModals() as $modal )
     <!--begin::Modal - Create Property-->
-    <div class="modal fade" id="modal_{{ $modal['modal_id'] }}" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="{{ $modal['modal_id'] }}" tabindex="-1" aria-hidden="true">
         <!--begin::Modal dialog-->
         <div class="modal-dialog modal-dialog-centered mw-900px">
             <!--begin::Modal content-->
@@ -8,7 +8,7 @@
                 <!--begin::Modal header-->
                 <div class="modal-header pb-0 border-0">
                     <!--begin::Modal title-->
-                    <h2>{{ $modal['modal_name'] }}</h2>
+                    <h2>{{ $modal['details']['title'] }}</h2>
                     <!--end::Modal title-->
                     <!--begin::Close-->
                     <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
@@ -37,3 +37,25 @@
     <!--end::Modal - Create Property-->
 @endforeach
 
+<script>
+    let admin_global_modals = @json( getAdminGlobalModals() );
+    admin_global_modals.forEach( function (modal) {
+        window[modal.modal_id] = new bootstrap.Modal(document.getElementById(modal.modal_id));
+    });
+</script>
+
+@foreach( getAdminGlobalModals() as $modal )
+    @php
+        echo '
+        <script>
+                Livewire.on("'. $modal['emit_show'] .'", params => {
+                    '.$modal['modal_id'] . '.show();
+                })
+
+                Livewire.on("'. $modal['emit_hide'] .'", () => {
+                    '.$modal['modal_id'] . '.hide();
+                })
+
+        </script>';
+    @endphp
+@endforeach

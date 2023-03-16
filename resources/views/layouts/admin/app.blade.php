@@ -99,7 +99,7 @@ www.ebepro.com
 <!--end::Scrolltop-->
 
 <!--begin::Modals-->
-@include('modals.admin')
+
 
 @stack('modals')
 
@@ -119,20 +119,7 @@ www.ebepro.com
 
 @stack('js')
 
-<script>
-    let admin_global_modals = @json( getAdminGlobalModals() );
-    admin_global_modals.forEach( function (modal) {
-        console.log(modal.modal_id);
-        console.log("OKKKKKKKKKKK");
-        window[modal.modal_id + '_modal'] = new bootstrap.Modal(document.getElementById('modal_' + modal.modal_id));
-    });
-</script>
-
-{{--todo: echo js functions that shows the modals--}}
-
-{{--@foreach( getAdminGlobalModals() as $modal )--}}
-{{--    --}}
-{{--@endforeach--}}
+@include('modals.admin')
 
 <!--end::Javascript-->
 </body>
