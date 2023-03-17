@@ -5,11 +5,19 @@
         <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
             <!--begin::Label-->
             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                <span class="required">الملاحظات</span>
+                <span class="required">قيمة الإيجار</span>
             </label>
             <!--end::Label-->
 
-            <textarea wire:model.defer="contract.notes" class="form-control form-control-solid"></textarea>
+            <!--begin::Input-->
+            <div class="input-group mb-5">
+                <input wire:model.defer="contract.cost" type="text" class="form-control">
+                <span class="input-group-text" id="basic-addon2">د.ب. / شهري</span>
+            </div>
+            <!--end::Input-->
+            @error('contract.cost')
+            <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
         <!--end::Input group-->
 

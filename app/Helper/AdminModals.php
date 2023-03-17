@@ -25,6 +25,15 @@ function getAdminGlobalModals()
                 'title' => 'الملاحظات',
                 'modal_dialog_class' => 'mw-650px',
             ]
+        ], [
+            'modal_id' => 'contract_update_rental_cost_modal',
+            'livewire_component' => 'admin.contract.forms.rental-cost',
+            'emit_show' => 'show-contract-update-rental-cost-modal',
+            'emit_hide' => 'hide-contract-update-rental-cost-modal',
+            'details' => [
+                'title' => 'قيمة الإيجار',
+                'modal_dialog_class' => 'mw-650px',
+            ]
         ],
     ];
 }

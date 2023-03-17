@@ -25,4 +25,11 @@ class Summary extends Component
         return Contract::findOrFail($this->contract_id);
     }
 
+    public function manageRentalCost()
+    {
+        $this->emit('show-contract-update-rental-cost-modal', [
+            'contract_id' => $this->contract_id,
+        ]);
+    }
+
 }
