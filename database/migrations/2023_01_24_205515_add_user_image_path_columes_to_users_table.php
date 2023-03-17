@@ -14,10 +14,9 @@ class AddUserImagePathColumesToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('username');
             $table->longText('user_image_path')->nullable();
             $table->string('whatsapp_phone')->nullable();
-            $table->string('user_type');
+            $table->string('user_type')->nullable();
             $table->longText('cpr_image_path')->nullable();
             $table->longText('merchant_image_path')->nullable();
             $table->longText('iban_image_path')->nullable();
