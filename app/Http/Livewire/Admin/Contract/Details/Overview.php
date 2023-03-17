@@ -35,6 +35,7 @@ class Overview extends Component
         return [
             'contract-updated-notes' => '$refresh',
             'contract-updated-rental-cost' => '$refresh',
+            'contract-updated-apartment' => '$refresh',
         ];
     }
 

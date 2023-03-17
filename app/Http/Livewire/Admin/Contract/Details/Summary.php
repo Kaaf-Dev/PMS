@@ -14,6 +14,7 @@ class Summary extends Component
     {
         return [
             'contract-updated-user' => '$refresh',
+            'contract-updated-apartment' => '$refresh',
         ];
     }
 
@@ -42,6 +43,13 @@ class Summary extends Component
     public function manageUser()
     {
         $this->emit('show-contract-manage-user-modal', [
+            'contract_id' => $this->contract_id,
+        ]);
+    }
+
+    public function manageApartment()
+    {
+        $this->emit('show-contract-manage-apartment-modal', [
             'contract_id' => $this->contract_id,
         ]);
     }

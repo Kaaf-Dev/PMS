@@ -82,11 +82,20 @@ class ManageUser extends Component
         }
     }
 
+    public function clearSearchUser()
+    {
+        $this->reset('search_user');
+        $this->fetchUsers();
+    }
+
     public function resetFields()
     {
         $this->resetErrorBag();
         $this->reset([
             'contract',
+            'selected_user',
+            'users',
+            'search_user',
         ]);
     }
 
