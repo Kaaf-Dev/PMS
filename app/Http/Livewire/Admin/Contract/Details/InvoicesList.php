@@ -23,7 +23,8 @@ class InvoicesList extends Component
     {
         $invoices = Invoice::where([
             ['contract_id', '=', $this->contract_id]
-        ])->get();
+        ])->orderBy('date', 'desc')
+            ->get();
 
         return $invoices->groupBy(function ($item, $key) { // arrange by year
             return $item->date->format('Y');
