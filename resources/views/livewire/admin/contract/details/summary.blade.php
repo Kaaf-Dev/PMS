@@ -61,7 +61,7 @@
                         <div class="menu-sub menu-sub-dropdown w-175px py-4" style="">
                             <!--begin::Menu item-->
                             <div class="menu-item px-3">
-                                <a href="#" class="menu-link px-3">إدارة المستأجر</a>
+                                <a wire:click="manageUser" class="menu-link px-3">إدارة المستأجر</a>
                             </div>
                             <!--end::Menu item-->
                             <!--begin::Menu item-->

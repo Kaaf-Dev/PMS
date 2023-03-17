@@ -10,6 +10,13 @@ class Summary extends Component
 
     public $contract_id;
 
+    public function getListeners()
+    {
+        return [
+            'contract-updated-user' => '$refresh',
+        ];
+    }
+
     public function mount($contract_id)
     {
         $this->contract_id = $contract_id;
@@ -28,6 +35,13 @@ class Summary extends Component
     public function manageRentalCost()
     {
         $this->emit('show-contract-update-rental-cost-modal', [
+            'contract_id' => $this->contract_id,
+        ]);
+    }
+
+    public function manageUser()
+    {
+        $this->emit('show-contract-manage-user-modal', [
             'contract_id' => $this->contract_id,
         ]);
     }

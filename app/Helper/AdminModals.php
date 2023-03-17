@@ -34,6 +34,15 @@ function getAdminGlobalModals()
                 'title' => 'قيمة الإيجار',
                 'modal_dialog_class' => 'mw-650px',
             ]
+        ], [
+            'modal_id' => 'contract_manage_user_modal',
+            'livewire_component' => 'admin.contract.forms.manage-user',
+            'emit_show' => 'show-contract-manage-user-modal',
+            'emit_hide' => 'hide-contract-manage-user-modal',
+            'details' => [
+                'title' => 'إدارة المستأجر',
+                'modal_dialog_class' => 'mw-650px',
+            ]
         ],
     ];
 }
