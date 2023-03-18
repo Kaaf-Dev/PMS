@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin\Property;
 
 use App\Models\Apartment;
+use App\Models\Category;
 use Livewire\Component;
 use App\Models\Property;
 use App\Traits\WithAlert;
@@ -11,6 +12,7 @@ class CreateForm extends Component
 {
     use WithAlert;
 
+    public $category_id;
     public $name;
     public $area;
     public $floors_count;
@@ -21,6 +23,7 @@ class CreateForm extends Component
     public function rules()
     {
         return [
+            'category_id' => 'required',
             'name' => 'required',
             'area' => 'required|numeric',
             'floors_count' => 'required|integer',
@@ -51,9 +54,15 @@ class CreateForm extends Component
         return view('livewire.admin.property.create-form');
     }
 
+    public function getCategoriesProperty()
+    {
+        return Category::all();
+    }
+
     public function resetFields()
     {
         $this->reset([
+            'category_id',
             'name',
             'area',
             'floors_count',

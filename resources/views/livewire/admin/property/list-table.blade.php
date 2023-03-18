@@ -64,6 +64,7 @@
                     <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
                         <th class="w-10px pe-2">#</th>
                         <th class="min-w-125px">العقار</th>
+                        <th class="min-w-125px">التصنيف</th>
                         <th class="min-w-125px">الوحدات السكنية</th>
                         <th class="min-w-125px">المساحة</th>
                         <th class="min-w-125px">عدد الطوابق</th>
@@ -87,16 +88,19 @@
                                     {{ $property->id }}
                                 </td>
                                 <!--end::Checkbox-->
-                                <!--begin::User=-->
+                                <!--begin::Property=-->
                                 <td class="d-flex align-items-center">
-                                    <!--begin::User details-->
+                                    <!--begin::Property details-->
                                     <div class="d-flex flex-column">
                                         <a href="{{ route('admin.property.details', ['property_id' => $property->id]) }}" class="text-gray-800 text-hover-primary mb-1">{{ $property->name }}</a>
                                         <span>{{ $property->address }}</span>
                                     </div>
-                                    <!--begin::User details-->
+                                    <!--end::Property details-->
                                 </td>
-                                <!--end::User=-->
+                                <!--end::Property-->
+                                <!--begin::category=-->
+                                <td>{{ $property->category_name }}</td>
+                                <!--end::category-->
                                 <!--begin::apartments_count=-->
                                 <td>{{ $property->apartments_count }}</td>
                                 <!--end::apartments_count=-->

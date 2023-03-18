@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Property\Details;
 
+use App\Models\Category;
 use App\Models\Property;
 use Livewire\Component;
 use App\Traits\WithAlert;
@@ -15,6 +16,7 @@ class Settings extends Component
     public function rules()
     {
         return [
+            'property.category_id' => 'required',
             'property.name' => 'required',
             'property.area' => 'required|numeric',
             'property.floors_count' => 'required|numeric',
@@ -53,6 +55,11 @@ class Settings extends Component
     public function render()
     {
         return view('livewire.admin.property.details.settings');
+    }
+
+    public function getCategoriesProperty()
+    {
+        return Category::all();
     }
 
     public function save()

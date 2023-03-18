@@ -7,6 +7,9 @@
             <!--begin::Name-->
             <a class="fs-3 text-gray-800 text-hover-primary fw-bold mb-3">{{ $this->property->name }}</a>
             <!--end::Name-->
+            <!--begin::Category-->
+            <div class="fs-5 fw-semibold text-muted mb-6">{{ $this->property->category_name }}</div>
+            <!--end::Category-->
         </div>
         <!--end::User Info-->
         <!--end::Summary-->

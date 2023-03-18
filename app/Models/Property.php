@@ -10,7 +10,7 @@ class Property extends Model
     use HasFactory;
 
     protected $fillable = [
-        'contract_id',
+        'category_id',
         'name',
         'floors_count',
         'area',
@@ -25,6 +25,11 @@ class Property extends Model
     public function apartments()
     {
         return $this->hasMany(Apartment::class, 'property_id', 'id');
+    }
+
+    public function getCategoryNameAttribute()
+    {
+        return optional($this->Category)->name ?? '';
     }
 
     public function getRentedApartmentsCountAttribute()

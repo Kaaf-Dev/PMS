@@ -17,6 +17,29 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label required fw-semibold fs-6">التصنيف</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8 fv-row fv-plugins-icon-container">
+
+                                <!--begin::Input -->
+                                <select wire:model.defer="property.category_id" class="form-control form-control-solid form-select form-control-solid">
+                                    <option value="">اختيار</option>
+                                    @foreach($this->categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                                <!--end::Input -->
+                                @error('property.category_id')
+                                    <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
                             <label class="col-lg-4 col-form-label required fw-semibold fs-6">اسم العقار</label>
                             <!--end::Label-->
                             <!--begin::Col-->

@@ -17,6 +17,27 @@
         <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
             <!--begin::Label-->
             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                <span class="required">التصنيف</span>
+            </label>
+            <!--end::Label-->
+            <!--begin::Input -->
+            <select wire:model.defer="category_id" class="form-control form-control-solid form-select form-control-solid">
+                <option value="">اختيار</option>
+                @foreach($this->categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
+            </select>
+            @error('category_id')
+                <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+            @enderror
+            <!--end::Input -->
+        </div>
+        <!--end::Input group-->
+
+        <!--begin::Input group-->
+        <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+            <!--begin::Label-->
+            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                 <span class="required">اسم العقار</span>
             </label>
             <!--end::Label-->

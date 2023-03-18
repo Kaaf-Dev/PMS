@@ -16,8 +16,7 @@ class Info extends Component
                 'apartments',
                 'apartments as available_apartments_count',
                 'apartments as rented_apartments_count',
-            ])
-            ->firstOr(function () {
+            ])->firstOr(function () {
                 abort(404);
             });
     }
