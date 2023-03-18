@@ -54,4 +54,11 @@ class Summary extends Component
         ]);
     }
 
+    public function updateDuration()
+    {
+        $this->emit('show-contract-update-duration-modal', [
+            'contract_id' => $this->contract_id,
+        ]);
+    }
+
 }

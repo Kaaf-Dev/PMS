@@ -63,6 +63,17 @@ function getAdminGlobalModals()
         ],
 
         [
+            'modal_id' => 'contract_update_duration_modal',
+            'livewire_component' => 'admin.contract.forms.update-duration',
+            'emit_show' => 'show-contract-update-duration-modal',
+            'emit_hide' => 'hide-contract-update-duration-modal',
+            'details' => [
+                'title' => 'تحديد مدة العقد',
+                'modal_dialog_class' => 'mw-650px',
+            ]
+        ],
+
+        [
             'modal_id' => 'contract_manage_apartment_modal',
             'livewire_component' => 'admin.contract.forms.manage-apartment',
             'emit_show' => 'show-contract-manage-apartment-modal',
