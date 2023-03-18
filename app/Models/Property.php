@@ -16,6 +16,11 @@ class Property extends Model
         'construction_date',
     ];
 
+    public function Category()
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+
     public function apartments()
     {
         return $this->hasMany(Apartment::class, 'property_id', 'id');
@@ -24,14 +29,12 @@ class Property extends Model
     public function getRentedApartmentsCountAttribute()
     {
         $rented_apartments_count = 0;
-      //  $rented_apartments_count = (int) ($this->apartments->count() * ($this->id % 100) / 100);
-        $rented_apartments_count = $this->apartments()
+        return $this->apartments()
             ->withCount('activeContracts')
             ->get()
             ->filter(function ($apartment) {
                 return $apartment->active_contracts_count > 0;
             })->count();
-        return $rented_apartments_count;
     }
 
     public function getAvailableApartmentsCountAttribute()
