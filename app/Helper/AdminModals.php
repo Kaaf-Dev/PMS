@@ -8,6 +8,17 @@ function getAdminGlobalModals()
 
     return [
         [
+            'modal_id' => 'property_add_modal',
+            'livewire_component' => 'admin.property.create-form',
+            'emit_show' => 'show-property-add-modal',
+            'emit_hide' => 'hide-property-add-modal',
+            'details' => [
+                'title' => '',
+                'modal_dialog_class' => 'mw-650px',
+            ]
+        ],
+
+        [
             'modal_id' => 'contract_new_modal',
             'livewire_component' => 'admin.contract.create-form',
             'emit_show' => 'show-contract-new-modal',
