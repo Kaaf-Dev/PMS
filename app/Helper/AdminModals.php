@@ -19,6 +19,17 @@ function getAdminGlobalModals()
         ],
 
         [
+            'modal_id' => 'property_apartment_add_modal',
+            'livewire_component' => 'admin.property.apartment.create-form',
+            'emit_show' => 'show-apartment-add-modal',
+            'emit_hide' => 'hide-apartment-add-modal',
+            'details' => [
+                'title' => '',
+                'modal_dialog_class' => 'mw-650px',
+            ]
+        ],
+
+        [
             'modal_id' => 'contract_new_modal',
             'livewire_component' => 'admin.contract.create-form',
             'emit_show' => 'show-contract-new-modal',
