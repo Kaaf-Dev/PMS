@@ -93,6 +93,17 @@ function getAdminGlobalModals()
                 'title' => 'إدارة العقار',
                 'modal_dialog_class' => 'mw-650px',
             ]
+        ],
+
+        [
+            'modal_id' => 'contract_cancel_modal',
+            'livewire_component' => 'admin.contract.forms.cancel-contract',
+            'emit_show' => 'show-contract-cancel-modal',
+            'emit_hide' => 'hide-contract-cancel-modal',
+            'details' => [
+                'title' => 'إيقاف العقد',
+                'modal_dialog_class' => 'mw-650px',
+            ]
         ]
     ];
 }

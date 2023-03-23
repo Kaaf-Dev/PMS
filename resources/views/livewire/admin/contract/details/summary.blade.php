@@ -98,7 +98,7 @@
                     <!--end::Menu separator-->
                     <!--begin::Menu item-->
                     <div class="menu-item px-3">
-                        <a href="#" class="menu-link text-danger px-3">إيقاف العقد</a>
+                        <a wire:click="cancelContract" class="menu-link text-danger px-3">إيقاف العقد</a>
                     </div>
                     <!--end::Menu item-->
                 </div>

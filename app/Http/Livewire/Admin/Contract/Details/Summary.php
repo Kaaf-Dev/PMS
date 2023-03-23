@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class Summary extends Component
 {
-
+// todo: add checks for activation contracts
     public $contract_id;
 
     public function getListeners()
@@ -57,6 +57,13 @@ class Summary extends Component
     public function updateDuration()
     {
         $this->emit('show-contract-update-duration-modal', [
+            'contract_id' => $this->contract_id,
+        ]);
+    }
+
+    public function cancelContract()
+    {
+        $this->emit('show-contract-cancel-modal', [
             'contract_id' => $this->contract_id,
         ]);
     }

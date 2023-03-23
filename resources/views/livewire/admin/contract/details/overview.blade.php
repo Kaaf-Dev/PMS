@@ -62,7 +62,7 @@
                             <tr>
                                 <td class="text-gray-400">الحالة:</td>
                                 <td class="text-gray-800">
-                                    <span class="badge badge-light-success">فعّال</span>
+                                    <span class="badge badge-light-{{ $this->contract->active_status_class }}">{{ $this->contract->active_status_string }}</span>
                                 </td>
                             </tr>
                             <!--end::Row-->

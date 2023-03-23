@@ -37,6 +37,7 @@ class Overview extends Component
             'contract-updated-rental-cost' => '$refresh',
             'contract-updated-apartment' => '$refresh',
             'contract-updated-duration' => '$refresh',
+            'contract-canceled' => '$refresh',
         ];
     }
 

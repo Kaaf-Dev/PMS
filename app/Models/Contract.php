@@ -73,4 +73,30 @@ class Contract extends Model
         }
         return $is_active;
     }
+
+    public function getActiveStatusStringAttribute()
+    {
+        $strings = [
+            0 => 'غير فعّال',
+            1 => 'فعّال',
+        ];
+
+        return $strings[$this->active_status ?? 0];
+    }
+
+    public function getActiveStatusClassAttribute()
+    {
+        $strings = [
+            0 => 'danger',
+            1 => 'success',
+        ];
+
+        return $strings[$this->active_status ?? 0];
+    }
+
+    public function cancel()
+    {
+        $this->active = false;
+        return ($this->save());
+    }
 }
