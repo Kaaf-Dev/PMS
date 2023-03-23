@@ -160,10 +160,10 @@
 
             <button type="submit" id="kt_modal_new_target_submit" class="btn btn-primary">
                 <!--begin::Indicator label-->
-                <span wire:loading.remove>إنشاء</span>
+                <span wire:loading.remove wire:target="save">إنشاء</span>
                 <!--end::Indicator label-->
                 <!--begin::Indicator progress-->
-                <span wire:loading>
+                <span wire:loading wire:target="save">
                     الرجاء الانتظار
 					<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                 </span>
