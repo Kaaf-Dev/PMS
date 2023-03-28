@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -29,6 +30,26 @@ class Invoice extends Model
         'date',
         'due',
     ];
+
+    public static function boot() {
+        parent::boot();
+
+        static::creating(function ($model) {
+            if (!$model->no) {
+                $model->no = $model->getNextNo();
+            }
+
+            if (!$model->date) {
+                $model->date = Carbon::now();
+            }
+
+            if (!$model->due) {
+                $model->due = Carbon::now()->addDays(15);
+            }
+
+        });
+    }
+
 
     public function Contract()
     {
@@ -114,4 +135,31 @@ class Invoice extends Model
 
         return $paid_string;
     }
+
+    public function getNextNo()
+    {
+        $carbon = Carbon::now();
+        $year = $this->date ? $this->date->format('Y') : $carbon->format('Y');
+        $month = $this->date ? $this->date->format('m') : $carbon->format('m');
+        $contract_id = $this->contract_id ?? 0;
+
+        $max_no = self::where('contract_id', '=', $contract_id)
+            ->whereYear('date', '=', $year)
+            ->whereMonth('date', '=', $month)
+            ->where('no', 'like', '_________')
+            ->max('no');
+
+        if ($max_no) { // no exists and increase it by one
+            $max_no_array = str_split($max_no, 6);
+            $no = (int) ($max_no_array[1] + 1);
+            $next_no = $max_no_array[0];
+            $next_no .= str_pad($no, 3, '0', STR_PAD_LEFT);
+
+        } else { // create new no
+            $next_no = $year . $month . '001';
+        }
+
+        return $next_no;
+    }
+
 }

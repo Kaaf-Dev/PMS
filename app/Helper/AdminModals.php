@@ -104,6 +104,17 @@ function getAdminGlobalModals()
                 'title' => 'إيقاف العقد',
                 'modal_dialog_class' => 'mw-650px',
             ]
+        ],
+
+        [
+            'modal_id' => 'invoice_create_modal',
+            'livewire_component' => 'admin.invoice.forms.create',
+            'emit_show' => 'show-invoice-create-modal',
+            'emit_hide' => 'hide-invoice-create-modal',
+            'details' => [
+                'title' => 'تسجيل فاتورة جديدة',
+                'modal_dialog_class' => 'mw-900px',
+            ]
         ]
     ];
 }

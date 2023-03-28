@@ -9,6 +9,13 @@ class InvoicesList extends Component
 {
     public $contract_id;
 
+    public function getListeners()
+    {
+        return [
+            'invoice_added' => '$refresh',
+        ];
+    }
+
     public function mount($contract_id)
     {
         $this->contract_id = $contract_id;

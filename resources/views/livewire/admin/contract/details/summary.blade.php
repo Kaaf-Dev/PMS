@@ -31,7 +31,7 @@
                     <!--end::Heading-->
                     <!--begin::Menu item-->
                     <div class="menu-item px-3">
-                        <a href="#" class="menu-link px-3">
+                        <a wire:click="createInvoice" class="menu-link px-3">
                             <span class="">فاتورة جديدة</span>
                         </a>
                     </div>
@@ -96,11 +96,19 @@
                     <!--begin::Menu separator-->
                     <div class="separator my-2"></div>
                     <!--end::Menu separator-->
-                    <!--begin::Menu item-->
-                    <div class="menu-item px-3">
-                        <a wire:click="cancelContract" class="menu-link text-danger px-3">إيقاف العقد</a>
-                    </div>
-                    <!--end::Menu item-->
+                    @if($this->contract->active_status)
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-3">
+                            <a wire:click="cancelContract" class="menu-link text-danger px-3">إيقاف العقد</a>
+                        </div>
+                        <!--end::Menu item-->
+                    @else
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-3">
+                            <a class="menu-link text-muted px-3">إيقاف العقد (غير فعّال)</a>
+                        </div>
+                        <!--end::Menu item-->
+                    @endif
                 </div>
                 <!--end::Menu-->
                 <!--end::More options-->
