@@ -4,14 +4,20 @@ namespace App\Http\Livewire\Admin\Invoice\Forms;
 
 use App\Classes\Payment\InvoiceService;
 use App\Models\Contract;
-use App\Models\Invoice;
+use App\Traits\WithAlert;
 use Livewire\Component;
 
 class Create extends Component
 {
 
+    use WithAlert;
+
     public $selected_contract;
     public $invoice;
+
+    public $search_contract;
+
+    public $contracts;
 
     public function rules()
     {
@@ -38,11 +44,21 @@ class Create extends Component
         return view('livewire.admin.invoice.forms.create');
     }
 
+    public function updated($property)
+    {
+        if ($property == 'search_contract') {
+            $this->fetchContracts();
+        }
+    }
+
+
     public function showModal($params)
     {
         $this->resetFields();
+        $invoice_service = new InvoiceService();
+        $this->invoice = $invoice_service->newInvoice();
+        $this->fetchContracts();
 
-        $this->invoice = new Invoice();
 
         if (isset($params['contract_id'])) {
             $this->selectContract($params['contract_id']);
@@ -69,6 +85,12 @@ class Create extends Component
         }
     }
 
+    public function closeModal()
+    {
+        $this->emit('hide-invoice-create-modal');
+        $this->resetFields();
+    }
+
     public function resetFields()
     {
         $this->resetErrorBag();
@@ -78,20 +100,40 @@ class Create extends Component
         ]);
     }
 
-    public function selectContract($contract_id)
+    public function fetchContracts()
     {
-        $this->selected_contract = Contract::findOrFail($contract_id);
-        $this->invoice->contract_id = $this->selected_contract->id;
-        $this->invoice->no = $this->invoice->getNextNo();
+        $this->contracts = Contract::limit(15)
+            ->get();
+    }
+
+    public function selectContract($contract_id = 0)
+    {
+        if ($contract_id != 0) {
+            $this->selected_contract = Contract::findOrFail($contract_id);
+            $this->invoice->contract_id = $this->selected_contract->id;
+            $this->invoice->no = $this->invoice->getNextNo();
+        } else {
+            $this->reset([
+                'selected_contract',
+                'search_contract',
+            ]);
+            $this->invoice->contract_id = null;
+            $this->invoice->no = null;
+
+        }
     }
 
     public function save()
     {
+        $this->validate();
         $invoice_service = new InvoiceService();
-        $invoice_service->generateInvoice([
-            'contract_id' => 1,
-            'amount' => '99',
-        ]);
-        $this->emit('invoice_added');
+        if ($invoice_service->saveInvoice($this->invoice)) {
+            $this->emit('invoice_added');
+            $this->closeModal();
+            $this->showSuccessAlert('تمت العملية بنجاح');
+        } else {
+            $this->showWarningAlert('حدث خطأ ما');
+        }
+
     }
 }

@@ -7,9 +7,19 @@ use App\Models\Invoice;
 
 class InvoiceService
 {
+
+    public function newInvoice($data = [])
+    {
+        return new Invoice($data);
+    }
+
     public function generateInvoice($data = [])
     {
-        $invoice = new Invoice($data);
+        return $this->generateInvoice()->save();
+    }
+
+    public function saveInvoice(Invoice $invoice)
+    {
         return $invoice->save();
     }
 }
