@@ -83,7 +83,7 @@
                                     <div class="d-flex flex-column">
                                         <!--begin::Name-->
                                         <a href="#" class="fs-4 fw-bold text-gray-900 text-hover-primary me-2">
-                                            #{{ $this->selected_contract->id}}
+                                            رقم العقد#: {{ $this->selected_contract->id}}
                                             <br>
                                             {{ $this->selected_contract->user->name }}
                                         </a>
@@ -152,7 +152,7 @@
                                             <div class="d-flex flex-stack pb-3">
                                                 <div class="d-flex">
                                                     <p class="text-muted">
-                                                        #
+                                                        رقم العقد#:
                                                         {{ $contract->id }}
                                                     </p>
 
