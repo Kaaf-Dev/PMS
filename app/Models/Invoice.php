@@ -56,6 +56,11 @@ class Invoice extends Model
         return $this->belongsTo(Contract::class);
     }
 
+    public function Type()
+    {
+        return $this->belongsTo(InvoiceType::class, 'type', 'id');
+    }
+
     public function receipts()
     {
         return $this->hasMany(Receipt::class);
