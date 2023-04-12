@@ -102,7 +102,19 @@ class Create extends Component
 
     public function fetchContracts()
     {
-        $this->contracts = Contract::limit(15)
+        $search_key = $this->search_contract;
+        $this->contracts = Contract::where('id', 'like', '%'. $search_key .'%')
+            ->orWhere(function($query) use ($search_key) {
+                if ($search_key) {
+                    $query->whereHas('user', function ($query) use ($search_key) {
+                        $query->where('name', 'like', '%'. $search_key .'%');
+                    })
+                    ->orWhereHas('apartment', function ($query) use ($search_key) {
+                        $query->where('name', 'like', '%'. $search_key .'%');
+                    });
+                }
+            })
+            ->limit(15)
             ->get();
     }
 
