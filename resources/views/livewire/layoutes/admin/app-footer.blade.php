@@ -6,8 +6,6 @@
             <div class="text-dark order-2 order-md-1">
                 <span class="text-muted fw-semibold me-1">{{ date('Y') }} &copy;</span>
                 <a href="https://www.quality-solution.net" target="_blank" class="text-gray-800 text-hover-primary">Quality Solutions</a>
-                &amp;
-                <a href="https://www.ebepro.com?client=pms" target="_blank" class="text-gray-800 text-hover-primary">BePro Team</a>
             </div>
             <!--end::Copyright-->
             <!--begin::Menu-->
