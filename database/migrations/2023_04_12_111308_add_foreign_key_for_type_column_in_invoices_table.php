@@ -17,7 +17,7 @@ class AddForeignKeyForTypeColumnInInvoicesTable extends Migration
             $table->foreign('type')
                 ->references('id')
                 ->on('invoice_types')
-                ->onDelete('SET NULL');
+                ->nullOnDelete();
         });
     }
 
