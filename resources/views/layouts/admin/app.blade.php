@@ -17,7 +17,6 @@ www.ebepro.com
     <meta property="og:url" content="{{ env('APP_URL', 'https://www.ebepro.com') }}" />
     <meta property="og:site_name" content="Property Management System" />
     <link rel="canonical" href="{{ env('APP_URL', 'https://www.ebepro.com') }}" />
-    <link rel="shortcut icon" href="{{ asset('admin-assets/media/logos/favicon.ico') }}" />
     <!--begin::Fonts(mandatory for all pages)-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
     <!--end::Fonts-->

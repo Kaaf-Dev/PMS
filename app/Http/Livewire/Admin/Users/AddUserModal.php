@@ -52,4 +52,9 @@ class AddUserModal extends Component
         $user->save();
         return redirect()->route('admin.users.details', $user->id);
     }
+
+    public function closeModal()
+    {
+        $this->emit('hideAddUserModel');
+    }
 }

@@ -1,5 +1,5 @@
 <div>
-    <div class="modal-dialog modal-dialog-centered mw-650px">
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen">
         <!--begin::Modal content-->
         <div class="modal-content">
             <!--begin::Modal header-->
@@ -36,21 +36,12 @@
                             <!--begin::Label-->
                             <label class="d-block fw-semibold fs-6 mb-5">الصورة الشخصية</label>
                             <!--end::Label-->
-                            <!--begin::Image placeholder-->
-                            <style>.image-input-placeholder {
-                                    background-image: url('assets/media/svg/files/blank-image.svg');
-                                }
-
-                                [data-theme="dark"] .image-input-placeholder {
-                                    background-image: url('assets/media/svg/files/blank-image-dark.svg');
-                                }</style>
-                            <!--end::Image placeholder-->
                             <!--begin::Image input-->
                             <div class="image-input image-input-outline image-input-placeholder"
                                  data-kt-image-input="true">
                                 <!--begin::Preview existing avatar-->
                                 <div wire:ignore class="image-input-wrapper w-125px h-125px"
-                                     style="background-image: url(assets/media/avatars/300-6.jpg);"></div>
+                                     style="background-image: url('{{\Illuminate\Support\Facades\URL::asset('admin-assets/media/svg/files/blank-image.svg')}}');"></div>
                                 <!--end::Preview existing avatar-->
                                 <!--begin::Label-->
                                 <label
@@ -64,16 +55,14 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Cancel-->
-                                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                    data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
-																					<i class="bi bi-x fs-2"></i>
-																				</span>
+                                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
+                                    <i class="bi bi-x fs-2"></i>
+                                </span>
                                 <!--end::Cancel-->
                                 <!--begin::Remove-->
-                                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                    data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
-																					<i class="bi bi-x fs-2"></i>
-																				</span>
+                                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
+                                    <i class="bi bi-x fs-2"></i>
+                                </span>
                                 <!--end::Remove-->
                             </div>
                             <!--end::Image input-->
@@ -196,7 +185,7 @@
                     <!--end::Scroll-->
                     <!--begin::Actions-->
                     <div class="text-center pt-15">
-                        <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">حذف
+                        <button type="reset" wire:click="closeModal" class="btn btn-light me-3" data-kt-users-modal-action="cancel">عودة
                         </button>
                         <button wire:click="save" type="submit" class="btn btn-primary">
                             <span class="indicator-label">حفظ</span>
