@@ -8,7 +8,7 @@ www.ebepro.com
 <head><base>
     <title>{{ env('APP_NAME', 'kaaf') }}</title>
     <meta charset="utf-8" />
-    <meta name="description" content="Property Management System - BePro Team" />
+    <meta name="description" content="Property Management System - Quality-Solutions" />
     <meta name="keywords" content="bepro, team, property, management, system, quality, solution, php, laravel, livewire" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta property="og:locale" content="en_US" />
