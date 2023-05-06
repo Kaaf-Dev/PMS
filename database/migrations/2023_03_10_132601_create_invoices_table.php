@@ -19,8 +19,9 @@ class CreateInvoicesTable extends Migration
                 ->nullable();
             $table->string('no')
                 ->nullable();
-            $table->string('type')
+            $table->unsignedBigInteger('type')
                 ->nullable();
+            $table->foreign('type')->references('id')->on('invoice_types')->nullOnDelete();
             $table->float('amount', '8', '2');
             $table->timestamp('date')->nullable();
             $table->timestamp('due')->nullable();
