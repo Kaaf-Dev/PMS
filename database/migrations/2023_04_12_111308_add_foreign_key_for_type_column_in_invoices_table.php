@@ -14,6 +14,7 @@ class AddForeignKeyForTypeColumnInInvoicesTable extends Migration
     public function up()
     {
         Schema::table('invoices', function (Blueprint $table) {
+            $table->unsignedBigInteger('type')->nullable();
             $table->foreign('type')
                 ->references('id')
                 ->on('invoice_types')
@@ -29,7 +30,8 @@ class AddForeignKeyForTypeColumnInInvoicesTable extends Migration
     public function down()
     {
         Schema::table('invoices', function (Blueprint $table) {
-            //
+            $table->dropForeign(['type']);
+            $table->dropColumn(['type']);
         });
     }
 }
