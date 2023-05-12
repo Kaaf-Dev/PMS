@@ -5,9 +5,9 @@ function getDataKtMenuPlacementBottomValue()
     $current_lang = App::getLocale();
 
     if ($current_lang == 'ar') {
-        $data_kt_menu_placement_bottom_value = 'bottom-start';
-    } else {
         $data_kt_menu_placement_bottom_value = 'bottom-end';
+    } else {
+        $data_kt_menu_placement_bottom_value = 'bottom-start';
     }
     return $data_kt_menu_placement_bottom_value;
 }

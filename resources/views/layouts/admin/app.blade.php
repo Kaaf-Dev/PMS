@@ -98,10 +98,7 @@ www.ebepro.com
 <!--end::Scrolltop-->
 
 <!--begin::Modals-->
-
-
 @stack('modals')
-
 <!--end::Modals-->
 
 <!--begin::Javascript-->

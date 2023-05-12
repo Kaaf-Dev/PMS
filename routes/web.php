@@ -12,7 +12,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// Admin routes
 include('admin.php');
+
+// User routes
+include('user.php');
 
 Route::get('/', function () {
     return redirect(route('admin.auth.login'));
