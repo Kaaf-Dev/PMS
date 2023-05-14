@@ -77,6 +77,17 @@ class Invoice extends Model
 
     }
 
+    public function scopeUnPaid($query)
+    {
+        $query->whereNotExists(function ($query) {
+            $query->selectRaw('1')
+                ->from('receipts')
+                ->whereColumn('receipts.invoice_id', '=', 'invoices.id')
+                ->whereColumn('receipts.amount', '>=', 'invoices.amount');
+        });
+
+    }
+
     public function getIsPaidAttribute()
     {
         return $this->paid_amount >= $this->amount;
