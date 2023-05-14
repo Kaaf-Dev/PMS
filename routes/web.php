@@ -20,7 +20,7 @@ include('admin.php');
 include('user.php');
 
 Route::get('/', function () {
-    return redirect(route('admin.auth.login'));
+    return redirect(route('user.auth.login'));
 })->name('index');
 
 Route::middleware([
