@@ -71,6 +71,11 @@ class User extends Authenticatable
         return $this->hasMany(Contract::class);
     }
 
+    public function invoices()
+    {
+        return $this->hasManyThrough(Invoice::class, Contract::class);
+    }
+
     public function getProfilePhotoUrlAttribute()
     {
         return ($this->user_image_path)
