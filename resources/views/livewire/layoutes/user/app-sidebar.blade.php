@@ -3,30 +3,11 @@
     <div class="app-sidebar-wrapper py-8 py-lg-10" id="kt_app_sidebar_wrapper">
         <!--begin::Nav wrapper-->
         <div id="kt_app_sidebar_nav_wrapper" class="d-flex flex-column px-8 px-lg-10 hover-scroll-y" data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="{default: false, lg: '#kt_app_header'}" data-kt-scroll-wrappers="#kt_app_sidebar, #kt_app_sidebar_wrapper" data-kt-scroll-offset="{default: '10px', lg: '40px'}">
-            <!--begin::Stats-->
-            <div class="d-flex mb-8 mb-lg-10">
-                <!--begin::Stat-->
-                <div class="border border-gray-300 border-dashed rounded min-w-100px w-100 py-2 px-4 me-6">
-                    <!--begin::Date-->
-                    <span class="fs-6 text-gray-500 fw-bold">العقود</span>
-                    <!--end::Date-->
-                    <!--begin::Label-->
-                    <div class="fs-2 fw-bold">1</div>
-                    <!--end::Label-->
-                </div>
-                <!--end::Stat-->
-                <!--begin::Stat-->
-                <div class="border border-gray-300 border-dashed rounded min-w-100px w-100 py-2 px-4">
-                    <!--begin::Date-->
-                    <span class="fs-6 text-gray-500 fw-bold">الفواتير</span>
-                    <!--end::Date-->
-                    <!--begin::Label-->
-                    <div class="fs-2 fw-bold text-danger">$150</div>
-                    <!--end::Label-->
-                </div>
-                <!--end::Stat-->
-            </div>
-            <!--end::Stats-->
+
+            <!--begin::Stat-->
+            <livewire:layoutes.user.app-sidebar-overview />
+            <!--end::Stat-->
+
             <!--begin::Links-->
             <div class="mb-0">
                 <!--begin::Title-->

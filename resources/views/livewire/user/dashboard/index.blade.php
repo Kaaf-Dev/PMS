@@ -10,11 +10,9 @@
                 <div class="page-title d-flex align-items-center me-3">
                     <!--begin::Title-->
                     <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bold fs-lg-2x gap-2">
-													<span>
-													<span class="fw-light">Welcome back</span>,&nbsp;Adam</span>
-                        <!--begin::Description-->
-                        <span class="page-desc text-gray-600 fs-base fw-semibold">You are logged in as a Cloud Owner</span>
-                        <!--end::Description-->
+                        <span>
+                            <span class="fw-light">مرحبًا،</span>&nbsp;{{ Auth::user()->name }}
+                        </span>
                     </h1>
                     <!--end::Title-->
                 </div>
