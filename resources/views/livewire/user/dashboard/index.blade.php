@@ -80,7 +80,7 @@
                         <!--begin::Svg Icon | path: icons/duotune/general/gen032.svg-->
                         <div class="symbol symbol-45px me-5">
                             <span class="symbol-label bg-light-info">
-                                <i class="ki-outline ki-instagram fs-2x text-gray-800"></i>
+                                <i class="ki-outline ki-office-bag fs-2x text-gray-800"></i>
                             </span>
                         </div>
                         <!--end::Svg Icon-->
