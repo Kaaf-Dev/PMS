@@ -3,15 +3,10 @@
     <div class="app-sidebar-wrapper py-8 py-lg-10" id="kt_app_sidebar_wrapper">
         <!--begin::Nav wrapper-->
         <div id="kt_app_sidebar_nav_wrapper" class="d-flex flex-column px-8 px-lg-10 hover-scroll-y" data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="{default: false, lg: '#kt_app_header'}" data-kt-scroll-wrappers="#kt_app_sidebar, #kt_app_sidebar_wrapper" data-kt-scroll-offset="{default: '10px', lg: '40px'}">
-
-            <!--begin::Stat-->
-            <livewire:layoutes.user.app-sidebar-overview />
-            <!--end::Stat-->
-
             <!--begin::Links-->
             <div class="mb-0">
                 <!--begin::Title-->
-                <h3 class="text-gray-800 fw-bold mb-8">الخدمات</h3>
+                <h3 class="text-gray-800 fw-bold mb-8">لوحة التحكم</h3>
                 <!--end::Title-->
                 <!--begin::Row-->
                 <div class="row g-5" data-kt-buttons="true" data-kt-buttons-target="[data-kt-button]">
