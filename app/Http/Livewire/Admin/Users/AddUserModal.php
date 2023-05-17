@@ -55,6 +55,6 @@ class AddUserModal extends Component
 
     public function closeModal()
     {
-        $this->emit('hideAddUserModel');
+        $this->emit('hide-user-add-modal');
     }
 }

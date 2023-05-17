@@ -115,6 +115,17 @@ function getAdminGlobalModals()
                 'title' => 'تسجيل فاتورة جديدة',
                 'modal_dialog_class' => 'mw-900px',
             ]
+        ],
+
+        [
+            'modal_id' => 'kt_modal_add_user',
+            'livewire_component' => 'admin.users.add-user-modal',
+            'emit_show' => 'show-user-add-modal',
+            'emit_hide' => 'hide-user-add-modal',
+            'details' => [
+                'title' => 'تسجيل فاتورة جديدة',
+                'modal_dialog_class' => 'modal-dialog-centered modal-fullscreen',
+            ]
         ]
     ];
 }

@@ -53,6 +53,6 @@ class ListTable extends Component
 
     public function showAddUser()
     {
-        $this->emit('showAddUserModel');
+        $this->emit('show-user-add-modal');
     }
 }

@@ -1,9 +1,4 @@
 <div>
-    @push('modals')
-        <div wire:ignore.self class="modal fade" id="kt_modal_add_user" tabindex="-1" aria-hidden="true">
-            @livewire('admin.users.add-user-modal')
-        </div>
-    @endpush
     <!--begin::Card-->
     <div wire:init="load" class="card">
         <!--begin::Card header-->
