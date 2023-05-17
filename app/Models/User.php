@@ -29,10 +29,13 @@ class User extends Authenticatable
         'password',
         'username',
         'cpr',
+        'corporate_id',
         'gender',
         'phone',
         'blood',
         'date_of_berth',
+        'contact_name',
+        'contact_phone',
     ];
 
     /**

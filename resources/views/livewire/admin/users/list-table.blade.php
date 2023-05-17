@@ -166,16 +166,4 @@
         <!--end::Card body-->
     </div>
     <!--end::Card-->
-    @push('js')
-        <script>
-            window.Livewire.on('showAddUserModel', () => {
-                $('#kt_modal_add_user').modal('show');
-            });
-        </script>
-            <script>
-            window.Livewire.on('hideAddUserModel', () => {
-                $('#kt_modal_add_user').modal('hide');
-            });
-        </script>
-    @endpush
 </div>

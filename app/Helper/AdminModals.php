@@ -124,7 +124,7 @@ function getAdminGlobalModals()
             'emit_hide' => 'hide-user-add-modal',
             'details' => [
                 'title' => 'تسجيل فاتورة جديدة',
-                'modal_dialog_class' => 'modal-dialog-centered modal-fullscreen',
+                'modal_dialog_class' => 'modal-dialog-centered mw-1000px',
             ]
         ]
     ];
