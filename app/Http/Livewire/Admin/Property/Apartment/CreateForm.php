@@ -49,23 +49,28 @@ class CreateForm extends Component
             'bathrooms_count' => Rule::requiredIf($this->type == $this->type_house),
             'with_electricity' => [
                 'boolean',
+                'nullable',
                 Rule::requiredIf($this->type == $this->type_house),
             ],
             'with_balcony' => [
                 'boolean',
+                'nullable',
                 Rule::requiredIf($this->type == $this->type_house),
             ],
             'with_elevator' => [
                 'boolean',
+                'nullable',
                 Rule::requiredIf($this->type == $this->type_house),
             ],
             'with_pool' => [
                 'boolean',
+                'nullable',
                 Rule::requiredIf($this->type == $this->type_house),
             ],
             'parking' => Rule::requiredIf($this->type == $this->type_house),
             'furniture' => [
                 'boolean',
+                'nullable',
                 Rule::requiredIf($this->type == $this->type_house),
             ],
             'floors' => Rule::requiredIf($this->type == $this->type_store),

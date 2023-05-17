@@ -15,18 +15,23 @@ class AddAdditionalColumnsToApartmentsTable extends Migration
     {
         Schema::table('apartments', function (Blueprint $table) {
             $table->boolean('with_electricity')
+                ->nullable()
                 ->default(false);
 
             $table->boolean('with_balcony')
+                ->nullable()
                 ->default(false);
 
             $table->boolean('with_elevator')
+                ->nullable()
                 ->default(false);
 
             $table->boolean('with_pool')
+                ->nullable()
                 ->default(false);
 
             $table->integer('parking')
+                ->nullable()
                 ->default(0);
 
             $table->integer('furniture')
