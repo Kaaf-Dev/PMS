@@ -19,6 +19,14 @@ class CreateForm extends Component
     public $cost;
     public $rooms_count;
     public $bathrooms_count;
+    public $with_electricity;
+    public $with_balcony;
+    public $with_elevator;
+    public $with_pool;
+    public $parking;
+    public $furniture;
+
+    public $floors;
 
     public $type_house = Apartment::TYPE_HOUSE;
     public $type_store = Apartment::TYPE_STORE;
@@ -39,6 +47,28 @@ class CreateForm extends Component
             'area' => 'required|numeric',
             'rooms_count' => Rule::requiredIf($this->type == $this->type_house),
             'bathrooms_count' => Rule::requiredIf($this->type == $this->type_house),
+            'with_electricity' => [
+                'boolean',
+                Rule::requiredIf($this->type == $this->type_house),
+            ],
+            'with_balcony' => [
+                'boolean',
+                Rule::requiredIf($this->type == $this->type_house),
+            ],
+            'with_elevator' => [
+                'boolean',
+                Rule::requiredIf($this->type == $this->type_house),
+            ],
+            'with_pool' => [
+                'boolean',
+                Rule::requiredIf($this->type == $this->type_house),
+            ],
+            'parking' => Rule::requiredIf($this->type == $this->type_house),
+            'furniture' => [
+                'boolean',
+                Rule::requiredIf($this->type == $this->type_house),
+            ],
+            'floors' => Rule::requiredIf($this->type == $this->type_store),
         ];
     }
 
@@ -49,6 +79,7 @@ class CreateForm extends Component
             'integer' => 'الرقم غير صالح',
             'numeric' => 'القيمة غير صالحة',
             'type.in' => 'قيمة غير صالحة',
+            'boolean' => 'حقل اجباري',
         ];
     }
 
@@ -82,6 +113,13 @@ class CreateForm extends Component
             'cost',
             'rooms_count',
             'bathrooms_count',
+            'with_electricity',
+            'with_balcony',
+            'with_elevator',
+            'with_pool',
+            'parking',
+            'furniture',
+            'floors',
         ]);
 
         $this->resetErrorBag();

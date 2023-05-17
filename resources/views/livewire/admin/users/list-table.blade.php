@@ -74,8 +74,7 @@
                         </th>
                         <th class="min-w-125px">أسم المستأجر</th>
                         <th class="min-w-125px">الرقم الشخصي أو السجل</th>
-                        <th class="min-w-125px">البريد الإلكتروني</th>
-                        <th class="text-end min-w-100px">رقم الهاتف</th>
+                        <th class="min-w-125px">تاريخ التسجيل</th>
                         <th class="text-end min-w-100px">العمليات</th>
                     </tr>
                     <!--end::Table row-->
@@ -116,20 +115,17 @@
                                 </td>
                                 <!--end::User=-->
                                 <!--begin::Role=-->
-                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->id_human }}</td>
                                 <!--end::Role=-->
                                 <!--begin::Joined-->
                                 <td>{{ $user->created_at->format('Y/m/d') }}</td>
                                 <!--begin::Joined-->
                                 <!--begin::Action=-->
                                 <td class="text-end">
-
-
                                     <a href="{{ route('admin.users.details', ['user_id' => $user->id]) }}"
                                        class="btn btn-light btn-active-light-primary btn-sm">
                                         <i class="fa-solid fa-user-gear"></i>
                                     </a>
-
                                 </td>
                                 <!--end::Action=-->
                             </tr>

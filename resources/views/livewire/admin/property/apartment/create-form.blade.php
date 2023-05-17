@@ -126,6 +126,21 @@
         </div>
         <!--end::Input group-->
 
+        @if( $this->type == $this->type_store)
+            <!--begin::Input group-->
+            <div class="row g-9 mb-8">
+                <!--begin::Col-->
+                <div class="col-md-6 fv-row fv-plugins-icon-container">
+                    <label class="fs-6 fw-semibold mb-2">عدد الطوابق</label>
+                    <input wire:model.defer="floors" type="number" class="form-control form-control-solid" placeholder="عدد الطوابق">
+                    @error('floors')
+                    <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <!--end::Col-->
+            </div>
+        @endif
+
         @if( $this->type == $this->type_house)
             <!--begin::Input group-->
             <div class="row g-9 mb-8">
@@ -144,6 +159,87 @@
                     <label class="fs-6 fw-semibold mb-2">دورات المياه</label>
                     <input wire:model.defer="bathrooms_count" type="number" class="form-control form-control-solid" placeholder="دورات المياه">
                     @error('bathrooms_count')
+                    <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <!--end::Col-->
+
+                <!--begin::Col-->
+                <div class="col-md-6 fv-row fv-plugins-icon-container">
+                    <label class="fs-6 fw-semibold mb-2">مع كهرباء</label>
+                    <select wire:model.defer="with_electricity" class="form-control form-select form-control-solid">
+                        <option>-- اختيار --</option>
+                        <option value="1">نعم</option>
+                        <option value="0">لا</option>
+                    </select>
+                    @error('with_electricity')
+                    <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <!--end::Col-->
+
+                <!--begin::Col-->
+                <div class="col-md-6 fv-row fv-plugins-icon-container">
+                    <label class="fs-6 fw-semibold mb-2">مع بلكونة</label>
+                    <select wire:model.defer="with_balcony" class="form-control form-select form-control-solid">
+                        <option>-- اختيار --</option>
+                        <option value="1">نعم</option>
+                        <option value="0">لا</option>
+                    </select>
+                    @error('with_balcony')
+                    <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <!--end::Col-->
+
+                <!--begin::Col-->
+                <div class="col-md-6 fv-row fv-plugins-icon-container">
+                    <label class="fs-6 fw-semibold mb-2">مع مصعد</label>
+                    <select wire:model.defer="with_elevator" class="form-control form-select form-control-solid">
+                        <option>-- اختيار --</option>
+                        <option value="1">نعم</option>
+                        <option value="0">لا</option>
+                    </select>
+                    @error('with_elevator')
+                    <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <!--end::Col-->
+
+                <!--begin::Col-->
+                <div class="col-md-6 fv-row fv-plugins-icon-container">
+                    <label class="fs-6 fw-semibold mb-2">مع مسبح</label>
+                    <select wire:model.defer="with_pool" class="form-control form-select form-control-solid">
+                        <option>-- اختيار --</option>
+                        <option value="1">نعم</option>
+                        <option value="0">لا</option>
+                    </select>
+                    @error('with_pool')
+                    <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <!--end::Col-->
+
+                <!--begin::Col-->
+                <div class="col-md-6 fv-row fv-plugins-icon-container">
+                    <label class="fs-6 fw-semibold mb-2">التأثيث</label>
+                    <select wire:model.defer="furniture" class="form-control form-select form-control-solid">
+                        <option>-- اختيار --</option>
+                        <option value="1">كامل</option>
+                        <option value="2">نصف تأثيث</option>
+                        <option value="3">غير مؤثث</option>
+                    </select>
+                    @error('furniture')
+                    <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <!--end::Col-->
+
+                <!--begin::Col-->
+                <div class="col-md-6 fv-row fv-plugins-icon-container">
+                    <label class="required fs-6 fw-semibold mb-2">عدد مواقف السيارات</label>
+                    <input wire:model.defer="parking" type="number" class="form-control form-control-solid">
+                    @error('parking')
                     <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>

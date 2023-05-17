@@ -85,4 +85,17 @@ class User extends Authenticatable
             ? asset('user-image/'.$this->user_image_path)
             : $this->defaultProfilePhotoUrl();
     }
+
+    public function getIdHumanAttribute()
+    {
+        $value = '';
+
+        if ($this->user_type == 1){
+            $value = $this->cpr;
+        } else {
+            $value = $this->corporate_id;
+        }
+
+        return $value;
+    }
 }

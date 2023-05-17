@@ -20,6 +20,13 @@ class Apartment extends Model
         'area',
         'rooms_count',
         'bathrooms_count',
+        'with_electricity',
+        'with_balcony',
+        'with_elevator',
+        'with_pool',
+        'parking',
+        'furniture',
+        'floors',
     ];
 
     public function Property()
