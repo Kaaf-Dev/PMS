@@ -152,6 +152,16 @@ class Invoice extends Model
         return $paid_string;
     }
 
+    public function getDueHumanAttribute()
+    {
+        return $this->due->format('Y/m/d');
+    }
+
+    public function getAmountHumanAttribute()
+    {
+        return number_format($this->amount ?? 0, 2);
+    }
+
     public function getNextNo()
     {
         $carbon = Carbon::now();

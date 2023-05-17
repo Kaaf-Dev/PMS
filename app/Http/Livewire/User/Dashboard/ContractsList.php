@@ -13,7 +13,7 @@ class ContractsList extends Component
     public function render()
     {
         $contracts = ($this->ready_to_load)
-            ? Auth::user()->contracts
+            ? Auth::user()->contracts()->limit(4)->get()
             : [];
         return view('livewire.user.dashboard.contracts-list', [
             'contracts' => $contracts,

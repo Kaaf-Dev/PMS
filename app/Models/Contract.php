@@ -94,6 +94,11 @@ class Contract extends Model
         return $strings[$this->active_status ?? 0];
     }
 
+    public function getCostHumanAttribute()
+    {
+        return number_format($this->cost ?? 0, 2) . ' د.ب.';
+    }
+
     public function cancel()
     {
         $this->active = false;
