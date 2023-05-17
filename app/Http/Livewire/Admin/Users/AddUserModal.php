@@ -24,6 +24,8 @@ class AddUserModal extends Component
             $contact_name,
             $contact_phone;
 
+    public $user_id;
+
     public function rules()
     {
         $rules = [
@@ -52,6 +54,7 @@ class AddUserModal extends Component
             'required' => 'هذا الحقل إجباري',
             'required_if' => 'هذا الحقل إجباري',
             'digits' => 'القيمة غير صالحة',
+            'user_email.unique' => 'البريد الإلكتروني مسجل بالفعل!',
         ];
     }
 
@@ -82,6 +85,7 @@ class AddUserModal extends Component
             $password = Hash::make($password);
             $user = new User();
             $user->name = $this->user_name;
+            $user->username = $this->user_email;
             $user->email = $this->user_email;
             $user->user_type = $this->user_type;
             $user->cpr = $this->user_cpr;
@@ -93,6 +97,8 @@ class AddUserModal extends Component
                 $user->user_image_path = $this->user_image->store($this->user_cpr, 'user_image');
             }
             $user->save();
+            $this->user_id = $user->id;
+            $this->emit('user-added');
         }
 
         $this->nextStep();
@@ -105,7 +111,7 @@ class AddUserModal extends Component
 
     public function assignContract(){
         $this->emit('show-contract-new-modal', [
-            ''
+            'user' => $this->user_id,
         ]);
     }
 

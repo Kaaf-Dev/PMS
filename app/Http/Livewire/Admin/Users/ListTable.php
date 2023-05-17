@@ -22,6 +22,13 @@ class ListTable extends Component
         ];
     }
 
+    public function getListeners()
+    {
+        return [
+            'user-added' => '$refresh',
+        ];
+    }
+
     public function updated($property)
     {
         if ($property == 'search') {

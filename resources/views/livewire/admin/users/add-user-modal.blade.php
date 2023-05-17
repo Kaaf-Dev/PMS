@@ -63,7 +63,7 @@
                                 <!--begin::Col-->
                                 <div class="col-lg-6">
                                     <!--begin::Option-->
-                                    <input wire:model="user_type" type="radio" class="btn-check" name="user_type" value="1" id="user_type_person">
+                                    <input wire:model.defer="user_type" type="radio" class="btn-check" name="user_type" value="1" id="user_type_person">
                                     <label class="btn btn-outline btn-outline-dashed btn-active-light-primary p-7 d-flex align-items-center mb-10" for="user_type_person">
                                         <i class="fas fa-id-card fs-3x me-5"></i>
                                         <!--begin::Info-->
@@ -85,7 +85,7 @@
                                 <!--begin::Col-->
                                 <div class="col-lg-6">
                                     <!--begin::Option-->
-                                    <input wire:model="user_type" type="radio" class="btn-check" name="user_type" value="2" id="user_type_corporate">
+                                    <input wire:model.defer="user_type" type="radio" class="btn-check" name="user_type" value="2" id="user_type_corporate">
                                     <label class="btn btn-outline btn-outline-dashed btn-active-light-primary p-7 d-flex align-items-center mb-10" for="user_type_corporate">
                                         <i class="fas fa-briefcase fs-3x me-5"></i>
                                         <!--begin::Info-->
@@ -252,7 +252,7 @@
                                 <label class="required fw-semibold fs-6 mb-2">الرقم الشخصي</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="email" wire:model="user_cpr"
+                                <input wire:model.defer="user_cpr"
                                        class="form-control form-control-solid mb-3 mb-lg-0" placeholder="الرقم الشخصي"/>
                                 <!--end::Input-->
                                 @error('user_cpr')
@@ -270,7 +270,7 @@
                                     <label class="required fw-semibold fs-6 mb-2">رقم هاتف التواصل</label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
-                                    <input wire:model.defer.defer="contact_phone"
+                                    <input wire:model.defer="contact_phone"
                                            class="form-control form-control-solid mb-3 mb-lg-0"/>
                                     <!--end::Input-->
                                     @error('contact_phone')

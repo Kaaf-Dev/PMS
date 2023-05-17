@@ -8,6 +8,17 @@ function getAdminGlobalModals()
 
     return [
         [
+            'modal_id' => 'kt_modal_add_user',
+            'livewire_component' => 'admin.users.add-user-modal',
+            'emit_show' => 'show-user-add-modal',
+            'emit_hide' => 'hide-user-add-modal',
+            'details' => [
+                'title' => 'تسجيل مستأجر جديد',
+                'modal_dialog_class' => 'modal-dialog-centered mw-1000px',
+            ]
+        ],
+
+        [
             'modal_id' => 'property_add_modal',
             'livewire_component' => 'admin.property.create-form',
             'emit_show' => 'show-property-add-modal',
@@ -116,16 +127,5 @@ function getAdminGlobalModals()
                 'modal_dialog_class' => 'mw-900px',
             ]
         ],
-
-        [
-            'modal_id' => 'kt_modal_add_user',
-            'livewire_component' => 'admin.users.add-user-modal',
-            'emit_show' => 'show-user-add-modal',
-            'emit_hide' => 'hide-user-add-modal',
-            'details' => [
-                'title' => 'تسجيل فاتورة جديدة',
-                'modal_dialog_class' => 'modal-dialog-centered mw-1000px',
-            ]
-        ]
     ];
 }
