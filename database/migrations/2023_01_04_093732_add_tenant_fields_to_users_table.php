@@ -19,6 +19,7 @@ class AddTenantFieldsToUsersTable extends Migration
                 ->unique();
 
             $table->string('cpr')
+                ->nullable()
                 ->after('name');
 
             $table->string('gender')->nullable();
