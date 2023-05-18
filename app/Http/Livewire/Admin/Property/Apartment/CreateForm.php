@@ -19,13 +19,13 @@ class CreateForm extends Component
     public $cost;
     public $rooms_count;
     public $bathrooms_count;
+    public $with_building_guard;
     public $with_electricity;
     public $with_balcony;
     public $with_elevator;
     public $with_pool;
     public $parking;
     public $furniture;
-
     public $floors;
 
     public $type_house = Apartment::TYPE_HOUSE;
@@ -47,6 +47,11 @@ class CreateForm extends Component
             'area' => 'required|numeric',
             'rooms_count' => Rule::requiredIf($this->type == $this->type_house),
             'bathrooms_count' => Rule::requiredIf($this->type == $this->type_house),
+            'with_building_guard' => [
+                'boolean',
+                'nullable',
+                Rule::requiredIf($this->type == $this->type_house),
+            ],
             'with_electricity' => [
                 'boolean',
                 'nullable',
@@ -69,7 +74,7 @@ class CreateForm extends Component
             ],
             'parking' => Rule::requiredIf($this->type == $this->type_house),
             'furniture' => [
-                'boolean',
+                'integer',
                 'nullable',
                 Rule::requiredIf($this->type == $this->type_house),
             ],

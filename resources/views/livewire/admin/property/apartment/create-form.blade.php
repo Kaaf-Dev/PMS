@@ -166,6 +166,20 @@
 
                 <!--begin::Col-->
                 <div class="col-md-6 fv-row fv-plugins-icon-container">
+                    <label class="fs-6 fw-semibold mb-2">يوجد حارس عمارة</label>
+                    <select wire:model.defer="with_building_guard" class="form-control form-select form-control-solid">
+                        <option>-- اختيار --</option>
+                        <option value="1">نعم</option>
+                        <option value="0">لا</option>
+                    </select>
+                    @error('with_building_guard')
+                    <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <!--end::Col-->
+
+                <!--begin::Col-->
+                <div class="col-md-6 fv-row fv-plugins-icon-container">
                     <label class="fs-6 fw-semibold mb-2">مع كهرباء</label>
                     <select wire:model.defer="with_electricity" class="form-control form-select form-control-solid">
                         <option>-- اختيار --</option>
