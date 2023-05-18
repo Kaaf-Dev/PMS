@@ -20,6 +20,7 @@ class Apartment extends Model
         'area',
         'rooms_count',
         'bathrooms_count',
+        'with_building_guard',
         'with_electricity',
         'with_balcony',
         'with_elevator',

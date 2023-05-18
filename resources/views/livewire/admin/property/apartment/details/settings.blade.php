@@ -117,7 +117,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                                <input wire:model="apartment.cost" type="number" step="0.01" class="form-control form-control-lg form-control-solid" placeholder="الإيجار المقدر / شهري">
+                                <input wire:model.defer="apartment.cost" type="number" step="0.01" class="form-control form-control-lg form-control-solid" placeholder="الإيجار المقدر / شهري">
                                 @error('apartment.cost')
                                 <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -132,7 +132,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                                <input wire:model="apartment.area" type="number" step="0.01" class="form-control form-control-lg form-control-solid" placeholder="المساحة">
+                                <input wire:model.defer="apartment.area" type="number" step="0.01" class="form-control form-control-lg form-control-solid" placeholder="المساحة">
                                 @error('apartment.area')
                                 <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -149,7 +149,7 @@
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                                    <input wire:model="apartment.rooms_count" type="number" class="form-control form-control-lg form-control-solid" placeholder="عدد الغرف">
+                                    <input wire:model.defer="apartment.rooms_count" type="number" class="form-control form-control-lg form-control-solid" placeholder="عدد الغرف">
                                     @error('apartment.rooms_count')
                                     <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -157,9 +157,7 @@
                                 <!--end::Col-->
                             </div>
                             <!--end::Input group-->
-                        @endif
 
-                        @if($this->apartment->is_type_house)
                             <!--begin::Input group-->
                             <div class="row mb-6">
                                 <!--begin::Label-->
@@ -167,8 +165,145 @@
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                                    <input wire:model="apartment.bathrooms_count" type="number" class="form-control form-control-lg form-control-solid" placeholder="دورات المياه">
+                                    <input wire:model.defer="apartment.bathrooms_count" type="number" class="form-control form-control-lg form-control-solid" placeholder="دورات المياه">
                                     @error('apartment.bathrooms_count')
+                                    <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label required fw-semibold fs-6">يوجد حارس للعمارة</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                                    <select wire:model.defer="apartment.with_building_guard" class="form-control form-select form-control-solid">
+                                        <option>-- اختيار --</option>
+                                        <option value="1">نعم</option>
+                                        <option value="0">لا</option>
+                                    </select>
+                                    @error('apartment.with_building_guard')
+                                    <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label required fw-semibold fs-6">مع كهرباء</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                                    <select wire:model.defer="apartment.with_electricity" class="form-control form-select form-control-solid">
+                                        <option>-- اختيار --</option>
+                                        <option value="1">نعم</option>
+                                        <option value="0">لا</option>
+                                    </select>
+                                    @error('apartment.with_electricity')
+                                    <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label required fw-semibold fs-6">يوجد بلكونة</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                                    <select wire:model.defer="apartment.with_balcony" class="form-control form-select form-control-solid">
+                                        <option>-- اختيار --</option>
+                                        <option value="1">نعم</option>
+                                        <option value="0">لا</option>
+                                    </select>
+                                    @error('apartment.with_balcony')
+                                    <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label required fw-semibold fs-6">يوجد مصعد</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                                    <select wire:model.defer="apartment.with_elevator" class="form-control form-select form-control-solid">
+                                        <option>-- اختيار --</option>
+                                        <option value="1">نعم</option>
+                                        <option value="0">لا</option>
+                                    </select>
+                                    @error('apartment.with_elevator')
+                                    <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label required fw-semibold fs-6">يوجد مسبح</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                                    <select wire:model.defer="apartment.with_pool" class="form-control form-select form-control-solid">
+                                        <option>-- اختيار --</option>
+                                        <option value="1">نعم</option>
+                                        <option value="0">لا</option>
+                                    </select>
+                                    @error('apartment.with_pool')
+                                    <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label required fw-semibold fs-6">التأثيث</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                                    <select wire:model.defer="apartment.furniture" class="form-control form-select form-control-solid">
+                                        <option>-- اختيار --</option>
+                                        <option value="1">كامل</option>
+                                        <option value="2">نصف تأثيث</option>
+                                        <option value="3">بدون</option>
+                                    </select>
+                                    @error('apartment.furniture')
+                                    <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label required fw-semibold fs-6">عدد مواقف السيارات</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                                    <input wire:model.defer="apartment.parking" type="number" class="form-control form-control-lg form-control-solid" placeholder="عدد الغرف">
+                                    @error('apartment.parking')
                                     <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -177,6 +312,23 @@
                             <!--end::Input group-->
                         @endif
 
+                        @if($this->apartment->is_type_store)
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label required fw-semibold fs-6">عدد الطوابق</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                                    <input wire:model.defer="apartment.floors" type="number" class="form-control form-control-lg form-control-solid" placeholder="عدد الغرف">
+                                    @error('apartment.floors')
+                                    <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            @endif
 
 
                     </div>

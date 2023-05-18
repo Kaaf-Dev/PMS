@@ -28,6 +28,38 @@ class Settings extends Component
             'apartment.area' => 'required|numeric',
             'apartment.rooms_count' => Rule::requiredIf($this->apartment->is_type_house),
             'apartment.bathrooms_count' => Rule::requiredIf($this->apartment->is_type_house),
+            'apartment.with_building_guard' => [
+                'boolean',
+                'nullable',
+                Rule::requiredIf($this->apartment->is_type_house),
+            ],
+            'apartment.with_electricity' => [
+                'boolean',
+                'nullable',
+                Rule::requiredIf($this->apartment->is_type_house),
+            ],
+            'apartment.with_balcony' => [
+                'boolean',
+                'nullable',
+                Rule::requiredIf($this->apartment->is_type_house),
+            ],
+            'apartment.with_elevator' => [
+                'boolean',
+                'nullable',
+                Rule::requiredIf($this->apartment->is_type_house),
+            ],
+            'apartment.with_pool' => [
+                'boolean',
+                'nullable',
+                Rule::requiredIf($this->apartment->is_type_house),
+            ],
+            'apartment.parking' => Rule::requiredIf($this->apartment->is_type_house),
+            'apartment.furniture' => [
+                'integer',
+                'nullable',
+                Rule::requiredIf($this->apartment->is_type_house),
+            ],
+            'apartment.floors' => Rule::requiredIf($this->apartment->is_type_store),
         ];
     }
 
