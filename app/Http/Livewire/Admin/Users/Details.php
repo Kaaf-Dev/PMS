@@ -8,7 +8,6 @@ use Livewire\WithFileUploads;
 
 class Details extends Component
 {
-    use WithFileUploads;
 
 //    public $user_id;
     public $User;
@@ -31,15 +30,6 @@ class Details extends Component
         $rules['User.user_type'] = 'required|integer';
         $rules['User.gender'] = 'required|integer';
         $rules['User.cpr'] = 'required|digits:9';
-        $ruels['user_image_path'] = 'required|mimes:pdf';
-        $ruels['cpr_image_path'] = 'required|mimes:pdf';
-        $ruels['iban_image_path'] = 'required|mimes:pdf';
-        if ($this->User->user_type == 2){
-            $ruels['merchant_image_path'] = 'required|mimes:pdf';
-        }else{
-            $ruels['merchant_image_path'] = 'nullable|mimes:pdf';
-
-        }
         return $rules;
     }
 

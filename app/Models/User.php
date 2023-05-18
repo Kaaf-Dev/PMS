@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
@@ -97,5 +98,21 @@ class User extends Authenticatable
         }
 
         return $value;
+    }
+
+    public function getIsPersonAttribute()
+    {
+        return $this->user_type != 2;
+    }
+
+    public function getIsCorporateAttribute()
+    {
+        return $this->user_type == 2;
+    }
+
+    public function getAttachmentDiskPath($attachment)
+    {
+        return Storage::disk('user_image')->url($this->{$attachment});
+
     }
 }

@@ -6,14 +6,13 @@
             <!--begin::Page title-->
             <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
                 <!--begin::Title-->
-                <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">User
-                    Details</h1>
+                <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">بيانات المستأجر</h1>
                 <!--end::Title-->
                 <!--begin::Breadcrumb-->
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                     <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">
-                        <a href="{{ route('admin.dashboard') }}" class="text-muted text-hover-primary">Home</a>
+                        <a href="{{ route('admin.dashboard') }}" class="text-muted text-hover-primary">الرئيسية</a>
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
@@ -23,7 +22,7 @@
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">
-                        <a href="{{ route('admin.users') }}" class="text-muted text-hover-primary">Users</a>
+                        <a href="{{ route('admin.users') }}" class="text-muted text-hover-primary">المستأجرين</a>
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
@@ -32,7 +31,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">User Management</li>
+                    <li class="breadcrumb-item text-muted">بيانات المستأجرين</li>
                     <!--end::Item-->
                 </ul>
                 <!--end::Breadcrumb-->
@@ -56,273 +55,14 @@
                 <!--begin::Sidebar-->
                 <div class="flex-column flex-lg-row-auto w-lg-250px w-xl-350px mb-10">
                     <!--begin::Card-->
+                    <div class="row">
+                    </div>
                     <div class="card mb-5 mb-xl-8" wire:ignore>
                         @livewire('admin.users.details.info', ['user' => $this->User], key($this->User->id))
                     </div>
+
                     <div class="col-lg-12">
-                        <!--begin::Card-->
-                        <div class="card card-flush h-lg-100">
-                            <!--begin::Card header-->
-                            <div class="card-header mt-6">
-                                <!--begin::Card title-->
-                                <div class="card-title flex-column">
-                                    <h3 class="fw-bold mb-1">المرفقات</h3>
-                                    <div class="fs-6 text-gray-400">المجموع 3 مستندات مهمة</div>
-                                </div>
-                                <!--end::Card title-->
-                            </div>
-                            <!--end::Card header-->
-                            <!--begin::Card body-->
-                            <div class="card-body p-9 pt-3">
-                                <!--begin::Files-->
-                                <div class="d-flex flex-column mb-9">
-                                    <!--begin::File-->
-                                    <div class="d-flex align-items-center mb-5">
-                                        <!--begin::Icon-->
-                                        <div class="symbol symbol-30px me-5">
-                                            <img alt="Icon" src="{{\Illuminate\Support\Facades\URL::asset('admin-assets/media/svg/files/pdf.svg')}}"/>
-                                        </div>
-                                        <!--end::Icon-->
-                                        <!--begin::Details-->
-                                        <div class="fw-semibold">
-                                            <a class="fs-6 fw-bold text-dark text-hover-primary" href="#">مستند من
-                                                البطاقة الشخصية</a>
-                                            <div class="text-gray-400">
-                                                @if(isset($User->cpr_image_path))
-                                                    <a href="#">تحميل المستند</a>
-                                                @else
-                                                    <a>لا يوجد مستند</a>
-                                                @endif
-                                            </div>
-                                        </div>
-                                        <!--end::Details-->
-                                        <!--begin::Menu-->
-                                        <button type="button"
-                                                class="btn btn-clean btn-sm btn-icon btn-icon-primary btn-active-light-primary ms-auto"
-                                                data-kt-menu-trigger="click"
-                                                data-kt-menu-placement="bottom-end">
-                                            <!--begin::Svg Icon | path: icons/duotune/general/gen024.svg-->
-                                            <span class="svg-icon svg-icon-3">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24px"
-                                                         height="24px" viewBox="0 0 24 24">
-                                                        <g stroke="none" stroke-width="1" fill="none"
-                                                           fill-rule="evenodd">
-                                                            <rect x="5" y="5" width="5" height="5"
-                                                                  rx="1" fill="currentColor"/>
-                                                            <rect x="14" y="5" width="5" height="5"
-                                                                  rx="1" fill="currentColor"
-                                                                  opacity="0.3"/>
-                                                            <rect x="5" y="14" width="5" height="5"
-                                                                  rx="1" fill="currentColor"
-                                                                  opacity="0.3"/>
-                                                            <rect x="14" y="14" width="5" height="5"
-                                                                  rx="1" fill="currentColor"
-                                                                  opacity="0.3"/>
-                                                        </g>
-                                                    </svg>
-                                                </span>
-                                            <!--end::Svg Icon-->
-                                        </button>
-                                        <!--begin::Menu 1-->
-                                        <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px"
-                                             data-kt-menu="true" id="kt_menu_637dc6fdc4a34">
-                                            <!--begin::Header-->
-                                            <div class="px-7 py-5">
-                                                <div class="fs-5 text-dark fw-bold">تعديل المستند</div>
-                                            </div>
-                                            <!--end::Header-->
-                                            <!--begin::Menu separator-->
-                                            <div class="separator border-gray-200"></div>
-                                            <!--end::Menu separator-->
-                                            <!--begin::Form-->
-                                            <div class="px-7 py-5">
-                                                <!--begin::Input group-->
-                                                <div class="mb-10">
-                                                    <!--begin::Label-->
-                                                    <label class="form-label fw-semibold">البطاقة الشخصية:</label>
-                                                    <!--end::Label-->
-                                                    <!--begin::Input-->
-                                                    <div>
-                                                        <input wire:model="cpr_image_path" type="file" class="form-control" accept=".pdf">
-                                                    </div>
-                                                    <!--end::Input-->
-                                                </div>
-                                                <!--end::Actions-->
-                                            </div>
-                                            <!--end::Form-->
-                                        </div>
-                                        <!--end::Menu 1-->
-                                        <!--end::Menu-->
-                                    </div>
-                                    <!--end::File-->
-                                    <!--begin::File-->
-                                    <div class="d-flex align-items-center mb-5">
-                                        <!--begin::Icon-->
-                                        <div class="symbol symbol-30px me-5">
-                                            <img alt="Icon" src="{{\Illuminate\Support\Facades\URL::asset('admin-assets/media/svg/files/pdf.svg')}}"/>
-                                        </div>
-                                        <!--end::Icon-->
-                                        <!--begin::Details-->
-                                        <div class="fw-semibold">
-                                            <a class="fs-6 fw-bold text-dark text-hover-primary" href="#">مستند ال
-                                                IBAN</a>
-                                            <div class="text-gray-400">
-                                                @if(isset($User->iban_image_path))
-                                                    <a href="#">تحميل المستند</a>
-                                                @else
-                                                    <a>لا يوجد مستند</a>
-                                                @endif
-                                            </div>
-                                        </div>
-                                        <!--end::Details-->
-                                        <!--begin::Menu-->
-                                        <button type="button"
-                                                class="btn btn-clean btn-sm btn-icon btn-icon-primary btn-active-light-primary ms-auto"
-                                                data-kt-menu-trigger="click"
-                                                data-kt-menu-placement="bottom-end">
-                                            <!--begin::Svg Icon | path: icons/duotune/general/gen024.svg-->
-                                            <span class="svg-icon svg-icon-3">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24px"
-                                                         height="24px" viewBox="0 0 24 24">
-                                                        <g stroke="none" stroke-width="1" fill="none"
-                                                           fill-rule="evenodd">
-                                                            <rect x="5" y="5" width="5" height="5"
-                                                                  rx="1" fill="currentColor"/>
-                                                            <rect x="14" y="5" width="5" height="5"
-                                                                  rx="1" fill="currentColor"
-                                                                  opacity="0.3"/>
-                                                            <rect x="5" y="14" width="5" height="5"
-                                                                  rx="1" fill="currentColor"
-                                                                  opacity="0.3"/>
-                                                            <rect x="14" y="14" width="5" height="5"
-                                                                  rx="1" fill="currentColor"
-                                                                  opacity="0.3"/>
-                                                        </g>
-                                                    </svg>
-                                                </span>
-                                            <!--end::Svg Icon-->
-                                        </button>
-                                        <!--begin::Menu 1-->
-                                        <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px"
-                                             data-kt-menu="true" id="kt_menu_637dc6fdc4f5e">
-                                            <!--begin::Header-->
-                                            <div class="px-7 py-5">
-                                                <div class="fs-5 text-dark fw-bold">تعديل المستند</div>
-                                            </div>
-                                            <!--end::Header-->
-                                            <!--begin::Menu separator-->
-                                            <div class="separator border-gray-200"></div>
-                                            <!--end::Menu separator-->
-                                            <!--begin::Form-->
-                                            <div class="px-7 py-5">
-                                                <!--begin::Input group-->
-                                                <div class="mb-10">
-                                                    <!--begin::Label-->
-                                                    <label class="form-label fw-semibold">وثيقة ال IBAN:</label>
-                                                    <!--end::Label-->
-                                                    <!--begin::Input-->
-                                                    <div>
-                                                        <input wire:model="iban_image_path" type="file" class="form-control" accept=".pdf">
-                                                    </div>
-                                                    <!--end::Input-->
-                                                </div>
-                                                <!--end::Actions-->
-                                            </div>
-                                            <!--end::Form-->
-                                        </div>
-                                        <!--end::Menu 1-->
-                                        <!--end::Menu-->
-                                    </div>
-                                    <!--end::File-->
-                                    <!--begin::File-->
-                                    @if($User->user_type == 2)
-
-                                    <div class="d-flex align-items-center mb-5">
-                                        <!--begin::Icon-->
-                                        <div class="symbol symbol-30px me-5">
-                                            <img alt="Icon" src="{{\Illuminate\Support\Facades\URL::asset('admin-assets/media/svg/files/pdf.svg')}}"/>
-                                        </div>
-                                        <!--end::Icon-->
-                                        <!--begin::Details-->
-                                        <div class="fw-semibold">
-                                            <a class="fs-6 fw-bold text-dark text-hover-primary" href="#">مستند السجل
-                                                التجاري</a>
-                                            <div class="text-gray-400">
-                                                @if(isset($User->merchant_image_path))
-                                                <a href="#">تحميل المستند</a>
-                                                @else
-                                                    <a>لا يوجد مستند</a>
-                                                @endif
-                                            </div>
-                                        </div>
-                                        <!--end::Details-->
-                                        <!--begin::Menu-->
-                                        <button type="button"
-                                                class="btn btn-clean btn-sm btn-icon btn-icon-primary btn-active-light-primary ms-auto"
-                                                data-kt-menu-trigger="click"
-                                                data-kt-menu-placement="bottom-end">
-                                            <!--begin::Svg Icon | path: icons/duotune/general/gen024.svg-->
-                                            <span class="svg-icon svg-icon-3">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24px"
-                                                         height="24px" viewBox="0 0 24 24">
-                                                        <g stroke="none" stroke-width="1" fill="none"
-                                                           fill-rule="evenodd">
-                                                            <rect x="5" y="5" width="5" height="5"
-                                                                  rx="1" fill="currentColor"/>
-                                                            <rect x="14" y="5" width="5" height="5"
-                                                                  rx="1" fill="currentColor"
-                                                                  opacity="0.3"/>
-                                                            <rect x="5" y="14" width="5" height="5"
-                                                                  rx="1" fill="currentColor"
-                                                                  opacity="0.3"/>
-                                                            <rect x="14" y="14" width="5" height="5"
-                                                                  rx="1" fill="currentColor"
-                                                                  opacity="0.3"/>
-                                                        </g>
-                                                    </svg>
-                                                </span>
-                                            <!--end::Svg Icon-->
-                                        </button>
-                                        <!--begin::Menu 1-->
-                                        <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px"
-                                             data-kt-menu="true" id="kt_menu_637dc6fdc5467">
-                                            <!--begin::Header-->
-                                            <div class="px-7 py-5">
-                                                <div class="fs-5 text-dark fw-bold">تعديل المستند</div>
-                                            </div>
-                                            <!--end::Header-->
-                                            <!--begin::Menu separator-->
-                                            <div class="separator border-gray-200"></div>
-                                            <!--end::Menu separator-->
-                                            <!--begin::Form-->
-                                            <div class="px-7 py-5">
-                                                <!--begin::Input group-->
-                                                <div class="mb-10">
-                                                    <!--begin::Label-->
-                                                    <label class="form-label fw-semibold">وثيقة السجل التجاري:</label>
-                                                    <!--end::Label-->
-                                                    <!--begin::Input-->
-                                                    <div>
-                                                        <input wire:model="merchant_image_path" type="file" class="form-control" accept=".pdf">
-                                                    </div>
-                                                    <!--end::Input-->
-                                                </div>
-
-                                                <!--end::Actions-->
-                                            </div>
-                                            <!--end::Form-->
-                                        </div>
-                                        <!--end::Menu 1-->
-                                        <!--end::Menu-->
-                                    </div>
-                                    <!--end::File-->
-                                    @endif
-                                </div>
-                                <!--end::Files-->
-                            </div>
-                            <!--end::Card body -->
-                        </div>
-                        <!--end::Card-->
+                        @livewire('admin.users.details.attachments', ['user' => $this->User])
                     </div>
                 </div>
                 <!--end::Sidebar-->
