@@ -84,37 +84,6 @@ class CreateForm extends Component
         $validated_data = $this->validate();
         $property = Property::create($validated_data);
         if ($property) {
-
-            $apartments = false;
-
-            if (isset($validated_data['apartments_house_count'])) { // create house
-
-                for ($i = 1; $i <= $validated_data['apartments_house_count']; $i++) {
-                    $apartments[] = [
-                        'property_id' => $property->id,
-                        'type' => Apartment::TYPE_HOUSE,
-                        'name' => 'شقة - ' . $i,
-                    ];
-                }
-
-            }
-
-            if (isset($validated_data['apartments_market_count'])) { // create house
-
-                for ($i = 1; $i <= $validated_data['apartments_market_count']; $i++) {
-                    $apartments[] = [
-                        'property_id' => $property->id,
-                        'type' => Apartment::TYPE_STORE,
-                        'name' => 'تجاري - ' . $i,
-                    ];
-                }
-
-            }
-
-            if ($apartments) {
-                $property->apartments()->insert($apartments);
-            }
-
             $this->showSuccessAlert('تمت العملية بنجاح');
             $this->closeModal();
             $this->emit('property-added');
