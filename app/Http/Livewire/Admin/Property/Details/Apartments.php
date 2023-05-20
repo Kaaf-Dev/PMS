@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Property\Details;
 
+use App\Models\Apartment;
 use App\Models\Property;
 use Livewire\Component;
 
@@ -44,5 +45,11 @@ class Apartments extends Component
         $this->emit('show-apartment-add-modal', [
             'property_id' => $this->property_id,
         ]);
+    }
+
+    public function copyApartment($apartment_id)
+    {
+        $apartment = Apartment::findOrFail($apartment_id)->toArray();
+        $this->emit('show-apartment-add-modal', $apartment);
     }
 }

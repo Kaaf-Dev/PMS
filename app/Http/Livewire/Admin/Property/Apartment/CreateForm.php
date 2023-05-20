@@ -111,6 +111,63 @@ class CreateForm extends Component
         if (isset($params['property_id']) ) {
             $this->property_id = $params['property_id'];
         }
+
+        if (isset($params['name']) ) {
+            $this->name = $params['name'];
+        }
+
+        if (isset($params['area']) ) {
+            $this->area = $params['area'];
+        }
+
+        if (isset($params['type']) ) {
+            $this->type = $params['type'];
+        }
+
+        if (isset($params['cost']) ) {
+            $this->cost = $params['cost'];
+        }
+
+        if (isset($params['rooms_count']) ) {
+            $this->rooms_count = $params['rooms_count'];
+        }
+
+        if (isset($params['bathrooms_count']) ) {
+            $this->bathrooms_count = $params['bathrooms_count'];
+        }
+
+        if (isset($params['with_building_guard']) ) {
+            $this->with_building_guard = $params['with_building_guard'];
+        }
+
+        if (isset($params['with_electricity']) ) {
+            $this->with_electricity = $params['with_electricity'];
+        }
+
+        if (isset($params['with_balcony']) ) {
+            $this->with_balcony = $params['with_balcony'];
+        }
+
+        if (isset($params['with_elevator']) ) {
+            $this->with_elevator = $params['with_elevator'];
+        }
+
+        if (isset($params['with_pool']) ) {
+            $this->with_pool = $params['with_pool'];
+        }
+
+        if (isset($params['parking']) ) {
+            $this->parking = $params['parking'];
+        }
+
+        if (isset($params['furniture']) ) {
+            $this->furniture = $params['furniture'];
+        }
+
+        if (isset($params['floors']) ) {
+            $this->floors = $params['floors'];
+        }
+
     }
 
     public function resetFields()
