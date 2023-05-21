@@ -198,7 +198,7 @@
                     <!--begin:::Tab content-->
                     <div class="tab-content" id="myTabContent">
                         <!--begin:::Tab pane-->
-                        <div class="tab-pane fade" id="kt_user_view_overview_tab" role="tabpanel">
+                        <div class="tab-pane fade" id="kt_user_view_overview_tab11" role="tabpanel">
                             <!--begin::Card-->
                             <div class="card card-flush mb-6 mb-xl-9">
                                 <!--begin::Card header-->
@@ -2128,89 +2128,89 @@
                             @livewire('admin.users.details.invoices-card', ['user_id' => $User->id])
                             <!--end::Card-->
 
-                            <!--begin::Card-->
-                            <div class="card pt-4 mb-6 mb-xl-9">
-                                <!--begin::Card header-->
-                                <div class="card-header border-0">
-                                    <!--begin::Card title-->
-                                    <div class="card-title">
-                                        <h2>الملف الشخصي</h2>
-                                    </div>
-                                    <!--end::Card title-->
-                                </div>
-                                <!--end::Card header-->
-                                <!--begin::Card body-->
-                                <!--begin::Card body-->
-                                <div class="card-body border-top p-9">
-                                    <!--begin::Input group-->
-                                    <div class="row mb-6">
-                                        <!--begin::Col-->
-                                        <!--begin::Input group-->
-                                        <div class="fv-row mb-7">
-                                            <!--begin::Label-->
-                                            <label class="d-block fw-semibold fs-6 mb-5">الصورة الشخصية</label>
-                                            <!--end::Label-->
-                                            <!--begin::Image placeholder-->
-                                            <style>.image-input-placeholder {
-                                                    background-image: url('assets/media/svg/files/blank-image.svg');
-                                                }
+{{--                            <!--begin::Card-->--}}
+{{--                            <div class="card pt-4 mb-6 mb-xl-9">--}}
+{{--                                <!--begin::Card header-->--}}
+{{--                                <div class="card-header border-0">--}}
+{{--                                    <!--begin::Card title-->--}}
+{{--                                    <div class="card-title">--}}
+{{--                                        <h2>الملف الشخصي</h2>--}}
+{{--                                    </div>--}}
+{{--                                    <!--end::Card title-->--}}
+{{--                                </div>--}}
+{{--                                <!--end::Card header-->--}}
+{{--                                <!--begin::Card body-->--}}
+{{--                                <!--begin::Card body-->--}}
+{{--                                <div class="card-body border-top p-9">--}}
+{{--                                    <!--begin::Input group-->--}}
+{{--                                    <div class="row mb-6">--}}
+{{--                                        <!--begin::Col-->--}}
+{{--                                        <!--begin::Input group-->--}}
+{{--                                        <div class="fv-row mb-7">--}}
+{{--                                            <!--begin::Label-->--}}
+{{--                                            <label class="d-block fw-semibold fs-6 mb-5">الصورة الشخصية</label>--}}
+{{--                                            <!--end::Label-->--}}
+{{--                                            <!--begin::Image placeholder-->--}}
+{{--                                            <style>.image-input-placeholder {--}}
+{{--                                                    background-image: url('assets/media/svg/files/blank-image.svg');--}}
+{{--                                                }--}}
 
-                                                [data-theme="dark"] .image-input-placeholder {
-                                                    background-image: url('assets/media/svg/files/blank-image-dark.svg');
-                                                }</style>
-                                            <!--end::Image placeholder-->
-                                            <!--begin::Image input-->
-                                            <div class="image-input image-input-outline image-input-placeholder"
-                                                 data-kt-image-input="true">
-                                                <!--begin::Preview existing avatar-->
-                                                <div wire:ignore class="image-input-wrapper w-125px h-125px"
-                                                     style="background-image: url({{\Illuminate\Support\Facades\URL::asset('user-image/'.$User->user_image_path)}});"></div>
-                                                <!--end::Preview existing avatar-->
-                                                <!--begin::Label-->
-                                                <label
-                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                    data-kt-image-input-action="change" data-bs-toggle="tooltip"
-                                                    title="Change avatar">
-                                                    <i class="bi bi-pencil-fill fs-7"></i>
-                                                    <!--begin::Inputs-->
-                                                    <input type="file" wire:model="user_image_path" name="avatar"
-                                                           accept=".png, .jpg, .jpeg"/>
-                                                    <input type="hidden" name="avatar_remove"/>
-                                                    <!--end::Inputs-->
-                                                </label>
-                                                <!--end::Label-->
-                                                <!--begin::Cancel-->
-                                                <span
-                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                    data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
-                                                    title="Cancel avatar">
-																					<i class="bi bi-x fs-2"></i>
-																				</span>
-                                                <!--end::Cancel-->
-                                                <!--begin::Remove-->
-                                                <span
-                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                    data-kt-image-input-action="remove" data-bs-toggle="tooltip"
-                                                    title="Remove avatar">
-																					<i class="bi bi-x fs-2"></i>
-																				</span>
-                                                <!--end::Remove-->
-                                            </div>
-                                            <!--end::Image input-->
-                                            <!--begin::Hint-->
-                                            <div class="form-text">الامتدادات المسموح بها: png, jpg, jpeg.</div>
-                                            @error('user_image')
-                                            <div class="alert alert-danger">
-                                                {{$message}}
-                                            </div>
-                                            @enderror
-                                            <!--end::Hint-->
-                                        </div>
-                                        <!--end::Input group-->
-                                        <!--end::Col-->
-                                    </div>
-                                    <!--end::Input group-->
-                                    <!--begin::Input group-->
+{{--                                                [data-theme="dark"] .image-input-placeholder {--}}
+{{--                                                    background-image: url('assets/media/svg/files/blank-image-dark.svg');--}}
+{{--                                                }</style>--}}
+{{--                                            <!--end::Image placeholder-->--}}
+{{--                                            <!--begin::Image input-->--}}
+{{--                                            <div class="image-input image-input-outline image-input-placeholder"--}}
+{{--                                                 data-kt-image-input="true">--}}
+{{--                                                <!--begin::Preview existing avatar-->--}}
+{{--                                                <div wire:ignore class="image-input-wrapper w-125px h-125px"--}}
+{{--                                                     style="background-image: url({{\Illuminate\Support\Facades\URL::asset('user-image/'.$User->user_image_path)}});"></div>--}}
+{{--                                                <!--end::Preview existing avatar-->--}}
+{{--                                                <!--begin::Label-->--}}
+{{--                                                <label--}}
+{{--                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"--}}
+{{--                                                    data-kt-image-input-action="change" data-bs-toggle="tooltip"--}}
+{{--                                                    title="Change avatar">--}}
+{{--                                                    <i class="bi bi-pencil-fill fs-7"></i>--}}
+{{--                                                    <!--begin::Inputs-->--}}
+{{--                                                    <input type="file" wire:model="user_image_path" name="avatar"--}}
+{{--                                                           accept=".png, .jpg, .jpeg"/>--}}
+{{--                                                    <input type="hidden" name="avatar_remove"/>--}}
+{{--                                                    <!--end::Inputs-->--}}
+{{--                                                </label>--}}
+{{--                                                <!--end::Label-->--}}
+{{--                                                <!--begin::Cancel-->--}}
+{{--                                                <span--}}
+{{--                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"--}}
+{{--                                                    data-kt-image-input-action="cancel" data-bs-toggle="tooltip"--}}
+{{--                                                    title="Cancel avatar">--}}
+{{--																					<i class="bi bi-x fs-2"></i>--}}
+{{--																				</span>--}}
+{{--                                                <!--end::Cancel-->--}}
+{{--                                                <!--begin::Remove-->--}}
+{{--                                                <span--}}
+{{--                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"--}}
+{{--                                                    data-kt-image-input-action="remove" data-bs-toggle="tooltip"--}}
+{{--                                                    title="Remove avatar">--}}
+{{--																					<i class="bi bi-x fs-2"></i>--}}
+{{--																				</span>--}}
+{{--                                                <!--end::Remove-->--}}
+{{--                                            </div>--}}
+{{--                                            <!--end::Image input-->--}}
+{{--                                            <!--begin::Hint-->--}}
+{{--                                            <div class="form-text">الامتدادات المسموح بها: png, jpg, jpeg.</div>--}}
+{{--                                            @error('user_image')--}}
+{{--                                            <div class="alert alert-danger">--}}
+{{--                                                {{$message}}--}}
+{{--                                            </div>--}}
+{{--                                            @enderror--}}
+{{--                                            <!--end::Hint-->--}}
+{{--                                        </div>--}}
+{{--                                        <!--end::Input group-->--}}
+{{--                                        <!--end::Col-->--}}
+{{--                                    </div>--}}
+{{--                                    <!--end::Input group-->--}}
+{{--                                    <!--begin::Input group-->--}}
 {{--                                    <div class="row mb-6">--}}
 {{--                                        <!--begin::Label-->--}}
 {{--                                        <label class="col-lg-4 col-form-label required fw-semibold fs-6">نوع--}}
@@ -2240,165 +2240,165 @@
 {{--                                        </div>--}}
 {{--                                        <!--end::Col-->--}}
 {{--                                    </div>--}}
-                                    <!--end::Input group-->
-                                    <!--begin::Input group-->
-                                    <div class="row mb-6 ">
-                                        <!--begin::Label-->
-                                        <label class="col-lg-4 col-form-label required fw-semibold fs-6">الأسم
-                                            الكامل</label>
-                                        <!--end::Label-->
-                                        <!--begin::Col-->
-                                        <div class="col-lg-8">
-                                            <!--begin::Row-->
-                                            <div class="row">
-                                                <!--begin::Col-->
-                                                <div class="col-lg-12 fv-row">
-                                                    <input type="text" wire:model="User.name"
-                                                           class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
-                                                           placeholder="الأسم الكامل"/>
-                                                </div>
-                                                <!--end::Col-->
-                                            </div>
-                                            <!--end::Row-->
-                                        </div>
-                                        <!--end::Col-->
-                                    </div>
-                                    <!--end::Input group-->
-                                    <!--begin::Input group-->
-                                    <div class="row mb-6">
-                                        <!--begin::Label-->
-                                        <label class="col-lg-4 col-form-label required fw-semibold fs-6">البريد
-                                            الإلكتروني</label>
-                                        <!--end::Label-->
-                                        <!--begin::Col-->
-                                        <div class="col-lg-8 fv-row">
-                                            <input type="email" wire:model="User.email"
-                                                   class="form-control form-control-lg form-control-solid"
-                                                   placeholder="البريد الإلكتروني"/>
-                                        </div>
-                                        <!--end::Col-->
-                                    </div>
-                                    <!--end::Input group-->
-                                    <!--begin::Input group-->
-                                    <div class="row mb-6">
-                                        <!--begin::Label-->
-                                        <label class="col-lg-4 col-form-label fw-semibold fs-6">
-                                            <span class="required">الرقم الشخصي</span>
-                                        </label>
-                                        <!--end::Label-->
-                                        <!--begin::Col-->
-                                        <div class="col-lg-8 fv-row">
-                                            <input type="number" wire:model="User.cpr"
-                                                   class="form-control form-control-lg form-control-solid"
-                                                   placeholder="الرقم الشخصي"/>
-                                        </div>
-                                        <!--end::Col-->
-                                    </div>
-                                    <!--end::Input group-->
-                                    <!--begin::Input group-->
-                                    <div class="row mb-6">
-                                        <!--begin::Label-->
-                                        <label class="col-lg-4 col-form-label fw-semibold fs-6">
-                                            <span class="required">رقم الهاتف</span>
-                                            <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"
-                                               title="رقم الهاتف يجب أن يكون فعال."></i>
-                                        </label>
-                                        <!--end::Label-->
-                                        <!--begin::Col-->
-                                        <div class="col-lg-8 fv-row">
-                                            <input type="tel" wire:model="User.phone"
-                                                   class="form-control form-control-lg form-control-solid"
-                                                   placeholder="رقم الهاتف"/>
-                                        </div>
-                                        <!--end::Col-->
-                                    </div>
-                                    <!--end::Input group-->
-                                    <!--begin::Input group-->
-                                    <div class="row mb-6">
-                                        <!--begin::Label-->
-                                        <label class="col-lg-4 col-form-label fw-semibold fs-6">
-                                            <span class="required">الواتس آب</span>
-                                            <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"
-                                               title="رقم الهاتف يجب أن يكون فعال."></i>
-                                        </label>
-                                        <!--end::Label-->
-                                        <!--begin::Col-->
-                                        <div class="col-lg-8 fv-row">
-                                            <input type="tel" wire:model="User.whatsapp_phone"
-                                                   class="form-control form-control-lg form-control-solid"
-                                                   placeholder="رقم الهاتف"/>
-                                        </div>
-                                        <!--end::Col-->
-                                    </div>
-                                    <!--end::Input group-->
+{{--                                    <!--end::Input group-->--}}
+{{--                                    <!--begin::Input group-->--}}
+{{--                                    <div class="row mb-6 ">--}}
+{{--                                        <!--begin::Label-->--}}
+{{--                                        <label class="col-lg-4 col-form-label required fw-semibold fs-6">الأسم--}}
+{{--                                            الكامل</label>--}}
+{{--                                        <!--end::Label-->--}}
+{{--                                        <!--begin::Col-->--}}
+{{--                                        <div class="col-lg-8">--}}
+{{--                                            <!--begin::Row-->--}}
+{{--                                            <div class="row">--}}
+{{--                                                <!--begin::Col-->--}}
+{{--                                                <div class="col-lg-12 fv-row">--}}
+{{--                                                    <input type="text" wire:model="User.name"--}}
+{{--                                                           class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"--}}
+{{--                                                           placeholder="الأسم الكامل"/>--}}
+{{--                                                </div>--}}
+{{--                                                <!--end::Col-->--}}
+{{--                                            </div>--}}
+{{--                                            <!--end::Row-->--}}
+{{--                                        </div>--}}
+{{--                                        <!--end::Col-->--}}
+{{--                                    </div>--}}
+{{--                                    <!--end::Input group-->--}}
+{{--                                    <!--begin::Input group-->--}}
+{{--                                    <div class="row mb-6">--}}
+{{--                                        <!--begin::Label-->--}}
+{{--                                        <label class="col-lg-4 col-form-label required fw-semibold fs-6">البريد--}}
+{{--                                            الإلكتروني</label>--}}
+{{--                                        <!--end::Label-->--}}
+{{--                                        <!--begin::Col-->--}}
+{{--                                        <div class="col-lg-8 fv-row">--}}
+{{--                                            <input type="email" wire:model="User.email"--}}
+{{--                                                   class="form-control form-control-lg form-control-solid"--}}
+{{--                                                   placeholder="البريد الإلكتروني"/>--}}
+{{--                                        </div>--}}
+{{--                                        <!--end::Col-->--}}
+{{--                                    </div>--}}
+{{--                                    <!--end::Input group-->--}}
+{{--                                    <!--begin::Input group-->--}}
+{{--                                    <div class="row mb-6">--}}
+{{--                                        <!--begin::Label-->--}}
+{{--                                        <label class="col-lg-4 col-form-label fw-semibold fs-6">--}}
+{{--                                            <span class="required">الرقم الشخصي</span>--}}
+{{--                                        </label>--}}
+{{--                                        <!--end::Label-->--}}
+{{--                                        <!--begin::Col-->--}}
+{{--                                        <div class="col-lg-8 fv-row">--}}
+{{--                                            <input type="number" wire:model="User.cpr"--}}
+{{--                                                   class="form-control form-control-lg form-control-solid"--}}
+{{--                                                   placeholder="الرقم الشخصي"/>--}}
+{{--                                        </div>--}}
+{{--                                        <!--end::Col-->--}}
+{{--                                    </div>--}}
+{{--                                    <!--end::Input group-->--}}
+{{--                                    <!--begin::Input group-->--}}
+{{--                                    <div class="row mb-6">--}}
+{{--                                        <!--begin::Label-->--}}
+{{--                                        <label class="col-lg-4 col-form-label fw-semibold fs-6">--}}
+{{--                                            <span class="required">رقم الهاتف</span>--}}
+{{--                                            <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"--}}
+{{--                                               title="رقم الهاتف يجب أن يكون فعال."></i>--}}
+{{--                                        </label>--}}
+{{--                                        <!--end::Label-->--}}
+{{--                                        <!--begin::Col-->--}}
+{{--                                        <div class="col-lg-8 fv-row">--}}
+{{--                                            <input type="tel" wire:model="User.phone"--}}
+{{--                                                   class="form-control form-control-lg form-control-solid"--}}
+{{--                                                   placeholder="رقم الهاتف"/>--}}
+{{--                                        </div>--}}
+{{--                                        <!--end::Col-->--}}
+{{--                                    </div>--}}
+{{--                                    <!--end::Input group-->--}}
+{{--                                    <!--begin::Input group-->--}}
+{{--                                    <div class="row mb-6">--}}
+{{--                                        <!--begin::Label-->--}}
+{{--                                        <label class="col-lg-4 col-form-label fw-semibold fs-6">--}}
+{{--                                            <span class="required">الواتس آب</span>--}}
+{{--                                            <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"--}}
+{{--                                               title="رقم الهاتف يجب أن يكون فعال."></i>--}}
+{{--                                        </label>--}}
+{{--                                        <!--end::Label-->--}}
+{{--                                        <!--begin::Col-->--}}
+{{--                                        <div class="col-lg-8 fv-row">--}}
+{{--                                            <input type="tel" wire:model="User.whatsapp_phone"--}}
+{{--                                                   class="form-control form-control-lg form-control-solid"--}}
+{{--                                                   placeholder="رقم الهاتف"/>--}}
+{{--                                        </div>--}}
+{{--                                        <!--end::Col-->--}}
+{{--                                    </div>--}}
+{{--                                    <!--end::Input group-->--}}
 
-                                    <!--begin::Input group-->
-                                    <div class="row mb-6">
-                                        <!--begin::Label-->
-                                        <label class="col-lg-4 col-form-label fw-semibold fs-6">
-                                            <span class="required">الجنس</span>
-                                            <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"
-                                               title="الجنس"></i>
-                                        </label>
-                                        <!--end::Label-->
-                                        <!--begin::Col-->
-                                        <div class="col-lg-8 fv-row">
-                                            <select wire:model="User.gender"
-                                                    class="form-select form-select-solid form-select-lg">
-                                                <option label="">تحديد الجنس...</option>
-                                                <option value="1">ذكر</option>
-                                                <option value="2">انثى</option>
-                                            </select>
-                                        </div>
-                                        <!--end::Col-->
-                                    </div>
-                                    <!--end::Input group-->
+{{--                                    <!--begin::Input group-->--}}
+{{--                                    <div class="row mb-6">--}}
+{{--                                        <!--begin::Label-->--}}
+{{--                                        <label class="col-lg-4 col-form-label fw-semibold fs-6">--}}
+{{--                                            <span class="required">الجنس</span>--}}
+{{--                                            <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"--}}
+{{--                                               title="الجنس"></i>--}}
+{{--                                        </label>--}}
+{{--                                        <!--end::Label-->--}}
+{{--                                        <!--begin::Col-->--}}
+{{--                                        <div class="col-lg-8 fv-row">--}}
+{{--                                            <select wire:model="User.gender"--}}
+{{--                                                    class="form-select form-select-solid form-select-lg">--}}
+{{--                                                <option label="">تحديد الجنس...</option>--}}
+{{--                                                <option value="1">ذكر</option>--}}
+{{--                                                <option value="2">انثى</option>--}}
+{{--                                            </select>--}}
+{{--                                        </div>--}}
+{{--                                        <!--end::Col-->--}}
+{{--                                    </div>--}}
+{{--                                    <!--end::Input group-->--}}
 
-                                    <!--begin::Input group-->
-                                    <div class="row mb-6">
-                                        <!--begin::Label-->
-                                        <label class="col-lg-4 col-form-label required fw-semibold fs-6">طريقة
-                                            التواصل</label>
-                                        <!--end::Label-->
-                                        <!--begin::Col-->
-                                        <div class="col-lg-8 fv-row">
-                                            <!--begin::Options-->
-                                            <div class="d-flex align-items-center mt-3">
-                                                <!--begin::Option-->
-                                                <label
-                                                    class="form-check form-check-custom form-check-inline form-check-solid me-5">
-                                                    <input class="form-check-input" type="radio" value="1"/>
-                                                    <span class="fw-semibold ps-2 fs-6">البريد الإلكتروني</span>
-                                                </label>
-                                                <!--end::Option-->
-                                                <!--begin::Option-->
-                                                <label
-                                                    class="form-check form-check-custom form-check-inline form-check-solid">
-                                                    <input class="form-check-input" type="radio" value="2"/>
-                                                    <span class="fw-semibold ps-2 fs-6">الهاتف</span>
-                                                </label>
-                                                <!--end::Option-->
-                                            </div>
-                                            <!--end::Options-->
-                                        </div>
-                                        <!--end::Col-->
-                                    </div>
-                                    <!--end::Input group-->
-                                    <!--begin::Action buttons-->
-                                    <div class="d-flex justify-content-end align-items-center mt-12">
+{{--                                    <!--begin::Input group-->--}}
+{{--                                    <div class="row mb-6">--}}
+{{--                                        <!--begin::Label-->--}}
+{{--                                        <label class="col-lg-4 col-form-label required fw-semibold fs-6">طريقة--}}
+{{--                                            التواصل</label>--}}
+{{--                                        <!--end::Label-->--}}
+{{--                                        <!--begin::Col-->--}}
+{{--                                        <div class="col-lg-8 fv-row">--}}
+{{--                                            <!--begin::Options-->--}}
+{{--                                            <div class="d-flex align-items-center mt-3">--}}
+{{--                                                <!--begin::Option-->--}}
+{{--                                                <label--}}
+{{--                                                    class="form-check form-check-custom form-check-inline form-check-solid me-5">--}}
+{{--                                                    <input class="form-check-input" type="radio" value="1"/>--}}
+{{--                                                    <span class="fw-semibold ps-2 fs-6">البريد الإلكتروني</span>--}}
+{{--                                                </label>--}}
+{{--                                                <!--end::Option-->--}}
+{{--                                                <!--begin::Option-->--}}
+{{--                                                <label--}}
+{{--                                                    class="form-check form-check-custom form-check-inline form-check-solid">--}}
+{{--                                                    <input class="form-check-input" type="radio" value="2"/>--}}
+{{--                                                    <span class="fw-semibold ps-2 fs-6">الهاتف</span>--}}
+{{--                                                </label>--}}
+{{--                                                <!--end::Option-->--}}
+{{--                                            </div>--}}
+{{--                                            <!--end::Options-->--}}
+{{--                                        </div>--}}
+{{--                                        <!--end::Col-->--}}
+{{--                                    </div>--}}
+{{--                                    <!--end::Input group-->--}}
+{{--                                    <!--begin::Action buttons-->--}}
+{{--                                    <div class="d-flex justify-content-end align-items-center mt-12">--}}
 
-                                        <!--begin::Button-->
-                                        <button wire:click="save" type="button" class="btn btn-primary">
-                                            <span class="indicator-label">حفظ</span>
-                                        </button>
-                                        <!--end::Button-->
-                                    </div>
-                                    <!--begin::Action buttons-->
-                                </div>
-                                <!--end::Card body-->
-                                <!--end::Card body-->
-                            </div>
-                            <!--end::Card-->
+{{--                                        <!--begin::Button-->--}}
+{{--                                        <button wire:click="save" type="button" class="btn btn-primary">--}}
+{{--                                            <span class="indicator-label">حفظ</span>--}}
+{{--                                        </button>--}}
+{{--                                        <!--end::Button-->--}}
+{{--                                    </div>--}}
+{{--                                    <!--begin::Action buttons-->--}}
+{{--                                </div>--}}
+{{--                                <!--end::Card body-->--}}
+{{--                                <!--end::Card body-->--}}
+{{--                            </div>--}}
+{{--                            <!--end::Card-->--}}
 
                         </div>
                         <!--end:::Tab pane-->
