@@ -73,7 +73,7 @@
                         <!--begin:::Tab item-->
                         <li class="nav-item">
                             <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab"
-                               href="#kt_user_view_overview_security">البيانات</a>
+                               href="#kt_user_view_overview_security">نظرة عامة</a>
 
                         </li>
                         <!--end:::Tab item-->
@@ -198,7 +198,7 @@
                     <!--begin:::Tab content-->
                     <div class="tab-content" id="myTabContent">
                         <!--begin:::Tab pane-->
-                        <div class="tab-pane fade " id="kt_user_view_overview_tab11" role="tabpanel">
+                        <div class="tab-pane fade" id="kt_user_view_overview_tab" role="tabpanel">
                             <!--begin::Card-->
                             <div class="card card-flush mb-6 mb-xl-9">
                                 <!--begin::Card header-->
@@ -2122,7 +2122,12 @@
                         </div>
                         <!--end:::Tab pane-->
                         <!--begin:::Tab pane-->
-                        <div class="tab-pane fade" id="kt_user_view_overview_security11" role="tabpanel">
+                        <div class="tab-pane fade active show" id="kt_user_view_overview_security" role="tabpanel">
+
+                            <!--begin::Card-->
+                            @livewire('admin.users.details.invoices-card', ['user_id' => $User->id])
+                            <!--end::Card-->
+
                             <!--begin::Card-->
                             <div class="card pt-4 mb-6 mb-xl-9">
                                 <!--begin::Card header-->
@@ -2394,6 +2399,7 @@
                                 <!--end::Card body-->
                             </div>
                             <!--end::Card-->
+
                         </div>
                         <!--end:::Tab pane-->
 

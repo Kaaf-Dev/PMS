@@ -19,6 +19,9 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
+    const USER_TYPE_PERSON = 1;
+    const USER_TYPE_CORPORATE = 2;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -108,6 +111,16 @@ class User extends Authenticatable
     public function getIsCorporateAttribute()
     {
         return $this->user_type == 2;
+    }
+
+    public function getUserTypeHumanAttribute()
+    {
+        $strings = [
+            self::USER_TYPE_PERSON => 'فئة أفراد',
+            self::USER_TYPE_CORPORATE => 'فئة شركات',
+        ];
+
+        return $strings [$this->user_type];
     }
 
     public function getAttachmentDiskPath($attachment)

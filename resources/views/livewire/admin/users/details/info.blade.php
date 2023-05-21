@@ -5,14 +5,16 @@
     <div class="d-flex flex-center flex-column py-5">
         <!--begin::Avatar-->
         <div class="symbol symbol-100px symbol-circle mb-7">
-            @if(isset($user->user_image_path))
-            <img src="{{\Illuminate\Support\Facades\URL::asset('user-image/'.$user->user_image_path)}}" alt="image" />
-            @endif
+            <img src="{{ $user->profile_photo_url }}" alt="image" />
         </div>
         <!--end::Avatar-->
         <!--begin::Name-->
         <a href="#" class="fs-3 text-gray-800 text-hover-primary fw-bold mb-3">{{ $user->name }}</a>
         <!--end::Name-->
+
+        <!--begin::Type-->
+        <div class="fs-5 fw-semibold text-muted mb-6">{{ $user->user_type_human }}</div>
+        <!--end::Type-->
     </div>
     <!--end::User Info-->
     <!--end::Summary-->
@@ -36,7 +38,6 @@
     <!--begin::Details content-->
     <div id="kt_user_view_details" class="collapse show">
         <div class="pb-5 fs-6">
-            <!--begin::Details item-->
             @if($user->user_type == 1)
                 <div class="fw-bold mt-5">
                     الرقم الشخصي
@@ -49,27 +50,10 @@
                 <div class="text-gray-600">{{$user->corporate_id}}</div>
             @endif
 
-            <!--begin::Details item-->
-            <!--begin::Details item-->
             <div class="fw-bold mt-5">البريد الإلكتروني</div>
             <div class="text-gray-600">
                 <a href="#" class="text-gray-600 text-hover-primary">{{$user->email}}</a>
             </div>
-            <!--begin::Details item-->
-            <!--begin::Details item-->
-{{--            <div class="fw-bold mt-5">Address</div>--}}
-{{--            <div class="text-gray-600">101 Collin Street,--}}
-{{--                <br />Melbourne 3000 VIC--}}
-{{--                <br />Australia</div>--}}
-{{--            <!--begin::Details item-->--}}
-{{--            <!--begin::Details item-->--}}
-{{--            <div class="fw-bold mt-5">Language</div>--}}
-{{--            <div class="text-gray-600">English</div>--}}
-{{--            <!--begin::Details item-->--}}
-{{--            <!--begin::Details item-->--}}
-{{--            <div class="fw-bold mt-5">Last Login</div>--}}
-{{--            <div class="text-gray-600">20 Dec 2022, 11:05 am</div>--}}
-            <!--begin::Details item-->
         </div>
     </div>
     <!--end::Details content-->
