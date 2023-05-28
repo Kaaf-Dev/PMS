@@ -113,6 +113,7 @@ class AddUserModal extends Component
         $this->emit('show-contract-new-modal', [
             'user' => $this->user_id,
         ]);
+        $this->closeModal();
     }
 
     public function closeModal()
