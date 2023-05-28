@@ -1,4 +1,3 @@
-<!--begin::Card body-->
 <div class="card-body">
     <!--begin::Summary-->
     <!--begin::User Info-->
@@ -59,4 +58,3 @@
     <!--end::Details content-->
 
 </div>
-<!--end::Card body-->

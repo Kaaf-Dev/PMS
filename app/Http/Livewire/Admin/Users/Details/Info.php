@@ -8,6 +8,13 @@ class Info extends Component
 {
     public $user;
 
+    public function getListeners()
+    {
+        return [
+            'userUpdated' => '$refresh',
+        ];
+    }
+
     public function mount($user)
     {
         $this->fill([

@@ -38,6 +38,21 @@ class Attachments extends Component
         ],
     ];
 
+    public function getListeners()
+    {
+        return [
+            'userUpdated' => '$refresh',
+        ];
+    }
+
+    public function getMessages()
+    {
+        return [
+            'required' => 'هذا الحقل إجباري',
+            'mimes' => 'امتداد الملف غير صالح',
+        ];
+    }
+
     public function mount($user)
     {
         $this->fill([
