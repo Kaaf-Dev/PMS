@@ -232,7 +232,7 @@
                             <!--begin::Input group-->
                             <div class="fv-row mb-7">
                                 <!--begin::Label-->
-                                <label class="required fw-semibold fs-6 mb-2">البريد الإلكتروني</label>
+                                <label class="fw-semibold fs-6 mb-2">البريد الإلكتروني</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <input type="email" wire:model.defer="user_email"

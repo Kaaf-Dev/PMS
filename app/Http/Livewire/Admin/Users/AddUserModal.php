@@ -36,7 +36,7 @@ class AddUserModal extends Component
             '2' => [
                 'user_image' => 'nullable|mimes:jpeg,png,jpg',
                 'user_name' => 'required',
-                'user_email' => 'required|email|unique:users,email',
+                'user_email' => 'nullable|email|unique:users,email',
                 'user_cpr' => 'required_if:user_type,1|digits:9',
                 'corporate_id' => Rule::requiredIf($this->user_type == 2),
                 'contact_name' => Rule::requiredIf($this->user_type == 2),
