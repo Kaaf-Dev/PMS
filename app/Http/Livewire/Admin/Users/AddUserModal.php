@@ -118,8 +118,8 @@ class AddUserModal extends Component
 
     public function closeModal()
     {
-        $this->emit('hide-user-add-modal');
         $this->resetFields();
+        $this->emit('hide-user-add-modal');
     }
 
     public function resetFields()

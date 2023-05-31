@@ -659,6 +659,11 @@
 
                                     <div class="mt-2">
                                         <input wire:ignore  class="form-control form-control-solid" value="" placeholder="Pick date rage" id="kt_contract_duration"/>
+                                        <style>
+                                            .daterangepicker{
+                                                z-index: 10000 !important;
+                                            }
+                                        </style>
                                         <script wire:ignore>
 
                                             var start = moment();
@@ -680,7 +685,7 @@
                                                 },
                                                 locale: {
                                                     format: 'MM/YYYY'
-                                                }
+                                                },
                                             }, function(start, end, label) {
                                             @this.set('start_at', start);
                                             @this.set('end_at', end);
