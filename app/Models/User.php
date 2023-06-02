@@ -153,7 +153,7 @@ class User extends Authenticatable
         $username = implode('_', $tokens);
 
         $max_id = User::max('id');
-        $username = $max_id . '_' . $username;
+        $username = ($max_id + 1) . '_' . $username;
 
         $this->username = $username;
     }
