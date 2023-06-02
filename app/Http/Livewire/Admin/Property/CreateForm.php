@@ -12,6 +12,7 @@ class CreateForm extends Component
 {
     use WithAlert;
 
+    public $ky_no;
     public $category_id;
     public $name;
     public $area;
@@ -23,6 +24,7 @@ class CreateForm extends Component
     public function rules()
     {
         return [
+            'ky_no' => 'nullable|integer',
             'category_id' => 'required',
             'name' => 'required',
             'area' => 'required|numeric',

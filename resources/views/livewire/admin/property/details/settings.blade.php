@@ -14,6 +14,23 @@
                 <form wire:submit.prevent="save" id="kt_account_profile_details_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
                     <!--begin::Card body-->
                     <div class="card-body border-top p-9">
+
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label required fw-semibold fs-6">رقم البند</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                                <input wire:model="property.ky_no" type="text" class="form-control form-control-lg form-control-solid" placeholder="اسم العقار">
+                                @error('property.ky_no')
+                                  <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->

@@ -17,6 +17,21 @@
         <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
             <!--begin::Label-->
             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                <span class="required">رقم البند</span>
+            </label>
+            <!--end::Label-->
+
+            <input wire:model.defer="ky_no" type="text" class="form-control form-control-solid" placeholder="رقم البند">
+            @error('ky_no')
+               <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+        <!--end::Input group-->
+
+        <!--begin::Input group-->
+        <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+            <!--begin::Label-->
+            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                 <span class="required">التصنيف</span>
             </label>
             <!--end::Label-->

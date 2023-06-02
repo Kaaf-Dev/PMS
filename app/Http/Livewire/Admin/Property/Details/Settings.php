@@ -16,6 +16,7 @@ class Settings extends Component
     public function rules()
     {
         return [
+            'property.ky_no' => 'nullable|integer',
             'property.category_id' => 'required',
             'property.name' => 'required',
             'property.area' => 'required|numeric',
