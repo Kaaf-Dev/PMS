@@ -28,6 +28,7 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
+        'nationality_id',
         'name',
         'email',
         'password',
@@ -40,6 +41,8 @@ class User extends Authenticatable
         'date_of_berth',
         'contact_name',
         'contact_phone',
+        'passport_path',
+        'corporate_register_path',
     ];
 
     /**
@@ -72,6 +75,11 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function Nationality()
+    {
+        return $this->belongsTo(Nationality::class, 'nationality_id', 'id');
+    }
 
     public function contracts()
     {
@@ -126,6 +134,27 @@ class User extends Authenticatable
     public function getAttachmentDiskPath($attachment)
     {
         return Storage::disk('user_image')->url($this->{$attachment});
+    }
 
+    public function getIsBahrinianAttribute()
+    {
+        return $this->nationality_id == 1;
+    }
+
+    public function getIsNonBahrinianAttribute()
+    {
+        return !($this->getIsBahrinianAttribute());
+    }
+
+    public function generateUserName()
+    {
+        $tokens = $this->email ?? $this->name;
+        $tokens = explode(' ', $tokens);
+        $username = implode('_', $tokens);
+
+        $max_id = User::max('id');
+        $username = $max_id . '_' . $username;
+
+        $this->username = $username;
     }
 }

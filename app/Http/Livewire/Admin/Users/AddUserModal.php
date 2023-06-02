@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Users;
 
+use App\Models\Nationality;
 use App\Models\User;
 use App\Traits\WithWizard;
 use Illuminate\Support\Facades\Hash;
@@ -20,6 +21,7 @@ class AddUserModal extends Component
             $user_type = 1,
             $user_email,
             $user_cpr,
+            $user_nationality_id,
             $corporate_id,
             $contact_name,
             $contact_phone;
@@ -34,16 +36,27 @@ class AddUserModal extends Component
             ],
 
             '2' => [
+                'user_nationality_id' => [
+                    'exists:nationalities,id',
+                    Rule::requiredIf($this->user_type == 1),
+                ],
                 'user_image' => 'nullable|mimes:jpeg,png,jpg',
                 'user_name' => 'required',
                 'user_email' => 'nullable|email|unique:users,email',
-                'user_cpr' => 'required_if:user_type,1|digits:9',
+                'user_cpr' => 'nullable',
                 'corporate_id' => Rule::requiredIf($this->user_type == 2),
                 'contact_name' => Rule::requiredIf($this->user_type == 2),
                 'contact_phone' => Rule::requiredIf($this->user_type == 2),
             ]
         ];
 
+        if ($this->user_type == 1) {
+            if ($this->user_nationality_id == 1) {
+                $rules['2']['user_cpr'] = 'required|digits:9';
+            } else {
+                $rules['2']['user_cpr'] = 'required|numeric';
+            }
+        }
 
         return $rules[$this->step ?? 1];
     }
@@ -75,6 +88,11 @@ class AddUserModal extends Component
         return view('livewire.admin.users.add-user-modal');
     }
 
+    public function getNationalitiesProperty()
+    {
+        return Nationality::all();
+    }
+
     public function next()
     {
         $this->validate();
@@ -85,10 +103,10 @@ class AddUserModal extends Component
             $password = Hash::make($password);
             $user = new User();
             $user->name = $this->user_name;
-            $user->username = $this->user_email;
             $user->email = $this->user_email;
             $user->user_type = $this->user_type;
             $user->cpr = $this->user_cpr;
+            $user->nationality_id = $this->user_nationality_id;
             $user->password = $password;
             $user->corporate_id = $this->corporate_id;
             $user->contact_name = $this->contact_name;
@@ -96,6 +114,7 @@ class AddUserModal extends Component
             if (isset($this->user_image)) {
                 $user->user_image_path = $this->user_image->store($this->user_cpr, 'user_image');
             }
+            $user->generateUserName();
             $user->save();
             $this->user_id = $user->id;
             $this->emit('user-added');

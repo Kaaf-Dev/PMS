@@ -30,10 +30,20 @@ class Attachments extends Component
                 'attribute' => 'iban_image_path',
             ],
         ],
+        'person|non_bahrinian' => [
+            [
+                'title' => 'جواز السفر',
+                'attribute' => 'passport_path',
+            ],
+        ],
         'corporate' => [
             [
                 'title' => 'سند التسجيل',
                 'attribute' => 'merchant_image_path',
+            ],
+            [
+                'title' => 'السجل التجاري',
+                'attribute' => 'corporate_register_path',
             ],
         ],
     ];

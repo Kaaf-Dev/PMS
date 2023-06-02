@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Users\Details;
 
+use App\Models\Nationality;
 use App\Traits\WithAlert;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
@@ -18,26 +19,41 @@ class Settings extends Component
 
     public function rules()
     {
-        return [
+        $rules = [
+            'User.nationality_id' => [
+                'exists:nationalities,id',
+                Rule::requiredIf($this->User->user_type == 1),
+            ],
             'User.name' => 'required',
-            'User.email' => 'required|email',
-            'User.phone' => 'required',
+            'User.email' => 'nullable|email|unique:users,email',
+            'User.phone' => Rule::requiredIf($this->User->is_person),
             'User.whatsapp_phone' => 'nullable',
             'User.user_type' => 'required|integer',
             'User.gender' => Rule::requiredIf($this->User->is_person),
-            'User.cpr' => Rule::requiredIf($this->User->is_person),
+            'User.cpr' => 'nullable',
             'User.corporate_id' => Rule::requiredIf($this->User->is_corporate),
             'User.contact_name' => Rule::requiredIf($this->User->is_corporate),
             'User.contact_phone' => Rule::requiredIf($this->User->is_corporate),
         ];
+
+        if ($this->User->is_person) {
+            if ($this->User->is_bahrinian) {
+                $rules['User.cpr'] = 'required|digits:9';
+            } else {
+                $rules['User.cpr'] = 'required|numeric';
+            }
+        }
+
+        return $rules;
     }
 
     public function getMessages()
     {
         return [
-            'required' => 'هذا الحقل مطلوب',
-            'integer' => 'القيمة غير صالحة',
-            'email' => 'البريد الإلكتروني غير صالح',
+            'required' => 'هذا الحقل إجباري',
+            'required_if' => 'هذا الحقل إجباري',
+            'digits' => 'القيمة غير صالحة',
+            'User.email.unique' => 'البريد الإلكتروني مسجل بالفعل!',
         ];
     }
 
@@ -49,6 +65,11 @@ class Settings extends Component
     public function render()
     {
         return view('livewire.admin.users.details.settings');
+    }
+
+    public function getNationalitiesProperty()
+    {
+        return Nationality::all();
     }
 
     public function save()

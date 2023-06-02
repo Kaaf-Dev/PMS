@@ -15,11 +15,16 @@
             <!--begin::Files-->
             <div class="d-flex flex-column mb-9">
 
-                @foreach($attachments_list as $attachment_type => $attachments)
-                    @if($attachment_type and $attachment_type != 'common')
-                        @if(!($User->{'is_'.$attachment_type}))
-                            @continue
-                        @endif
+                @foreach($attachments_list as $attachment_types => $attachments)
+                    @if($attachment_types and $attachment_types != 'common')
+                        @php
+                            $attachment_types = explode('|', $attachment_types);
+                            foreach ($attachment_types as $attachment_type) {
+                                if(!($User->{'is_'.$attachment_type})){
+                                    continue 2;
+                                }
+                            }
+                        @endphp
                     @endif
 
                     @foreach($attachments as $attachment)

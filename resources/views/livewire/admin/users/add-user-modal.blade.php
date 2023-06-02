@@ -263,6 +263,29 @@
                             </div>
                             <!--end::Input group-->
 
+                            @if($user_type == 1)
+                                <!--end::Input group-->
+                                <div class="fv-row mb-7">
+                                    <!--begin::Label-->
+                                    <label class="required fw-semibold fs-6 mb-2">الجنسية</label>
+                                    <!--end::Label-->
+                                    <!--begin::Input -->
+                                    <select wire:model.defer="user_nationality_id" class="form-control form-control-solid form-select form-control-solid">
+                                        <option value="">اختيار</option>
+                                        @foreach($this->nationalities as $nationality)
+                                            <option value="{{ $nationality->id }}">{{ $nationality->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('user_nationality_id')
+                                        <div class="alert alert-danger">
+                                            {{$message}}
+                                        </div>
+                                    @enderror
+                                    <!--end::Input -->
+                                </div>
+                                <!--end::Input group-->
+                            @endif
+
                             @if($user_type == 2)
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-7">

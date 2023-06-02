@@ -253,6 +253,33 @@
                 <div class="row mb-6">
                     <!--begin::Label-->
                     <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                        <span class="required">الجنسية</span>
+                    </label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <!--begin::Input -->
+                        <select wire:model.defer="User.nationality_id" class="form-control form-control-solid form-select form-control-solid">
+                            <option value="">اختيار</option>
+                            @foreach($this->nationalities as $nationality)
+                                <option value="{{ $nationality->id }}">{{ $nationality->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('User.nationality_id')
+                        <div class="alert alert-danger">
+                            {{$message}}
+                        </div>
+                        @enderror
+                        <!--end::Input -->
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-semibold fs-6">
                         <span class="required">رقم الهاتف</span>
                         <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"
                            title="رقم الهاتف يجب أن يكون فعال."></i>
