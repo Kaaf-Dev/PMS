@@ -63,6 +63,7 @@
                     <!--begin::Table row-->
                     <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
                         <th class="w-10px pe-2">#</th>
+                        <th class="w-10px pe-2">رقم البند</th>
                         <th class="min-w-125px">العقار</th>
                         <th class="min-w-125px">التصنيف</th>
                         <th class="min-w-125px">الوحدات السكنية</th>
@@ -83,11 +84,12 @@
                         @forelse($properties as $property)
                             <!--begin::Table row-->
                             <tr>
-                                <!--begin::Checkbox-->
                                 <td>
                                     {{ $property->id }}
                                 </td>
-                                <!--end::Checkbox-->
+                                <td>
+                                    {{ $property->ky_no }}
+                                </td>
                                 <!--begin::Property=-->
                                 <td class="d-flex align-items-center">
                                     <!--begin::Property details-->
