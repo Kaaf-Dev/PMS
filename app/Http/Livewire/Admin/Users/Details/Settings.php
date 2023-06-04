@@ -21,6 +21,7 @@ class Settings extends Component
     {
         $rules = [
             'User.nationality_id' => [
+                'nullable',
                 'exists:nationalities,id',
                 Rule::requiredIf($this->User->user_type == 1),
             ],
