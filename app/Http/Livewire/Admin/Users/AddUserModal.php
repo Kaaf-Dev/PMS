@@ -37,6 +37,7 @@ class AddUserModal extends Component
 
             '2' => [
                 'user_nationality_id' => [
+                    'nullable',
                     'exists:nationalities,id',
                     Rule::requiredIf($this->user_type == 1),
                 ],
@@ -57,7 +58,6 @@ class AddUserModal extends Component
                 $rules['2']['user_cpr'] = 'required|numeric';
             }
         }
-
         return $rules[$this->step ?? 1];
     }
 
