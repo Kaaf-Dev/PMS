@@ -50,10 +50,11 @@ class Contract extends Model
     {
         $current_date = $date ?? Carbon::now(); // get date from parameter or get now date
         $query->where('active', '=', '1') // check activation flag
-        ->where(function($query) use ($current_date){ // check date flag
-            $query->whereRaw('? BETWEEN `start_at` AND `end_at`', [$current_date->format('Y-m-01')])
-                ->orWhereRaw('`start_at` <= ? and `end_at` IS NULL', [$current_date->format('Y-m-01')]);
-        });
+            ->whereDate('start_at', '<=', $current_date);
+//        ->where(function($query) use ($current_date){ // check date flag
+//            $query->whereRaw('? BETWEEN `start_at` AND `end_at`', [$current_date->format('Y-m-01')])
+//                ->orWhereRaw('`start_at` <= ? and `end_at` IS NULL', [$current_date->format('Y-m-01')]);
+//        });
         return $query;
     }
 
@@ -67,6 +68,9 @@ class Contract extends Model
         if ($this->active) {
             if ($start_at and $end_at) {
                 $is_active = $current_date->between($start_at, $end_at);
+                if (!$is_active) {
+                    $is_active = 2;
+                }
             } elseif ($start_at) {
                 $is_active = $current_date->lte($start_at);
             }
@@ -79,6 +83,7 @@ class Contract extends Model
         $strings = [
             0 => 'غير فعّال',
             1 => 'فعّال',
+            2 => 'العقد منتهي',
         ];
 
         return $strings[$this->active_status ?? 0];
@@ -89,6 +94,7 @@ class Contract extends Model
         $strings = [
             0 => 'danger',
             1 => 'success',
+            2 => 'warning',
         ];
 
         return $strings[$this->active_status ?? 0];

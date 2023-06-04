@@ -80,11 +80,9 @@
                                     {{ $apartment->typeString }}
                                 </td>
                                 <td>
-                                    @if($apartment->isAvailable)
-                                        <span class="badge badge-light-success fs-7 fw-bold">متاح</span>
-                                    @else
-                                        <span class="badge badge-light-primary fs-7 fw-bold">مؤجر</span>
-                                    @endif
+                                    <span class="badge badge-light-{{ $apartment->contractActiveStatusClass }} fs-7 fw-bold">
+                                        {{ $apartment->contractActiveStatusString }}
+                                    </span>
                                 </td>
                                 <td class="text-end">
 

@@ -379,15 +379,9 @@
                                                                             {{ $apartment->name }}
                                                                         </a>
                                                                         <!--begin::Label-->
-                                                                        @if($apartment->isAvailable)
-                                                                            <span class="badge badge-light-success d-flex align-items-center fs-8 fw-semibold">
-                                                                        متاح للتأجير
-                                                                   </span>
-                                                                        @else
-                                                                            <span class="badge badge-light-danger d-flex align-items-center fs-8 fw-semibold">
-                                                                        مؤجر
-                                                                   </span>
-                                                                        @endif
+                                                                        <span class="badge badge-light-{{ $apartment->contractActiveStatusClass }} d-flex align-items-center fs-8 fw-semibold">
+                                                                            {{ $apartment->contractActiveStatusString }}
+                                                                        </span>
                                                                         <!--end::Label-->
                                                                     </div>
                                                                     <!--end::Name-->

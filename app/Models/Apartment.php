@@ -91,4 +91,34 @@ class Apartment extends Model
 
         return $icon_svg;
     }
+
+    public function getContractActiveStatusAttribute()
+    {
+        $status = 0;
+        $contract = $this->activeContracts->last();
+        if ($contract) {
+            $status = $contract->activeStatus;
+        }
+        return $status;
+    }
+
+    public function getContractActiveStatusStringAttribute()
+    {
+        $strings = [
+            0 => 'متاح للتأجير',
+            1 => 'مؤجر',
+            2 => 'العقد منتهي',
+        ];
+        return $strings[$this->getContractActiveStatusAttribute() ?? 0];
+    }
+
+    public function getContractActiveStatusClassAttribute()
+    {
+        $strings = [
+            0 => 'success',
+            1 => 'danger',
+            2 => 'warning',
+        ];
+        return $strings[$this->getContractActiveStatusAttribute() ?? 0];
+    }
 }
