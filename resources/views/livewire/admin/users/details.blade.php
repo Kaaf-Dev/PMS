@@ -70,17 +70,25 @@
                 <div class="flex-lg-row-fluid ms-lg-15">
                     <!--begin:::Tabs-->
                     <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-semibold mb-8">
+
                         <!--begin:::Tab item-->
                         <li class="nav-item">
                             <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab"
-                               href="#kt_user_view_overview_security">نظرة عامة</a>
-
+                               href="#kt_user_view_contracts_tab">عقود التأجير</a>
                         </li>
                         <!--end:::Tab item-->
+
                         <!--begin:::Tab item-->
                         <li class="nav-item">
-                            <a class="nav-link text-active-primary pb-4" data-kt-countup-tabs="true"
-                               data-bs-toggle="tab" href="#kt_user_view_overview_tab">الملف الشخصي</a>
+                            <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab"
+                               href="#kt_user_view_invoices_tab">الفواتير</a>
+                        </li>
+                        <!--end:::Tab item-->
+
+                        <!--begin:::Tab item-->
+                        <li class="nav-item">
+                            <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab"
+                               href="#kt_user_view_settings_tab">الملف الشخصي</a>
                         </li>
                         <!--end:::Tab item-->
 
@@ -88,21 +96,31 @@
                     <!--end:::Tabs-->
                     <!--begin:::Tab content-->
                     <div class="tab-content" id="myTabContent">
+
                         <!--begin:::Tab pane-->
-                        <div class="tab-pane fade" id="kt_user_view_overview_tab" role="tabpanel">
+                        <div class="tab-pane fade active show" id="kt_user_view_contracts_tab" role="tabpanel">
+                            <!--begin::Card-->
+                            @livewire('admin.users.details.contracts-card', ['user_id' => $User->id])
+                            <!--end::Card-->
+                        </div>
+                        <!--end:::Tab pane-->
+
+                        <!--begin:::Tab pane-->
+                        <div class="tab-pane fade" id="kt_user_view_invoices_tab" role="tabpanel">
+                            <!--begin::Card-->
+                            @livewire('admin.users.details.invoices-card', ['user_id' => $User->id])
+                            <!--end::Card-->
+                        </div>
+                        <!--end:::Tab pane-->
+
+                        <!--begin:::Tab pane-->
+                        <div class="tab-pane fade" id="kt_user_view_settings_tab" role="tabpanel">
                             <!--begin::Card-->
                             @livewire('admin.users.details.settings', ['User' => $this->User])
                             <!--end::Card-->
                         </div>
                         <!--end:::Tab pane-->
 
-                        <!--begin:::Tab pane-->
-                        <div class="tab-pane fade active show" id="kt_user_view_overview_security" role="tabpanel">
-                            <!--begin::Card-->
-                            @livewire('admin.users.details.invoices-card', ['user_id' => $User->id])
-                            <!--end::Card-->
-                        </div>
-                        <!--end:::Tab pane-->
                     </div>
                     <!--end:::Tab content-->
                 </div>
