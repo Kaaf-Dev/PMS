@@ -55,14 +55,71 @@
             <!--end::Card toolbar-->
         </div>
         <!--end::Card header-->
-        <!--begin::Card body-->
-        <div class="card-body py-4">
 
-            <div wire:loading.class="table-loading" wire:target="load" class="table-responsive">
-                <div class="table-loading-message">
-                    الرجاء الإنتظار...
+        <!--begin::Table Widget 4-->
+        <div class="card card-flush h-xl-100">
+            <!--begin::Card header-->
+            <div class="card-header pt-7">
+                <!--begin::Title-->
+                <h3 class="card-title align-items-start flex-column">
+                    <span class="card-label fw-bold text-gray-800">Product Orders</span>
+                    <span class="text-gray-400 mt-1 fw-semibold fs-6">Avg. 57 orders per day</span>
+                </h3>
+                <!--end::Title-->
+                <!--begin::Actions-->
+                <div class="card-toolbar">
+                    <!--begin::Filters-->
+                    <div class="d-flex flex-stack flex-wrap gap-4">
+                        <!--begin::Destination-->
+                        <div class="d-flex align-items-center fw-bold">
+                            <!--begin::Label-->
+                            <div class="text-gray-400 fs-7 me-2">Cateogry</div>
+                            <!--end::Label-->
+                            <!--begin::Select-->
+                            <select class="form-select form-select-transparent text-graY-800 fs-base lh-1 fw-bold py-0 ps-3 w-auto" data-control="select2" data-hide-search="true" data-dropdown-css-class="w-150px" data-placeholder="Select an option">
+                                <option></option>
+                                <option value="Show All" selected="selected">Show All</option>
+                                <option value="a">Category A</option>
+                                <option value="b">Category A</option>
+                            </select>
+                            <!--end::Select-->
+                        </div>
+                        <!--end::Destination-->
+                        <!--begin::Status-->
+                        <div class="d-flex align-items-center fw-bold">
+                            <!--begin::Label-->
+                            <div class="text-gray-400 fs-7 me-2">Status</div>
+                            <!--end::Label-->
+                            <!--begin::Select-->
+                            <select class="form-select form-select-transparent text-dark fs-7 lh-1 fw-bold py-0 ps-3 w-auto" data-control="select2" data-hide-search="true" data-dropdown-css-class="w-150px" data-placeholder="Select an option" data-kt-table-widget-4="filter_status">
+                                <option></option>
+                                <option value="Show All" selected="selected">Show All</option>
+                                <option value="Shipped">Shipped</option>
+                                <option value="Confirmed">Confirmed</option>
+                                <option value="Rejected">Rejected</option>
+                                <option value="Pending">Pending</option>
+                            </select>
+                            <!--end::Select-->
+                        </div>
+                        <!--end::Status-->
+                        <!--begin::Search-->
+                        <div class="position-relative my-1">
+                            <i class="ki-duotone ki-magnifier fs-2 position-absolute top-50 translate-middle-y ms-4">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>
+                            <input type="text" data-kt-table-widget-4="search" class="form-control w-150px fs-7 ps-12" placeholder="Search" />
+                        </div>
+                        <!--end::Search-->
+                    </div>
+                    <!--begin::Filters-->
                 </div>
-
+                <!--end::Actions-->
+            </div>
+            <!--end::Card header-->
+            <!--begin::Card body-->
+            <div class="card-body pt-2">
+                <!--begin::Table-->
                 <table class="table align-middle table-row-dashed fs-6 gy-3" id="kt_table_widget_4_table">
                     <!--begin::Table head-->
                     <thead>
@@ -128,21 +185,8 @@
                         </td>
                         <td class="text-end">
                             <button type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary toggle h-25px w-25px" data-kt-table-widget-4="expand_row">
-                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr087.svg-->
-                                <span class="svg-icon svg-icon-3 m-0 toggle-off">
-																			<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-																				<rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-																				<rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-																			</svg>
-																		</span>
-                                <!--end::Svg Icon-->
-                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr089.svg-->
-                                <span class="svg-icon svg-icon-3 m-0 toggle-on">
-																			<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-																				<rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-																			</svg>
-																		</span>
-                                <!--end::Svg Icon-->
+                                <i class="ki-duotone ki-plus fs-4 m-0 toggle-off"></i>
+                                <i class="ki-duotone ki-minus fs-4 m-0 toggle-on"></i>
                             </button>
                         </td>
                     </tr>
@@ -163,21 +207,8 @@
                         </td>
                         <td class="text-end">
                             <button type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary toggle h-25px w-25px" data-kt-table-widget-4="expand_row">
-                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr087.svg-->
-                                <span class="svg-icon svg-icon-3 m-0 toggle-off">
-																			<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-																				<rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-																				<rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-																			</svg>
-																		</span>
-                                <!--end::Svg Icon-->
-                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr089.svg-->
-                                <span class="svg-icon svg-icon-3 m-0 toggle-on">
-																			<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-																				<rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-																			</svg>
-																		</span>
-                                <!--end::Svg Icon-->
+                                <i class="ki-duotone ki-plus fs-4 m-0 toggle-off"></i>
+                                <i class="ki-duotone ki-minus fs-4 m-0 toggle-on"></i>
                             </button>
                         </td>
                     </tr>
@@ -198,21 +229,8 @@
                         </td>
                         <td class="text-end">
                             <button type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary toggle h-25px w-25px" data-kt-table-widget-4="expand_row">
-                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr087.svg-->
-                                <span class="svg-icon svg-icon-3 m-0 toggle-off">
-																			<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-																				<rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-																				<rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-																			</svg>
-																		</span>
-                                <!--end::Svg Icon-->
-                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr089.svg-->
-                                <span class="svg-icon svg-icon-3 m-0 toggle-on">
-																			<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-																				<rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-																			</svg>
-																		</span>
-                                <!--end::Svg Icon-->
+                                <i class="ki-duotone ki-plus fs-4 m-0 toggle-off"></i>
+                                <i class="ki-duotone ki-minus fs-4 m-0 toggle-on"></i>
                             </button>
                         </td>
                     </tr>
@@ -233,21 +251,8 @@
                         </td>
                         <td class="text-end">
                             <button type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary toggle h-25px w-25px" data-kt-table-widget-4="expand_row">
-                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr087.svg-->
-                                <span class="svg-icon svg-icon-3 m-0 toggle-off">
-																			<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-																				<rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-																				<rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-																			</svg>
-																		</span>
-                                <!--end::Svg Icon-->
-                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr089.svg-->
-                                <span class="svg-icon svg-icon-3 m-0 toggle-on">
-																			<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-																				<rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-																			</svg>
-																		</span>
-                                <!--end::Svg Icon-->
+                                <i class="ki-duotone ki-plus fs-4 m-0 toggle-off"></i>
+                                <i class="ki-duotone ki-minus fs-4 m-0 toggle-on"></i>
                             </button>
                         </td>
                     </tr>
@@ -268,21 +273,8 @@
                         </td>
                         <td class="text-end">
                             <button type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary toggle h-25px w-25px" data-kt-table-widget-4="expand_row">
-                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr087.svg-->
-                                <span class="svg-icon svg-icon-3 m-0 toggle-off">
-																			<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-																				<rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-																				<rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-																			</svg>
-																		</span>
-                                <!--end::Svg Icon-->
-                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr089.svg-->
-                                <span class="svg-icon svg-icon-3 m-0 toggle-on">
-																			<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-																				<rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-																			</svg>
-																		</span>
-                                <!--end::Svg Icon-->
+                                <i class="ki-duotone ki-plus fs-4 m-0 toggle-off"></i>
+                                <i class="ki-duotone ki-minus fs-4 m-0 toggle-on"></i>
                             </button>
                         </td>
                     </tr>
@@ -303,21 +295,8 @@
                         </td>
                         <td class="text-end">
                             <button type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary toggle h-25px w-25px" data-kt-table-widget-4="expand_row">
-                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr087.svg-->
-                                <span class="svg-icon svg-icon-3 m-0 toggle-off">
-																			<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-																				<rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-																				<rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-																			</svg>
-																		</span>
-                                <!--end::Svg Icon-->
-                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr089.svg-->
-                                <span class="svg-icon svg-icon-3 m-0 toggle-on">
-																			<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-																				<rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-																			</svg>
-																		</span>
-                                <!--end::Svg Icon-->
+                                <i class="ki-duotone ki-plus fs-4 m-0 toggle-off"></i>
+                                <i class="ki-duotone ki-minus fs-4 m-0 toggle-on"></i>
                             </button>
                         </td>
                     </tr>
@@ -338,27 +317,27 @@
                         </td>
                         <td class="text-end">
                             <button type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary toggle h-25px w-25px" data-kt-table-widget-4="expand_row">
-                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr087.svg-->
-                                <span class="svg-icon svg-icon-3 m-0 toggle-off">
-																			<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-																				<rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-																				<rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-																			</svg>
-																		</span>
-                                <!--end::Svg Icon-->
-                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr089.svg-->
-                                <span class="svg-icon svg-icon-3 m-0 toggle-on">
-																			<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-																				<rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-																			</svg>
-																		</span>
-                                <!--end::Svg Icon-->
+                                <i class="ki-duotone ki-plus fs-4 m-0 toggle-off"></i>
+                                <i class="ki-duotone ki-minus fs-4 m-0 toggle-on"></i>
                             </button>
                         </td>
                     </tr>
                     </tbody>
                     <!--end::Table body-->
                 </table>
+                <!--end::Table-->
+            </div>
+            <!--end::Card body-->
+        </div>
+        <!--end::Table Widget 4-->
+
+        <!--begin::Card body-->
+        <div class="card-body py-4">
+
+            <div wire:loading.class="table-loading" wire:target="load" class="table-responsive">
+                <div class="table-loading-message">
+                    الرجاء الإنتظار...
+                </div>
 
                 <!--begin::Table-->
                 <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users">
@@ -454,3 +433,11 @@
     </div>
     <!--end::Card-->
 </div>
+
+
+@push('js')
+    <script src="/admin-assets/js/custom/widgets.js"></script>
+    <script src="/admin-assets/js/custom/apps/chat/chat.js"></script>
+    <script src="/admin-assets/js/custom/utilities/modals/upgrade-plan.js"></script>
+    <script src="/admin-assets/js/custom/utilities/modals/users-search.js"></script>
+@endpush
