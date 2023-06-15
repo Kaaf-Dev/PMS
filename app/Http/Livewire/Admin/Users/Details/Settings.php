@@ -26,7 +26,7 @@ class Settings extends Component
                 Rule::requiredIf($this->User->user_type == 1),
             ],
             'User.name' => 'required',
-            'User.email' => 'nullable|email|unique:users,email',
+            'User.email' => 'nullable|email|unique:users,email,' . $this->User->id,
             'User.phone' => Rule::requiredIf($this->User->is_person),
             'User.whatsapp_phone' => 'nullable',
             'User.user_type' => 'required|integer',
