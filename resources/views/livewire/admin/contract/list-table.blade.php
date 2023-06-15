@@ -56,281 +56,6 @@
         </div>
         <!--end::Card header-->
 
-        <!--begin::Table Widget 4-->
-        <div class="card card-flush h-xl-100">
-            <!--begin::Card header-->
-            <div class="card-header pt-7">
-                <!--begin::Title-->
-                <h3 class="card-title align-items-start flex-column">
-                    <span class="card-label fw-bold text-gray-800">Product Orders</span>
-                    <span class="text-gray-400 mt-1 fw-semibold fs-6">Avg. 57 orders per day</span>
-                </h3>
-                <!--end::Title-->
-                <!--begin::Actions-->
-                <div class="card-toolbar">
-                    <!--begin::Filters-->
-                    <div class="d-flex flex-stack flex-wrap gap-4">
-                        <!--begin::Destination-->
-                        <div class="d-flex align-items-center fw-bold">
-                            <!--begin::Label-->
-                            <div class="text-gray-400 fs-7 me-2">Cateogry</div>
-                            <!--end::Label-->
-                            <!--begin::Select-->
-                            <select class="form-select form-select-transparent text-graY-800 fs-base lh-1 fw-bold py-0 ps-3 w-auto" data-control="select2" data-hide-search="true" data-dropdown-css-class="w-150px" data-placeholder="Select an option">
-                                <option></option>
-                                <option value="Show All" selected="selected">Show All</option>
-                                <option value="a">Category A</option>
-                                <option value="b">Category A</option>
-                            </select>
-                            <!--end::Select-->
-                        </div>
-                        <!--end::Destination-->
-                        <!--begin::Status-->
-                        <div class="d-flex align-items-center fw-bold">
-                            <!--begin::Label-->
-                            <div class="text-gray-400 fs-7 me-2">Status</div>
-                            <!--end::Label-->
-                            <!--begin::Select-->
-                            <select class="form-select form-select-transparent text-dark fs-7 lh-1 fw-bold py-0 ps-3 w-auto" data-control="select2" data-hide-search="true" data-dropdown-css-class="w-150px" data-placeholder="Select an option" data-kt-table-widget-4="filter_status">
-                                <option></option>
-                                <option value="Show All" selected="selected">Show All</option>
-                                <option value="Shipped">Shipped</option>
-                                <option value="Confirmed">Confirmed</option>
-                                <option value="Rejected">Rejected</option>
-                                <option value="Pending">Pending</option>
-                            </select>
-                            <!--end::Select-->
-                        </div>
-                        <!--end::Status-->
-                        <!--begin::Search-->
-                        <div class="position-relative my-1">
-                            <i class="ki-duotone ki-magnifier fs-2 position-absolute top-50 translate-middle-y ms-4">
-                                <span class="path1"></span>
-                                <span class="path2"></span>
-                            </i>
-                            <input type="text" data-kt-table-widget-4="search" class="form-control w-150px fs-7 ps-12" placeholder="Search" />
-                        </div>
-                        <!--end::Search-->
-                    </div>
-                    <!--begin::Filters-->
-                </div>
-                <!--end::Actions-->
-            </div>
-            <!--end::Card header-->
-            <!--begin::Card body-->
-            <div class="card-body pt-2">
-                <!--begin::Table-->
-                <table class="table align-middle table-row-dashed fs-6 gy-3" id="kt_table_widget_4_table">
-                    <!--begin::Table head-->
-                    <thead>
-                    <!--begin::Table row-->
-                    <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-                        <th class="min-w-100px">Order ID</th>
-                        <th class="text-end min-w-100px">Created</th>
-                        <th class="text-end min-w-125px">Customer</th>
-                        <th class="text-end min-w-100px">Total</th>
-                        <th class="text-end min-w-100px">Profit</th>
-                        <th class="text-end min-w-50px">Status</th>
-                        <th class="text-end"></th>
-                    </tr>
-                    <!--end::Table row-->
-                    </thead>
-                    <!--end::Table head-->
-                    <!--begin::Table body-->
-                    <tbody class="fw-bold text-gray-600">
-                    <tr data-kt-table-widget-4="subtable_template" class="d-none">
-                        <td colspan="2">
-                            <div class="d-flex align-items-center gap-3">
-                                <a href="#" class="symbol symbol-50px bg-secondary bg-opacity-25 rounded">
-                                    <img src="" data-kt-src-path="assets/media/stock/ecommerce/" alt="" data-kt-table-widget-4="template_image" />
-                                </a>
-                                <div class="d-flex flex-column text-muted">
-                                    <a href="#" class="text-gray-800 text-hover-primary fw-bold" data-kt-table-widget-4="template_name">Product name</a>
-                                    <div class="fs-7" data-kt-table-widget-4="template_description">Product description</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="text-end">
-                            <div class="text-gray-800 fs-7">Cost</div>
-                            <div class="text-muted fs-7 fw-bold" data-kt-table-widget-4="template_cost">1</div>
-                        </td>
-                        <td class="text-end">
-                            <div class="text-gray-800 fs-7">Qty</div>
-                            <div class="text-muted fs-7 fw-bold" data-kt-table-widget-4="template_qty">1</div>
-                        </td>
-                        <td class="text-end">
-                            <div class="text-gray-800 fs-7">Total</div>
-                            <div class="text-muted fs-7 fw-bold" data-kt-table-widget-4="template_total">name</div>
-                        </td>
-                        <td class="text-end">
-                            <div class="text-gray-800 fs-7 me-3">On hand</div>
-                            <div class="text-muted fs-7 fw-bold" data-kt-table-widget-4="template_stock">32</div>
-                        </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary">#XGY-346</a>
-                        </td>
-                        <td class="text-end">7 min ago</td>
-                        <td class="text-end">
-                            <a href="#" class="text-gray-600 text-hover-primary">Albert Flores</a>
-                        </td>
-                        <td class="text-end">$630.00</td>
-                        <td class="text-end">
-                            <span class="text-gray-800 fw-bolder">$86.70</span>
-                        </td>
-                        <td class="text-end">
-                            <span class="badge py-3 px-4 fs-7 badge-light-warning">Pending</span>
-                        </td>
-                        <td class="text-end">
-                            <button type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary toggle h-25px w-25px" data-kt-table-widget-4="expand_row">
-                                <i class="ki-duotone ki-plus fs-4 m-0 toggle-off"></i>
-                                <i class="ki-duotone ki-minus fs-4 m-0 toggle-on"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary">#YHD-047</a>
-                        </td>
-                        <td class="text-end">52 min ago</td>
-                        <td class="text-end">
-                            <a href="#" class="text-gray-600 text-hover-primary">Jenny Wilson</a>
-                        </td>
-                        <td class="text-end">$25.00</td>
-                        <td class="text-end">
-                            <span class="text-gray-800 fw-bolder">$4.20</span>
-                        </td>
-                        <td class="text-end">
-                            <span class="badge py-3 px-4 fs-7 badge-light-primary">Confirmed</span>
-                        </td>
-                        <td class="text-end">
-                            <button type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary toggle h-25px w-25px" data-kt-table-widget-4="expand_row">
-                                <i class="ki-duotone ki-plus fs-4 m-0 toggle-off"></i>
-                                <i class="ki-duotone ki-minus fs-4 m-0 toggle-on"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary">#SRR-678</a>
-                        </td>
-                        <td class="text-end">1 hour ago</td>
-                        <td class="text-end">
-                            <a href="#" class="text-gray-600 text-hover-primary">Robert Fox</a>
-                        </td>
-                        <td class="text-end">$1,630.00</td>
-                        <td class="text-end">
-                            <span class="text-gray-800 fw-bolder">$203.90</span>
-                        </td>
-                        <td class="text-end">
-                            <span class="badge py-3 px-4 fs-7 badge-light-warning">Pending</span>
-                        </td>
-                        <td class="text-end">
-                            <button type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary toggle h-25px w-25px" data-kt-table-widget-4="expand_row">
-                                <i class="ki-duotone ki-plus fs-4 m-0 toggle-off"></i>
-                                <i class="ki-duotone ki-minus fs-4 m-0 toggle-on"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary">#PXF-534</a>
-                        </td>
-                        <td class="text-end">3 hour ago</td>
-                        <td class="text-end">
-                            <a href="#" class="text-gray-600 text-hover-primary">Cody Fisher</a>
-                        </td>
-                        <td class="text-end">$119.00</td>
-                        <td class="text-end">
-                            <span class="text-gray-800 fw-bolder">$12.00</span>
-                        </td>
-                        <td class="text-end">
-                            <span class="badge py-3 px-4 fs-7 badge-light-success">Shipped</span>
-                        </td>
-                        <td class="text-end">
-                            <button type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary toggle h-25px w-25px" data-kt-table-widget-4="expand_row">
-                                <i class="ki-duotone ki-plus fs-4 m-0 toggle-off"></i>
-                                <i class="ki-duotone ki-minus fs-4 m-0 toggle-on"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary">#XGD-249</a>
-                        </td>
-                        <td class="text-end">2 day ago</td>
-                        <td class="text-end">
-                            <a href="#" class="text-gray-600 text-hover-primary">Arlene McCoy</a>
-                        </td>
-                        <td class="text-end">$660.00</td>
-                        <td class="text-end">
-                            <span class="text-gray-800 fw-bolder">$52.26</span>
-                        </td>
-                        <td class="text-end">
-                            <span class="badge py-3 px-4 fs-7 badge-light-success">Shipped</span>
-                        </td>
-                        <td class="text-end">
-                            <button type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary toggle h-25px w-25px" data-kt-table-widget-4="expand_row">
-                                <i class="ki-duotone ki-plus fs-4 m-0 toggle-off"></i>
-                                <i class="ki-duotone ki-minus fs-4 m-0 toggle-on"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary">#SKP-035</a>
-                        </td>
-                        <td class="text-end">2 day ago</td>
-                        <td class="text-end">
-                            <a href="#" class="text-gray-600 text-hover-primary">Eleanor Pena</a>
-                        </td>
-                        <td class="text-end">$290.00</td>
-                        <td class="text-end">
-                            <span class="text-gray-800 fw-bolder">$29.00</span>
-                        </td>
-                        <td class="text-end">
-                            <span class="badge py-3 px-4 fs-7 badge-light-danger">Rejected</span>
-                        </td>
-                        <td class="text-end">
-                            <button type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary toggle h-25px w-25px" data-kt-table-widget-4="expand_row">
-                                <i class="ki-duotone ki-plus fs-4 m-0 toggle-off"></i>
-                                <i class="ki-duotone ki-minus fs-4 m-0 toggle-on"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary">#SKP-567</a>
-                        </td>
-                        <td class="text-end">7 min ago</td>
-                        <td class="text-end">
-                            <a href="#" class="text-gray-600 text-hover-primary">Dan Wilson</a>
-                        </td>
-                        <td class="text-end">$590.00</td>
-                        <td class="text-end">
-                            <span class="text-gray-800 fw-bolder">$50.00</span>
-                        </td>
-                        <td class="text-end">
-                            <span class="badge py-3 px-4 fs-7 badge-light-success">Shipped</span>
-                        </td>
-                        <td class="text-end">
-                            <button type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary toggle h-25px w-25px" data-kt-table-widget-4="expand_row">
-                                <i class="ki-duotone ki-plus fs-4 m-0 toggle-off"></i>
-                                <i class="ki-duotone ki-minus fs-4 m-0 toggle-on"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    </tbody>
-                    <!--end::Table body-->
-                </table>
-                <!--end::Table-->
-            </div>
-            <!--end::Card body-->
-        </div>
-        <!--end::Table Widget 4-->
-
         <!--begin::Card body-->
         <div class="card-body py-4">
 
@@ -338,6 +63,183 @@
                 <div class="table-loading-message">
                     الرجاء الإنتظار...
                 </div>
+
+                <!--begin::Card body-->
+                <div class="card-body pt-0">
+                    @if($contracts)
+
+                        @forelse($contracts as $contract)
+                            <!--begin::Option-->
+                            <div class="py-0">
+                                <!--begin::Header-->
+                                <div class="py-3 d-flex flex-stack flex-wrap">
+                                    <!--begin::Toggle-->
+                                    <div class="d-flex align-items-center collapsible rotate" data-bs-toggle="collapse" href="#contract_apartment_list_{{ $contract->id }}" role="button" aria-expanded="false" aria-controls="contract_apartment_list_{{ $contract->id }}">
+                                        <!--begin::Arrow-->
+                                        <div class="me-3 rotate-90">
+                                            <i class="ki-duotone ki-right fs-3"></i>
+                                        </div>
+                                        <!--end::Arrow-->
+                                        <!--begin::Summary-->
+                                        <div class="me-3">
+                                            <div class="d-flex align-items-center">
+                                                <div class="text-gray-800 fw-bold">
+                                                    {{ $contract->user->name }}
+                                                </div>
+                                                <span class="badge badge-light-{{ $contract->activeStatusClass }} fs-7 fw-bold">
+                                                    {{ $contract->activeStatusString }}
+                                                </span>
+                                            </div>
+                                            <div class="text-muted">Expires Dec 2024</div>
+                                        </div>
+                                        <!--end::Summary-->
+                                    </div>
+                                    <!--end::Toggle-->
+                                    <!--begin::Toolbar-->
+                                    <div class="d-flex my-3 ms-9">
+                                        <!--begin::Edit-->
+                                        <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card">
+																			<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Edit">
+																				<i class="ki-duotone ki-pencil fs-3">
+																					<span class="path1"></span>
+																					<span class="path2"></span>
+																				</i>
+																			</span>
+                                        </a>
+                                        <!--end::Edit-->
+                                        <!--begin::Delete-->
+                                        <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="tooltip" title="Delete" data-kt-customer-payment-method="delete">
+                                            <i class="ki-duotone ki-trash fs-3">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="path3"></span>
+                                                <span class="path4"></span>
+                                                <span class="path5"></span>
+                                            </i>
+                                        </a>
+                                        <!--end::Delete-->
+                                        <!--begin::More-->
+                                        <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px" data-bs-toggle="tooltip" title="More Options" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                                            <i class="ki-duotone ki-setting-3 fs-3">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="path3"></span>
+                                                <span class="path4"></span>
+                                                <span class="path5"></span>
+                                            </i>
+                                        </a>
+                                        <!--begin::Menu-->
+                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold w-150px py-3" data-kt-menu="true">
+                                            <!--begin::Menu item-->
+                                            <div class="menu-item px-3">
+                                                <a href="#" class="menu-link px-3" data-kt-payment-mehtod-action="set_as_primary">Set as Primary</a>
+                                            </div>
+                                            <!--end::Menu item-->
+                                        </div>
+                                        <!--end::Menu-->
+                                        <!--end::More-->
+                                    </div>
+                                    <!--end::Toolbar-->
+                                </div>
+                                <!--end::Header-->
+                                <!--begin::Body-->
+                                <div id="contract_apartment_list_{{ $contract->id }}" class="collapse fs-6 ps-10" data-bs-parent="#contract_apartment_list_{{ $contract->id }}">
+                                    <!--begin::Details-->
+                                    <div class="d-flex flex-wrap py-5">
+                                        <!--begin::Col-->
+                                        <div class="flex-equal me-5">
+                                            <table class="table table-flush fw-semibold gy-1">
+                                                <tr>
+                                                    <td class="text-muted min-w-125px w-125px">Name</td>
+                                                    <td class="text-gray-800">Emma Smith</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-muted min-w-125px w-125px">Number</td>
+                                                    <td class="text-gray-800">**** 5863</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-muted min-w-125px w-125px">Expires</td>
+                                                    <td class="text-gray-800">12/2024</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-muted min-w-125px w-125px">Type</td>
+                                                    <td class="text-gray-800">Mastercard credit card</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-muted min-w-125px w-125px">Issuer</td>
+                                                    <td class="text-gray-800">VICBANK</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-muted min-w-125px w-125px">ID</td>
+                                                    <td class="text-gray-800">id_4325df90sdf8</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="flex-equal">
+                                            <table class="table table-flush fw-semibold gy-1">
+                                                <tr>
+                                                    <td class="text-muted min-w-125px w-125px">Billing address</td>
+                                                    <td class="text-gray-800">AU</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-muted min-w-125px w-125px">Phone</td>
+                                                    <td class="text-gray-800">No phone provided</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-muted min-w-125px w-125px">Email</td>
+                                                    <td class="text-gray-800">
+                                                        <a href="#" class="text-gray-900 text-hover-primary">smith@kpmg.com</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-muted min-w-125px w-125px">Origin</td>
+                                                    <td class="text-gray-800">Australia
+                                                        <div class="symbol symbol-20px symbol-circle ms-2">
+                                                            <img src="assets/media/flags/australia.svg" />
+                                                        </div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-muted min-w-125px w-125px">CVC check</td>
+                                                    <td class="text-gray-800">Passed
+                                                        <i class="ki-duotone ki-check-circle fs-2 text-success">
+                                                            <span class="path1"></span>
+                                                            <span class="path2"></span>
+                                                        </i></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Details-->
+                                </div>
+                                <!--end::Body-->
+                            </div>
+                            <!--end::Option-->
+                            <div class="separator separator-dashed"></div>
+                        @empty
+                            <tr>
+                                <td colspan="100%">
+
+                                    <div class="d-flex flex-column flex-center">
+                                        <img src="{{ asset('admin-assets/media/illustrations/sigma-1/5.png') }}"
+                                             class="mw-350px">
+                                        <div class="fs-3 fw-bolder text-dark mb-4">No data found.</div>
+                                        <div class="fs-6"></div>
+                                    </div>
+
+
+                                </td>
+                            </tr>
+                        @endforelse
+
+                    @endif
+
+
+                </div>
+                <!--end::Card body-->
+
 
                 <!--begin::Table-->
                 <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users">
@@ -348,10 +250,11 @@
                         <th class="w-10px pe-2">
                             #
                         </th>
-                        <th class="min-w-125px">المستأجر</th>
-                        <th class="min-w-125px">الحالة</th>
-                        <th class="min-w-125px">بداية العقد</th>
-                        <th class="min-w-125px">نهاية العقد</th>
+                        <th class="min-w-auto">المستأجر</th>
+                        <th class="min-w-auto">الحالة</th>
+                        <th class="min-w-auto">التكلفة</th>
+                        <th class="min-w-auto">بداية العقد</th>
+                        <th class="min-w-auto">نهاية العقد</th>
                         <th class="text-end min-w-100px">العمليات</th>
                     </tr>
                     <!--end::Table row-->
@@ -365,36 +268,41 @@
                         @forelse($contracts as $contract)
                             <!--begin::Table row-->
                             <tr>
-                                <!--begin::Checkbox-->
+
                                 <td>
                                     {{ $contract->id }}
                                 </td>
-                                <!--end::Checkbox-->
-                                <!--begin::User=-->
+
                                 <td>
                                     <a href="{{ route('admin.users.details', ['user_id' => $contract->user_id]) }}" class="text-gray-800 text-hover-primary mb-1">
                                         {{ $contract->user->name }}
                                     </a>
                                 </td>
 
-                                <!--end::User=-->
-                                <!--begin::Role=-->
                                 <td>
                                     <span class="badge badge-light-{{ $contract->activeStatusClass }} fs-7 fw-bold">
                                         {{ $contract->activeStatusString }}
                                     </span>
                                 </td>
 
-                                <!--end::Role=-->
-                                <!--begin::Joined-->
+                                <td>
+                                    {{ $contract->cost }}
+                                </td>
+
                                 <td>{{ ($contract->start_at)? $contract->start_at->format('Y/m/d') : '-' }}</td>
                                 <td>{{ ($contract->end_at)? $contract->end_at->format('Y/m/d') : '-' }}</td>
-                                <!--begin::Joined-->
+
                                 <!--begin::Action=-->
                                 <td class="text-end">
                                     <a href="{{ route('admin.contracts.details', ['contract_id' => $contract->id]) }}"
-                                       class="btn btn-light btn-active-light-primary btn-sm">
+                                       class="btn btn-sm btn-light btn-active-light-primary">
                                         <i class="fa-solid fa-gear"></i>
+                                        إدارة
+                                    </a>
+                                    <a wire:click="showApartments({{ $contract->id }})"
+                                       class="btn btn-sm btn-light btn-active-light-primary">
+                                        <i class="fa-solid fa-list"></i>
+                                        العقارات
                                     </a>
                                 </td>
                                 <!--end::Action=-->
@@ -433,11 +341,3 @@
     </div>
     <!--end::Card-->
 </div>
-
-
-@push('js')
-    <script src="/admin-assets/js/custom/widgets.js"></script>
-    <script src="/admin-assets/js/custom/apps/chat/chat.js"></script>
-    <script src="/admin-assets/js/custom/utilities/modals/upgrade-plan.js"></script>
-    <script src="/admin-assets/js/custom/utilities/modals/users-search.js"></script>
-@endpush
