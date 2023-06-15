@@ -65,6 +65,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'date_of_berth' => 'datetime',
+        'user_type' => 'integer',
     ];
 
     /**
@@ -128,7 +129,11 @@ class User extends Authenticatable
             self::USER_TYPE_CORPORATE => 'فئة شركات',
         ];
 
-        return $strings [$this->user_type];
+        $user_type = ($this->user_type > 0)
+            ? $this->user_type
+            : self::USER_TYPE_PERSON;
+
+        return $strings[$user_type];
     }
 
     public function getAttachmentDiskPath($attachment)
