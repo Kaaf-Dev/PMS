@@ -36,10 +36,11 @@ class Contract extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function Apartment()
+    public function apartments()
     {
-        return $this->belongsTo(Apartment::class);
+        return $this->belongsToMany(Apartment::class, 'contract_apartment');
     }
+
 
     public function invoices()
     {
