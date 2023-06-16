@@ -28,6 +28,12 @@ class Overview extends Component
             'show_notes' => true,
             'show_edit_notes' => false,
         ],
+        'apartment_page' => [
+            'show_user' => true,
+            'show_contract_link' => true,
+            'show_notes' => true,
+            'show_edit_notes' => false,
+        ],
     ];
 
     public function getListeners()

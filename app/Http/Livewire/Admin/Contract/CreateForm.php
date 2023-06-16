@@ -150,7 +150,6 @@ class CreateForm extends Component
     public function goNextStep()
     {
         $validated_data = $this->validate();
-        $apartment_ids = array_keys($validated_data['selected_apartments']);
         if ($this->step_no >= $this->max_step_no) {
             $Contract = new Contract();
             $Contract->user_id = $this->selected_user->id;
@@ -163,6 +162,7 @@ class CreateForm extends Component
             $Contract->end_at = $end_at;
 
             if ($Contract->save()) { // saved successfully
+                $apartment_ids = array_keys($validated_data['selected_apartments']);
                 $Contract->apartments()->attach($apartment_ids);
                 $this->contract_id = $Contract->id;
                 $this->emit('contract_added');

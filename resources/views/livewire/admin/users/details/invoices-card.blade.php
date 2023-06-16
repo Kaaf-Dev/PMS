@@ -38,7 +38,6 @@
                                     <!--begin::Thead-->
                                     <thead class="border-bottom border-gray-200 fs-7 text-uppercase fw-bold">
                                     <tr class="text-start text-gray-400">
-                                        <th class="min-w-100px">العقار</th>
                                         <th class="min-w-100px">رقم الفاتورة</th>
                                         <th class="min-w-100px align-left">المبلغ</th>
                                         <th class="min-w-100px">الحالة</th>
@@ -53,11 +52,6 @@
                                     <tbody class="fs-6 fw-semibold text-gray-600">
                                     @foreach($invoices as $invoice)
                                         <tr>
-                                            <td>
-                                                <a href="{{ route('admin.property.apartment.details', ['property_id' => $invoice->contract->apartment->property_id, 'apartment_id' => $invoice->contract->apartment->id]) }}" class="text-gray-600 text-hover-primary">
-                                                    {{ $invoice->contract->apartment->property->name }} / {{ $invoice->contract->apartment->name }}
-                                                </a>
-                                            </td>
                                             <td>
                                                 <a href="#{{ $invoice->id }}" class="text-gray-600 text-hover-primary">{{ $invoice->no }}</a>
                                             </td>

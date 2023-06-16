@@ -21,6 +21,6 @@ class ContractsCard extends Component
 
     public function getContractsProperty()
     {
-        return $this->User->contracts()->get();
+        return $this->User->contracts()->with('apartments')->get();
     }
 }

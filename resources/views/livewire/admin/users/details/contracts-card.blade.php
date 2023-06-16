@@ -23,9 +23,8 @@
                             <thead class="border-bottom border-gray-200 fs-7 text-uppercase fw-bold">
                             <tr class="text-start text-gray-400">
                                 <th class="w-10px pe-2">#</th>
-                                <th class="min-w-auto">العقار</th>
-                                <th class="min-w-auto">الوحدة</th>
                                 <th class="min-w-auto">الحالة</th>
+                                <th class="min-w-auto">الإيجار</th>
                                 <th class="min-w-auto">بداية العقد</th>
                                 <th class="min-w-auto">نهاية العقد</th>
                                 <th class="text-end min-w-100px">العمليات</th>
@@ -39,32 +38,17 @@
                                 @forelse($this->contracts as $contract)
                                     <!--begin::Table row-->
                                     <tr>
-                                        <!--begin::Checkbox-->
                                         <td>
                                             {{ $contract->id }}
                                         </td>
-                                        <!--end::Checkbox-->
-                                        <!--begin::User=-->
                                         <td>
-                                            <a href="{{ route('admin.property.details', ['property_id' => $contract->apartment->property->id]) }}" class="text-gray-800 text-hover-primary mb-1">
-                                                {{ $contract->apartment->property->name }}
-                                            </a>
+                                            <span class="badge badge-light-{{ $contract->activeStatusClass }} fs-7 fw-bold">
+                                                {{ $contract->activeStatusString }}
+                                            </span>
                                         </td>
-                                        <!--end::User=-->
-                                        <!--begin::User=-->
                                         <td>
-                                            <a href="{{ route('admin.property.apartment.details', ['property_id' => $contract->apartment->property->id, 'apartment_id' => $contract->apartment->id]) }}" class="text-gray-800 text-hover-primary mb-1">
-                                                {{ $contract->apartment->name }}
-                                            </a>
+                                            {{ $contract->cost }}
                                         </td>
-                                        <!--end::User=-->
-                                        <!--begin::Role=-->
-                                        <td>
-                                    <span class="badge badge-light-{{ $contract->activeStatusClass }} fs-7 fw-bold">
-                                        {{ $contract->activeStatusString }}
-                                    </span>
-                                        </td>
-
                                         <!--end::Role=-->
                                         <!--begin::Joined-->
                                         <td>{{ ($contract->start_at)? $contract->start_at->format('Y/m/d') : '-' }}</td>
