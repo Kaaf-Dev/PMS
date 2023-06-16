@@ -14,7 +14,6 @@ class Contract extends Model
 
     protected $fillable = [
         'user_id',
-        'apartment_id',
         'cost',
         'notes',
         'active',
