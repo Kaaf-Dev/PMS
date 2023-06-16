@@ -47,7 +47,8 @@ class ListTable extends Component
 
     public function loadContracts()
     {
-        return Contract::orderBy('id', 'desc')
+        return Contract::with('apartments')
+            ->orderBy('id', 'desc')
             ->paginate();
     }
 
