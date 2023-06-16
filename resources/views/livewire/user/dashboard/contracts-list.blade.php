@@ -7,7 +7,6 @@
                 <span class="card-label fw-bold text-gray-800">
                     عقود الإيجار
                 </span>
-{{--                --}}
                 <a href="#" class="text-gray-400 mt-1 fw-semibold fs-6 mt-2">عرض الجميع</a>
             </h3>
             <!--end::Title-->
@@ -30,19 +29,17 @@
                             <!--begin::Flag-->
                             <div class="symbol symbol-50px me-2">
                                 <span class="symbol-label bg-light-{{ $contract->active_status_class }}">
-                                    <span class="fs-2x text-{{ $contract->active_status_class }}">
-                                        {!! $contract->apartment->icon_svg !!}
-                                    </span>
+                                    <i class="fas fa-building fs-2x text-{{ $contract->active_status_class }}"></i>
                                 </span>
                             </div>
                             <!--end::Flag-->
                             <!--begin::Content-->
                             <div class="me-5">
                                 <!--begin::Title-->
-                                <a href="#" class="text-gray-800 fw-bold text-hover-primary fs-6">{{ $contract->Apartment->name }}</a>
+                                <a href="#" class="text-gray-800 fw-bold text-hover-primary fs-6">رقم العقد: {{ $contract->id }}</a>
                                 <!--end::Title-->
                                 <!--begin::Desc-->
-                                <span class="text-gray-400 fw-semibold fs-7 d-block text-start ps-0">رقم العقد: {{ $contract->id }}</span>
+                                <span class="text-gray-400 fw-semibold fs-7 d-block text-start ps-0">{{ $contract->costHuman }}</span>
                                 <!--end::Desc-->
                             </div>
                             <!--end::Content-->
@@ -50,9 +47,6 @@
                         <!--end::Section-->
                         <!--begin::Wrapper-->
                         <div class="d-flex align-items-center">
-                            <!--begin::Number-->
-                            <span class="text-gray-800 fw-bold fs-6 me-3">{{ $contract->costHuman }}</span>
-                            <!--end::Number-->
                             <!--begin::Info-->
                             <div class="m-0">
                                 <!--begin::Label-->
