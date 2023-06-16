@@ -32,6 +32,13 @@ class Create extends Component
         ];
     }
 
+    public function getMessages()
+    {
+        return [
+            'required' => 'هذا الحقل إجباري',
+        ];
+    }
+
     public function getListeners()
     {
         return [
@@ -109,7 +116,7 @@ class Create extends Component
                     $query->whereHas('user', function ($query) use ($search_key) {
                         $query->where('name', 'like', '%'. $search_key .'%');
                     })
-                    ->orWhereHas('apartment', function ($query) use ($search_key) {
+                    ->orWhereHas('apartments', function ($query) use ($search_key) {
                         $query->where('name', 'like', '%'. $search_key .'%');
                     });
                 }

@@ -23,7 +23,8 @@
                         <!--end::Datepicker-->
 
                         <!--begin::Icon-->
-                        <i class="ki-duotone ki-down fs-4 position-absolute ms-4 end-0"></i>                        <!--end::Icon-->
+                        <i class="ki-duotone ki-down fs-4 position-absolute ms-4 end-0"></i>
+                       <!--end::Icon-->
                     </div>
                     <!--end::Input-->
                 </div>
@@ -75,6 +76,11 @@
                     <!--begin::Col-->
                     <div class="col-lg-6">
                         <label class="form-label fs-6 fw-bold text-gray-700 mb-3">العقد</label>
+                        @error('invoice.contract_id')
+                            <div class="text-danger">
+                                {{ $message }}
+                            </div>
+                        @enderror
                         @if($this->selected_contract)
                             <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed rounded-3 p-2 mt-4">
 
@@ -172,42 +178,6 @@
                                                 <!--end::Label-->
                                             </div>
                                             <!--end::Id-->
-                                            <!--begin::Info-->
-                                            <div class="d-flex flex-stack pb-3">
-                                                <!--begin::Info-->
-                                                <div class="d-flex">
-                                                    <!--begin::Avatar-->
-                                                    <div class="symbol symbol-circle symbol-45px">
-                                                        <span class="svg-icon svg-icon-2x svg-icon-primary">
-                                                            {!! $contract->apartment->icon_svg !!}
-                                                        </span>
-                                                    </div>
-                                                    <!--end::Avatar-->
-                                                    <!--begin::Details-->
-                                                    <div class="ms-5">
-                                                        <!--begin::Name-->
-                                                        <div class="d-flex align-items-center">
-                                                            <a href="{{ route('admin.property.apartment.details', ['property_id' => $contract->apartment->property->id, 'apartment_id' => $contract->apartment->id]) }}"
-                                                               class="text-dark fw-bold text-hover-primary fs-5 me-4">
-                                                                {{ $contract->apartment->name }}
-                                                            </a>
-
-                                                        </div>
-                                                        <!--end::Name-->
-                                                        <!--begin::Desc-->
-                                                        <p class="text-dark fw-bold text-hover-primary fs-5 me-4">
-                                                            <a href="{{ route('admin.property.details', ['property_id' => $contract->apartment->property->id]) }}"
-                                                               class="text-dark fw-bold text-hover-primary fs-5 me-4">
-                                                                {{ $contract->apartment->property->name }}
-                                                            </a>
-                                                        </p>
-                                                        <!--end::Desc-->
-                                                    </div>
-                                                    <!--end::Details-->
-                                                </div>
-                                                <!--end::Info-->
-                                            </div>
-                                            <!--end::Info-->
                                             <!--begin::Wrapper-->
                                             <div class="p-0">
                                                 <!--begin::Section-->
@@ -260,7 +230,16 @@
                                                         </div>
                                                         <!--end::Progress-->
                                                         <!--begin::Button-->
-                                                        <a wire:click="selectContract('{{ $contract->id }}')" class="btn btn-sm btn-primary">اختيار</a>
+                                                        <a href="{{ route('admin.contracts.details', ['contract_id' => $contract->id]) }}" class="btn btn-sm btn-info">
+                                                            <i class="fas fa-eye"></i>
+                                                            معاينة
+                                                        </a>
+                                                        <!--end::Button-->
+                                                        <!--begin::Button-->
+                                                        <a wire:click="selectContract('{{ $contract->id }}')" class="btn btn-sm btn-primary">
+                                                            <i class="fas fa-check"></i>
+                                                            اختيار
+                                                        </a>
                                                         <!--end::Button-->
                                                     </div>
                                                     <!--end::Action-->
@@ -286,10 +265,15 @@
 
                     <!--begin::Col-->
                     <div class="col-lg-6">
-                        <label class="form-label fs-6 fw-bold text-gray-700 mb-3">البيان</label>
+                        <label class="form-label fs-6 fw-bold text-gray-700 mb-3">القيمة</label>
                         <!--begin::Input group-->
                         <div class="mb-5">
-                            <input type="text" class="form-control form-control-solid" placeholder="القيمة">
+                            <input wire:model.defer="invoice.amount" type="text" class="form-control form-control-solid">
+                            @error('invoice.amount')
+                            <div class="text-danger">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
                         <!--end::Input group-->
 
