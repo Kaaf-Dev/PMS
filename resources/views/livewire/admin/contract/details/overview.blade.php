@@ -68,14 +68,8 @@
                             <!--end::Row-->
                             <!--begin::Row-->
                             <tr>
-                                <td class="text-gray-400">رقم الهاتف:</td>
-                                <td class="text-gray-800">{{ $this->contract->user->phone }}</td>
-                            </tr>
-                            <!--end::Row-->
-                            <!--begin::Row-->
-                            <tr>
-                                <td class="text-gray-400">العقار:</td>
-                                <td class="text-gray-800">{{ $this->contract->apartment->name }}</td>
+                                <td class="text-gray-400">الإيجار: </td>
+                                <td class="text-gray-800">{{ $this->contract->cost }}</td>
                             </tr>
                             <!--end::Row-->
                         </table>
@@ -98,12 +92,6 @@
                                 <td class="text-gray-800">{{ $this->contract->end_at->format('Y-m') }}</td>
                             </tr>
                             <!--end::Row-->
-                            <!--begin::Row-->
-                            <tr>
-                                <td class="text-gray-400">الإيجار: </td>
-                                <td class="text-gray-800">{{ $this->contract->cost }}</td>
-                            </tr>
-                            <!--end::Row-->
                         </table>
                         <!--end::Details-->
                     </div>
@@ -112,6 +100,66 @@
                 <!--end::Row-->
             </div>
             <!--end::Section-->
+
+            <!--begin::Title-->
+            <h5 class="mb-4">العقارات</h5>
+            <!--end::Title-->
+            <!--begin::Details-->
+            <div class="mb-4">
+                <!--begin::Details-->
+                <div class="table-responsive">
+                    <!--begin::Table-->
+                    <table class="table align-middle gs-0 gy-5">
+                        <!--begin::Table head-->
+                        <thead>
+                        <tr>
+                            <th class="p-0 w-50px"></th>
+                            <th class="p-0 min-w-auto"></th>
+                            <th class="p-0 min-w-40px"></th>
+                        </tr>
+                        </thead>
+                        <!--end::Table head-->
+                        <!--begin::Table body-->
+                        <tbody>
+                        @forelse($this->contract->apartments ?? [] as $selected_apartment)
+                            <tr>
+                                <td>
+                                    <div class="symbol symbol-50px me-2">
+                                                        <span class="symbol-label">
+                                                            {!! $selected_apartment['icon_svg'] !!}
+                                                        </span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a href="{{ route('admin.property.apartment.details', ['property_id' => $selected_apartment['property']['id'], 'apartment_id' => $selected_apartment['id']]) }}" class="text-dark fw-bold text-hover-primary mb-1 fs-6">
+                                        {{ $selected_apartment['name'] }}
+                                    </a>
+                                    <span class="text-muted fw-semibold d-block fs-7">
+                                        {{ $selected_apartment['property']['name'] }}
+                                    </span>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="4">
+                                    <div class="alert alert-info">
+                                        لا يوجد عقارات محددة بعد!
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforelse
+
+                        </tbody>
+                        <!--end::Table body-->
+                    </table>
+                    <!--end::Table-->
+
+
+                </div>
+                <!--end::Details-->
+            </div>
+            <!--end::Details-->
+
             @if($this->show_notes and $this->contract->notes)
                 <!--begin::Section-->
                 <div class="mb-10">

@@ -29,7 +29,7 @@ class CreateForm extends Component
     public $users;
 
     public $selected_property;
-    public $selected_apartment;
+    public $selected_apartments;
     public $selected_user;
 
     public $start_at;
@@ -43,7 +43,9 @@ class CreateForm extends Component
         $rules = [
             1 => [
                 'selected_property' => 'required',
-                'selected_apartment' => 'required',
+                'selected_apartments' => 'required|array',
+                'selected_apartments.*' => 'array',
+                'selected_apartments.*.id' => 'exists:apartments,id',
             ],
 
             2 => [
@@ -110,7 +112,7 @@ class CreateForm extends Component
         $this->reset([
             'contract_id',
             'selected_property',
-            'selected_apartment',
+            'selected_apartments',
             'selected_user',
             'search_property',
             'search_apartment',
@@ -148,11 +150,10 @@ class CreateForm extends Component
     public function goNextStep()
     {
         $validated_data = $this->validate();
-
+        $apartment_ids = array_keys($validated_data['selected_apartments']);
         if ($this->step_no >= $this->max_step_no) {
             $Contract = new Contract();
             $Contract->user_id = $this->selected_user->id;
-            $Contract->apartment_id = $this->selected_apartment->id;
             $Contract->cost = $this->cost;
             $Contract->notes = $this->notes;
             $Contract->active = true;
@@ -162,6 +163,7 @@ class CreateForm extends Component
             $Contract->end_at = $end_at;
 
             if ($Contract->save()) { // saved successfully
+                $Contract->apartments()->attach($apartment_ids);
                 $this->contract_id = $Contract->id;
                 $this->emit('contract_added');
             } else {
@@ -241,7 +243,6 @@ class CreateForm extends Component
             'search_property',
             'search_apartment',
             'selected_property',
-            'selected_apartment',
         ]);
         if ($property) {
             $this->selected_property = Property::findOrfail($property);
@@ -251,18 +252,25 @@ class CreateForm extends Component
 
     public function selectApartment($apartment = null)
     {
-        $this->reset([
-            'search_apartment',
-            'selected_apartment',
-        ]);
         if ($apartment) {
-            $apartment = Apartment::findOrFail($apartment);
+            $apartment = Apartment::with('Property')
+                ->findOrFail($apartment)->append('icon_svg');
             if ($apartment->is_available) {
-                $this->selected_apartment = $apartment;
-                $this->cost = $apartment->cost;
+                $this->selected_apartments[$apartment->id] = $apartment->toArray();
+                $this->cost += $apartment->cost;
             } else {
                 $this->showErrorAlert('هذه الوحدة مؤجرة في الوقت الحالي');
             }
+        }
+    }
+
+    public function unselectApartment($apartment)
+    {
+        if (isset($this->selected_apartments[$apartment])) {
+            unset($this->selected_apartments[$apartment]);
+            $this->showSuccessAlert('تمت العملية بنجاح');
+        } else {
+            $this->showSuccessAlert('العقار المحدد تم استثناؤه سابقًا');
         }
     }
 

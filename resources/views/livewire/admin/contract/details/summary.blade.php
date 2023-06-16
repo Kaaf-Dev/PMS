@@ -144,32 +144,6 @@
                 <!--end::Details-->
             </div>
             <!--end::Section-->
-            <!--begin::Seperator-->
-            <div class="separator separator-dashed mb-7"></div>
-            <!--end::Seperator-->
-            <!--begin::Section-->
-            <div class="mb-10">
-                <!--begin::Title-->
-                <h5 class="mb-4">العقار</h5>
-                <!--end::Title-->
-                <!--begin::Details-->
-                <table class="table fs-6 fw-semibold gs-0 gy-2 gx-2">
-                    <!--begin::Row-->
-                    <tr class="">
-                        <td class="text-gray-400">العقار:</td>
-                        <td class="text-gray-800">{{ $this->contract->apartment->property->name }}</td>
-                    </tr>
-                    <!--end::Row-->
-                    <!--begin::Row-->
-                    <tr class="">
-                        <td class="text-gray-400">الوحدة:</td>
-                        <td class="text-gray-800">{{ $this->contract->apartment->name }}</td>
-                    </tr>
-                    <!--end::Row-->
-                </table>
-                <!--end::Details-->
-            </div>
-            <!--end::Section-->
         </div>
         <!--end::Card body-->
     </div>

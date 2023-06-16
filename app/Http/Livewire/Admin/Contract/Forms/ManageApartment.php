@@ -17,8 +17,9 @@ class ManageApartment extends Component
     public $search_property;
     public $search_apartment;
 
-    public $selected_apartment;
     public $selected_property;
+    public $selected_apartments;
+    public $selected_apartment;
 
     public $properties;
     public $apartments;
@@ -26,7 +27,10 @@ class ManageApartment extends Component
     public function rules()
     {
         return [
-            'selected_apartment' => 'required',
+            'selected_apartments' => 'array',
+            'selected_apartments' => 'required|array',
+            'selected_apartments.*' => 'array',
+            'selected_apartments.*.id' => 'exists:apartments,id',
         ];
 
     }
@@ -80,7 +84,6 @@ class ManageApartment extends Component
             'search_property',
             'search_apartment',
             'selected_property',
-            'selected_apartment',
         ]);
         if ($property) {
             $this->selected_property = Property::findOrfail($property);
@@ -90,17 +93,24 @@ class ManageApartment extends Component
 
     public function selectApartment($apartment = null)
     {
-        $this->reset([
-            'search_apartment',
-            'selected_apartment',
-        ]);
         if ($apartment) {
-            $apartment = Apartment::findOrFail($apartment);
-            if ($apartment->is_available or $this->contract->apartment_id == $apartment->id) {
-                $this->selected_apartment = $apartment;
+            $apartment = Apartment::with('Property')
+                ->findOrFail($apartment)->append('icon_svg');
+            if ($apartment->is_available or $this->contract->apartments()->where('apartment_id', $apartment->id)->exists()) {
+                $this->selected_apartments[$apartment->id] = $apartment->toArray();
             } else {
                 $this->showErrorAlert('هذه الوحدة مؤجرة في الوقت الحالي');
             }
+        }
+    }
+
+    public function unselectApartment($apartment)
+    {
+        if (isset($this->selected_apartments[$apartment])) {
+            unset($this->selected_apartments[$apartment]);
+            $this->showSuccessAlert('تمت العملية بنجاح');
+        } else {
+            $this->showSuccessAlert('العقار المحدد تم استثناؤه سابقًا');
         }
     }
 
@@ -121,9 +131,11 @@ class ManageApartment extends Component
         $this->resetFields();
         $contract_id = $params['contract_id'] ?? 0;
         $this->contract = Contract::findOrFail($contract_id);
-        $this->selectProperty($this->contract->Apartment->Property->id);
-        $this->selectApartment($this->contract->Apartment->id);
-        $this->fetchApartments();
+        $apartment_ids = $this->contract->apartments()->pluck('apartments.id');
+        foreach ($apartment_ids as $apartment_id) {
+            $this->selectApartment($apartment_id);
+        }
+        $this->fetchProperties();
     }
 
     public function resetFields()
@@ -144,8 +156,8 @@ class ManageApartment extends Component
     public function save()
     {
         $validated_data = $this->validate();
-        $this->contract->apartment_id = $this->selected_apartment->id;
-        if ($this->contract->save()) {
+        $apartment_ids = array_keys($validated_data['selected_apartments']);
+        if ($this->contract->apartments()->sync($apartment_ids)) {
             $this->showSuccessAlert('تمت العملية بنجاح');
             $this->emit('contract-updated-apartment');
             $this->closeModal();

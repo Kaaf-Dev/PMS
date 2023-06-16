@@ -43,13 +43,13 @@ class Apartment extends Model
 
     public function activeContracts()
     {
-        return $this->hasMany(Contract::class)->active();
+        return $this->belongsToMany(Contract::class, 'contract_apartment')->active();
     }
 
-    public function currentContract()
-    {
-        return $this->hasOne(Contract::class)->active();
-    }
+//    public function currentContract()
+//    {
+//        return $this->hasOne(Contract::class)->active();
+//    }
 
     public function getTypeStringAttribute()
     {

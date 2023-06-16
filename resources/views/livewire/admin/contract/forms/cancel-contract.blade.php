@@ -5,14 +5,9 @@
             <div class="mb-13 text-center">
                 <!--begin::Title-->
                 <h2 class="mb-3">
-                    هل أنت متأكد من إيقاف العقد الخاص بوحدة
+                    هل أنت متأكد من إيقاف العقد؟
                 </h2>
                 <!--end::Title-->
-                <!--begin::Description-->
-                <h3 class="fw-semibold fs-5">
-                    {{ $this->contract->Apartment->Property->name }} - {{ $this->contract->Apartment->name }}
-                </h3>
-                <!--end::Description-->
             </div>
 
             <!--begin::Actions-->
