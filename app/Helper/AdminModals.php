@@ -36,7 +36,7 @@ function getAdminGlobalModals()
             'emit_hide' => 'hide-contract-new-modal',
             'details' => [
                 'title' => 'تسجيل عقد تأجير',
-                'modal_dialog_class' => 'modal-dialog-centered mw-900px',
+                'modal_dialog_class' => 'modal-fullscreen',
             ]
         ],
 
