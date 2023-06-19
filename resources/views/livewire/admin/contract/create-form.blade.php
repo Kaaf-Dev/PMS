@@ -104,9 +104,9 @@
                                                         <tr>
                                                             <td>
                                                                 <div class="symbol symbol-50px me-2">
-                                                        <span class="symbol-label">
-                                                            {!! $selected_apartment['icon_svg'] !!}
-                                                        </span>
+                                                                    <span class="symbol-label">
+                                                                        {!! $selected_apartment['icon_svg'] !!}
+                                                                    </span>
                                                                 </div>
                                                             </td>
                                                             <td>
@@ -114,8 +114,8 @@
                                                                     {{ $selected_apartment['name'] }}
                                                                 </a>
                                                                 <span class="text-muted fw-semibold d-block fs-7">
-                                                        {{ $selected_apartment['property']['name'] }}
-                                                    </span>
+                                                                    {{ $selected_apartment['property']['name'] }}
+                                                                </span>
                                                             </td>
                                                             <td class="text-end">
                                                                 <span class="text-muted fw-bold">{{ $selected_apartment['cost'] }} / شهري</span>
@@ -268,7 +268,7 @@
                                         <div class="fv-row">
                                             @if($selected_property)
                                                 <!--begin::Label-->
-                                                <label class="d-flex align-items-center fs-5 fw-semibold">
+                                                <label class="d-flex align-items-center fs-5 fw-semibold mt-4">
                                                     <span class="required">الوحدة:</span>
                                                 </label>
                                                 @error('selected_apartments')
