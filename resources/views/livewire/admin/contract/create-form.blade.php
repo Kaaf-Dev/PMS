@@ -58,7 +58,7 @@
                     <!--end::Step 3-->
 
                     <!--begin::Step 4-->
-                    <div class="stepper-item @if($step_no == 3) current @elseif($step_no > 4) completed @endif">
+                    <div class="stepper-item @if($step_no == 4) current @elseif($step_no > 4) completed @endif">
                         <h3 class="stepper-title">
                             الانتهاء
                         </h3>
@@ -103,11 +103,13 @@
                                                     @forelse($this->selected_apartments ?? [] as $selected_apartment)
                                                         <tr>
                                                             <td>
-                                                                <div class="symbol symbol-50px me-2">
-                                                                    <span class="symbol-label">
+                                                                <!--begin::Avatar-->
+                                                                <div class="symbol symbol-circle symbol-45px">
+                                                                    <span class="svg-icon svg-icon-2x svg-icon-primary">
                                                                         {!! $selected_apartment['icon_svg'] !!}
                                                                     </span>
                                                                 </div>
+                                                                <!--end::Avatar-->
                                                             </td>
                                                             <td>
                                                                 <a href="#" class="text-dark fw-bold text-hover-primary mb-1 fs-6">
@@ -141,13 +143,10 @@
                                                             </td>
                                                         </tr>
                                                     @endforelse
-
                                                     </tbody>
                                                     <!--end::Table body-->
                                                 </table>
                                                 <!--end::Table-->
-
-
                                             </div>
                                         </div>
 
@@ -177,11 +176,11 @@
                                                     <a wire:click="selectProperty()" class="btn btn-icon btn-bg-light btn-color-primary btn-sm me-1">
                                                         <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                                                         <span class="svg-icon svg-icon-3">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path opacity="0.3" d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z" fill="currentColor"></path>
-                                                    <path d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.3789 21.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.696 18.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z" fill="currentColor"></path>
-                                                </svg>
-                                            </span>
+                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path opacity="0.3" d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z" fill="currentColor"></path>
+                                                                <path d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.3789 21.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.696 18.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z" fill="currentColor"></path>
+                                                            </svg>
+                                                        </span>
                                                         <!--end::Svg Icon-->
                                                     </a>
                                                     <!--end::Button-->
@@ -268,7 +267,7 @@
                                         <div class="fv-row">
                                             @if($selected_property)
                                                 <!--begin::Label-->
-                                                <label class="d-flex align-items-center fs-5 fw-semibold mt-4">
+                                                <label class="d-flex align-items-center fs-5 fw-semibold my-8">
                                                     <span class="required">الوحدة:</span>
                                                 </label>
                                                 @error('selected_apartments')
@@ -276,126 +275,135 @@
                                                 @enderror
                                                 <!--end::Label-->
                                                 <div class="w-100">
-                                                    <div class="text-gray-500 fw-semibold fs-5 my-4">يمكنك البحث ضمن القائمة المتاحة:</div>
+                                                    <div class="row">
+                                                        <div class="col-md-10">
+                                                            <div class="w-100 position-relative mb-5" autocomplete="off">
+                                                                <!--begin::Icon-->
+                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+                                                                <span class="svg-icon svg-icon-2 svg-icon-lg-1 svg-icon-gray-500 position-absolute top-50 ms-5 translate-middle-y">
+                                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor"></rect>
+                                                                        <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor"></path>
+                                                                    </svg>
+                                                                </span>
+                                                                <!--end::Svg Icon-->
+                                                                <!--end::Icon-->
+                                                                <!--begin::Input-->
+                                                                <input wire:model="search_apartment" type="text" class="form-control form-control-lg form-control-solid px-15" placeholder="البحث عن الوحدات السكنية…">
+                                                                <!--end::Input-->
+                                                                <!--begin::Spinner-->
+                                                                <span wire:loading.class.remove="d-none" wire:target="search_apartment" class="position-absolute top-50 end-0 translate-middle-y lh-0 me-5 d-none">
+                                                                    <span class="spinner-border h-15px w-15px align-middle text-muted"></span>
+                                                                </span>
+                                                                <!--end::Spinner-->
+                                                                <!--begin::Reset-->
+                                                                <span wire:click="clearSearchApartment" wire:loading.remove wire:target="search_apartment" class="btn btn-flush btn-active-color-primary position-absolute top-50 end-0 translate-middle-y lh-0 me-5 @if(!$search_apartment) d-none @endif">
+                                                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                                                    <span class="svg-icon svg-icon-2 svg-icon-lg-1 me-0">
+                                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor"></rect>
+                                                                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor"></rect>
+                                                                            </svg>
+                                                                        </span>
+                                                                <!--end::Svg Icon-->
+                                                                </span>
+                                                                <!--end::Reset-->
+                                                            </div>
+                                                        </div>
 
-                                                    <div class="w-100 position-relative mb-5" autocomplete="off">
-                                                        <!--begin::Icon-->
-                                                        <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
-                                                        <span class="svg-icon svg-icon-2 svg-icon-lg-1 svg-icon-gray-500 position-absolute top-50 ms-5 translate-middle-y">
-                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor"></rect>
-                                                                <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor"></path>
-                                                            </svg>
-                                                        </span>
-                                                        <!--end::Svg Icon-->
-                                                        <!--end::Icon-->
-                                                        <!--begin::Input-->
-                                                        <input wire:model="search_apartment" type="text" class="form-control form-control-lg form-control-solid px-15" placeholder="البحث عن الوحدات السكنية…">
-                                                        <!--end::Input-->
-                                                        <!--begin::Spinner-->
-                                                        <span wire:loading.class.remove="d-none" wire:target="search_apartment" class="position-absolute top-50 end-0 translate-middle-y lh-0 me-5 d-none">
-                                                            <span class="spinner-border h-15px w-15px align-middle text-muted"></span>
-                                                        </span>
-                                                        <!--end::Spinner-->
-                                                        <!--begin::Reset-->
-                                                        <span wire:click="clearSearchApartment" wire:loading.remove wire:target="search_apartment" class="btn btn-flush btn-active-color-primary position-absolute top-50 end-0 translate-middle-y lh-0 me-5 @if(!$search_apartment) d-none @endif">
-                                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
-                                                            <span class="svg-icon svg-icon-2 svg-icon-lg-1 me-0">
-                                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor"></rect>
-                                                                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor"></rect>
-                                                                </svg>
-                                                            </span>
-                                                            <!--end::Svg Icon-->
-                                                        </span>
-                                                        <!--end::Reset-->
+                                                        <div class="col-md-2">
+                                                            <button wire:click="selectAllApartments" class="btn btn-success w-100 position-relative mb-5">
+                                                                <i class="ki-duotone ki-questionnaire-tablet fs-2">
+                                                                    <i class="path1"></i>
+                                                                    <i class="path2"></i>
+                                                                </i>
+                                                                اختيار الجميع
+                                                                <span wire:loading.class.remove="d-none" wire:target="selectAllApartments" class="position-absolute top-50 translate-middle-y lh-0 ms-2 d-none">
+                                                                    <span class="spinner-border h-15px w-15px align-middle text-white"></span>
+                                                                </span>
+                                                            </button>
+                                                        </div>
+
                                                     </div>
+
 
                                                     <div class="mh-350px scroll-y me-n7 pe-7">
 
-                                                        @forelse($apartments ?? [] as $apartment)
+                                                        <div class="row g-6 g-xl-9">
 
-                                                            <!--begin::Apartment-->
-                                                            <div class="border border-hover-primary p-7 rounded mb-7 @if($apartment->is_rented) bg-light-danger @endif">
-                                                                <!--begin::Info-->
-                                                                <div class="d-flex flex-stack pb-3">
-                                                                    <!--begin::Info-->
-                                                                    <div class="d-flex">
-                                                                        <!--begin::Avatar-->
-                                                                        <div class="symbol symbol-circle symbol-45px">
-                                                                <span class="svg-icon svg-icon-2x svg-icon-primary">
-                                                                    {!! $apartment->icon_svg !!}
-                                                                </span>
-                                                                        </div>
-                                                                        <!--end::Avatar-->
-                                                                        <!--begin::Details-->
-                                                                        <div class="ms-5">
-                                                                            <!--begin::Name-->
-                                                                            <div class="d-flex align-items-center">
-                                                                                <a href="{{ route('admin.property.apartment.details', ['property_id' => $selected_property->id, 'apartment_id' => $apartment->id]) }}" class="text-dark fw-bold text-hover-primary fs-5 me-4">
-                                                                                    {{ $apartment->name }}
-                                                                                </a>
-                                                                                {{--                                                                        <!--begin::Label-->--}}
-                                                                                {{--                                                                        <span class="badge badge-light-{{ $apartment->contractActiveStatusClass }} d-flex align-items-center fs-8 fw-semibold">--}}
-                                                                                {{--                                                                            {{ $apartment->contractActiveStatusString }}--}}
-                                                                                {{--                                                                        </span>--}}
-                                                                                {{--                                                                        <!--end::Label-->--}}
-                                                                            </div>
-                                                                            <!--end::Name-->
-                                                                            <!--begin::Desc-->
-                                                                            <span class="text-muted fw-semibold mb-3">
-                                                                    {{ $apartment->type_string }}
-                                                                </span>
-                                                                            <!--end::Desc-->
-                                                                        </div>
-                                                                        <!--end::Details-->
-                                                                    </div>
-                                                                    <!--end::Info-->
-                                                                    <!--begin::Stats-->
-                                                                    <div clas="d-flex">
-                                                                        <!--begin::Price-->
-                                                                        <div class="text-end pb-3">
-                                                                            <span class="text-dark fw-bold fs-5">{{ $apartment->cost }}</span>
-                                                                            <span class="text-muted fs-7">/شهري</span>
-                                                                        </div>
-                                                                        <!--end::Price-->
-                                                                    </div>
-                                                                    <!--end::Stats-->
-                                                                </div>
-                                                                <!--end::Info-->
-                                                                <!--begin::Wrapper-->
-                                                                <div class="p-0">
-                                                                    @if($apartment->is_available)
-                                                                        <!--begin::Footer-->
-                                                                        <div class="d-flex flex-column">
-                                                                            <!--begin::Separator-->
-                                                                            <div class="separator separator-dashed border-muted my-5"></div>
-                                                                            <!--end::Separator-->
-                                                                            <!--begin::Action-->
-                                                                            <div class="d-flex flex-stack">
-                                                                                <!--begin::Progress-->
-                                                                                <div class="d-flex flex-column mw-200px">
-                                                                                </div>
-                                                                                <!--end::Progress-->
-                                                                                <!--begin::Button-->
-                                                                                <a wire:click="selectApartment('{{ $apartment->id }}')" class="btn btn-sm btn-primary">اختيار</a>
-                                                                                <!--end::Button-->
-                                                                            </div>
-                                                                            <!--end::Action-->
-                                                                        </div>
-                                                                        <!--end::Footer-->
+
+
+
+
+                                                            @forelse($apartments ?? [] as $apartment)
+                                                                <!--begin::Col-->
+                                                                <div class="col-lg-3 col-md-4">
+                                                                    <!--begin::Card-->
+                                                                    <div class="card border rounded h-100
+                                                                    @if(isset($this->selected_apartments[$apartment->id])) border-dashed border-primary bg-light-primary
+                                                                    @elseif($apartment->is_rented) border-dashed border-danger bg-light-danger
+                                                                    @else border-gray-500
                                                                     @endif
+                                                                    ">
+                                                                        <!--begin::Card body-->
+                                                                        <div class="card-body d-flex flex-center flex-column pt-12 p-9">
+                                                                            <!--begin::Avatar-->
+                                                                            <div class="symbol symbol-65px symbol-circle mb-5">
+                                                                                <span class="svg-icon svg-icon-3x svg-icon-primary">
+                                                                                    {!! $apartment->icon_svg !!}
+                                                                                </span>
+                                                                            </div>
+                                                                            <!--end::Avatar-->
+
+                                                                            <!--begin::Name-->
+                                                                            <a href="{{ route('admin.property.apartment.details', ['property_id' => $selected_property->id, 'apartment_id' => $apartment->id]) }}" class="fs-4 text-gray-800 text-hover-primary fw-bold mb-0">
+                                                                                {{ $apartment->name }}
+                                                                            </a>
+                                                                            <!--end::Name-->
+
+                                                                            <!--begin::Info-->
+                                                                            <div class="fw-semibold text-gray-400">
+                                                                                {{ $apartment->type_string }}
+                                                                            </div>
+                                                                            <!--end::Info-->
+
+                                                                            <!--begin::Cost-->
+                                                                            <div class="fw-semibold text-gray-400 mb-6">
+                                                                                {{ $apartment->cost }} /شهري
+                                                                            </div>
+                                                                            <!--end::Cost-->
+
+                                                                            @if(isset($this->selected_apartments[$apartment->id]))
+                                                                                <a wire:click="unselectApartment('{{ $apartment->id }}')" class="btn btn-sm btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary w-100">
+                                                                                    <i class="ki-duotone ki-check">
+                                                                                    <span class="path1"></span>
+                                                                                    <span class="path2"></span>
+                                                                                    </i>
+                                                                                    إلغاء
+                                                                                </a>
+                                                                            @elseif($apartment->is_available)
+                                                                                <a wire:click="selectApartment('{{ $apartment->id }}')" class="btn btn-sm btn-primary w-100">
+                                                                                    اختيار
+                                                                                </a>
+                                                                            @else
+                                                                                <a class="btn btn-sm btn-outline btn-outline-dashed btn-outline-danger btn-active-light-danger w-100">مؤجر</a>
+                                                                            @endif
+
+                                                                        </div>
+                                                                        <!--end::Card body-->
+                                                                    </div>
+                                                                    <!--end::Card-->
                                                                 </div>
-                                                                <!--end::Wrapper-->
-                                                            </div>
-                                                            <!--end::Apartment-->
-                                                        @empty
-                                                            <div class="d-flex flex-column flex-center">
-                                                                <img src="{{ asset('admin-assets/media/illustrations/sigma-1/5.png') }}" class="mw-250px">
-                                                                <div class="fs-3 fw-bolder text-dark mb-4">No data found.</div>
-                                                                <div class="fs-6"></div>
-                                                            </div>
-                                                        @endif
+                                                                <!--end::Col-->
+                                                            @empty
+                                                                <div class="d-flex flex-column flex-center">
+                                                                    <img src="{{ asset('admin-assets/media/illustrations/sigma-1/5.png') }}" class="mw-250px">
+                                                                    <div class="fs-3 fw-bolder text-dark mb-4">No data found.</div>
+                                                                    <div class="fs-6"></div>
+                                                                </div>
+                                                            @endif
+
+                                                        </div>
                                                     </div>
                                                 </div>
                                             @endif
@@ -469,8 +477,8 @@
                                                     <!--end::Input-->
                                                     <!--begin::Spinner-->
                                                     <span wire:loading.class.remove="d-none" wire:target="search_user" class="position-absolute top-50 end-0 translate-middle-y lh-0 me-5 d-none">
-                                            <span class="spinner-border h-15px w-15px align-middle text-muted"></span>
-                                        </span>
+                                                        <span class="spinner-border h-15px w-15px align-middle text-muted"></span>
+                                                    </span>
                                                     <!--end::Spinner-->
                                                     <!--begin::Reset-->
                                                     <span wire:click="clearSearchUser" wire:loading.remove wire:target="search_user" class="btn btn-flush btn-active-color-primary position-absolute top-50 end-0 translate-middle-y lh-0 me-5 @if(!$search_user) d-none @endif">
@@ -754,11 +762,11 @@
                                     <button wire:click="goPreviouesStep" type="button" class="btn btn-lg btn-light-primary me-3">
                                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr063.svg-->
                                         <span class="svg-icon svg-icon-3 me-1">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect opacity="0.5" x="6" y="11" width="13" height="2" rx="1" fill="currentColor" />
-                                    <path d="M8.56569 11.4343L12.75 7.25C13.1642 6.83579 13.1642 6.16421 12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75L5.70711 11.2929C5.31658 11.6834 5.31658 12.3166 5.70711 12.7071L11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25C13.1642 17.8358 13.1642 17.1642 12.75 16.75L8.56569 12.5657C8.25327 12.2533 8.25327 11.7467 8.56569 11.4343Z" fill="currentColor" />
-                                </svg>
-                            </span>
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <rect opacity="0.5" x="6" y="11" width="13" height="2" rx="1" fill="currentColor" />
+                                                <path d="M8.56569 11.4343L12.75 7.25C13.1642 6.83579 13.1642 6.16421 12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75L5.70711 11.2929C5.31658 11.6834 5.31658 12.3166 5.70711 12.7071L11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25C13.1642 17.8358 13.1642 17.1642 12.75 16.75L8.56569 12.5657C8.25327 12.2533 8.25327 11.7467 8.56569 11.4343Z" fill="currentColor" />
+                                            </svg>
+                                        </span>
                                         <!--end::Svg Icon-->
                                         العودة
                                     </button>
@@ -780,7 +788,7 @@
                                 </span>
                                     <!--end::Indicator label-->
                                     <!--begin::Indicator progress-->
-                                    <span wire:loading wire:target="goNextStep">
+                                    <span wire:loading>
                                     انتظر قليلًا…
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                                 </span>

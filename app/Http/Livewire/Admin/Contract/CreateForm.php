@@ -150,6 +150,15 @@ class CreateForm extends Component
     public function goNextStep()
     {
         $validated_data = $this->validate();
+
+        if ($this->step_no == 2) {
+            $cost = 0;
+            foreach ($this->selected_apartments ?? [] as $selected_apartment) {
+                $cost += $selected_apartment['cost'];
+            }
+            $this->cost = $cost;
+        }
+
         if ($this->step_no >= $this->max_step_no) {
             $Contract = new Contract();
             $Contract->user_id = $this->selected_user->id;
@@ -250,16 +259,18 @@ class CreateForm extends Component
         }
     }
 
-    public function selectApartment($apartment = null)
+    public function selectApartment($apartment = null, $show_error_msg = true)
     {
+//        ddd($apartment);
         if ($apartment) {
             $apartment = Apartment::with('Property')
                 ->findOrFail($apartment)->append('icon_svg');
             if ($apartment->is_available) {
                 $this->selected_apartments[$apartment->id] = $apartment->toArray();
-                $this->cost += $apartment->cost;
             } else {
-                $this->showErrorAlert('هذه الوحدة مؤجرة في الوقت الحالي');
+                if ($show_error_msg) {
+                    $this->showErrorAlert('هذه الوحدة مؤجرة في الوقت الحالي');
+                }
             }
         }
     }
@@ -268,9 +279,6 @@ class CreateForm extends Component
     {
         if (isset($this->selected_apartments[$apartment])) {
             unset($this->selected_apartments[$apartment]);
-            $this->showSuccessAlert('تمت العملية بنجاح');
-        } else {
-            $this->showSuccessAlert('العقار المحدد تم استثناؤه سابقًا');
         }
     }
 
@@ -282,6 +290,17 @@ class CreateForm extends Component
         ]);
         if ($user) {
             $this->selected_user = User::findOrFail($user);
+        }
+    }
+
+    public function selectAllApartments()
+    {
+        if (isset($this->apartments)) {
+            foreach ($this->apartments as $apartment) {
+                $this->selectApartment($apartment->id, false);
+            }
+        } else {
+            $this->showWarningAlert('لا يوجد بيانات حاليًا');
         }
     }
 
