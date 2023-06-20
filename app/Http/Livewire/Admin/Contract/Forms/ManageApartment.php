@@ -19,6 +19,7 @@ class ManageApartment extends Component
 
     public $selected_property;
     public $selected_apartments;
+    public $unselected_apartments;
     public $selected_apartment;
 
     public $properties;
@@ -91,26 +92,40 @@ class ManageApartment extends Component
         }
     }
 
-    public function selectApartment($apartment = null)
+    public function selectApartment($apartment = null, $show_error_msg = true)
     {
         if ($apartment) {
             $apartment = Apartment::with('Property')
                 ->findOrFail($apartment)->append('icon_svg');
             if ($apartment->is_available or $this->contract->apartments()->where('apartment_id', $apartment->id)->exists()) {
                 $this->selected_apartments[$apartment->id] = $apartment->toArray();
+                if (isset($this->unselected_apartments[$apartment->id])) {
+                    unset($this->unselected_apartments[$apartment->id]);
+                }
             } else {
-                $this->showErrorAlert('هذه الوحدة مؤجرة في الوقت الحالي');
+                if ($show_error_msg) {
+                    $this->showErrorAlert('هذه الوحدة مؤجرة في الوقت الحالي');
+                }
             }
+        }
+    }
+
+    public function selectAllApartments()
+    {
+        if (isset($this->apartments)) {
+            foreach ($this->apartments as $apartment) {
+                $this->selectApartment($apartment->id, false);
+            }
+        } else {
+            $this->showWarningAlert('لا يوجد بيانات حاليًا');
         }
     }
 
     public function unselectApartment($apartment)
     {
         if (isset($this->selected_apartments[$apartment])) {
+            $this->unselected_apartments[$apartment] = $this->selected_apartments[$apartment];
             unset($this->selected_apartments[$apartment]);
-            $this->showSuccessAlert('تمت العملية بنجاح');
-        } else {
-            $this->showSuccessAlert('العقار المحدد تم استثناؤه سابقًا');
         }
     }
 
@@ -144,6 +159,8 @@ class ManageApartment extends Component
         $this->reset([
             'contract',
             'selected_apartment',
+            'selected_apartments',
+            'unselected_apartments',
             'selected_property',
         ]);
     }

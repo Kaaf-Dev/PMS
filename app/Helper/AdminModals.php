@@ -91,7 +91,7 @@ function getAdminGlobalModals()
             'emit_hide' => 'hide-contract-manage-apartment-modal',
             'details' => [
                 'title' => 'إدارة العقار',
-                'modal_dialog_class' => 'mw-650px',
+                'modal_dialog_class' => 'modal-fullscreen',
             ]
         ],
 

@@ -123,8 +123,8 @@
                                                                 <span class="text-muted fw-bold">{{ $selected_apartment['cost'] }} / شهري</span>
                                                             </td>
                                                             <td class="text-end">
-                                                                <a wire:click="unselectApartment({{ $selected_apartment['id'] }})" class="btn btn-sm btn-icon btn-bg-light btn-active-color-danger">
-                                                                    <i class="ki-duotone ki-trash fs-2">
+                                                                <a wire:click="unselectApartment({{ $selected_apartment['id'] }})" class="btn btn-sm btn-outline btn-outline-dashed btn-outline-danger btn-active-light-danger">
+                                                                    <i class="ki-duotone ki-trash fs-2 p-0">
                                                                         <span class="path1 text-danger"></span>
                                                                         <span class="path2 text-danger"></span>
                                                                         <span class="path3 text-danger"></span>
@@ -276,6 +276,7 @@
                                                 <!--end::Label-->
                                                 <div class="w-100">
                                                     <div class="row">
+
                                                         <div class="col-md-10">
                                                             <div class="w-100 position-relative mb-5" autocomplete="off">
                                                                 <!--begin::Icon-->
@@ -326,14 +327,8 @@
 
                                                     </div>
 
-
                                                     <div class="mh-350px scroll-y me-n7 pe-7">
-
                                                         <div class="row g-6 g-xl-9">
-
-
-
-
 
                                                             @forelse($apartments ?? [] as $apartment)
                                                                 <!--begin::Col-->
@@ -446,11 +441,11 @@
                                                     <a wire:click="selectUser()" class="btn btn-icon btn-bg-light btn-color-primary btn-sm me-1">
                                                         <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                                                         <span class="svg-icon svg-icon-3">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path opacity="0.3" d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z" fill="currentColor"></path>
-                                                <path d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.3789 21.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.696 18.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z" fill="currentColor"></path>
-                                            </svg>
-                                        </span>
+                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path opacity="0.3" d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z" fill="currentColor"></path>
+                                                                <path d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.3789 21.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.696 18.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z" fill="currentColor"></path>
+                                                            </svg>
+                                                        </span>
                                                         <!--end::Svg Icon-->
                                                     </a>
                                                     <!--end::Button-->
@@ -465,11 +460,11 @@
                                                     <!--begin::Icon-->
                                                     <!--begin::Svg Icon -->
                                                     <span class="svg-icon svg-icon-2 svg-icon-lg-1 svg-icon-gray-500 position-absolute top-50 ms-5 translate-middle-y">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor"></rect>
-                                                <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor"></path>
-                                            </svg>
-                                        </span>
+                                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor"></rect>
+                                                            <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor"></path>
+                                                        </svg>
+                                                    </span>
                                                     <!--end::Svg Icon-->
                                                     <!--end::Icon-->
                                                     <!--begin::Input-->
@@ -482,15 +477,15 @@
                                                     <!--end::Spinner-->
                                                     <!--begin::Reset-->
                                                     <span wire:click="clearSearchUser" wire:loading.remove wire:target="search_user" class="btn btn-flush btn-active-color-primary position-absolute top-50 end-0 translate-middle-y lh-0 me-5 @if(!$search_user) d-none @endif">
-                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
-                                            <span class="svg-icon svg-icon-2 svg-icon-lg-1 me-0">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor"></rect>
-                                                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor"></rect>
-                                                </svg>
-                                            </span>
+                                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                                        <span class="svg-icon svg-icon-2 svg-icon-lg-1 me-0">
+                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor"></rect>
+                                                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor"></rect>
+                                                            </svg>
+                                                        </span>
                                                         <!--end::Svg Icon-->
-                                        </span>
+                                                     </span>
                                                     <!--end::Reset-->
                                                 </div>
 
