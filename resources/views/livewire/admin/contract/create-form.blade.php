@@ -332,7 +332,7 @@
 
                                                             @forelse($apartments ?? [] as $apartment)
                                                                 <!--begin::Col-->
-                                                                <div class="col-lg-3 col-md-4">
+                                                                <div wire:key="apartment-{{ $apartment->id }}" class="col-lg-3 col-md-4">
                                                                     <!--begin::Card-->
                                                                     <div class="card border rounded h-100
                                                                     @if(isset($this->selected_apartments[$apartment->id])) border-dashed border-primary bg-light-primary

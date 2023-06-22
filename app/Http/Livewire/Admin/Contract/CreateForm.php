@@ -261,7 +261,6 @@ class CreateForm extends Component
 
     public function selectApartment($apartment = null, $show_error_msg = true)
     {
-//        ddd($apartment);
         if ($apartment) {
             $apartment = Apartment::with('Property')
                 ->findOrFail($apartment)->append('icon_svg');
