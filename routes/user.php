@@ -30,5 +30,15 @@ Route::prefix('my')->group(function () {
 //            Route::get('/profile', Admin\Dashboard\Index::class)->name('admin.account-settings');
         });
 
+        Route::group([
+            'prefix' => 'contracts',
+            'middleware' => [
+                'auth',
+            ],
+        ], function () {
+            Route::get('/', User\Contract\Index::class)->name('user.contracts');
+            Route::get('/{contract_id}/details', User\Contract\Index::class)->name('user.contracts.details');
+        });
+
     });
 });

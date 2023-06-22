@@ -110,4 +110,22 @@ class Contract extends Model
         $this->active = false;
         return ($this->save());
     }
+
+    public function getStartAtHumanAttribute()
+    {
+        $human = '-';
+        if ($this->start_at) {
+            $human = $this->start_at->format('Y/m/d');
+        }
+        return $human;
+    }
+
+    public function getEndAtHumanAttribute()
+    {
+        $human = '-';
+        if ($this->end_at) {
+            $human = $this->end_at->format('Y/m/d');
+        }
+        return $human;
+    }
 }
