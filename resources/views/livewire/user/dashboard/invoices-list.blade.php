@@ -7,7 +7,6 @@
                 <span class="card-label fw-bold text-gray-800">
                     الفواتير المستحقة
                 </span>
-{{--                --}}
                 <a href="#" class="text-gray-400 mt-1 fw-semibold fs-6 mt-2">عرض الجميع</a>
             </h3>
             <!--end::Title-->
@@ -47,11 +46,11 @@
                                     <a href="#" class="text-dark fw-bold text-hover-primary mb-1 fs-6">{{ $invoice->no }}</a>
                                 </td>
                                 <td class="">
-                                    <span class="text-muted fw-semibold d-block fs-8">Amount</span>
+                                    <span class="text-muted fw-semibold d-block fs-8">القيمة</span>
                                     <span class="text-dark fw-bold d-block fs-7">{{ $invoice->amount_human }}</span>
                                 </td>
                                 <td class="">
-                                    <span class="text-muted fw-semibold d-block fs-8">Due</span>
+                                    <span class="text-muted fw-semibold d-block fs-8">الاستحقاق</span>
                                     <span class="text-dark fw-bold d-block fs-7">{{ $invoice->due_human }}</span>
                                 </td>
                                 <td class="">
