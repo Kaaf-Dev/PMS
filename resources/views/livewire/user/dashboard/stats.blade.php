@@ -3,7 +3,7 @@
         <!--begin::Col-->
         <div class="col-md-4 mb-xl-10">
             <!--begin::Statistics Widget-->
-            <a href="#" class="card bg-body hoverable card-xl-stretch mb-xl-8">
+            <a href="{{ route('user.contracts') }}" class="card bg-body hoverable card-xl-stretch mb-xl-8">
                 <!--begin::Body-->
                 <div class="card-body">
                     <!--begin::Svg Icon | path: icons/duotune/general/gen032.svg-->
