@@ -67,15 +67,29 @@
             <div class="mb-0">
                 <!--begin::Title-->
                 <h3 class="mb-4">
-                    الوحدات:
-                    <a wire:click="showApartment" class="btn btn-dark btn-sm">
-                        <i class="ki-duotone ki-chart-simple-2 fs-1">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                            <span class="path3"></span>
-                            <span class="path4"></span>
-                        </i>
-                        Caption
+                    <a wire:click="toggleApartment" class="btn btn-dark btn-sm">
+                        @if($show_apartments)
+                            <i class="ki-duotone ki-eye-slash fs-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                                <span class="path3"></span>
+                                <span class="path4"></span>
+                                <span class="path5"></span>
+                                <span class="path6"></span>
+                            </i>
+                            إخفاء
+                        @else
+                            <i class="ki-duotone ki-eye fs-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                                <span class="path3"></span>
+                                <span class="path4"></span>
+                                <span class="path5"></span>
+                                <span class="path6"></span>
+                            </i>
+                            عرض الوحدات
+                        @endif
+
                     </a>
                 </h3>
                 <!--end::Title-->

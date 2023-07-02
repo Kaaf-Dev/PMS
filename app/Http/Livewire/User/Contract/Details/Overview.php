@@ -29,4 +29,9 @@ class Overview extends Component
             'apartments',
         ])->findOrFail($this->contract_id);
     }
+
+    public function toggleApartment()
+    {
+        $this->show_apartments = !$this->show_apartments;
+    }
 }
