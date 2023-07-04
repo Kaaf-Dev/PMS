@@ -128,4 +128,34 @@ class Contract extends Model
         }
         return $human;
     }
+
+    public function getInvoicesTotalAttribute()
+    {
+        return $this->invoices()->sum('amount');
+    }
+
+    public function getReceiptsTotalAttribute()
+    {
+        // Retrieve the receipts associated with the invoices of the contract
+        $receipts = $this->invoices->flatMap(function ($invoice) {
+            return $invoice->receipts;
+        });
+
+        // Calculate the sum of the receipt amounts
+        return $receipts->sum('amount');
+
+    }
+
+    public function getTotalAmountRemainingAttribute()
+    {
+        $total = $this->invoices_total ?? 0;
+        $paid = $this->receipts_total ?? 0;
+        return $total - $paid;
+    }
+
+    public function getTotalAmountRemainingHumanAttribute()
+    {
+        $total_amount_remaining = $this->total_amount_remaining;
+        return number_format($total_amount_remaining, 2);
+    }
 }

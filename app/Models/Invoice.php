@@ -104,9 +104,7 @@ class Invoice extends Model
 
     public function getPaidAmountAttribute()
     {
-        return Receipt::where([
-            ['invoice_id', '=', $this->id],
-        ])->sum('amount');
+        return $this->receipts->sum('amount');
     }
 
     public function getTypeStringAttribute()

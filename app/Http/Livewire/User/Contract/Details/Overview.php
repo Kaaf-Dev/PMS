@@ -26,7 +26,8 @@ class Overview extends Component
     {
         return Contract::with([
             'user',
-            'apartments',
+            'apartments.property',
+            'invoices.receipts',
         ])->findOrFail($this->contract_id);
     }
 
