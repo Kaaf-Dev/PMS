@@ -7,7 +7,7 @@
                 <span class="card-label fw-bold text-gray-800">
                     عقود الإيجار
                 </span>
-                <a href="#" class="text-gray-400 mt-1 fw-semibold fs-6 mt-2">عرض الجميع</a>
+                <a href="{{ route('user.contracts') }}" class="text-gray-400 mt-1 fw-semibold fs-6 mt-2">عرض الجميع</a>
             </h3>
             <!--end::Title-->
             <!--begin::Toolbar-->
@@ -36,7 +36,7 @@
                             <!--begin::Content-->
                             <div class="me-5">
                                 <!--begin::Title-->
-                                <a href="#" class="text-gray-800 fw-bold text-hover-primary fs-6">رقم العقد: {{ $contract->id }}</a>
+                                <a href="{{ route('user.contracts.details',['contract_id' => $contract->id]) }}" class="text-gray-800 fw-bold text-hover-primary fs-6">رقم العقد: {{ $contract->id }}</a>
                                 <!--end::Title-->
                                 <!--begin::Desc-->
                                 <span class="text-gray-400 fw-semibold fs-7 d-block text-start ps-0">{{ $contract->costHuman }}</span>
