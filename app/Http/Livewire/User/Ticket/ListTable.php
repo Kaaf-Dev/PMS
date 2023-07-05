@@ -22,9 +22,13 @@ class ListTable extends Component
         $tickets = [];
         if ($this->ready_to_load) {
             $user = Auth::user();
+            $search = $this->search;
             $tickets = $user->tickets()
                 ->with('ticketCategory')
-                ->where('subject', 'like', '%'. $this->search .'%')
+                ->where(function ($query) use ($search) {
+                    $query->where('subject', 'like', '%'. $search .'%')
+                    ->orWhere('description', 'like', '%'. $search .'%');
+                })
                 ->orderBy('status', 'asc')
                 ->orderBy('updated_at', 'desc')
                 ->paginate();
