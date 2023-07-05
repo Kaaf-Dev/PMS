@@ -40,5 +40,15 @@ Route::prefix('my')->group(function () {
             Route::get('/{contract_id}/details', User\Contract\Details::class)->name('user.contracts.details');
         });
 
+        Route::group([
+            'prefix' => 'tickets',
+            'middleware' => [
+                'auth',
+            ],
+        ], function () {
+            Route::get('/', User\Ticket\Index::class)->name('user.tickets');
+            Route::get('/{ticket_id}/details', User\Ticket\Details::class)->name('user.tickets.details');
+        });
+
     });
 });
