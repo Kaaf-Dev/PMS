@@ -61,7 +61,6 @@ php artisan db:seed --class ContractApartmentSeeder
 php artisan db:seed --class TicketCategoriesTableSeeder
 php artisan db:seed --class TicketsTableSeeder
 
-.php
 
 ```
 
