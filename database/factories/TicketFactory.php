@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Contract;
 use App\Models\Ticket;
 use App\Models\TicketCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -25,9 +26,11 @@ class TicketFactory extends Factory
     {
 
         $ticketCategoryIds = TicketCategory::pluck('id')->toArray();
+        $contractsIds = Contract::pluck('id')->toArray();
 
         return [
             'id' => Str::uuid(),
+            'contract_id' => $this->faker->randomElement($contractsIds),
             'ticket_category_id' => $this->faker->randomElement($ticketCategoryIds),
             'subject' => $this->faker->sentence,
             'status' => $this->faker->randomElement([1, 2, 3]),

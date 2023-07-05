@@ -92,6 +92,18 @@ class User extends Authenticatable
         return $this->hasManyThrough(Invoice::class, Contract::class);
     }
 
+    public function tickets()
+    {
+        return $this->hasManyThrough(
+            Ticket::class, // The related Ticket model class
+            Contract::class, // The intermediate Contract model class
+            'user_id', // Foreign key on the Contract table referencing User model
+            'contract_id', // Foreign key on the Ticket table referencing Contract model
+            'id', // Local key on the User model
+            'id' // Local key on the Contract model
+        );
+    }
+
     public function getProfilePhotoUrlAttribute()
     {
         return ($this->user_image_path)

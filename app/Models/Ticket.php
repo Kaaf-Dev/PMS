@@ -25,4 +25,25 @@ class Ticket extends Model
         'visit_at' => 'date',
         'visited_at' => 'date',
     ];
+
+    public function ticketCategory()
+    {
+        return $this->belongsTo(TicketCategory::class, 'ticket_category_id', 'id');
+    }
+
+    public function getTruncatedDescriptionAttribute()
+    {
+        $string = $this->description;
+        $wordCount = 25;
+        $words = explode(' ', $string);
+        $append = ' ...';
+
+        if (count($words) <= $wordCount) {
+            return $string;
+        }
+
+        $truncatedString = implode(' ', array_slice($words, 0, $wordCount));
+
+        return $truncatedString . $append;
+    }
 }
