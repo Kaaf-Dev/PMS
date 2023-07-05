@@ -58,6 +58,11 @@ php artisan db:seed --class CategoriesTableSeeder
 php artisan db:seed --class PropertyTableSeeder
 php artisan db:seed --class ContractApartmentSeeder
 
+php artisan db:seed --class TicketCategoriesTableSeeder
+php artisan db:seed --class TicketsTableSeeder
+
+.php
+
 ```
 
 8. Start the development server:
