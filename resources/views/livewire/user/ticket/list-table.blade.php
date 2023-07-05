@@ -38,29 +38,36 @@
                                         <!--begin::Ticket-->
                                         <div class="d-flex mb-10">
                                             <!--begin::Symbol-->
-                                            <i class="ki-outline ki-file-added fs-2x me-5 ms-n1 mt-2 text-success"></i>
+                                            <i class="ki-outline ki-{{ $ticket->status_icon }} fs-2x me-5 ms-n1 mt-2 text-{{ $ticket->status_class }}"></i>
                                             <!--end::Symbol-->
                                             <!--begin::Section-->
-                                            <div class="d-flex flex-column">
-                                                <!--begin::Content-->
-                                                <div class="d-flex align-items-center mb-2">
-                                                    <!--begin::Title-->
-                                                    <a href="{{ route('user.tickets.details', ['ticket_id' => $ticket->id]) }}" class="text-dark text-hover-primary fs-4 me-3 fw-semibold">
-                                                        {{ $ticket->subject }}
-                                                    </a>
-                                                    <!--end::Title-->
-                                                    <!--begin::Label-->
-                                                    <span class="badge badge-light my-1">{{ $ticket->ticketCategory->title }}</span>
-                                                    <!--end::Label-->
+                                            <a href="{{ route('user.tickets.details', ['ticket_id' => $ticket->id]) }}" class="text-dark text-hover-primary fs-4 me-3 fw-semibold">
+
+                                                <div class="d-flex flex-column">
+                                                    <!--begin::Content-->
+                                                    <div class="d-flex align-items-center mb-2">
+                                                        <span class="badge badge-{{ $ticket->status_class }} my-1">{{ $ticket->status_string }}</span>
+                                                    </div>
+
+                                                    <div class="d-flex align-items-center mb-2">
+                                                        <!--begin::Title-->
+                                                            {{ $ticket->subject }}
+
+                                                        <!--end::Title-->
+                                                        <!--begin::Label-->
+                                                        <span class="badge badge-light my-1">{{ $ticket->ticketCategory->title }}</span>
+                                                        <!--end::Label-->
+                                                    </div>
+
+                                                    <!--end::Content-->
+                                                    <!--begin::Text-->
+                                                    <span class="text-muted fw-semibold fs-6">
+                                                        {{ $ticket->truncated_description }}
+                                                    </span>
+                                                    <!--end::Text-->
                                                 </div>
-                                                <!--end::Content-->
-                                                <!--begin::Text-->
-                                                <span class="text-muted fw-semibold fs-6">
-                                                    {{ $ticket->truncated_description }}
-                                                </span>
-                                                <!--end::Text-->
-                                            </div>
-                                            <!--end::Section-->
+                                                <!--end::Section-->
+                                            </a>
                                         </div>
                                         <!--end::Ticket-->
                                     @empty
