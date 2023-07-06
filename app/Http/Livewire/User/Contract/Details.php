@@ -3,10 +3,13 @@
 namespace App\Http\Livewire\User\Contract;
 
 use App\Models\Contract;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
 class Details extends Component
 {
+
+    use AuthorizesRequests;
 
     public $contract_id;
 
@@ -23,7 +26,11 @@ class Details extends Component
 
     public function getContractProperty()
     {
-        return Contract::with('apartments')
+        $contract = Contract::with('apartments')
             ->findOrFail($this->contract_id);
+
+        if ( $this->authorize('view', $contract) ) {
+            return $contract;
+        }
     }
 }
