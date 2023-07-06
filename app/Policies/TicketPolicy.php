@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Auth;
 
 class TicketPolicy
 {
@@ -30,7 +31,16 @@ class TicketPolicy
      */
     public function view(User $user, Ticket $ticket)
     {
-        //
+        $allow = false;
+
+        if (Auth::guard('admin')->check()) {
+            $allow = true;
+
+        } elseif ($user->tickets->contains($ticket)) {
+            $allow = true;
+        }
+
+        return $allow;
     }
 
     /**
@@ -90,5 +100,37 @@ class TicketPolicy
     public function forceDelete(User $user, Ticket $ticket)
     {
         //
+    }
+
+    public function cancel(User $user, Ticket $ticket)
+    {
+        $allow = false;
+
+        if (Auth::guard('admin')->check()) {
+            $allow = true;
+
+        } elseif ($user->tickets->contains($ticket)) {
+            if ($ticket->cancelable) {
+                $allow = true;
+            }
+        }
+
+        return $allow;
+    }
+
+    public function comment(User $user, Ticket $ticket)
+    {
+        $allow = false;
+
+        if (Auth::guard('admin')->check()) {
+            $allow = true;
+
+        } elseif ($user->tickets->contains($ticket)) {
+            if ($ticket->commentable) {
+                $allow = true;
+            }
+        }
+
+        return $allow;
     }
 }

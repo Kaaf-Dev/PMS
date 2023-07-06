@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -35,10 +36,17 @@ class Ticket extends Model
         'visited_at' => 'date',
     ];
 
+    public function contract()
+    {
+        return $this->belongsTo(Contract::class, 'contract_id', 'id');
+    }
+
     public function ticketCategory()
     {
         return $this->belongsTo(TicketCategory::class, 'ticket_category_id', 'id');
     }
+
+
 
     public function getTruncatedDescriptionAttribute()
     {
@@ -99,5 +107,25 @@ class Ticket extends Model
             7 => 'delete-folder',
         ];
         return $status_icons[$status];
+    }
+
+    public function getCancelableAttribute()
+    {
+        return $this->status <= SELF::STATUS_UNDER_PROCESSING;
+    }
+
+    public function getCommentableAttribute()
+    {
+        return $this->status <= SELF::STATUS_UNDER_PROCESSING;
+    }
+
+    public function getCreatedAtHumanAttribute()
+    {
+        return Carbon::parse($this->created_at)->diffForHumans();
+    }
+
+    public function getUpdatedAtHumanAttribute()
+    {
+        return Carbon::parse($this->updated_at)->diffForHumans();
     }
 }
