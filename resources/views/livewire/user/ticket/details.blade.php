@@ -36,7 +36,7 @@
 
         @livewire('user.ticket.details.overview', ['ticket' => $this->ticket->id])
 
-        @livewire('user.ticket.details.comments', ['ticket' => $this->ticket->id])
+        @livewire('user.ticket.details.replies', ['ticket' => $this->ticket->id])
 
     </div>
     <!--end::Content-->

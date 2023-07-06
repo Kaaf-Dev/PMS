@@ -46,6 +46,11 @@ class Ticket extends Model
         return $this->belongsTo(TicketCategory::class, 'ticket_category_id', 'id');
     }
 
+    public function ticketReplies()
+    {
+        return $this->hasMany(TicketReply::class);
+    }
+
 
 
     public function getTruncatedDescriptionAttribute()
@@ -114,7 +119,7 @@ class Ticket extends Model
         return $this->status <= SELF::STATUS_UNDER_PROCESSING;
     }
 
-    public function getCommentableAttribute()
+    public function getRepliableAttribute()
     {
         return $this->status <= SELF::STATUS_UNDER_PROCESSING;
     }

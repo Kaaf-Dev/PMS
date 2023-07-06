@@ -4,10 +4,10 @@ namespace App\Http\Livewire\User\Ticket\Details;
 
 use Livewire\Component;
 
-class Comments extends Component
+class AddReply extends Component
 {
     public function render()
     {
-        return view('livewire.user.ticket.details.comments');
+        return view('livewire.user.ticket.details.add-reply');
     }
 }

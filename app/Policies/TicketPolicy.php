@@ -118,7 +118,7 @@ class TicketPolicy
         return $allow;
     }
 
-    public function comment(User $user, Ticket $ticket)
+    public function reply(User $user, Ticket $ticket)
     {
         $allow = false;
 
@@ -126,7 +126,7 @@ class TicketPolicy
             $allow = true;
 
         } elseif ($user->tickets->contains($ticket)) {
-            if ($ticket->commentable) {
+            if ($ticket->repliable) {
                 $allow = true;
             }
         }
