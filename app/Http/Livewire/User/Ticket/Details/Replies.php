@@ -25,9 +25,14 @@ class Replies extends Component
 
     public function render()
     {
-
         $replies = ($this->ready_to_load)
-            ? TicketReply::where('ticket_id', '=', $this->ticket_id)->get()
+            ? TicketReply::with([
+                'admin',
+                'user',
+            ])
+                ->where('ticket_id', '=', $this->ticket_id)
+                ->orderBy('updated_at')
+                ->get()
             : [];
 
         $view_data = [

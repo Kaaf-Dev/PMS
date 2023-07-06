@@ -16,7 +16,7 @@
                             <div class="d-flex flex-column">
                                 <!--begin::Title-->
                                 <h1 class="text-gray-800 fw-semibold mb-10">
-                                    الملاحظات
+                                    الردود
 
                                     <div wire:loading wire:target="load">
                                         <span class="spinner-border spinner-border-sm align-middle"></span>
@@ -39,37 +39,36 @@
                                                 <div class="w-100 d-flex flex-stack mb-8">
                                                     <!--begin::Container-->
                                                     <div class="d-flex align-items-center f">
-                                                        <!--begin::Author-->
-                                                        <div class="symbol symbol-50px me-5">
-                                                            <div class="symbol-label fs-1 fw-bold bg-light-success text-success">S</div>
-                                                        </div>
-                                                        <!--end::Author-->
                                                         <!--begin::Info-->
                                                         <div class="d-flex flex-column fw-semibold fs-5 text-gray-600 text-dark">
                                                             <!--begin::Text-->
                                                             <div class="d-flex align-items-center">
                                                                 <!--begin::Username-->
-                                                                <a href="../../demo37/dist/pages/user-profile/overview.html" class="text-gray-800 fw-bold text-hover-primary fs-5 me-3">Sandra Piquet</a>
+                                                                <a class="text-gray-800 fw-bold text-hover-primary fs-5 me-3">
+                                                                    {{ $reply->author_name }}
+                                                                </a>
                                                                 <!--end::Username-->
-                                                                <span class="m-0"></span>
+                                                                <span class="badge badge-light-{{ $reply->author_class }}">{{ $reply->author_string }}</span>
                                                             </div>
                                                             <!--end::Text-->
                                                             <!--begin::Date-->
-                                                            <span class="text-muted fw-semibold fs-6">2 Days ago</span>
+                                                            <span class="text-muted fw-semibold fs-6">{{ $reply->updated_at_human }}</span>
                                                             <!--end::Date-->
                                                         </div>
                                                         <!--end::Info-->
                                                     </div>
                                                     <!--end::Container-->
-                                                    <!--begin::Actions-->
-                                                    <div class="m-0">
-                                                        <button class="btn btn-color-gray-400 btn-active-color-primary p-0 fw-bold">Reply</button>
-                                                    </div>
-                                                    <!--end::Actions-->
+{{--                                                    <!--begin::Actions-->--}}
+{{--                                                    <div class="m-0">--}}
+{{--                                                        <button class="btn btn-color-gray-400 btn-active-color-primary p-0 fw-bold">Reply</button>--}}
+{{--                                                    </div>--}}
+{{--                                                    <!--end::Actions-->--}}
                                                 </div>
                                                 <!--end::Wrapper-->
                                                 <!--begin::Desc-->
-                                                <p class="fw-normal fs-5 text-gray-700 m-0">I run a team of 20 product managers, developers, QA and UX Previously we designed everything ourselves.</p>
+                                                <p class="fw-normal fs-5 text-gray-700 m-0">
+                                                    {{ $reply->content }}
+                                                </p>
                                                 <!--end::Desc-->
                                             </div>
                                             <!--end::Body-->
@@ -132,14 +131,7 @@
 {{--                            </div>--}}
 {{--                            <!--end::Comment-->--}}
 
-                            <!--begin::Input group-->
-                            <div class="mb-0">
-                                <textarea class="form-control form-control-solid placeholder-gray-600 fw-bold fs-4 ps-9 pt-7" rows="6" name="message" placeholder="Share Your Knowledge"></textarea>
-                                <!--begin::Submit-->
-                                <button type="submit" class="btn btn-primary mt-n20 mb-20 position-relative float-end me-7">Send</button>
-                                <!--end::Submit-->
-                            </div>
-                            <!--end::Input group-->
+                            @livewire('user.ticket.details.add-reply', ['ticket' => $this->ticket_id])
 
                         </div>
                         <!--end::Comments-->

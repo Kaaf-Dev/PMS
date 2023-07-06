@@ -24,10 +24,12 @@ class TicketReplyFactory extends Factory
         $userIds = User::pluck('id')->toArray();
         $adminIds = Admin::pluck('id')->toArray();
 
+        $for_admin = rand(0, 1);
+
         return [
             'ticket_id' => $this->faker->randomElement($ticketIds),
-            'user_id' => $this->faker->randomElement($userIds),
-            'admin_id' => $this->faker->randomElement($adminIds),
+            'user_id' => ($for_admin == 0) ? $this->faker->randomElement($userIds) : null,
+            'admin_id' => ($for_admin == 1) ? $this->faker->randomElement($adminIds) : null,
             'content' => $this->faker->paragraph,
         ];
     }
