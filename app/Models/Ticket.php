@@ -5,6 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Ticket extends Model
 {
@@ -35,6 +36,14 @@ class Ticket extends Model
         'visit_at' => 'date',
         'visited_at' => 'date',
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+        self::creating(function ($model) {
+            $model->id = (string)  Str::uuid();
+        });
+    }
 
     public function contract()
     {

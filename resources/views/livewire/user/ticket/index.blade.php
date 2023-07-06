@@ -19,6 +19,15 @@
                 <!--end::Page title-->
             </div>
             <!--end::Toolbar container-->
+            <!--begin::Actions-->
+            <div class="d-flex align-self-center flex-center flex-shrink-0">
+                <a wire:click="newTicket" class="btn btn-sm btn-success d-flex flex-center ms-3 px-4 py-3">
+                    <i class="ki-outline ki-plus-square fs-2"></i>
+                    <span>إنشاء جديد</span>
+                </a>
+            </div>
+            <!--end::Actions-->
+
         </div>
         <!--end::Toolbar container-->
     </div>

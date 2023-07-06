@@ -11,4 +11,9 @@ class Index extends Component
         return view('livewire.user.ticket.index')
             ->layout('layouts.user.app');
     }
+
+    public function newTicket()
+    {
+        return $this->emit('show-user-ticket-create-modal');
+    }
 }

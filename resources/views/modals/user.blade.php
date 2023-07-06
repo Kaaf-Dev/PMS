@@ -38,13 +38,13 @@
 @endforeach
 
 <script>
-    let admin_global_modals = @json( getAdminGlobalModals() );
+    let admin_global_modals = @json( getUserGlobalModals() );
     admin_global_modals.forEach( function (modal) {
         window[modal.modal_id] = new bootstrap.Modal(document.getElementById(modal.modal_id));
     });
 </script>
 
-@foreach( getAdminGlobalModals() as $modal )
+@foreach( getUserGlobalModals() as $modal )
     @php
         echo '
         <script>

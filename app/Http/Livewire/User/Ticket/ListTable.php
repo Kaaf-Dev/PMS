@@ -17,6 +17,13 @@ class ListTable extends Component
 
     public $search;
 
+    public function getListeners()
+    {
+        return [
+            'ticket-added' => '$refresh',
+        ];
+    }
+
     public function render()
     {
         $tickets = [];

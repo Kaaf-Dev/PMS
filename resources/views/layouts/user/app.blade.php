@@ -3706,8 +3706,8 @@ www.ebepro.com
 
 @livewireScripts
 
-<script src="{{ asset('admin-assets/js/livewire/swal-alert.js') }}"></script>
-<script src="{{ asset('admin-assets/js/livewire/modals.js') }}"></script>
+<script src="{{ asset('user-assets/js/livewire/swal-alert.js') }}"></script>
+<script src="{{ asset('user-assets/js/livewire/modals.js') }}"></script>
 
 @stack('js')
 
