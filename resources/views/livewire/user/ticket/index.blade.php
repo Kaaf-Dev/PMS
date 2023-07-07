@@ -35,7 +35,11 @@
     <!--begin::Content-->
     <div id="kt_app_content" class="app-content flex-column-fluid">
 
-        <livewire:user.ticket.list-table />
+        @if ($this->contract_id)
+            <livewire:user.ticket.list-table :contract_id="$this->contract_id" />
+        @else
+            <livewire:user.ticket.list-table />
+        @endif
 
     </div>
     <!--end::Content-->

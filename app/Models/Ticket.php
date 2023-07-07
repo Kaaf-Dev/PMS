@@ -19,7 +19,7 @@ class Ticket extends Model
     const STATUS_UNDER_PROCESSING = 4;
     const STATUS_UNDER_COMPLETE = 5;
     const STATUS_REJECTED = 6;
-    const STATUS_UNDER_CANCELED  = 7;
+    const STATUS_UNDER_CANCELED = 7;
 
 
     public $incrementing = false;
@@ -67,10 +67,6 @@ class Ticket extends Model
         return $this->hasMany(TicketAttachment::class, 'ticket_id', 'id');
     }
 
-
-
-
-
     public function getTruncatedDescriptionAttribute()
     {
         $string = $this->description;
@@ -85,6 +81,19 @@ class Ticket extends Model
         $truncatedString = implode(' ', array_slice($words, 0, $wordCount));
 
         return $truncatedString . $append;
+    }
+
+    public static function getStatusList()
+    {
+        return [
+            Ticket::STATUS_NEW => 'جديد',
+            Ticket::STATUS_PENDING => 'قيد الدراسة',
+            Ticket::STATUS_INCOMPLETE => 'بحاجة إلى استكمال',
+            Ticket::STATUS_UNDER_PROCESSING => 'قيد المعالجة',
+            Ticket::STATUS_UNDER_COMPLETE => 'تم الإنجاز',
+            Ticket::STATUS_REJECTED => 'مرفوض',
+//            Ticket::STATUS_UNDER_CANCELED => 'ملغي',
+        ];
     }
 
     public function getStatusStringAttribute()

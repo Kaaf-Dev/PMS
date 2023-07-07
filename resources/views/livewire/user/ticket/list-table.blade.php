@@ -13,12 +13,34 @@
                         <!--begin::Tickets-->
                         <div class="mb-0">
                             <!--begin::Search form-->
-                            <!--begin::Input wrapper-->
-                            <div class="position-relative">
-                                <i class="ki-outline ki-magnifier fs-1 text-primary position-absolute top-50 translate-middle ms-9"></i>
-                                <input wire:model.debounce.500ms="search" type="text" class="form-control form-control-lg form-control-solid ps-14" placeholder="البحث عن طلبات الصيانة" />
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <!--begin::Input wrapper-->
+                                    <div class="position-relative">
+                                        <i class="ki-outline ki-magnifier fs-1 text-primary position-absolute top-50 translate-middle ms-9"></i>
+                                        <input wire:model.debounce.500ms="search" type="text" class="form-control form-control-lg form-control-solid ps-14" placeholder="البحث في طلبات الصيانة" />
+                                    </div>
+                                    <!--end::Input wrapper-->
+                                </div>
+                                <div class="col-md-4">
+                                    <select wire:model.debounce.500ms="contract_id" class="form-select form-select-lg form-select-solid">
+                                        <option value="">اختيار العقد</option>
+                                        @foreach($this->contracts ?? [] as $contract)
+                                            <option value="{{ $contract->id }}">(#{{ $contract->id }}): {{ $contract->start_at_human }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <select wire:model.debounce.500ms="status" class="form-select form-select-lg form-select-solid">
+                                        <option value="">الحالة</option>
+                                        @foreach($this->status_list ?? [] as $key => $status)
+                                            <option value="{{ $key }}">{{ $status }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
-                            <!--end::Input wrapper-->
+
 
                             <!--end::Search form-->
 

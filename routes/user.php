@@ -46,7 +46,7 @@ Route::prefix('my')->group(function () {
                 'auth',
             ],
         ], function () {
-            Route::get('/', User\Ticket\Index::class)->name('user.tickets');
+            Route::get('/{contract_id?}', User\Ticket\Index::class)->name('user.tickets');
             Route::get('/{ticket_id}/details', User\Ticket\Details::class)->name('user.tickets.details');
         });
 
