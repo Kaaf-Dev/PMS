@@ -13,13 +13,13 @@ class Ticket extends Model
     use HasFactory;
     use SoftDeletes;
 
-    const STATUS_NEW = 1;
-    const STATUS_PENDING = 2;
-    const STATUS_INCOMPLETE = 3;
-    const STATUS_UNDER_PROCESSING = 4;
-    const STATUS_UNDER_COMPLETE = 5;
-    const STATUS_REJECTED = 6;
-    const STATUS_UNDER_CANCELED = 7;
+    const STATUS_NEW = '1';
+    const STATUS_PENDING = '2';
+    const STATUS_INCOMPLETE = '3';
+    const STATUS_UNDER_PROCESSING = '4';
+    const STATUS_UNDER_COMPLETE = '5';
+    const STATUS_REJECTED = '6';
+    const STATUS_UNDER_CANCELED = '7';
 
 
     public $incrementing = false;
@@ -65,6 +65,21 @@ class Ticket extends Model
     public function ticketAttachments()
     {
         return $this->hasMany(TicketAttachment::class, 'ticket_id', 'id');
+    }
+
+    public function scopeOpened($query)
+    {
+        return $query->where(function () use ($query) {
+            return $query->where('status', '=', Ticket::STATUS_NEW)
+                ->orWhere('status', '=', Ticket::STATUS_PENDING)
+                ->orWhere('status', '=', Ticket::STATUS_INCOMPLETE)
+                ->orWhere('status', '=', Ticket::STATUS_UNDER_PROCESSING);
+        });
+    }
+
+    public function scopeContract($query, $contract_id)
+    {
+        $query->where('contract_id', '=', $contract_id);
     }
 
     public function getTruncatedDescriptionAttribute()

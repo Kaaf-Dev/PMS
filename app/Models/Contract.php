@@ -40,10 +40,14 @@ class Contract extends Model
         return $this->belongsToMany(Apartment::class, 'contract_apartment');
     }
 
-
     public function invoices()
     {
         return $this->hasMany(Invoice::class);
+    }
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class, 'contract_id', 'id');
     }
 
     public function scopeActive($query, Carbon $date = null)
@@ -157,5 +161,10 @@ class Contract extends Model
     {
         $total_amount_remaining = $this->total_amount_remaining;
         return number_format($total_amount_remaining, 2);
+    }
+
+    public function getTotalTicketOpenedAttribute()
+    {
+        return $this->tickets()->opened()->count();
     }
 }

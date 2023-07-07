@@ -47,7 +47,7 @@
         <!--begin::Col-->
         <div class="col-md-4 mb-xl-10">
             <!--begin::Statistics Widget-->
-            <a href="#" class="card bg-body hoverable card-xl-stretch mb-xl-8">
+            <a href="{{ route('user.tickets') }}" class="card bg-body hoverable card-xl-stretch mb-xl-8">
                 <!--begin::Body-->
                 <div class="card-body">
                     <!--begin::Svg Icon | path: icons/duotune/general/gen032.svg-->
@@ -57,7 +57,7 @@
                             </span>
                     </div>
                     <!--end::Svg Icon-->
-                    <div class="fw-bolder fs-2x text-dark mb-2 mt-5">{{ $maintenance_requests_count }}</div>
+                    <div class="fw-bolder fs-2x text-dark mb-2 mt-5">{{ $tickets_count }}</div>
                     <i wire:loading wire:target="fetch" class="fa fa-spin fa-spinner fs-2"></i>
                     <div class="fw-semibold text-gray-500">طلبات الصيانة المفتوحة</div>
                 </div>

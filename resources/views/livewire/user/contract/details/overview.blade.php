@@ -170,13 +170,13 @@
                         <!--end::Body-->
                     </a>
 
-                    <a href="#" class="card bg-info mb-5">
+                    <a href="{{ route('user.tickets', ['contract_id' => $this->contract->id]) }}" class="card bg-info mb-5">
                         <!--begin::Body-->
                         <div class="card-body">
                             <i class="ki-outline ki-office-bag text-white fs-2x ms-n1"></i>
 
                             <div class="text-white fw-bold fs-2 mb-2 mt-5">
-                                10
+                                {{ $this->contract->total_ticket_opened }}
                             </div>
 
                             <div class="fw-semibold text-white">
