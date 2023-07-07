@@ -5,11 +5,13 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
 class Ticket extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     const STATUS_NEW = 1;
     const STATUS_PENDING = 2;
@@ -59,6 +61,13 @@ class Ticket extends Model
     {
         return $this->hasMany(TicketReply::class);
     }
+
+    public function ticketAttachments()
+    {
+        return $this->hasMany(TicketAttachment::class, 'ticket_id', 'id');
+    }
+
+
 
 
 

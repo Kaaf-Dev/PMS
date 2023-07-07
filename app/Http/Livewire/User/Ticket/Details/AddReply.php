@@ -59,7 +59,6 @@ class AddReply extends Component
         if ($reply) {
             $this->resetInputs();
             $this->emit('reply-added');
-            $this->showSuccessAlert('تمت إضاةف الرد بنجاح، شكرًا لك!');
         } else {
             $this->showErrorAlert('لا يمكن إضافة الرد في الوقت الحالي');
         }

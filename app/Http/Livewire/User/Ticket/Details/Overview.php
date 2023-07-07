@@ -24,7 +24,7 @@ class Overview extends Component
     {
         return Ticket::with([
             'contract',
-//            'user',
+            'ticketAttachments',
         ])->findOrFail($this->ticket_id);
     }
 }

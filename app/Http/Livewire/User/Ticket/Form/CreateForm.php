@@ -7,10 +7,12 @@ use App\Models\TicketCategory;
 use App\Traits\WithAlert;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class CreateForm extends Component
 {
 
+    use WithFileUploads;
     use WithAlert;
 
     public $ticket_categories;
@@ -21,6 +23,9 @@ class CreateForm extends Component
     public $subject;
     public $description;
 
+    public $attachments;
+    public $attachment;
+
     public function rules()
     {
         return [
@@ -28,6 +33,7 @@ class CreateForm extends Component
             'selected_ticket_category' => 'required|exists:ticket_categories,id',
             'subject' => 'required',
             'description' => 'required|max:5000',
+            'attachments.*' => 'required|mimes:png,jpg,jpeg|max:1024',
         ];
     }
 
@@ -36,7 +42,9 @@ class CreateForm extends Component
         return [
             'exists' => 'لا يوجد بيانات للحقل المحدد',
             'required' => 'هذا الحقل إجباري',
-            'max' => 'لا يمكن تجاوز :max حرف',
+            'description.max' => 'لا يمكن تجاوز :max حرف',
+            'attachment.max' => 'لا يمكن تجاوز :max MB',
+            'mimes' => 'الصورة غير صالحة',
         ];
     }
 
@@ -55,6 +63,7 @@ class CreateForm extends Component
     public function resolveParams($params = [])
     {
         $this->resetInputs();
+        $this->resetErrorBag();
         $this->contracts = Auth::user()->contracts()
             ->with([
                 'apartments.property',
@@ -67,16 +76,44 @@ class CreateForm extends Component
 
     }
 
+    public function updatedAttachment()
+    {
+        $this->validate([
+            'attachment' => 'required|mimes:png,jpg,jpeg|max:10240', // 1MB Max
+        ]);
+        $this->attachments[md5(time())] = $this->attachment;
+        $this->reset([
+            'attachment',
+        ]);
+        $this->showSuccessAlert('تمت إضافة المرفق بنجاح!');
+    }
+
+    public function cancelAttachment($attachment)
+    {
+        if (isset($this->attachments[$attachment])) {
+            unset($this->attachments[$attachment]);
+        }
+    }
+
     public function submit()
     {
         $validated_data = $this->validate();
-        \Debugbar::info($validated_data);
         $ticket = new Ticket();
         $ticket->contract_id = $validated_data['selected_contract'];
         $ticket->ticket_category_id = $validated_data['selected_ticket_category'];
         $ticket->subject = $validated_data['subject'];
         $ticket->description = $validated_data['description'];
         if ($ticket->save()) {
+            $attachments = [];
+            foreach ($validated_data['attachments'] ?? [] as $attachment) {
+                $attachments[] = [
+                    'path' =>  $attachment->store(md5($ticket->id), 'ticket_attachments'),
+                    'file_name' => $attachment->getClientOriginalName(),
+                ];
+            }
+            $ticket_attachments = $ticket->ticketAttachments()->createMany($attachments);
+            \Debugbar::info($attachments, $ticket_attachments);
+            \Debugbar::info();
             $this->showSuccessAlert('تمت إضافة الطلب بنجاح');
             $this->hideMe();
             $this->emit('ticket-added');
@@ -98,6 +135,8 @@ class CreateForm extends Component
             'selected_ticket_category',
             'subject',
             'description',
+            'attachment',
+            'attachments',
         ]);
     }
 }

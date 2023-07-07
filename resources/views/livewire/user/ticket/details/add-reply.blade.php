@@ -6,7 +6,15 @@
 
         </textarea>
         <!--begin::Submit-->
-        <button wire:click="sendReply" class="btn btn-primary mt-n20 mb-20 position-relative float-end me-7">إرسال</button>
+        <button wire:click="sendReply" class="btn btn-primary mt-n20 mb-20 position-relative float-end me-7">
+            <span wire:loading.remove wire:target="sendReply">إرسال</span>
+            <!--begin::Indicator progress-->
+            <span wire:loading wire:target="sendReply">
+					<span class="spinner-border spinner-border-sm align-middle"></span>
+                </span>
+            <!--end::Indicator progress-->
+
+        </button>
         <!--end::Submit-->
         @endcan
     </div>

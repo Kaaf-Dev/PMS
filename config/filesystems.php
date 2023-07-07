@@ -41,10 +41,18 @@ return [
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
+
         'user_image' => [
             'driver' => 'local',
             'root' => public_path('/user-image'),
             'url' => env('APP_URL') . '/user-image',
+            'visibility' => 'public',
+        ],
+
+        'ticket_attachments' => [
+            'driver' => 'local',
+            'root' => public_path('/ticket-attachments'),
+            'url' => env('APP_URL') . '/ticket-attachments',
             'visibility' => 'public',
         ],
 
