@@ -44,6 +44,9 @@ class Ticket extends Model
         parent::boot();
         self::creating(function ($model) {
             $model->id = (string)  Str::uuid();
+            if (!$model->status) {
+                $model->status = Ticket::STATUS_NEW;
+            }
         });
     }
 
