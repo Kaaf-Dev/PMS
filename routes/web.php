@@ -13,12 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Admin routes
-include('admin.php');
-
-// User routes
-include('user.php');
-
 Route::get('/', function () {
     return redirect(route('user.auth.login'));
 })->name('index');

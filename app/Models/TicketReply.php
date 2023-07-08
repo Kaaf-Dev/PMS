@@ -16,6 +16,7 @@ class TicketReply extends Model
         'ticket_id',
         'user_id',
         'admin_id',
+        'maintenance_company',
         'content',
     ];
 
@@ -34,10 +35,18 @@ class TicketReply extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function maintenanceCompany()
+    {
+        return $this->belongsTo(MaintenanceCompany::class, 'maintenance_company_id', 'id');
+    }
+
     public function author()
     {
         if ($this->is_admin) {
             return $this->belongsTo(Admin::class);
+
+        } elseif ($this->is_maintenance_company) {
+            return $this->belongsTo(MaintenanceCompany::class);
 
         } elseif ($this->is_user) {
             return $this->belongsTo(User::class);
@@ -50,6 +59,9 @@ class TicketReply extends Model
 
         if ($this->is_admin) {
             $name = $this->admin->name;
+
+        } elseif ($this->is_maintenance_company) {
+            $name = $this->maintenanceCompany->name;
 
         } elseif ($this->is_user) {
             $name = $this->user->name;
@@ -64,6 +76,9 @@ class TicketReply extends Model
         if ($this->is_admin) {
             $class = 'danger';
 
+        } elseif ($this->is_maintenance_company) {
+            $class = 'success';
+
         } elseif ($this->is_user) {
             $class = 'info';
         }
@@ -77,6 +92,8 @@ class TicketReply extends Model
         if ($this->is_admin) {
             $string = 'مدير النظام';
 
+        } elseif ($this->is_maintenance_company) {
+            $string = 'شركة الصيانة';
         } elseif ($this->is_user) {
             $string = 'المستأجر';
         }
@@ -92,6 +109,11 @@ class TicketReply extends Model
     public function getIsUserAttribute()
     {
         return !is_null($this->user);
+    }
+
+    public function getIsMaintenanceCompanyAttribute()
+    {
+        return !is_null($this->maintenanceCompany);
     }
 
     public function getUpdatedAtHumanAttribute()

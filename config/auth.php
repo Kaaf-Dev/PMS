@@ -45,6 +45,11 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
+
+        'maintenance_company' => [
+            'driver' => 'session',
+            'provider' => 'maintenance_companies',
+        ],
     ],
 
     /*
@@ -73,6 +78,11 @@ return [
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
+        ],
+
+        'maintenance_companies' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\MaintenanceCompany::class,
         ],
 
         // 'users' => [

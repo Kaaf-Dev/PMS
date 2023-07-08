@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Contract;
+use App\Models\MaintenanceCompany;
 use App\Models\Ticket;
 use App\Models\TicketCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -27,13 +28,15 @@ class TicketFactory extends Factory
 
         $ticketCategoryIds = TicketCategory::pluck('id')->toArray();
         $contractsIds = Contract::pluck('id')->toArray();
-
+        $maintenanceCompaniesIds = MaintenanceCompany::pluck('id')->toArray();
+        $status = $this->faker->randomElement(Ticket::getStatusValues());
         return [
             'id' => Str::uuid(),
             'contract_id' => $this->faker->randomElement($contractsIds),
+            'maintenance_company_id' => ($status >= Ticket::STATUS_UNDER_PROCESSING) ? $this->faker->randomElement($maintenanceCompaniesIds) : null,
             'ticket_category_id' => $this->faker->randomElement($ticketCategoryIds),
             'subject' => $this->faker->sentence,
-            'status' => $this->faker->randomElement([1, 2, 3]),
+            'status' => $status,
             'description' => $this->faker->paragraph,
             'visit_at' => $this->faker->dateTimeThisYear,
             'visited_at' => $this->faker->dateTimeThisYear,

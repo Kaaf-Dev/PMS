@@ -26,6 +26,8 @@ class Ticket extends Model
 
     protected $fillable = [
         'id',
+        'contract_id',
+        'maintenance_company_id',
         'subject',
         'status',
         'description',
@@ -53,6 +55,11 @@ class Ticket extends Model
     public function contract()
     {
         return $this->belongsTo(Contract::class, 'contract_id', 'id');
+    }
+
+    public function maintenanceCompany()
+    {
+        return $this->belongsTo(MaintenanceCompany::class, 'maintenance_company_id', 'id');
     }
 
     public function ticketCategory()
@@ -111,6 +118,19 @@ class Ticket extends Model
             Ticket::STATUS_UNDER_COMPLETE => 'تم الإنجاز',
             Ticket::STATUS_REJECTED => 'مرفوض',
 //            Ticket::STATUS_UNDER_CANCELED => 'ملغي',
+        ];
+    }
+
+    public static function getStatusValues()
+    {
+        return [
+            Ticket::STATUS_NEW,
+            Ticket::STATUS_PENDING,
+            Ticket::STATUS_INCOMPLETE,
+            Ticket::STATUS_UNDER_PROCESSING,
+            Ticket::STATUS_UNDER_COMPLETE,
+            Ticket::STATUS_REJECTED,
+//            Ticket::STATUS_UNDER_CANCELED,
         ];
     }
 
