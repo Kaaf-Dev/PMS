@@ -87,6 +87,36 @@ class Ticket extends Model
         });
     }
 
+    public function scopeVisitIn($query, $visit_in)
+    {
+        if ( in_array($visit_in, [
+            'day',
+            'week',
+            'month',
+        ]))  {
+
+            $now = Carbon::now();
+            $start_of_range = $now->format('Y-m-d H:i:s');
+            $end_of_range = $start_of_range;
+            if ($visit_in == 'day') {
+                $end_of_range = $now->addDay()->format('Y-m-d H:i:s');
+
+            } elseif ($visit_in == 'week') {
+                $end_of_range = $now->addDays(7)->format('Y-m-d H:i:s');
+
+            } elseif($visit_in == 'month') {
+                $end_of_range = $now->addMonth()->format('Y-m-d H:i:s');
+
+            }
+            return $query->whereBetween('visit_at', [$start_of_range, $end_of_range]);
+        }
+    }
+
+    public function scopeSearch($query, $search)
+    {
+
+    }
+
     public function scopeContract($query, $contract_id)
     {
         $query->where('contract_id', '=', $contract_id);

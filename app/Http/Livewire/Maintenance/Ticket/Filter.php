@@ -50,7 +50,7 @@ class Filter extends Component
         $validated_data = $this->validate();
         $validated_data['ticket_categories'] = array_filter($validated_data['ticket_categories'] ?? []);
         $validated_data = array_filter($validated_data);
-        $this->emit('ticket-search', $validated_data);
+        $this->emit('tickets-filter', $validated_data);
     }
 
     public function discard()

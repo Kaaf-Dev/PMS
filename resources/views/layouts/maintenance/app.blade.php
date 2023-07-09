@@ -3711,7 +3711,7 @@ www.ebepro.com
 
 @stack('js')
 
-@include('modals.user')
+@include('modals.maintenance')
 
 <!--end::Javascript-->
 </body>

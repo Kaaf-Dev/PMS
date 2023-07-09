@@ -37,7 +37,7 @@ Route::prefix('company')->group(function () {
             ],
         ], function () {
             Route::get('/', Maintenance\Ticket\Index::class)->name('maintenance.tickets');
-//            Route::get('/{ticket_id}/details', User\Ticket\Details::class)->name('user.tickets.details');
+            Route::get('/{ticket_id}/details', User\Ticket\Details::class)->name('maintenance.tickets.details');
         });
 
     });
