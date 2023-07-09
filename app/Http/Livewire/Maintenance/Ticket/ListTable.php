@@ -78,7 +78,7 @@ class ListTable extends Component
         return $tickets->with([
             'contract.user',
             'ticketCategory',
-        ])->paginate(4, ['*'], 'ticketsPage');
+        ])->paginate(15, ['*'], 'ticketsPage');
 
     }
 
