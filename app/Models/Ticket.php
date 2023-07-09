@@ -228,4 +228,27 @@ class Ticket extends Model
     {
         return Carbon::parse($this->updated_at)->diffForHumans();
     }
+
+    public function getUpdatedAtDateHumanAttribute()
+    {
+        return Carbon::parse($this->updated_at)->format('Y.m.d H:ia');
+    }
+
+    public function getVisitInHumanAttribute()
+    {
+        $date = '-';
+        if ($this->visit_at) {
+            $date = Carbon::parse($this->visit_at)->diffForHumans();
+        }
+        return $date;
+    }
+
+    public function getVisitInDateHumanAttribute()
+    {
+        $date = '-';
+        if ($this->visit_at) {
+            $date = Carbon::parse($this->visit_at)->format('Y.m.d H:ia');
+        }
+        return $date;
+    }
 }

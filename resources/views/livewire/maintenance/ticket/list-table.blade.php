@@ -10,7 +10,7 @@
                     <tr>
                         <th class="min-w-250px">الطلب</th>
                         <th class="min-w-150px">آخر إجراء</th>
-                        <th class="min-w-90px">الفئة</th>
+                        <th class="min-w-150px">موعد الزيارة</th>
                         <th class="min-w-90px">الحالة</th>
                         <th class="min-w-50px text-end">عرض</th>
                     </tr>
@@ -33,13 +33,20 @@
                                     <!--begin::Info-->
                                     <div class="d-flex flex-column justify-content-center">
                                         <a href="{{ route('maintenance.tickets.details', ['ticket_id' => $ticket->id]) }}" class="mb-1 text-gray-800 text-hover-primary">{{ $ticket->contract->user->name }}</a>
+                                        <div class="fw-semibold fs-6 text-gray-400">{{ $ticket->ticketCategory->title }}</div>
                                     </div>
                                     <!--end::Info-->
                                 </div>
                                 <!--end::User-->
                             </td>
-                            <td>{{ $ticket->updated_at_human }}</td>
-                            <td>{{ $ticket->ticketCategory->title }}</td>
+                            <td>
+                                {{ $ticket->updated_at_human }}
+                                <div class="fw-semibold fs-6 text-gray-400">{{ $ticket->updated_at_date_human }}</div>
+                            </td>
+                            <td>
+                                {{ $ticket->visit_in_human }}
+                                <div class="fw-semibold fs-6 text-gray-400">{{ $ticket->visit_in_date_human }}</div>
+                            </td>
                             <td>
                                 <span class="badge badge-light-{{ $ticket->status_class }} fw-bold px-4 py-3">{{ $ticket->status_string }}</span>
                             </td>
@@ -57,8 +64,6 @@
                                     <div class="fs-3 fw-bolder text-dark mb-4">لا يوجد طلبات صيانة</div>
                                     <div class="fs-6"></div>
                                 </div>
-
-
                             </td>
                         </tr>
                     @endforelse
