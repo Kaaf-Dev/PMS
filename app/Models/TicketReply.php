@@ -16,7 +16,7 @@ class TicketReply extends Model
         'ticket_id',
         'user_id',
         'admin_id',
-        'maintenance_company',
+        'maintenance_company_id',
         'content',
     ];
 
