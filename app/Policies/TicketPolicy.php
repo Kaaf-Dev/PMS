@@ -6,6 +6,8 @@ use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
 
 class TicketPolicy
 {
@@ -17,7 +19,7 @@ class TicketPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(User $user)
+    public function viewAny(Authenticatable $user)
     {
         //
     }
@@ -29,12 +31,17 @@ class TicketPolicy
      * @param  \App\Models\Ticket  $ticket
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Ticket $ticket)
+    public function view(Authenticatable $user, Ticket $ticket)
     {
         $allow = false;
 
         if (Auth::guard('admin')->check()) {
             $allow = true;
+
+        } elseif (Auth::guard('maintenance_company')->check()) {
+            if ($user->tickets->contains($ticket)) {
+                $allow = true;
+            }
 
         } elseif ($user->tickets->contains($ticket)) {
             $allow = true;
@@ -49,7 +56,7 @@ class TicketPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function create(Authenticatable $user)
     {
         //
     }
@@ -61,7 +68,7 @@ class TicketPolicy
      * @param  \App\Models\Ticket  $ticket
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Ticket $ticket)
+    public function update(Authenticatable $user, Ticket $ticket)
     {
         //
     }
@@ -73,7 +80,7 @@ class TicketPolicy
      * @param  \App\Models\Ticket  $ticket
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Ticket $ticket)
+    public function delete(Authenticatable $user, Ticket $ticket)
     {
         //
     }
@@ -85,7 +92,7 @@ class TicketPolicy
      * @param  \App\Models\Ticket  $ticket
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Ticket $ticket)
+    public function restore(Authenticatable $user, Ticket $ticket)
     {
         //
     }
@@ -97,12 +104,12 @@ class TicketPolicy
      * @param  \App\Models\Ticket  $ticket
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Ticket $ticket)
+    public function forceDelete(Authenticatable $user, Ticket $ticket)
     {
         //
     }
 
-    public function cancel(User $user, Ticket $ticket)
+    public function cancel(Authenticatable $user, Ticket $ticket)
     {
         $allow = false;
 
@@ -118,7 +125,7 @@ class TicketPolicy
         return $allow;
     }
 
-    public function reply(User $user, Ticket $ticket)
+    public function reply(Authenticatable $user, Ticket $ticket)
     {
         $allow = false;
 

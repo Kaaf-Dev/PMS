@@ -8,11 +8,49 @@
                 <table class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold">
                     <thead class="fs-7 text-gray-400 text-uppercase">
                     <tr>
-                        <th class="min-w-250px">الطلب</th>
-                        <th class="min-w-150px">آخر إجراء</th>
-                        <th class="min-w-150px">موعد الزيارة</th>
-                        <th class="min-w-90px">الحالة</th>
-                        <th class="min-w-50px text-end">عرض</th>
+                        <th wire:click="orderBy('contract_id')" class="min-w-250px">
+                            الطلب
+                            @if($order_by == 'contract_id')
+                                @if($order_as == 'desc')
+                                    <i class="ki-outline ki-arrow-down"></i>
+                                @else
+                                    <i class="ki-outline ki-arrow-up"></i>
+                                @endif
+                            @endif
+                        </th>
+                        <th wire:click="orderBy('updated_at')" class="min-w-150px">
+                            آخر إجراء
+                            @if($order_by == 'updated_at')
+                                @if($order_as == 'desc')
+                                    <i class="ki-outline ki-arrow-down"></i>
+                                @else
+                                    <i class="ki-outline ki-arrow-up"></i>
+                                @endif
+                            @endif
+                        </th>
+                        <th wire:click="orderBy('visit_at')" class="min-w-150px">
+                            موعد الزيارة
+                            @if($order_by == 'visit_at')
+                                @if($order_as == 'desc')
+                                    <i class="ki-outline ki-arrow-down"></i>
+                                @else
+                                    <i class="ki-outline ki-arrow-up"></i>
+                                @endif
+                            @endif
+                        </th>
+                        <th wire:click="orderBy('status')" class="min-w-90px">
+                            الحالة
+                            @if($order_by == 'status')
+                                @if($order_as == 'desc')
+                                    <i class="ki-outline ki-arrow-down"></i>
+                                @else
+                                    <i class="ki-outline ki-arrow-up"></i>
+                                @endif
+                            @endif
+                        </th>
+                        <th class="min-w-50px text-end">
+                            عرض
+                        </th>
                     </tr>
                     </thead>
                     <tbody class="fs-6">

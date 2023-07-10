@@ -35,15 +35,20 @@ class ListTable extends Component
 
     public function orderBy($property)
     {
-        if (is_array($property, [
+        if (in_array($property, [
             'contract_id',
             'updated_at',
+            'visit_at',
             'status',
         ])) {
-            $this->order_by = $property;
-            if ($this->order_as == 'asc') {
-                $this->order_as = 'desc';
+            if ($this->order_by == $property) { // swap order by
+                if ($this->order_as == 'asc') {
+                    $this->order_as = 'desc';
+                } else {
+                    $this->order_as = 'asc';
+                }
             } else {
+                $this->order_by = $property;
                 $this->order_as = 'asc';
             }
         }
