@@ -64,6 +64,7 @@ class AddReply extends Component
         ]);
 
         if ($reply) {
+            $this->ticket->touch();
             $this->resetInputs();
             $this->emit('reply-added');
         } else {

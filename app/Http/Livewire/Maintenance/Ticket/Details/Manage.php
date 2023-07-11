@@ -17,10 +17,7 @@ class Manage extends Component
     public function rules()
     {
         return [
-            'ticket.status' => [
-                'required',
-                Rule::in($this->getStatusValueProperty())
-            ],
+            'ticket.visit_at' => 'nullable',
         ];
     }
 
@@ -32,18 +29,6 @@ class Manage extends Component
     public function render()
     {
         return view('livewire.maintenance.ticket.details.manage');
-    }
-
-    public function getStatusListProperty()
-    {
-        \Debugbar::info(Ticket::getStatusList());
-        return Ticket::getStatusList();
-    }
-
-    public function getStatusValueProperty()
-    {
-        \Debugbar::info(Ticket::getStatusValues());
-        return Ticket::getStatusValues();
     }
 
     public function save()

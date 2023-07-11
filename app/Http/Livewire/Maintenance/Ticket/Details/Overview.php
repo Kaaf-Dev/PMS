@@ -14,6 +14,7 @@ class Overview extends Component
     {
         return [
             'ticket-updated' => '$refresh',
+            'reply-added' => '$refresh',
         ];
     }
 

@@ -10,6 +10,13 @@ class Overview extends Component
 
     public $ticket_id;
 
+    public function getListeners()
+    {
+        return [
+            'reply-added' => '$refresh',
+        ];
+    }
+
     public function mount($ticket)
     {
         $this->ticket_id = $ticket;

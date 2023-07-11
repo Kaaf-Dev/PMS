@@ -37,8 +37,8 @@ class Ticket extends Model
 
     protected $casts = [
         'id' => 'string',
-        'visit_at' => 'date',
-        'visited_at' => 'date',
+        'visit_at' => 'date:Y-m-d H:i',
+        'visited_at' => 'date:Y-m-d H:i',
     ];
 
     public static function boot()
@@ -250,5 +250,11 @@ class Ticket extends Model
             $date = Carbon::parse($this->visit_at)->format('Y.m.d H:ia');
         }
         return $date;
+    }
+
+    public function generateVerificationCode()
+    {
+        $verification_code = rand(100000, 999999);
+        $this->verification_code = $verification_code;
     }
 }
