@@ -4,6 +4,8 @@
         <!--begin::Aside column-->
         <div class="col-md-4 col-sm-12">
 
+            @livewire('maintenance.ticket.details.finish-ticket-btn', ['ticket' => $this->ticket->id])
+
             @livewire('maintenance.ticket.details.info', ['ticket' => $this->ticket->id])
 
             @livewire('maintenance.ticket.details.manage', ['ticket' => $this->ticket->id])
@@ -18,6 +20,7 @@
             <!--begin::replies-->
             @livewire('maintenance.ticket.details.replies', ['ticket' => $this->ticket->id])
             <!--end::replies-->
+
         </div>
         <!--end::Main column-->
     </div>

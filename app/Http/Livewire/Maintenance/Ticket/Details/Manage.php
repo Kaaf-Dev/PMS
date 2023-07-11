@@ -21,6 +21,13 @@ class Manage extends Component
         ];
     }
 
+    public function getListeners()
+    {
+        return [
+            'ticket-updated' => '$refresh',
+        ];
+    }
+
     public function mount($ticket)
     {
         $this->ticket = Ticket::findOrFail($ticket);;
@@ -34,6 +41,7 @@ class Manage extends Component
     public function save()
     {
         $this->validate();
+        $this->ticket->status = Ticket::STATUS_UNDER_PROCESSING;
         $this->ticket->save();
         $this->emit('ticket-updated');
         $this->showSuccessAlert('تمت العملية بنجاح');

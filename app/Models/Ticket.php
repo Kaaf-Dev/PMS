@@ -17,9 +17,9 @@ class Ticket extends Model
     const STATUS_PENDING = '2';
     const STATUS_INCOMPLETE = '3';
     const STATUS_UNDER_PROCESSING = '4';
-    const STATUS_UNDER_COMPLETE = '5';
+    const STATUS_COMPLETE = '5';
     const STATUS_REJECTED = '6';
-    const STATUS_UNDER_CANCELED = '7';
+    const STATUS_CANCELED = '7';
 
 
     public $incrementing = false;
@@ -33,6 +33,10 @@ class Ticket extends Model
         'description',
         'visit_at',
         'visited_at',
+    ];
+
+    protected $hidden = [
+        'verification_code',
     ];
 
     protected $casts = [
@@ -145,9 +149,9 @@ class Ticket extends Model
             Ticket::STATUS_PENDING => 'قيد الدراسة',
             Ticket::STATUS_INCOMPLETE => 'بحاجة إلى استكمال',
             Ticket::STATUS_UNDER_PROCESSING => 'قيد المعالجة',
-            Ticket::STATUS_UNDER_COMPLETE => 'تم الإنجاز',
+            Ticket::STATUS_COMPLETE => 'تم الإنجاز',
             Ticket::STATUS_REJECTED => 'مرفوض',
-//            Ticket::STATUS_UNDER_CANCELED => 'ملغي',
+//            Ticket::STATUS_CANCELED => 'ملغي',
         ];
     }
 
@@ -158,24 +162,17 @@ class Ticket extends Model
             Ticket::STATUS_PENDING,
             Ticket::STATUS_INCOMPLETE,
             Ticket::STATUS_UNDER_PROCESSING,
-            Ticket::STATUS_UNDER_COMPLETE,
+            Ticket::STATUS_COMPLETE,
             Ticket::STATUS_REJECTED,
-//            Ticket::STATUS_UNDER_CANCELED,
+//            Ticket::STATUS_CANCELED,
         ];
     }
 
     public function getStatusStringAttribute()
     {
         $status = $this->status ?? 1;
-        $status_strings = [
-            1 => 'جديد',
-            2 => 'قيد الدراسة',
-            3 => 'بحاجة إلى استكمال',
-            4 => 'قيد المعالجة',
-            5 => 'تم الإنجاز',
-            6 => 'مرفوض',
-            7 => 'ملغي',
-        ];
+
+        $status_strings = $this->getStatusList();
         return $status_strings[$status];
     }
 
@@ -183,13 +180,13 @@ class Ticket extends Model
     {
         $status = $this->status ?? 1;
         $status_classes = [
-            1 => 'info',
-            2 => 'info',
-            3 => 'warning',
-            4 => 'primary',
-            5 => 'success',
-            6 => 'danger',
-            7 => 'dark',
+            Ticket::STATUS_NEW => 'info',
+            Ticket::STATUS_PENDING => 'info',
+            Ticket::STATUS_INCOMPLETE => 'warning',
+            Ticket::STATUS_UNDER_PROCESSING => 'primary',
+            Ticket::STATUS_COMPLETE => 'success',
+            Ticket::STATUS_REJECTED => 'danger',
+            Ticket::STATUS_CANCELED => 'dark',
         ];
         return $status_classes[$status];
     }
@@ -198,13 +195,13 @@ class Ticket extends Model
     {
         $status = $this->status ?? 1;
         $status_icons = [
-            1 => 'add-files',
-            2 => 'watch',
-            3 => 'information',
-            4 => 'delivery-time',
-            5 => 'file-added',
-            6 => 'cross-circle',
-            7 => 'delete-folder',
+            Ticket::STATUS_NEW => 'add-files',
+            Ticket::STATUS_PENDING => 'watch',
+            Ticket::STATUS_INCOMPLETE => 'information',
+            Ticket::STATUS_UNDER_PROCESSING => 'delivery-time',
+            Ticket::STATUS_COMPLETE => 'file-added',
+            Ticket::STATUS_REJECTED => 'cross-circle',
+            Ticket::STATUS_CANCELED => 'delete-folder',
         ];
         return $status_icons[$status];
     }
@@ -215,6 +212,21 @@ class Ticket extends Model
     }
 
     public function getRepliableAttribute()
+    {
+        return $this->status <= SELF::STATUS_UNDER_PROCESSING;
+    }
+
+    public function getFinishableAttribute()
+    {
+        return $this->status == SELF::STATUS_UNDER_PROCESSING;
+    }
+
+    public function getIsVerificationCodeSentAttribute()
+    {
+        return !(is_null($this->verification_code));
+    }
+
+    public function getIsChangeVisitAtAttribute()
     {
         return $this->status <= SELF::STATUS_UNDER_PROCESSING;
     }
@@ -252,9 +264,33 @@ class Ticket extends Model
         return $date;
     }
 
+    public function getVisitedAtHumanAttribute()
+    {
+        $date = '-';
+        if ($this->visited_at) {
+            $date = Carbon::parse($this->visited_at)->diffForHumans();
+        }
+        return $date;
+    }
+
+    public function getVisitedAtDateHumanAttribute()
+    {
+        $date = '-';
+        if ($this->visited_at) {
+            $date = Carbon::parse($this->visited_at)->format('Y.m.d H:ia');
+        }
+        return $date;
+    }
+
     public function generateVerificationCode()
     {
         $verification_code = rand(100000, 999999);
         $this->verification_code = $verification_code;
+    }
+
+    public function finish()
+    {
+        $this->visited_at = now();
+        $this->status = SELF::STATUS_COMPLETE;
     }
 }

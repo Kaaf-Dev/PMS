@@ -140,4 +140,19 @@ class TicketPolicy
 
         return $allow;
     }
+
+    public function finish(Authenticatable $user, Ticket $ticket)
+    {
+        $allow = false;
+
+        if (Auth::guard('admin')->check()) {
+            $allow = true;
+
+        } else {
+            $allow = $ticket->finishable;
+        }
+
+        return $allow;
+
+    }
 }

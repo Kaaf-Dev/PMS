@@ -3,15 +3,15 @@
 function getMaintenanceGlobalModals()
 {
     return [
-//        [
-//            'modal_id' => 'user_ticket_create',
-//            'livewire_component' => 'user.ticket.form.create-form',
-//            'emit_show' => 'show-user-ticket-create-modal',
-//            'emit_hide' => 'hide-user-ticket-create-modal',
-//            'details' => [
-//                'title' => 'إضافة طلب صيانة جديد',
-//                'modal_dialog_class' => 'mw-650px',
-//            ]
-//        ],
+        [
+            'modal_id' => 'maintenance_ticket_finish',
+            'livewire_component' => 'maintenance.ticket.details.finish-ticket',
+            'emit_show' => 'show-maintenance-ticket-finish-modal',
+            'emit_hide' => 'hide-maintenance-ticket-finish-modal',
+            'details' => [
+                'title' => 'طلب اعتماد الصيانة',
+                'modal_dialog_class' => 'mw-650px',
+            ]
+        ],
     ];
 }

@@ -14,7 +14,7 @@
                 <!--end::Avatar-->
 
                 <!--begin::Name-->
-                <a href="#" class="fs-3 text-gray-800 text-hover-primary fw-bold mb-3">
+                <a class="fs-3 text-gray-800 text-hover-primary fw-bold mb-3">
                     {{ $this->ticket->contract->user->name }}
                 </a>
                 <!--end::Name-->
@@ -45,7 +45,7 @@
                     <!--begin::Details item-->
                     <!--begin::Details item-->
                     <div class="fw-bold mt-5">رقم الهاتف</div>
-                    <div class="text-gray-600"><a href="#" class="text-gray-600 text-hover-primary">{{ $this->ticket->contract->user->phone }}</a></div>
+                    <div class="text-gray-600"><a class="text-gray-600 text-hover-primary">{{ $this->ticket->contract->user->phone }}</a></div>
                     <!--begin::Details item-->
                 </div>
             </div>
