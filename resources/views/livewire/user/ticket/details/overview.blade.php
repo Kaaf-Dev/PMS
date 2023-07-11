@@ -99,6 +99,133 @@
                             <!--end::Description-->
                         </div>
                         <!--end::Details-->
+
+                        @if($this->ticket->visit_at)
+                            <!--begin::Details-->
+                            <div class="mb-0">
+
+                                <div class="alert bg-light-primary border border-primary border-dashed d-flex flex-column flex-sm-row p-5 mb-10">
+                                    <!--begin::Icon-->
+                                    <i class="ki-duotone ki-notification-bing fs-2hx text-primary me-4 mb-5 mb-sm-0">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                        <span class="path3"></span>
+                                    </i>
+                                    <!--end::Icon-->
+
+                                    <!--begin::Wrapper-->
+                                    <div class="d-flex flex-column pe-0 pe-sm-10">
+                                        <!--begin::Title-->
+                                        <h5 class="mb-1">تحديد موعد الزيارة</h5>
+                                        <!--end::Title-->
+
+                                        <!--begin::Content-->
+                                        <span class="">
+                                            تم تحديد موعد الزيارة بتاريخ:
+                                            <br>
+                                            <strong>
+                                                {{ $this->ticket->visit_in_date_human }} ({{ $this->ticket->visit_in_human }})
+                                            </strong>
+                                        </span>
+                                    </div>
+                                    <!--end::Wrapper-->
+
+                                </div>
+                            </div>
+                            <!--end::Details-->
+                        @endif
+
+                        @if($this->ticket->visited_at)
+                            <!--begin::Details-->
+                            <div class="mb-0">
+
+                                <div class="alert bg-light-primary border border-primary border-dashed d-flex flex-column flex-sm-row p-5 mb-10">
+                                    <!--begin::Icon-->
+                                    <i class="ki-duotone ki-notification-bing fs-2hx text-primary me-4 mb-5 mb-sm-0">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                        <span class="path3"></span>
+                                    </i>
+                                    <!--end::Icon-->
+
+                                    <!--begin::Wrapper-->
+                                    <div class="d-flex flex-column pe-0 pe-sm-10">
+                                        <!--begin::Title-->
+                                        <h5 class="mb-1">تمت الزيارة</h5>
+                                        <!--end::Title-->
+
+                                        <!--begin::Content-->
+                                        <span class="">
+                                            تمت الزيارة بتاريخ:
+                                            <br>
+                                            <strong>
+                                                {{ $this->ticket->visited_at_date_human }} ({{ $this->ticket->visited_at_human }})
+                                            </strong>
+                                        </span>
+                                    </div>
+                                    <!--end::Wrapper-->
+
+                                </div>
+                            </div>
+                            <!--end::Details-->
+                        @endif
+
+                        @if($this->ticket->is_show_verification_code_to_user)
+                            <!--begin::Details-->
+                            <div class="mb-0">
+
+                                <div class="alert bg-light-primary border border-primary border-dashed d-flex flex-column flex-sm-row p-5 mb-10">
+                                    <!--begin::Icon-->
+                                    <i class="ki-duotone ki-notification-bing fs-2hx text-primary me-4 mb-5 mb-sm-0">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                        <span class="path3"></span>
+                                    </i>
+                                    <!--end::Icon-->
+
+                                    <!--begin::Wrapper-->
+                                    <div class="d-flex flex-column pe-0 pe-sm-10">
+                                        <!--begin::Title-->
+                                        <h5 class="mb-1">اعتماد أعمال الصيانة</h5>
+                                        <!--end::Title-->
+
+                                        <!--begin::Content-->
+                                        <span class="mb-8">
+                                        تم إرسال طلب اعتماد أعمال الصيانة من قِبل مندوب شركة الصيانة
+                                        في حال انتهاء المندوب من الأعمال المطلوبة يرجى تزويده برمز التأكيد لإنهاء هذا الطلب
+                                    </span>
+
+                                        <span>
+
+                                        @if($show_verification_code)
+                                                <div class="badge badge-info fs-2x font-monospace">
+                                                {{ $this->ticket->verification_code ?? '- ' }}
+                                            </div>
+                                            @else
+                                                <button wire:click="showVerificationCode" type="button" class="btn btn-sm btn-primary">
+                                                    <div wire:loading.remove wire:target="showVerificationCode">
+
+                                                        عرض رمز التأكيد
+
+                                                    </div>
+                                                    <!--begin::Indicator progress-->
+                                                    <span wire:loading wire:target="showVerificationCode">
+                                                        <span class="spinner-border spinner-border-sm align-middle"></span>
+                                                    </span>
+                                                    <!--end::Indicator progress-->
+
+                                            </button>
+                                            @endif
+                                    </span>
+                                        <!--end::Content-->
+
+                                    </div>
+                                    <!--end::Wrapper-->
+
+                                </div>
+                            </div>
+                            <!--end::Details-->
+                        @endif
                     </div>
                     <!--end::Ticket view-->
                 </div>

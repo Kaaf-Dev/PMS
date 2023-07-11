@@ -231,6 +231,11 @@ class Ticket extends Model
         return $this->status <= SELF::STATUS_UNDER_PROCESSING;
     }
 
+    public function getIsShowVerificationCodeToUserAttribute()
+    {
+        return $this->status == SELF::STATUS_UNDER_PROCESSING and $this->is_verification_code_sent;
+    }
+
     public function getCreatedAtHumanAttribute()
     {
         return Carbon::parse($this->created_at)->diffForHumans();

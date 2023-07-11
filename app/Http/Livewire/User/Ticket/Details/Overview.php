@@ -9,6 +9,7 @@ class Overview extends Component
 {
 
     public $ticket_id;
+    public $show_verification_code = false;
 
     public function getListeners()
     {
@@ -33,5 +34,10 @@ class Overview extends Component
             'contract',
             'ticketAttachments',
         ])->findOrFail($this->ticket_id);
+    }
+
+    public function showVerificationCode()
+    {
+        $this->show_verification_code = true;
     }
 }
