@@ -173,7 +173,7 @@ class Ticket extends Model
         $status = $this->status ?? 1;
 
         $status_strings = $this->getStatusList();
-        return $status_strings[$status];
+        return $status_strings[$status] ?? $status_strings[1];
     }
 
     public function getStatusClassAttribute()
