@@ -63,6 +63,16 @@ Route::prefix('admin')->group(function () {
             Route::get('/{contract_id}/details', Admin\Contract\Details::class)->name('admin.contracts.details');
         });
 
+        Route::group([
+            'prefix' => 'tickets',
+            'middleware' => [
+                'auth:admin',
+            ],
+        ], function () {
+            Route::get('/', Admin\Ticket\Index::class)->name('admin.tickets');
+            Route::get('/{ticket_id}/details', Admin\Ticket\Details::class)->name('admin.tickets.details');
+        });
+
 
     });
 });

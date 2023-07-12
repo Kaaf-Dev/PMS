@@ -118,12 +118,22 @@ class Ticket extends Model
 
     public function scopeSearch($query, $search)
     {
-
+        return $query->where(function ($query) use ($search) {
+            return $query->where('subject', 'like', '%'. $search .'%')
+                ->orWhere('description', 'like', '%'. $search .'%');
+        });
     }
 
     public function scopeContract($query, $contract_id)
     {
         $query->where('contract_id', '=', $contract_id);
+    }
+
+    public function scopeUser($query, $user_id)
+    {
+        $query->whereHas('contract', function ($query) use ($user_id) {
+            return $query->where('user_id', $user_id);
+        });
     }
 
     public function getTruncatedDescriptionAttribute()

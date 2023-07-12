@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Livewire\Maintenance\Ticket;
+namespace App\Http\Livewire\Admin\Ticket;
 
+use App\Models\Ticket;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -15,7 +16,7 @@ class ListTable extends Component
 
     public $filters;
     public $order_by;
-    public $order_as;
+    public $order_as = 'asc';
 
     public function getListeners()
     {
@@ -30,13 +31,14 @@ class ListTable extends Component
         $view_data = [
             'tickets' => $tickets,
         ];
-        return view('livewire.maintenance.ticket.list-table', $view_data);
+        return view('livewire.admin.ticket.list-table', $view_data);
     }
 
     public function orderBy($property)
     {
         if (in_array($property, [
             'contract_id',
+            'maintenance_company_id',
             'updated_at',
             'visit_at',
             'status',
@@ -56,12 +58,25 @@ class ListTable extends Component
 
     public function fetchTickets()
     {
-        $this->resetPage();
-        $auth = Auth::guard('maintenance_company')->user();
-        $tickets = $auth->tickets();
+        $order_by = $this->order_by;
+        $order_as = $this->order_as;
+
+        $tickets = Ticket::with([
+            'contract.user',
+            'ticketCategory',
+            'maintenanceCompany',
+        ]);
+
+        if (isset($this->filters['search'])) {
+            $tickets = $tickets->search($this->filters['search']);
+        }
 
         if (isset($this->filters['status'])) {
             $tickets = $tickets->where('status', '=', $this->filters['status']);
+        }
+
+        if (isset( $this->filters['user_id'] )) {
+            $tickets = $tickets->user($this->filters['user_id']);
         }
 
         if (isset($this->filters['ticket_categories'])) {
@@ -72,23 +87,18 @@ class ListTable extends Component
             $tickets = $tickets->visitIn($this->filters['visit_in']);
         }
 
-        if (isset($this->filters['search'])) {
-            $tickets = $tickets->search($this->filters['search']);
+        if ($order_by) {
+            $tickets = $tickets->orderBy($order_by, $order_as);
         }
 
-        if ($this->order_by) {
-            $tickets = $tickets->orderBy($this->order_by, $this->order_as);
-        }
-
-        return $tickets->with([
-            'contract.user',
-            'ticketCategory',
-        ])->paginate(15, ['*'], 'ticketsPage');
+        return $tickets->paginate(15, ['*'], 'ticketsPage');
 
     }
 
     public function updateFilters($filters)
     {
+        $this->resetPage('ticketsPage');
         $this->filters = $filters;
     }
+
 }

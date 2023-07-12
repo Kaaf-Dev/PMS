@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Livewire\Maintenance\Ticket;
+namespace App\Http\Livewire\Admin\Ticket;
 
+use App\Models\MaintenanceCompany;
 use App\Models\Ticket;
 use App\Models\TicketCategory;
+use App\Models\User;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 
@@ -12,6 +14,8 @@ class Filter extends Component
 
     public $search;
     public $status;
+    public $user_id;
+    public $maintenance_company_id;
     public $ticket_categories;
     public $visit_in;
 
@@ -19,6 +23,8 @@ class Filter extends Component
     {
         return [
             'search' => 'nullable',
+            'user_id' => 'nullable|exists:users,id',
+            'maintenance_company_id' => 'nullable|exists:maintenance_companies,id',
             'status' => [
                 'nullable',
                 Rule::in(Ticket::getStatusValues()),
@@ -31,7 +37,17 @@ class Filter extends Component
 
     public function render()
     {
-        return view('livewire.maintenance.ticket.filter');
+        return view('livewire.admin.ticket.filter');
+    }
+
+    public function getUsersProperty()
+    {
+        return User::all();
+    }
+
+    public function getMaintenanceCompaniesProperty()
+    {
+        return MaintenanceCompany::all();
     }
 
     public function getStatusListProperty()
@@ -49,6 +65,7 @@ class Filter extends Component
         $validated_data = $this->validate();
         $validated_data['ticket_categories'] = array_filter($validated_data['ticket_categories'] ?? []);
         $validated_data = array_filter($validated_data);
+        \Debugbar::info($validated_data);
         $this->emit('tickets-filter', $validated_data);
     }
 
@@ -61,4 +78,5 @@ class Filter extends Component
             'visit_in',
         ]);
     }
+
 }
