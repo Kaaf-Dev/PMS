@@ -28,6 +28,9 @@
                                 @endif
                             @endif
                         </th>
+                        <th class="min-w-150px">
+                            الفئة
+                        </th>
                         <th wire:click="orderBy('updated_at')" class="min-w-150px">
                             آخر إجراء
                             @if($order_by == 'updated_at')
