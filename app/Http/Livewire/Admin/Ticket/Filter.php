@@ -42,7 +42,7 @@ class Filter extends Component
 
     public function getUsersProperty()
     {
-        return User::all();
+        return User::orderBy('name')->get();
     }
 
     public function getMaintenanceCompaniesProperty()

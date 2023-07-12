@@ -6,18 +6,22 @@
 
 
             <!--begin::User Info-->
-            <div class="d-flex flex-center flex-column py-5">
-                <!--begin::Avatar-->
-                <div class="symbol symbol-100px symbol-circle mb-7">
-                    <img src="{{ $this->ticket->contract->user->profile_photo_url }}" alt="image">
-                </div>
-                <!--end::Avatar-->
 
-                <!--begin::Name-->
-                <a class="fs-3 text-gray-800 text-hover-primary fw-bold mb-3">
-                    {{ $this->ticket->contract->user->name }}
-                </a>
-                <!--end::Name-->
+            <div class="d-flex align-items-center me-5 me-xl-13 mb-5">
+                <!--begin::Symbol-->
+                <div class="symbol symbol-60px symbol-circle me-3">
+                    <img src="{{ $this->ticket->contract->user->profile_photo_url }}" class="" alt="">
+                </div>
+                <!--end::Symbol-->
+
+                <!--begin::Info-->
+                <div class="m-0">
+                    <span class="fw-semibold text-gray-400 d-block fs-7">المستأجر</span>
+                    <a href="{{ route('admin.users.details', ['user_id' => $this->ticket->contract->user->id]) }}" class="fw-bold text-gray-800 text-hover-primary fs-6">
+                        {{ $this->ticket->contract->user->name }}
+                    </a>
+                </div>
+                <!--end::Info-->
             </div>
             <!--end::User Info-->
             <!--end::Summary-->

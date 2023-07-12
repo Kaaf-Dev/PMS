@@ -51,6 +51,7 @@
 
                 <div class="col-md-9 col-sm-12">
                     @livewire('admin.ticket.details.overview', ['ticket' => $this->ticket->id])
+                    @livewire('admin.ticket.details.replies', ['ticket' => $this->ticket->id])
                 </div>
 
             </div>
