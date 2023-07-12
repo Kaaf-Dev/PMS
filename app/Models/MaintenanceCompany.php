@@ -16,6 +16,9 @@ class MaintenanceCompany extends Authenticatable
 
     protected $fillable = [
         'name',
+        'contact_name',
+        'contact_phone',
+        'contact_address',
         'username',
         'password',
     ];

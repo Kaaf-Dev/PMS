@@ -124,7 +124,7 @@
                     <!--begin:Menu item-->
                     <div class="menu-item">
                         <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ route('admin.contracts') }}">
+                        <a class="menu-link" href="{{ route('admin.maintenance-companies') }}">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-badge fs-2">
                                     <span class="path1"></span>

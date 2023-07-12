@@ -128,5 +128,27 @@ function getAdminGlobalModals()
             ]
         ],
 
+        [
+            'modal_id' => 'kt_modal_create_maintenance_company',
+            'livewire_component' => 'admin.maintenance-company.form.create-new',
+            'emit_show' => 'show-maintenance-company-create-modal',
+            'emit_hide' => 'hide-maintenance-company-create-modal',
+            'details' => [
+                'title' => 'تسجيل شركة صيانة جديدة',
+                'modal_dialog_class' => '',
+            ]
+        ],
+
+        [
+            'modal_id' => 'kt_modal_update_maintenance_company',
+            'livewire_component' => 'admin.maintenance-company.form.update-form',
+            'emit_show' => 'show-maintenance-company-update-modal',
+            'emit_hide' => 'hide-maintenance-company-update-modal',
+            'details' => [
+                'title' => 'إدارة شركة الصيانة',
+                'modal_dialog_class' => '',
+            ]
+        ],
+
     ];
 }
