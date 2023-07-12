@@ -80,8 +80,9 @@
                                     <!--end::Wrapper-->
                                     <!--begin::Info-->
                                     <div class="d-flex flex-column justify-content-center">
-                                        <a href="{{ route('admin.tickets.details', ['ticket_id' => $ticket->id]) }}" class="mb-1 text-gray-800 text-hover-primary">{{ $ticket->contract->user->name }}</a>
-                                        <div class="fw-semibold fs-6 text-gray-400">{{ $ticket->ticketCategory->title }}</div>
+                                        <a href="{{ route('admin.tickets.details', ['ticket_id' => $ticket->id]) }}" class="mb-1 text-gray-800 text-hover-primary">
+                                            {{ $ticket->subject }}</a>
+                                        <div class="fw-semibold fs-6 text-gray-400">{{ $ticket->contract->user->name }}</div>
                                     </div>
                                     <!--end::Info-->
                                 </div>
@@ -93,12 +94,15 @@
                                     <!--begin::Info-->
                                     <div class="d-flex flex-column justify-content-center">
                                         <a href="{{ route('admin.tickets.details', ['ticket_id' => $ticket->id]) }}" class="mb-1 text-gray-800 text-hover-primary">
-                                            {{ $ticket->contract->user->name }}
+                                            {{ ($ticket->maintenanceCompany) ? $ticket->maintenanceCompany->name : '-'  }}
                                         </a>
                                     </div>
                                     <!--end::Maintenance Company-->
                                 </div>
                                 <!--end::User-->
+                            </td>
+                            <td>
+                                {{ $ticket->ticketCategory->title }}
                             </td>
                             <td>
                                 {{ $ticket->updated_at_human }}
