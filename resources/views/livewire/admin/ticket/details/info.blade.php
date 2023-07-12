@@ -3,10 +3,7 @@
     <div class="card card-flush mb-4">
         <div class="card-body">
             <!--begin::Summary-->
-
-
             <!--begin::User Info-->
-
             <div class="d-flex align-items-center me-5 me-xl-13 mb-5">
                 <!--begin::Symbol-->
                 <div class="symbol symbol-60px symbol-circle me-3">
@@ -26,35 +23,81 @@
             <!--end::User Info-->
             <!--end::Summary-->
 
-            <!--begin::Details toggle-->
-            <div class="d-flex flex-stack fs-4 py-3">
-                <div class="fw-bold rotate collapsible" data-bs-toggle="collapse" href="#kt_user_view_details" role="button" aria-expanded="false" aria-controls="kt_user_view_details">
-                    التواصل
-                    <span class="ms-2 rotate-180">
-                      <i class="ki-outline ki-down fs-3"></i>
-                    </span>
-                </div>
-                </span>
-            </div>
-            <!--end::Details toggle-->
+            <div class="separator separator-dashed my-8"></div>
 
-            <div class="separator"></div>
-
-            <!--begin::Details content-->
-            <div id="kt_user_view_details" class="collapse show">
-                <div class="pb-5 fs-6">
-                    <!--begin::Details item-->
-                    <div class="fw-bold mt-5">العقار</div>
-                    <div class="text-gray-600">{{ $this->ticket->contract->apartments[0]->property->name }}</div>
-                    <!--begin::Details item-->
-                    <!--begin::Details item-->
-                    <div class="fw-bold mt-5">رقم الهاتف</div>
-                    <div class="text-gray-600"><a class="text-gray-600 text-hover-primary">{{ $this->ticket->contract->user->phone }}</a></div>
-                    <!--begin::Details item-->
+            <div class="">
+                <!--begin::Input group-->
+                <div class="mb-4">
+                    <label class="fs-6 form-label fw-bold text-dark">شركة الصيانة </label>
+                    <!--begin::Select-->
+                    <select wire:model.defer="ticket.maintenance_company_id" class="form-select form-select">
+                        <option value="">غير محدد</option>
+                        @foreach($this->maintenance_companies ?? [] as $maintenance_company)
+                            <option value="{{ $maintenance_company->id }}">{{ $maintenance_company->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('ticket.maintenance_company_id')
+                    <div class="text-danger">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                    <div class="text-muted fs-7">تعيين شركة صيانة لمتابعة الطلب</div>
+                    @if(!$this->ticket->maintenance_company_id)
+                        <div class="alert alert-danger border border-danger border-dashed mt-4">
+                            لم يتم تحديد شركة صيانة بعد!
+                        </div>
+                    @endif
+                    <!--end::Select-->
                 </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group-->
+                <div class="">
+                    <label class="fs-6 form-label fw-bold text-dark">الحالة</label>
+                    <!--begin::Select-->
+                    <select wire:model.defer="ticket.status" class="form-select mb-2">
+                        @foreach($this->status_list ?? [] as $key => $status)
+                            <option value="{{ $key }}">{{ $status }}</option>
+                        @endforeach
+                    </select>
+                    @error('ticket.status')
+                    <div class="text-danger">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                    <div class="text-muted fs-7">تحديد حالة طلب الصيانة</div>
+                    <!--end::Select-->
+                </div>
+                <!--end::Input group-->
+
             </div>
-            <!--end::Details content-->
+
         </div>
+
+        <div class="card-footer">
+            <!--begin::Button-->
+            <button wire:click="discard" class="btn btn-light me-3" data-kt-users-modal-action="cancel">
+                <span wire:loading.remove wire:target="discard">تراجع</span>
+                <!--begin::Indicator progress-->
+                <span wire:loading wire:target="discard">
+					<span class="spinner-border spinner-border-sm align-middle"></span>
+                </span>
+                <!--end::Indicator progress-->
+            </button>
+            <!--end::Button-->
+
+            <!--begin::Button-->
+            <button wire:click="save" class="btn btn-primary" data-kt-users-modal-action="submit">
+                <span wire:loading.remove wire:target="save">حفظ</span>
+                <!--begin::Indicator progress-->
+                <span wire:loading wire:target="save">
+					<span class="spinner-border spinner-border-sm align-middle"></span>
+                </span>
+                <!--end::Indicator progress-->
+            </button>
+            <!--end::Button-->
+        </div>
+
     </div>
 
 </div>

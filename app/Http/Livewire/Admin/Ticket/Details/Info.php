@@ -2,17 +2,36 @@
 
 namespace App\Http\Livewire\Admin\Ticket\Details;
 
+use App\Models\MaintenanceCompany;
 use App\Models\Ticket;
+use App\Traits\WithAlert;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 
 class Info extends Component
 {
 
-    public $ticket_id;
+    use WithAlert;
+
+    public $ticket;
+
+    public function rules()
+    {
+        return [
+            'ticket.maintenance_company_id' => 'nullable|exists:maintenance_companies,id',
+            'ticket.status' => [
+                'required',
+                Rule::in($this->getStatusValueProperty())
+            ],
+        ];
+    }
 
     public function mount($ticket)
     {
-        $this->ticket_id = $ticket;
+        $this->ticket = Ticket::with([
+            'contract.user',
+        ])
+            ->findOrFail($ticket);;
     }
 
     public function render()
@@ -20,14 +39,39 @@ class Info extends Component
         return view('livewire.admin.ticket.details.info');
     }
 
-    public function getTicketProperty()
+    public function getMaintenanceCompaniesProperty()
     {
-        return Ticket::with([
-            'contract',
-            'contract.user',
-            'contract.apartments',
-            'contract.apartments.property',
-            'ticketAttachments',
-        ])->findOrFail($this->ticket_id);
+        return MaintenanceCompany::orderBy('name')->get();
+    }
+
+    public function getStatusListProperty()
+    {
+        \Debugbar::info(Ticket::getStatusList());
+        return Ticket::getStatusList();
+    }
+
+    public function getStatusValueProperty()
+    {
+        \Debugbar::info(Ticket::getStatusValues());
+        return Ticket::getStatusValues();
+    }
+
+    public function save()
+    {
+        $validated_data = $this->validate();
+        if (!isset($validated_data['ticket']['maintenance_company_id']) or empty($validated_data['ticket']['maintenance_company_id'])) {
+            $this->ticket->maintenance_company_id = null;
+        }
+        if ($this->ticket->save()) {
+            $this->emit('ticket-updated');
+            $this->showSuccessAlert('تمت العملية بنجاح');
+        } else {
+            $this->showWarningAlert('حدث خطأ ما، يرجى المحاولة لاحقًا');
+        }
+    }
+
+    public function discard()
+    {
+        $this->ticket->refresh();
     }
 }
