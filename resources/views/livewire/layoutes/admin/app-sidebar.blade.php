@@ -110,12 +110,28 @@
                         <!--begin:Menu link-->
                         <a class="menu-link" href="{{ route('admin.tickets') }}">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-wrench  fs-2">
+                                <i class="ki-duotone ki-wrench fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                 </i>
                             </span>
                             <span class="menu-title">طلبات الصيانة</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+
+                    <!--begin:Menu item-->
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a class="menu-link" href="{{ route('admin.ticket-categories') }}">
+                            <span class="menu-icon">
+                                <i class="ki-duotone ki-abstract-29 fs-2">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                </i>
+                            </span>
+                            <span class="menu-title">فئات طلبات الصيانة</span>
                         </a>
                         <!--end:Menu link-->
                     </div>
