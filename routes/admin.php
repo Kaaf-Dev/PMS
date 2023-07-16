@@ -82,6 +82,15 @@ Route::prefix('admin')->group(function () {
             Route::get('/', Admin\MaintenanceCompany\Index::class)->name('admin.maintenance-companies');
         });
 
+        Route::group([
+            'prefix' => 'ticket-categories',
+            'middleware' => [
+                'auth:admin',
+            ],
+        ], function () {
+            Route::get('/', Admin\TicketCategory\Index::class)->name('admin.ticket-categories');
+        });
+
 
     });
 });

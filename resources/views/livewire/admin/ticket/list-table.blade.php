@@ -28,7 +28,7 @@
                                 @endif
                             @endif
                         </th>
-                        <th class="min-w-150px">
+                        <th     class="min-w-150px">
                             الفئة
                         </th>
                         <th wire:click="orderBy('updated_at')" class="min-w-150px">

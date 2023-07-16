@@ -150,5 +150,38 @@ function getAdminGlobalModals()
             ]
         ],
 
+        [
+            'modal_id' => 'kt_modal_add_ticket_category',
+            'livewire_component' => 'admin.ticket-category.form.create-new',
+            'emit_show' => 'show-ticket-category-create-modal',
+            'emit_hide' => 'hide-ticket-category-create-modal',
+            'details' => [
+                'title' => 'إضافة فئة جديدة',
+                'modal_dialog_class' => '',
+            ]
+        ],
+
+        [
+            'modal_id' => 'kt_modal_update_ticket_category',
+            'livewire_component' => 'admin.ticket-category.form.update-form',
+            'emit_show' => 'show-ticket-category-update-modal',
+            'emit_hide' => 'hide-ticket-category-update-modal',
+            'details' => [
+                'title' => 'تعديل الفئة',
+                'modal_dialog_class' => '',
+            ]
+        ],
+
+        [
+            'modal_id' => 'kt_modal_delete_ticket_category',
+            'livewire_component' => 'admin.ticket-category.form.delete-verify',
+            'emit_show' => 'show-ticket-category-delete-modal',
+            'emit_hide' => 'hide-ticket-category-delete-modal',
+            'details' => [
+                'title' => 'تأكيد عملية الحذف',
+                'modal_dialog_class' => '',
+            ]
+        ],
+
     ];
 }
