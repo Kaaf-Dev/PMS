@@ -15,6 +15,8 @@ class Summary extends Component
             'contract-updated-user' => '$refresh',
             'contract-updated-apartment' => '$refresh',
             'contract-canceled' => '$refresh',
+            'contract-lawyer-assigned' => '$refresh',
+            'contract-lawyer-unassigned' => '$refresh',
         ];
     }
 
@@ -30,7 +32,8 @@ class Summary extends Component
 
     public function getContractProperty()
     {
-        return Contract::findOrFail($this->contract_id);
+        return Contract::with('lawyer')
+            ->findOrFail($this->contract_id);
     }
 
     public function manageRentalCost()
@@ -71,6 +74,20 @@ class Summary extends Component
     public function createInvoice()
     {
         $this->emit('show-invoice-create-modal', [
+            'contract_id' => $this->contract_id,
+        ]);
+    }
+
+    public function assignLawyer()
+    {
+        $this->emit('show-contract-assign-lawyer-modal', [
+            'contract_id' => $this->contract_id,
+        ]);
+    }
+
+    public function unassignLawyer()
+    {
+        $this->emit('show-contract-unassign-lawyer-modal', [
             'contract_id' => $this->contract_id,
         ]);
     }

@@ -183,5 +183,27 @@ function getAdminGlobalModals()
             ]
         ],
 
+        [
+            'modal_id' => 'kt_modal_contract_assign_lawyer',
+            'livewire_component' => 'admin.contract.forms.assign-lawyer',
+            'emit_show' => 'show-contract-assign-lawyer-modal',
+            'emit_hide' => 'hide-contract-assign-lawyer-modal',
+            'details' => [
+                'title' => 'تحويل العقد إلى المحامي',
+                'modal_dialog_class' => '',
+            ]
+        ],
+
+        [
+            'modal_id' => 'kt_modal_contract_unassign_lawyer',
+            'livewire_component' => 'admin.contract.forms.unassign-lawyer',
+            'emit_show' => 'show-contract-unassign-lawyer-modal',
+            'emit_hide' => 'hide-contract-unassign-lawyer-modal',
+            'details' => [
+                'title' => 'إلغاء توكيل المحامي',
+                'modal_dialog_class' => '',
+            ]
+        ],
+
     ];
 }

@@ -35,6 +35,11 @@ class Contract extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function Lawyer()
+    {
+        return $this->belongsTo(Lawyer::class);
+    }
+
     public function apartments()
     {
         return $this->belongsToMany(Apartment::class, 'contract_apartment');
@@ -166,5 +171,10 @@ class Contract extends Model
     public function getTotalTicketOpenedAttribute()
     {
         return $this->tickets()->opened()->count();
+    }
+
+    public function getIsLawyerableAttribute()
+    {
+        return !($this->lawyer) == false;
     }
 }

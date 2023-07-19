@@ -96,6 +96,23 @@
                     <!--begin::Menu separator-->
                     <div class="separator my-2"></div>
                     <!--end::Menu separator-->
+                    @if($this->contract->is_lawyerable)
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-3">
+                            <a class="menu-link text-muted px-3">( تم تعيين محامي )</a>
+                        </div>
+                        <!--end::Menu item-->
+                    @else
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-3">
+                            <a wire:click="assignLawyer" class="menu-link px-3">تحويل العقد إلى المحامي</a>
+                        </div>
+                        <!--end::Menu item-->
+                    @endif
+
+                    <!--begin::Menu separator-->
+                    <div class="separator my-2"></div>
+                    <!--end::Menu separator-->
                     @if($this->contract->active_status)
                         <!--begin::Menu item-->
                         <div class="menu-item px-3">
@@ -144,6 +161,54 @@
                 <!--end::Details-->
             </div>
             <!--end::Section-->
+
+            @if ($this->contract->is_lawyerable)
+
+                <div class="separator separator-dashed my-5"></div>
+
+                <!--begin::Section-->
+                <div class="mb-7">
+                    <!--begin::Title-->
+                    <h5 class="mb-4">المحامي</h5>
+                    <!--end::Title-->
+                    <!--begin::Details-->
+                    <div class="d-flex align-items-center">
+                        <!--begin::Avatar-->
+                        <div class="symbol symbol-60px symbol-circle me-3">
+                            <img alt="{{ $this->contract->lawyer->name }}" src="{{ $this->contract->lawyer->profilePhotoUrl }}">
+                        </div>
+                        <!--end::Avatar-->
+                        <!--begin::Info-->
+                        <div class="d-flex flex-column">
+                            <!--begin::Name-->
+                            <a href="{{ route('admin.users.details', ['user_id' => $this->contract->user->id]) }}" class="fs-4 fw-bold text-gray-900 text-hover-primary me-2">{{ $this->contract->lawyer->name }}</a>
+                            <!--end::Name-->
+                            <!--begin::Email-->
+                            <a href="{{ route('admin.users.details', ['user_id' => $this->contract->user->id]) }}" class="fw-semibold text-gray-600 text-hover-primary">{{ $this->contract->lawyer->contact_name }}</a>
+                            <!--end::Email-->
+                        </div>
+                        <!--end::Info-->
+                    </div>
+                    <!--end::Details-->
+                </div>
+                <!--end::Section-->
+
+                <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed rounded-3 p-6">
+                    <!--begin::Wrapper-->
+                    <div class="d-flex flex-stack flex-grow-1">
+                        <!--begin::Content-->
+                        <div class="fw-semibold">
+                            <div class="fs-6 text-gray-700">
+                                تم تحويل هذا العقد إلى المحامي
+                            </div>
+                        </div>
+                        <button wire:click="unassignLawyer" class="btn btn-warning btn-sm">إلغاء التوكيل</button>
+                        <!--end::Content-->
+                    </div>
+                    <!--end::Wrapper-->
+                </div>
+
+            @endif
         </div>
         <!--end::Card body-->
     </div>
