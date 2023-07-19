@@ -16,6 +16,7 @@ class GlobalFunctionsServiceProvider extends ServiceProvider
         require_once base_path().'/app/Helper/LocaleBladeHelper.php';
         require_once base_path().'/app/Helper/AdminModals.php';
         require_once base_path().'/app/Helper/MaintenanceModals.php';
+        require_once base_path().'/app/Helper/LawyerModals.php';
         require_once base_path().'/app/Helper/UserModals.php';
     }
 

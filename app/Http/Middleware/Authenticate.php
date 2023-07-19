@@ -21,6 +21,9 @@ class Authenticate extends Middleware
             if ($request->is('company/*') or $request->is('company')) {
                 return route('maintenance.auth.login');
             }
+            if ($request->is('lawyer/*') or $request->is('lawyer')) {
+                return route('lawyer.auth.login');
+            }
             return route('user.auth.login');
         }
     }

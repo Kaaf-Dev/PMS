@@ -50,6 +50,11 @@ return [
             'driver' => 'session',
             'provider' => 'maintenance_companies',
         ],
+
+        'lawyer' => [
+            'driver' => 'session',
+            'provider' => 'lawyers',
+        ],
     ],
 
     /*
@@ -83,6 +88,11 @@ return [
         'maintenance_companies' => [
             'driver' => 'eloquent',
             'model' => App\Models\MaintenanceCompany::class,
+        ],
+
+        'lawyers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Lawyer::class,
         ],
 
         // 'users' => [
