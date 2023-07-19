@@ -59,6 +59,7 @@ php artisan db:seed --class PropertyTableSeeder
 php artisan db:seed --class ContractApartmentSeeder
 
 php artisan db:seed --class MaintenanceCompaniesTableSeeder
+php artisan db:seed --class LawyersTableSeeder
 
 php artisan db:seed --class TicketCategoriesTableSeeder
 php artisan db:seed --class TicketsTableSeeder
