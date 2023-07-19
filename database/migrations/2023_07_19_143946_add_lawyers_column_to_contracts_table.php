@@ -14,7 +14,8 @@ class AddLawyersColumnToContractsTable extends Migration
     public function up()
     {
         Schema::table('contracts', function (Blueprint $table) {
-            //
+            $table->unsignedBigInteger('lawyer_id')->after('user_id')->nullable();
+            $table->foreign('lawyer_id')->references('id')->on('lawyers');
         });
     }
 
@@ -26,7 +27,8 @@ class AddLawyersColumnToContractsTable extends Migration
     public function down()
     {
         Schema::table('contracts', function (Blueprint $table) {
-            //
+            $table->dropForeign(['lawyer_id']);
+            $table->dropColumn('lawyer_id');
         });
     }
 }
