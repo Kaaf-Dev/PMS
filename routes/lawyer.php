@@ -29,16 +29,16 @@ Route::prefix('lawyer')->group(function () {
             Route::get('/', Lawyer\Dashboard\Index::class)->name('lawyer.dashboard');
 //            Route::get('/profile', Admin\Dashboard\Index::class)->name('admin.account-settings');
         });
-//
-//        Route::group([
-//            'prefix' => 'tickets',
-//            'middleware' => [
-//                'auth:maintenance_company',
-//            ],
-//        ], function () {
-//            Route::get('/', Maintenance\Ticket\Index::class)->name('maintenance.tickets');
-//            Route::get('/{ticket_id}/details', Maintenance\Ticket\Details::class)->name('maintenance.tickets.details');
-//        });
+
+        Route::group([
+            'prefix' => 'contracts',
+            'middleware' => [
+                'auth:lawyer',
+            ],
+        ], function () {
+            Route::get('/', Lawyer\Contract\Index::class)->name('lawyer.contracts');
+            Route::get('/{contract_id}/details', Maintenance\Ticket\Details::class)->name('lawyer.contracts.details');
+        });
 
     });
 });
