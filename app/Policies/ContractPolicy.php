@@ -6,6 +6,8 @@ use App\Models\Contract;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
 
 class ContractPolicy
 {
@@ -17,7 +19,7 @@ class ContractPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(User $user)
+    public function viewAny(Authenticatable $user)
     {
         //
     }
@@ -29,17 +31,9 @@ class ContractPolicy
      * @param  \App\Models\Contract  $contract
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Contract $contract)
+    public function view(Authenticatable $user, Contract $contract)
     {
-        $allow = false;
-        if (Auth::guard('admin')->check()) {
-            $allow = true;
-
-        } elseif ($user->id === $contract->user_id) {
-            $allow = true;
-        }
-
-        return $allow;
+        return $this->ownContract($user, $contract);
     }
 
     /**
@@ -48,7 +42,7 @@ class ContractPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function create(Authenticatable $user)
     {
         //
     }
@@ -60,7 +54,7 @@ class ContractPolicy
      * @param  \App\Models\Contract  $contract
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Contract $contract)
+    public function update(Authenticatable $user, Contract $contract)
     {
         //
     }
@@ -72,7 +66,7 @@ class ContractPolicy
      * @param  \App\Models\Contract  $contract
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Contract $contract)
+    public function delete(Authenticatable $user, Contract $contract)
     {
         //
     }
@@ -84,7 +78,7 @@ class ContractPolicy
      * @param  \App\Models\Contract  $contract
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Contract $contract)
+    public function restore(Authenticatable $user, Contract $contract)
     {
         //
     }
@@ -96,8 +90,36 @@ class ContractPolicy
      * @param  \App\Models\Contract  $contract
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Contract $contract)
+    public function forceDelete(Authenticatable $user, Contract $contract)
     {
         //
+    }
+
+    public function reply(Authenticatable $user, Contract $contract)
+    {
+        return $this->ownContract($user, $contract);
+    }
+
+    /**
+     * @param Authenticatable $user
+     * @param Contract $contract
+     * @return bool
+     */
+    protected function ownContract(Authenticatable $user, Contract $contract): bool
+    {
+        $allow = false;
+        if (Auth::guard('admin')->check()) {
+            $allow = true;
+
+        } elseif (Auth::guard('lawyer')->check()) {
+            if ($user->id == $contract->lawyer_id) {
+                $allow = true;
+            }
+
+        } elseif ($user->id === $contract->user_id) {
+            $allow = true;
+        }
+
+        return $allow;
     }
 }

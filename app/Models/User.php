@@ -115,7 +115,7 @@ class User extends Authenticatable
     {
         $value = '';
 
-        if ($this->user_type == 1){
+        if ($this->is_person){
             $value = $this->cpr;
         } else {
             $value = $this->corporate_id;
@@ -126,7 +126,7 @@ class User extends Authenticatable
 
     public function getIsPersonAttribute()
     {
-        return $this->user_type != 2;
+        return (is_null($this->user_type) or $this->user_type == 1);
     }
 
     public function getIsCorporateAttribute()
@@ -146,6 +146,16 @@ class User extends Authenticatable
             : self::USER_TYPE_PERSON;
 
         return $strings[$user_type];
+    }
+
+    public function getGenderStringAttribute()
+    {
+        $genders = [
+            '1' => 'ذكر',
+            '2' => 'أنثى',
+        ];
+
+        return $genders[$this->gender ?? 1] ?? '-';
     }
 
     public function getAttachmentDiskPath($attachment)

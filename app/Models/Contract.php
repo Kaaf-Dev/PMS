@@ -55,6 +55,11 @@ class Contract extends Model
         return $this->hasMany(Ticket::class, 'contract_id', 'id');
     }
 
+    public function contractReplies()
+    {
+        return $this->hasMany(ContractReply::class, 'contract_id', 'id');
+    }
+
     public function scopeActive($query, Carbon $date = null)
     {
         $current_date = $date ?? Carbon::now(); // get date from parameter or get now date

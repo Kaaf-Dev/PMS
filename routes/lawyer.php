@@ -37,7 +37,7 @@ Route::prefix('lawyer')->group(function () {
             ],
         ], function () {
             Route::get('/', Lawyer\Contract\Index::class)->name('lawyer.contracts');
-            Route::get('/{contract_id}/details', Maintenance\Ticket\Details::class)->name('lawyer.contracts.details');
+            Route::get('/{contract_id}/details', Lawyer\Contract\Details::class)->name('lawyer.contracts.details');
         });
 
     });

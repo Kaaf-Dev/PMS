@@ -36,6 +36,11 @@ class Lawyer extends Authenticatable
         return $this->hasMany(Contract::class);
     }
 
+    public function contractReplies()
+    {
+        return $this->hasMany(ContractReply::class, 'contract_id', 'id');
+    }
+
     public function getProfilePhotoUrlAttribute()
     {
         return $this->defaultProfilePhotoUrl();

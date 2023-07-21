@@ -29,11 +29,11 @@
                     <!--end::Label-->
                     <!--begin::Image placeholder-->
                     <style>.image-input-placeholder {
-                            background-image: url('assets/media/svg/files/blank-image.svg');
+                            background-image: url('{{ asset('admin-assets/media/svg/files/blank-image.svg') }}');
                         }
 
                         [data-theme="dark"] .image-input-placeholder {
-                            background-image: url('assets/media/svg/files/blank-image-dark.svg');
+                            background-image: url('{{ asset('admin-assets/media/svg/files/blank-image-dark.svg') }}');
                         }</style>
                     <!--end::Image placeholder-->
                     <!--begin::Image input-->
