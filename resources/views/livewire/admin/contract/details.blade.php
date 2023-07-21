@@ -53,6 +53,12 @@
                         @livewire('admin.contract.details.invoices-list', ['contract_id' => $this->contract->id])
                     <!--end::Card-->
 
+                    @if($this->contract->contract_replies_count > 0 or $this->contract->is_lawyerable)
+                        <!--begin::Card-->
+                        @livewire('admin.contract.details.replies', ['contract' => $this->contract->id])
+                        <!--end::Card-->
+                    @endif
+
                 </div>
                 <!--end::Content-->
                 <!--begin::Sidebar-->

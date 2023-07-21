@@ -75,7 +75,10 @@ class Overview extends Component
 
     public function getContractProperty()
     {
-        return Contract::with('apartments')
+        return Contract::with([
+            'apartments',
+            'apartments.property'
+        ])
             ->findOrFail($this->contract_id);
     }
 

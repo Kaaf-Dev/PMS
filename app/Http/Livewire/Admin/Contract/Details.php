@@ -15,6 +15,14 @@ class Details extends Component
         $this->contract_id = $contract_id;
     }
 
+    public function getListeners()
+    {
+        return [
+            'contract-lawyer-assigned' => '$refresh',
+            'contract-lawyer-unassigned' => '$refresh',
+        ];
+    }
+
     public function render()
     {
         return view('livewire.admin.contract.details')
@@ -23,7 +31,10 @@ class Details extends Component
 
     public function getContractProperty()
     {
-        return Contract::with('apartments')
+        return Contract::with([
+            'apartments',
+        ])
+            ->withCount('contractReplies')
             ->findOrFail($this->contract_id);
     }
 }
