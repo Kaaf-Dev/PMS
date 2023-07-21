@@ -205,5 +205,27 @@ function getAdminGlobalModals()
             ]
         ],
 
+        [
+            'modal_id' => 'kt_modal_create_lawyer',
+            'livewire_component' => 'admin.lawyer.form.create-new',
+            'emit_show' => 'show-lawyer-create-modal',
+            'emit_hide' => 'hide-lawyer-create-modal',
+            'details' => [
+                'title' => 'تسجيل جهة قانونية جديدة',
+                'modal_dialog_class' => '',
+            ]
+        ],
+
+        [
+            'modal_id' => 'kt_modal_update_lawyer',
+            'livewire_component' => 'admin.lawyer.form.update-form',
+            'emit_show' => 'show-lawyer-update-modal',
+            'emit_hide' => 'hide-lawyer-update-modal',
+            'details' => [
+                'title' => 'إدارة الجهة القانونية',
+                'modal_dialog_class' => '',
+            ]
+        ],
+
     ];
 }

@@ -127,7 +127,7 @@
                             <td colspan="100%">
 
                                 <div class="d-flex flex-column flex-center">
-                                    <img src="{{ asset('user-assets/media/illustrations/sigma-1/5.png') }}"
+                                    <img src="{{ asset('admin-assets/media/illustrations/sigma-1/5.png') }}"
                                          class="mw-350px">
                                     <div class="fs-3 fw-bolder text-dark mb-4">لا يوجد طلبات صيانة</div>
                                     <div class="fs-6"></div>

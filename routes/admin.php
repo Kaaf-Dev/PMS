@@ -91,6 +91,16 @@ Route::prefix('admin')->group(function () {
             Route::get('/', Admin\TicketCategory\Index::class)->name('admin.ticket-categories');
         });
 
+        Route::group([
+            'prefix' => 'lawyers',
+            'middleware' => [
+                'auth:admin',
+            ],
+        ], function () {
+            Route::get('/', Admin\Lawyer\Index::class)->name('admin.lawyers');
+        });
+
+
 
     });
 });
