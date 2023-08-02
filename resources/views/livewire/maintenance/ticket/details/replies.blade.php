@@ -16,7 +16,7 @@
                             <div class="d-flex flex-column">
                                 <!--begin::Title-->
                                 <h1 class="text-gray-800 fw-semibold mb-10">
-                                    الردود
+                                    التعليقات
 
                                     <div wire:loading wire:target="load">
                                         <span class="spinner-border spinner-border-sm align-middle"></span>

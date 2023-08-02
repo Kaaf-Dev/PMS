@@ -16,7 +16,7 @@
                             <div class="d-flex flex-column">
                                 <!--begin::Title-->
                                 <h1 class="text-gray-800 fw-semibold mb-10">
-                                    الردود
+                                    التعليقات
 
                                     <div wire:loading wire:target="load">
                                         <span class="spinner-border spinner-border-sm align-middle"></span>
@@ -75,7 +75,7 @@
                                     <div class="d-flex flex-column flex-center">
                                         <img src="{{ asset('lawyer-assets/media/illustrations/dozzy-1/13.png') }}"
                                              class="mw-350px">
-                                        <div class="fs-3 fw-bolder text-dark mb-4">ابدأ بإضافة الردود بينك وبين إدارة العقار</div>
+                                        <div class="fs-3 fw-bolder text-dark mb-4">ابدأ بإضافة التعليقات بينك وبين إدارة العقار</div>
                                         <div class="fs-6"></div>
                                     </div>
                                 @endforelse

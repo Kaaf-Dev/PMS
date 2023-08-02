@@ -74,7 +74,7 @@
                                     <div class="d-flex flex-column flex-center">
                                         <img src="{{ asset('lawyer-assets/media/illustrations/dozzy-1/13.png') }}"
                                              class="mw-350px">
-                                        <div class="fs-3 fw-bolder text-dark mb-4">ابدأ بإضافة الردود بينك وبين المحامي</div>
+                                        <div class="fs-3 fw-bolder text-dark mb-4">ابدأ بإضافة التعليقات بينك وبين المحامي</div>
                                         <div class="fs-6"></div>
                                     </div>
                                 @endforelse
