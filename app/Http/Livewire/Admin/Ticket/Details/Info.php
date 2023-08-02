@@ -28,6 +28,13 @@ class Info extends Component
         ];
     }
 
+    public function getMessages()
+    {
+        return [
+            'exists' => 'يرجى اختيار قيمة صالحة',
+        ];
+    }
+
     public function mount($ticket)
     {
         $this->ticket = Ticket::with([
@@ -66,8 +73,13 @@ class Info extends Component
     public function save()
     {
         $validated_data = $this->validate();
+
         if (!isset($validated_data['ticket']['maintenance_company_id']) or empty($validated_data['ticket']['maintenance_company_id'])) {
             $this->ticket->maintenance_company_id = null;
+        }
+
+        if (!isset($validated_data['ticket']['ticket_category_id']) or empty($validated_data['ticket']['ticket_category_id'])) {
+            $this->ticket->ticket_category_id = null;
         }
         if ($this->ticket->save()) {
             $this->emit('ticket-updated');

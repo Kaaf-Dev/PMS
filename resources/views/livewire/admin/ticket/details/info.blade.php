@@ -56,7 +56,7 @@
                     <label class="fs-6 form-label fw-bold text-dark">الفئة</label>
                     <!--begin::Select-->
                     <select wire:model.defer="ticket.ticket_category_id" class="form-select mb-2">
-                        <option value="">-- تحديد --</option>
+                        <option value="">غير محدد</option>
                         @foreach($this->ticket_categories ?? [] as $key => $category)
                             <option value="{{ $category->id }}">{{ $category->title }}</option>
                         @endforeach
