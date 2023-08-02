@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\User\Ticket\Form;
 
 use App\Models\Ticket;
-use App\Models\TicketCategory;
 use App\Traits\WithAlert;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -19,7 +18,6 @@ class CreateForm extends Component
     public $contracts;
 
     public $selected_contract;
-    public $selected_ticket_category;
     public $subject;
     public $description;
 
@@ -30,7 +28,6 @@ class CreateForm extends Component
     {
         return [
             'selected_contract' => 'required|exists:contracts,id',
-            'selected_ticket_category' => 'required|exists:ticket_categories,id',
             'subject' => 'required',
             'description' => 'required|max:5000',
             'attachments.*' => 'required|mimes:png,jpg,jpeg|max:1024',
@@ -68,8 +65,6 @@ class CreateForm extends Component
             ->with([
                 'apartments.property',
             ])->get();
-        $this->ticket_categories = TicketCategory::all();
-
         if(isset($params['contract'])) {
             $this->selected_contract = $params;
         }
@@ -100,7 +95,6 @@ class CreateForm extends Component
         $validated_data = $this->validate();
         $ticket = new Ticket();
         $ticket->contract_id = $validated_data['selected_contract'];
-        $ticket->ticket_category_id = $validated_data['selected_ticket_category'];
         $ticket->subject = $validated_data['subject'];
         $ticket->description = $validated_data['description'];
         if ($ticket->save()) {
@@ -132,7 +126,6 @@ class CreateForm extends Component
     {
         $this->reset([
             'selected_contract',
-            'selected_ticket_category',
             'subject',
             'description',
             'attachment',

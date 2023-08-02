@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin\Ticket\Details;
 
 use App\Models\MaintenanceCompany;
 use App\Models\Ticket;
+use App\Models\TicketCategory;
 use App\Traits\WithAlert;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
@@ -18,6 +19,7 @@ class Info extends Component
     public function rules()
     {
         return [
+            'ticket.ticket_category_id' => 'nullable|exists:ticket_categories,id',
             'ticket.maintenance_company_id' => 'nullable|exists:maintenance_companies,id',
             'ticket.status' => [
                 'required',
@@ -54,6 +56,11 @@ class Info extends Component
     {
         \Debugbar::info(Ticket::getStatusValues());
         return Ticket::getStatusValues();
+    }
+
+    public function getTicketCategoriesProperty()
+    {
+        return TicketCategory::all();
     }
 
     public function save()

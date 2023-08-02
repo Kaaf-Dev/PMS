@@ -105,7 +105,7 @@
                                 <!--end::User-->
                             </td>
                             <td>
-                                {{ $ticket->ticketCategory->title }}
+                                {{ optional($ticket->ticketCategory)->title }}
                             </td>
                             <td>
                                 {{ $ticket->updated_at_human }}

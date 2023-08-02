@@ -77,7 +77,7 @@
 
                                                         <!--end::Title-->
                                                         <!--begin::Label-->
-                                                        <span class="badge badge-light my-1">{{ $ticket->ticketCategory->title }}</span>
+                                                        <span class="badge badge-light my-1">{{ optional($ticket->ticketCategory)->title }}</span>
                                                         <!--end::Label-->
                                                     </div>
 

@@ -52,6 +52,30 @@
                 <!--end::Input group-->
 
                 <!--begin::Input group-->
+                <div class="mb-4">
+                    <label class="fs-6 form-label fw-bold text-dark">الفئة</label>
+                    <!--begin::Select-->
+                    <select wire:model.defer="ticket.ticket_category_id" class="form-select mb-2">
+                        <option value="">-- تحديد --</option>
+                        @foreach($this->ticket_categories ?? [] as $key => $category)
+                            <option value="{{ $category->id }}">{{ $category->title }}</option>
+                        @endforeach
+                    </select>
+                    @error('ticket.ticket_category_id')
+                    <div class="text-danger">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                    <!--end::Select-->
+                    @if(!$this->ticket->ticket_category_id)
+                        <div class="alert alert-danger border border-danger border-dashed mt-4">
+                            لم يتم تحديد فئة للتذكرة بعد!
+                        </div>
+                    @endif
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group-->
                 <div class="">
                     <label class="fs-6 form-label fw-bold text-dark">الحالة</label>
                     <!--begin::Select-->

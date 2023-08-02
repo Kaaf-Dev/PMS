@@ -19,22 +19,6 @@
         <div class="row g-9 mb-8">
             <!--begin::Col-->
             <div class="col-md-6 fv-row">
-                <label class="required fs-6 fw-semibold mb-2">الفئة</label>
-                <select wire:model.defer="selected_ticket_category" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a product" name="product">
-                    <option value="">-- اختيار --</option>
-                    @foreach($this->ticket_categories ?? [] as $category)
-                        <option value="{{ $category->id }}">{{ $category->title }}</option>
-                    @endforeach
-                </select>
-                @error('selected_ticket_category')
-                <span class="text-danger">
-                    {{ $message }}
-                </span>
-                @enderror
-            </div>
-            <!--end::Col-->
-            <!--begin::Col-->
-            <div class="col-md-6 fv-row">
                 <label class="required fs-6 fw-semibold mb-2">عقد الإيجار</label>
                 <select wire:model.defer="selected_contract" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a product" name="product">
                     <option value="">-- اختيار --</option>
