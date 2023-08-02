@@ -14,12 +14,10 @@ class Ticket extends Model
     use SoftDeletes;
 
     const STATUS_NEW = '1';
-    const STATUS_PENDING = '2';
-    const STATUS_INCOMPLETE = '3';
-    const STATUS_UNDER_PROCESSING = '4';
-    const STATUS_COMPLETE = '5';
-    const STATUS_REJECTED = '6';
-    const STATUS_CANCELED = '7';
+    const STATUS_UNDER_PROCESSING = '2';
+    const STATUS_COMPLETE = '3';
+    const STATUS_REJECTED = '4';
+    const STATUS_CANCELED = '5';
 
 
     public $incrementing = false;
@@ -85,8 +83,6 @@ class Ticket extends Model
     {
         return $query->where(function () use ($query) {
             return $query->where('status', '=', Ticket::STATUS_NEW)
-                ->orWhere('status', '=', Ticket::STATUS_PENDING)
-                ->orWhere('status', '=', Ticket::STATUS_INCOMPLETE)
                 ->orWhere('status', '=', Ticket::STATUS_UNDER_PROCESSING);
         });
     }
@@ -156,12 +152,9 @@ class Ticket extends Model
     {
         return [
             Ticket::STATUS_NEW => 'جديد',
-            Ticket::STATUS_PENDING => 'قيد الدراسة',
-            Ticket::STATUS_INCOMPLETE => 'بحاجة إلى استكمال',
-            Ticket::STATUS_UNDER_PROCESSING => 'قيد المعالجة',
-            Ticket::STATUS_COMPLETE => 'تم الإنجاز',
+            Ticket::STATUS_UNDER_PROCESSING => 'قيد الإنجاز',
+            Ticket::STATUS_COMPLETE => 'مكتملة',
             Ticket::STATUS_REJECTED => 'مرفوض',
-//            Ticket::STATUS_CANCELED => 'ملغي',
         ];
     }
 
@@ -169,12 +162,9 @@ class Ticket extends Model
     {
         return [
             Ticket::STATUS_NEW,
-            Ticket::STATUS_PENDING,
-            Ticket::STATUS_INCOMPLETE,
             Ticket::STATUS_UNDER_PROCESSING,
             Ticket::STATUS_COMPLETE,
             Ticket::STATUS_REJECTED,
-//            Ticket::STATUS_CANCELED,
         ];
     }
 
@@ -191,14 +181,12 @@ class Ticket extends Model
         $status = $this->status ?? 1;
         $status_classes = [
             Ticket::STATUS_NEW => 'info',
-            Ticket::STATUS_PENDING => 'info',
-            Ticket::STATUS_INCOMPLETE => 'warning',
             Ticket::STATUS_UNDER_PROCESSING => 'primary',
             Ticket::STATUS_COMPLETE => 'success',
             Ticket::STATUS_REJECTED => 'danger',
             Ticket::STATUS_CANCELED => 'dark',
         ];
-        return $status_classes[$status];
+        return $status_classes[$status] ?? $status_classes[1];
     }
 
     public function getStatusIconAttribute()
@@ -206,14 +194,12 @@ class Ticket extends Model
         $status = $this->status ?? 1;
         $status_icons = [
             Ticket::STATUS_NEW => 'add-files',
-            Ticket::STATUS_PENDING => 'watch',
-            Ticket::STATUS_INCOMPLETE => 'information',
             Ticket::STATUS_UNDER_PROCESSING => 'delivery-time',
             Ticket::STATUS_COMPLETE => 'file-added',
             Ticket::STATUS_REJECTED => 'cross-circle',
             Ticket::STATUS_CANCELED => 'delete-folder',
         ];
-        return $status_icons[$status];
+        return $status_icons[$status] ?? $status_icons[1];
     }
 
     public function getCancelableAttribute()
