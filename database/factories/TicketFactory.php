@@ -30,6 +30,7 @@ class TicketFactory extends Factory
         $contractsIds = Contract::pluck('id')->toArray();
         $maintenanceCompaniesIds = MaintenanceCompany::pluck('id')->toArray();
         $status = $this->faker->randomElement(Ticket::getStatusValues());
+        $priority = $this->faker->randomElement(Ticket::getPriorityValues());
         return [
             'id' => Str::uuid(),
             'contract_id' => $this->faker->randomElement($contractsIds),
@@ -37,6 +38,7 @@ class TicketFactory extends Factory
             'ticket_category_id' => $this->faker->randomElement($ticketCategoryIds),
             'subject' => $this->faker->sentence,
             'status' => $status,
+            'priority' => $priority,
             'description' => $this->faker->paragraph,
             'visit_at' => $this->faker->dateTimeThisYear,
             'visited_at' => $this->faker->dateTimeThisYear,

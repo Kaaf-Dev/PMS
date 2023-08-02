@@ -16,6 +16,20 @@
                 <!--end::Border-->
                 <!--begin::Input group-->
                 <div class="mb-5">
+                    <label class="fs-6 form-label fw-bold text-dark">الأولوية</label>
+                    <!--begin::Select-->
+                    <select wire:model.defer="priority" class="form-select form-select-solid">
+                        <option value="">الجميع</option>
+                        @foreach($this->priorityList ?? [] as $key => $priority)
+                            <option value="{{ $key }}">{{ $priority }}</option>
+                        @endforeach
+                    </select>
+                    <!--end::Select-->
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group-->
+                <div class="mb-5">
                     <label class="fs-6 form-label fw-bold text-dark">حالة الطلب</label>
                     <!--begin::Select-->
                     <select wire:model.defer="status" class="form-select form-select-solid">

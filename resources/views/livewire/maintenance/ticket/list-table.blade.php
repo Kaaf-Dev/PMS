@@ -38,6 +38,16 @@
                                 @endif
                             @endif
                         </th>
+                        <th wire:click="orderBy('priority')" class="min-w-90px">
+                            الأولوية
+                            @if($order_by == 'status')
+                                @if($order_as == 'desc')
+                                    <i class="ki-outline ki-arrow-down"></i>
+                                @else
+                                    <i class="ki-outline ki-arrow-up"></i>
+                                @endif
+                            @endif
+                        </th>
                         <th wire:click="orderBy('status')" class="min-w-90px">
                             الحالة
                             @if($order_by == 'status')
@@ -84,6 +94,9 @@
                             <td>
                                 {{ $ticket->visit_in_human }}
                                 <div class="fw-semibold fs-6 text-gray-400">{{ $ticket->visit_in_date_human }}</div>
+                            </td>
+                            <td>
+                                <span class="badge badge-light-{{ $ticket->priority_class }} fw-bold px-4 py-3">{{ $ticket->priority_string }}</span>
                             </td>
                             <td>
                                 <span class="badge badge-light-{{ $ticket->status_class }} fw-bold px-4 py-3">{{ $ticket->status_string }}</span>

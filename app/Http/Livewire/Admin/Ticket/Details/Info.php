@@ -21,6 +21,10 @@ class Info extends Component
         return [
             'ticket.ticket_category_id' => 'nullable|exists:ticket_categories,id',
             'ticket.maintenance_company_id' => 'nullable|exists:maintenance_companies,id',
+            'ticket.priority' => [
+                'nullable',
+                Rule::in($this->getPriorityValueProperty())
+            ],
             'ticket.status' => [
                 'required',
                 Rule::in($this->getStatusValueProperty())
@@ -55,14 +59,22 @@ class Info extends Component
 
     public function getStatusListProperty()
     {
-        \Debugbar::info(Ticket::getStatusList());
         return Ticket::getStatusList();
     }
 
     public function getStatusValueProperty()
     {
-        \Debugbar::info(Ticket::getStatusValues());
         return Ticket::getStatusValues();
+    }
+
+    public function getPriorityListProperty()
+    {
+        return Ticket::getPriorityList();
+    }
+
+    public function getPriorityValueProperty()
+    {
+        return Ticket::getPriorityValues();
     }
 
     public function getTicketCategoriesProperty()
@@ -81,6 +93,11 @@ class Info extends Component
         if (!isset($validated_data['ticket']['ticket_category_id']) or empty($validated_data['ticket']['ticket_category_id'])) {
             $this->ticket->ticket_category_id = null;
         }
+
+        if (!isset($validated_data['ticket']['priority']) or empty($validated_data['ticket']['priority'])) {
+            $this->ticket->priority = null;
+        }
+
         if ($this->ticket->save()) {
             $this->emit('ticket-updated');
             $this->showSuccessAlert('تمت العملية بنجاح');

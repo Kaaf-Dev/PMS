@@ -14,6 +14,7 @@ class Filter extends Component
 
     public $search;
     public $status;
+    public $priority;
     public $user_id;
     public $maintenance_company_id;
     public $ticket_categories;
@@ -28,6 +29,10 @@ class Filter extends Component
             'status' => [
                 'nullable',
                 Rule::in(Ticket::getStatusValues()),
+            ],
+            'priority' => [
+                'nullable',
+                Rule::in(Ticket::getPriorityValues()),
             ],
             'ticket_categories' => 'nullable|array',
             'ticket_categories.*' => 'nullable',
@@ -53,6 +58,11 @@ class Filter extends Component
     public function getStatusListProperty()
     {
         return Ticket::getStatusList();
+    }
+
+    public function getPriorityListProperty()
+    {
+        return Ticket::getPriorityList();
     }
 
     public function getTicketCategoriesProperty()

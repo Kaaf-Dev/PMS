@@ -60,6 +60,10 @@ class ListTable extends Component
         $auth = Auth::guard('maintenance_company')->user();
         $tickets = $auth->tickets();
 
+        if (isset($this->filters['priority'])) {
+            $tickets = $tickets->where('priority', '=', $this->filters['priority']);
+        }
+
         if (isset($this->filters['status'])) {
             $tickets = $tickets->where('status', '=', $this->filters['status']);
         }

@@ -19,6 +19,9 @@ class Ticket extends Model
     const STATUS_REJECTED = '4';
     const STATUS_CANCELED = '5';
 
+    const PRIORITY_NORMAL = '1';
+    const PRIORITY_URGENT = '2';
+
 
     public $incrementing = false;
 
@@ -28,6 +31,7 @@ class Ticket extends Model
         'maintenance_company_id',
         'subject',
         'status',
+        'priority',
         'description',
         'visit_at',
         'visited_at',
@@ -202,6 +206,51 @@ class Ticket extends Model
         return $status_icons[$status] ?? $status_icons[1];
     }
 
+    public static function getPriorityList()
+    {
+        return [
+            Ticket::PRIORITY_NORMAL => 'عادية',
+            Ticket::PRIORITY_URGENT => 'طارئة',
+        ];
+    }
+
+    public static function getPriorityValues()
+    {
+        return [
+            Ticket::PRIORITY_NORMAL,
+            Ticket::PRIORITY_URGENT,
+        ];
+    }
+
+    public function getPriorityStringAttribute()
+    {
+        $priority = $this->priority ?? 1;
+
+        $priority_strings = $this->getPriorityList();
+        return $priority_strings[$priority] ?? $priority_strings[1];
+    }
+
+
+    public function getPriorityClassAttribute()
+    {
+        $priority = $this->priority ?? 1;
+        $priority_classes = [
+            Ticket::PRIORITY_NORMAL => 'primary',
+            Ticket::PRIORITY_URGENT => 'danger',
+        ];
+        return $priority_classes[$priority] ?? $priority_classes[1];
+    }
+
+    public function getPriorityIconAttribute()
+    {
+        $priority = $this->priority ?? 1;
+        $priority_classes = [
+            Ticket::PRIORITY_NORMAL => 'time',
+            Ticket::PRIORITY_URGENT => 'information-2',
+        ];
+        return $priority_classes[$priority] ?? $priority_classes[1];
+    }
+
     public function getCancelableAttribute()
     {
         return $this->status <= SELF::STATUS_UNDER_PROCESSING;
@@ -230,6 +279,11 @@ class Ticket extends Model
     public function getIsShowVerificationCodeToUserAttribute()
     {
         return $this->status == SELF::STATUS_UNDER_PROCESSING and $this->is_verification_code_sent;
+    }
+
+    public function getIsUrgentAttribute()
+    {
+        return $this->priority == SELF::PRIORITY_URGENT;
     }
 
     public function getCreatedAtHumanAttribute()

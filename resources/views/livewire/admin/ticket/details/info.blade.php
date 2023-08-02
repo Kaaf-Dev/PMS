@@ -76,7 +76,26 @@
                 <!--end::Input group-->
 
                 <!--begin::Input group-->
-                <div class="">
+                <div class="mb-4">
+                    <label class="fs-6 form-label fw-bold text-dark">الأولوية</label>
+                    <!--begin::Select-->
+                    <select wire:model.defer="ticket.priority" class="form-select mb-2">
+                        <option value="">غير محدد</option>
+                        @foreach($this->priority_list ?? [] as $key => $priority)
+                            <option value="{{ $key }}">{{ $priority }}</option>
+                        @endforeach
+                    </select>
+                    @error('ticket.priority')
+                    <div class="text-danger">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                    <!--end::Select-->
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group-->
+                <div class="mb-4">
                     <label class="fs-6 form-label fw-bold text-dark">الحالة</label>
                     <!--begin::Select-->
                     <select wire:model.defer="ticket.status" class="form-select mb-2">

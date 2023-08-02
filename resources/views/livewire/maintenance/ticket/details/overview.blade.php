@@ -6,6 +6,19 @@
             <div class="d-flex flex-column flex-xl-row p-7">
                 <!--begin::Content-->
                 <div class="flex-lg-row-fluid me-xl-15 mb-20 mb-xl-0">
+
+                    @if($this->ticket->is_urgent)
+                        <!--begin::Ribbon-->
+                        <div class="ribbon ribbon-triangle ribbon-top-start border-{{ $this->ticket->priority_class }}">
+                            <!--begin::Ribbon icon-->
+                            <div class="ribbon-icon mt-n5 ms-n6">
+                                <i class="ki-outline ki-{{ $this->ticket->priority_icon }} fs-2 text-white"></i>
+                            </div>
+                            <!--end::Ribbon icon-->
+                        </div>
+                        <!--end::Ribbon-->
+                    @endif
+
                     <!--begin::Ticket view-->
                     <div class="mb-0">
                         <!--begin::Heading-->
@@ -20,6 +33,15 @@
                                 <!--end::Title-->
                                 <!--begin::Info-->
                                 <div class="">
+
+                                    @if($this->ticket->is_urgent)
+                                        <!--begin::Label-->
+                                        <span class="fw-semibold text-muted me-2">
+                                            <span class="badge badge-{{ $this->ticket->priority_class }}">{{ $this->ticket->priority_string }}</span>
+                                        </span>
+                                        <!--end::Label-->
+                                    @endif
+
                                     <!--begin::Label-->
                                     <span class="fw-semibold text-muted me-6">
                                         <span class="badge badge-{{ $this->ticket->status_class }}">{{ $this->ticket->status_string }}</span>

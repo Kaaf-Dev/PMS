@@ -75,6 +75,10 @@ class ListTable extends Component
             $tickets = $tickets->where('status', '=', $this->filters['status']);
         }
 
+        if (isset($this->filters['priority'])) {
+            $tickets = $tickets->where('priority', '=', $this->filters['priority']);
+        }
+
         if (isset( $this->filters['user_id'] )) {
             $tickets = $tickets->user($this->filters['user_id']);
         }
