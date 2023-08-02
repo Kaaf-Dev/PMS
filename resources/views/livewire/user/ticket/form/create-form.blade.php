@@ -37,7 +37,7 @@
         <!--end::Input group-->
         <!--begin::Input group-->
         <div class="d-flex flex-column mb-8 fv-row">
-            <label class="fs-6 fw-semibold mb-2">الوصف</label>
+            <label class="fs-6 fw-semibold mb-2">وصف طلب الصيانة</label>
             <textarea wire:model.defer="description" class="form-control form-control-solid" rows="4" name="description" placeholder="ادخل وصفًا بالتفاصيل للمشكلة"></textarea>
             @error('description')
             <span class="text-danger">
