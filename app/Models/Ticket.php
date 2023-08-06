@@ -13,6 +13,8 @@ class Ticket extends Model
     use HasFactory;
     use SoftDeletes;
 
+    public $no_prefix = 'T-';
+
     const STATUS_NEW = '1';
     const STATUS_UNDER_PROCESSING = '2';
     const STATUS_COMPLETE = '3';
@@ -27,6 +29,7 @@ class Ticket extends Model
 
     protected $fillable = [
         'id',
+        'no',
         'contract_id',
         'maintenance_company_id',
         'subject',
@@ -55,7 +58,38 @@ class Ticket extends Model
             if (!$model->status) {
                 $model->status = Ticket::STATUS_NEW;
             }
+
+            if ($model->no === null) {
+                $model->setAttribute('no', $model->nextNo());
+            }
+
         });
+    }
+
+    public function nextNo ()
+    {
+        $year = date('Y'); // Current year
+        $month = date('n'); // Current month
+
+        $max_order = SELF::withTrashed()->whereYear('created_at', $year)
+            ->whereMonth('created_at', $month)
+            ->max('no');
+
+        $max_order = substr($max_order, -7);
+        $max_order = (int) $max_order;
+        $next_order = $max_order + 1;
+
+
+        $no = substr($year, 2, 2)
+            .str_pad($month, 2, '0', STR_PAD_LEFT)
+            .str_pad($next_order, 7, '0', STR_PAD_LEFT);
+
+        return $this->getNoPrefix() . $no;
+    }
+
+    public function getNoPrefix()
+    {
+        return $this->no_prefix;
     }
 
     public function contract()
