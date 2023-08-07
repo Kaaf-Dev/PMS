@@ -68,6 +68,7 @@
                                                 <div class="d-flex flex-column">
                                                     <!--begin::Content-->
                                                     <div class="d-flex align-items-center mb-2">
+                                                        <span class="badge badge-primary badge-outline my-1 me-2">الرقم المرجعي: {{ $ticket->no ?? '-' }}</span>
                                                         <span class="badge badge-{{ $ticket->status_class }} my-1">{{ $ticket->status_string }}</span>
                                                     </div>
 

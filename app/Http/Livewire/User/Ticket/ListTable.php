@@ -56,7 +56,8 @@ class ListTable extends Component
                 })
                 ->where(function ($query) use ($search) {
                     $query->where('subject', 'like', '%'. $search .'%')
-                    ->orWhere('description', 'like', '%'. $search .'%');
+                    ->orWhere('description', 'like', '%'. $search .'%')
+                    ->orWhere('no', 'like', '%'. $search .'%');
                 })
                 ->orderBy('status', 'asc')
                 ->orderBy('updated_at', 'desc')
