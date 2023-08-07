@@ -8,8 +8,8 @@
                 <table class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold">
                     <thead class="fs-7 text-gray-400 text-uppercase">
                     <tr>
-                        <th wire:click="orderBy('contract_id')" class="min-w-250px">
-                            الطلب
+                        <th wire:click="orderBy('contract_id')" class="min-w-auto">
+                            طلب الصيانة
                             @if($order_by == 'contract_id')
                                 @if($order_as == 'desc')
                                     <i class="ki-outline ki-arrow-down"></i>
@@ -18,7 +18,19 @@
                                 @endif
                             @endif
                         </th>
-                        <th wire:click="orderBy('maintenance_company_id')" class="min-w-250px">
+                        <th class="min-w-250px">
+                            الموضوع
+                        </th>
+
+                        <th class="min-w-auto">
+                            العقار
+                        </th>
+
+                        <th class="min-w-auto">
+                            رقم الهاتف
+                        </th>
+
+                        <th wire:click="orderBy('maintenance_company_id')" class="min-w-auto">
                             شركة الصيانة
                             @if($order_by == 'maintenance_company_id')
                                 @if($order_as == 'desc')
@@ -28,7 +40,7 @@
                                 @endif
                             @endif
                         </th>
-                        <th     class="min-w-150px">
+                        <th class="min-w-150px">
                             الفئة
                         </th>
                         <th wire:click="orderBy('updated_at')" class="min-w-150px">
@@ -84,13 +96,59 @@
                                     <!--begin::Info-->
                                     <div class="d-flex flex-column justify-content-center">
                                         <a href="{{ route('admin.tickets.details', ['ticket_id' => $ticket->id]) }}" class="mb-1 text-gray-800 text-hover-primary">
-                                            {{ $ticket->subject }}</a>
-                                        <div class="fw-semibold fs-6 text-gray-400">{{ $ticket->contract->user->name }}</div>
+                                            {{ $ticket->no }}
+                                        </a>
                                     </div>
                                     <!--end::Info-->
                                 </div>
                                 <!--end::User-->
                             </td>
+
+                            <td>
+                                <!--begin::Subject-->
+                                <div class="d-flex align-items-center">
+                                    <!--begin::Info-->
+                                    <div class="d-flex flex-column justify-content-center">
+                                        <a href="{{ route('admin.tickets.details', ['ticket_id' => $ticket->id]) }}" class="mb-1 text-gray-800 text-hover-primary">
+                                            {{ $ticket->subject }}</a>
+                                            <a class="fw-semibold fs-6 text-gray-400" href="{{ route('admin.users.details', ['user_id' => $ticket->contract->user->id]) }}">
+                                                {{ $ticket->contract->user->name }}
+                                            </a>
+                                    </div>
+                                    <!--end::Subject-->
+                                </div>
+                                <!--end::User-->
+                            </td>
+
+                            <td>
+                                <!--begin::Subject-->
+                                <div class="d-flex align-items-center">
+                                    <!--begin::Info-->
+                                    <div class="d-flex flex-column justify-content-center">
+                                        <a href="{{ route('admin.tickets.details', ['ticket_id' => $ticket->id]) }}" class="mb-1 text-gray-800 text-hover-primary">
+                                            {{ $ticket->subject }}</a>
+                                            <a class="fw-semibold fs-6 text-gray-400" href="{{ route('admin.users.details', ['user_id' => $ticket->contract->user->id]) }}">
+                                                {{ $ticket->contract->user->name }}
+                                            </a>
+                                    </div>
+                                    <!--end::Subject-->
+                                </div>
+                                <!--end::User-->
+                            </td>
+
+                            <td>
+                                <!--begin::Subject-->
+                                <div class="d-flex align-items-center">
+                                    <!--begin::Info-->
+                                    <div class="d-flex flex-column justify-content-center">
+                                        <a href="{{ route('admin.tickets.details', ['ticket_id' => $ticket->id]) }}" class="mb-1 text-gray-800 text-hover-primary">
+                                            {{ $ticket->contract->user->phone_human }}</a>
+                                    </div>
+                                    <!--end::Subject-->
+                                </div>
+                                <!--end::User-->
+                            </td>
+
                             <td>
                                 <!--begin::Maintenance Company-->
                                 <div class="d-flex align-items-center">

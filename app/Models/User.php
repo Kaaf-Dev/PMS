@@ -184,4 +184,15 @@ class User extends Authenticatable
 
         $this->username = $username;
     }
+
+    public function getPhoneHumanAttribute()
+    {
+        $phone = '-';
+        if ($this->is_person) {
+            $phone = $this->phone;
+        } elseif ($this->is_corporate) {
+            $phone = $this->contact_phone;
+        }
+        return $phone;
+    }
 }
