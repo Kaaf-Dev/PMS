@@ -65,6 +65,8 @@ class ListTable extends Component
             'contract.user',
             'ticketCategory',
             'maintenanceCompany',
+            'apartment',
+            'property',
         ]);
 
         if (isset($this->filters['search'])) {

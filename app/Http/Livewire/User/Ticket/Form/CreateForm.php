@@ -2,9 +2,13 @@
 
 namespace App\Http\Livewire\User\Ticket\Form;
 
+use App\Models\ContractApartment;
+use App\Models\Property;
 use App\Models\Ticket;
 use App\Traits\WithAlert;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -13,11 +17,14 @@ class CreateForm extends Component
 
     use WithFileUploads;
     use WithAlert;
+    use AuthorizesRequests;
 
     public $ticket_categories;
-    public $contracts;
 
-    public $selected_contract;
+    public $properties;
+
+    public $selected_property;
+    public $selected_contract_apartment;
     public $subject;
     public $description;
 
@@ -27,7 +34,8 @@ class CreateForm extends Component
     public function rules()
     {
         return [
-            'selected_contract' => 'required|exists:contracts,id',
+            'selected_property' => 'required|exists:properties,id',
+            'selected_contract_apartment' => 'required|exists:contract_apartment,id',
             'subject' => 'required',
             'description' => 'required|max:5000',
             'attachments.*' => 'required|mimes:png,jpg,jpeg|max:1024',
@@ -61,13 +69,7 @@ class CreateForm extends Component
     {
         $this->resetInputs();
         $this->resetErrorBag();
-        $this->contracts = Auth::user()->contracts()
-            ->with([
-                'apartments.property',
-            ])->get();
-        if(isset($params['contract'])) {
-            $this->selected_contract = $params;
-        }
+        $this->fetchProperties();
 
     }
 
@@ -90,11 +92,52 @@ class CreateForm extends Component
         }
     }
 
+    public function getContracts()
+    {
+        return Auth::user()->contracts()
+            ->with([
+                'apartments.property',
+            ])->get();
+    }
+
+    public function fetchProperties()
+    {
+        $contracts = $this->getContracts();
+        $contract_ids = $contracts->pluck('id')->toArray();
+        $apartments = DB::table('contract_apartment')
+            ->join('apartments', 'contract_apartment.apartment_id', '=', 'apartments.id')
+            ->whereIn('contract_id', $contract_ids)
+            ->get();
+        $property_ids = $apartments->pluck('property_id')->toArray();
+        $this->properties = Property::whereIn('id', $property_ids)->get();
+    }
+
+    public function getApartmentsProperty()
+    {
+        $contracts = $this->getContracts();
+        $contract_ids = $contracts->pluck('id')->toArray();
+
+        $apartments = DB::table('contract_apartment')
+            ->selectRaw('*, contract_apartment.id as contract_apartment_id')
+            ->join('apartments', 'contract_apartment.apartment_id', '=', 'apartments.id')
+            ->whereIn('contract_id', $contract_ids)
+            ->where('property_id', '=', $this->selected_property)
+            ->get();
+
+        return $apartments;
+    }
+
     public function submit()
     {
         $validated_data = $this->validate();
         $ticket = new Ticket();
-        $ticket->contract_id = $validated_data['selected_contract'];
+
+        $contract_apartment = ContractApartment::find($this->selected_contract_apartment);
+        $this->authorize('createTicket', $contract_apartment);
+
+        $ticket->contract_id = $contract_apartment->contract_id;
+        $ticket->property_id = $validated_data['selected_property'];
+        $ticket->apartment_id = $contract_apartment->apartment_id;
         $ticket->subject = $validated_data['subject'];
         $ticket->description = $validated_data['description'];
         if ($ticket->save()) {
@@ -106,8 +149,6 @@ class CreateForm extends Component
                 ];
             }
             $ticket_attachments = $ticket->ticketAttachments()->createMany($attachments);
-            \Debugbar::info($attachments, $ticket_attachments);
-            \Debugbar::info();
             $this->showSuccessAlert('تمت إضافة الطلب بنجاح');
             $this->hideMe();
             $this->emit('ticket-added');
@@ -125,7 +166,8 @@ class CreateForm extends Component
     public function resetInputs()
     {
         $this->reset([
-            'selected_contract',
+            'selected_property',
+            'selected_contract_apartment',
             'subject',
             'description',
             'attachment',

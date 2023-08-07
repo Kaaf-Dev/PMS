@@ -22,11 +22,11 @@
                             الموضوع
                         </th>
 
-                        <th class="min-w-auto">
+                        <th class="min-w-150px">
                             العقار
                         </th>
 
-                        <th class="min-w-auto">
+                        <th class="min-w-150px">
                             رقم الهاتف
                         </th>
 
@@ -126,9 +126,9 @@
                                     <!--begin::Info-->
                                     <div class="d-flex flex-column justify-content-center">
                                         <a href="{{ route('admin.tickets.details', ['ticket_id' => $ticket->id]) }}" class="mb-1 text-gray-800 text-hover-primary">
-                                            {{ $ticket->subject }}</a>
+                                            {{ optional($ticket->property)->name }}</a>
                                             <a class="fw-semibold fs-6 text-gray-400" href="{{ route('admin.users.details', ['user_id' => $ticket->contract->user->id]) }}">
-                                                {{ $ticket->contract->user->name }}
+                                                {{ optional($ticket->apartment)->name }}
                                             </a>
                                     </div>
                                     <!--end::Subject-->
@@ -141,7 +141,7 @@
                                 <div class="d-flex align-items-center">
                                     <!--begin::Info-->
                                     <div class="d-flex flex-column justify-content-center">
-                                        <a href="{{ route('admin.tickets.details', ['ticket_id' => $ticket->id]) }}" class="mb-1 text-gray-800 text-hover-primary">
+                                        <a href="tel:{{$ticket->contract->user->phone_human}}" class="mb-1 text-gray-800 text-hover-primary">
                                             {{ $ticket->contract->user->phone_human }}</a>
                                     </div>
                                     <!--end::Subject-->
@@ -166,12 +166,10 @@
                                 {{ optional($ticket->ticketCategory)->title }}
                             </td>
                             <td>
-                                {{ $ticket->updated_at_human }}
-                                <div class="fw-semibold fs-6 text-gray-400">{{ $ticket->updated_at_date_human }}</div>
+                                {{ $ticket->updated_at_date_human }}
                             </td>
                             <td>
-                                {{ $ticket->visit_in_human }}
-                                <div class="fw-semibold fs-6 text-gray-400">{{ $ticket->visit_in_date_human }}</div>
+                                {{ $ticket->visit_in_date_human }}
                             </td>
                             <td>
                                 <span class="badge badge-light-{{ $ticket->status_class }} fw-bold px-4 py-3">{{ $ticket->status_string }}</span>

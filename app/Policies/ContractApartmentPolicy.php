@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\ContractApartment;
 use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -9,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 
-class TicketPolicy
+class ContractApartmentPolicy
 {
     use HandlesAuthorization;
 
@@ -33,21 +34,7 @@ class TicketPolicy
      */
     public function view(Authenticatable $user, Ticket $ticket)
     {
-        $allow = false;
 
-        if (Auth::guard('admin')->check()) {
-            $allow = true;
-
-        } elseif (Auth::guard('maintenance_company')->check()) {
-            if ($user->tickets->contains($ticket)) {
-                $allow = true;
-            }
-
-        } elseif ($user->tickets->contains($ticket)) {
-            $allow = true;
-        }
-
-        return $allow;
     }
 
     /**
@@ -58,7 +45,7 @@ class TicketPolicy
      */
     public function create(Authenticatable $user)
     {
-
+        //
     }
 
     /**
@@ -68,7 +55,7 @@ class TicketPolicy
      * @param  \App\Models\Ticket  $ticket
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(Authenticatable $user, Ticket $ticket)
+    public function update(Authenticatable $user, ContractApartment $ticket)
     {
         //
     }
@@ -80,7 +67,7 @@ class TicketPolicy
      * @param  \App\Models\Ticket  $ticket
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(Authenticatable $user, Ticket $ticket)
+    public function delete(Authenticatable $user, ContractApartment $ticket)
     {
         //
     }
@@ -92,7 +79,7 @@ class TicketPolicy
      * @param  \App\Models\Ticket  $ticket
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(Authenticatable $user, Ticket $ticket)
+    public function restore(Authenticatable $user, ContractApartment $ticket)
     {
         //
     }
@@ -109,39 +96,7 @@ class TicketPolicy
         //
     }
 
-    public function cancel(Authenticatable $user, Ticket $ticket)
-    {
-        $allow = false;
-
-        if (Auth::guard('admin')->check()) {
-            $allow = true;
-
-        } elseif ($user->tickets->contains($ticket)) {
-            if ($ticket->cancelable) {
-                $allow = true;
-            }
-        }
-
-        return $allow;
-    }
-
-    public function reply(Authenticatable $user, Ticket $ticket)
-    {
-        $allow = false;
-
-        if (Auth::guard('admin')->check()) {
-            $allow = true;
-
-        } elseif ($user->tickets->contains($ticket)) {
-            if ($ticket->repliable) {
-                $allow = true;
-            }
-        }
-
-        return $allow;
-    }
-
-    public function finish(Authenticatable $user, Ticket $ticket)
+    public function createTicket(Authenticatable $user, ContractApartment $contract_apartment)
     {
         $allow = false;
 
@@ -149,10 +104,14 @@ class TicketPolicy
             $allow = true;
 
         } else {
-            $allow = $ticket->finishable;
+            $contract = $contract_apartment->contract;
+            if ($user->id == $contract->user_id) {
+                $allow = true;
+            }
         }
 
         return $allow;
-
     }
+
+
 }

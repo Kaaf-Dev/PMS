@@ -97,6 +97,16 @@ class Ticket extends Model
         return $this->belongsTo(Contract::class, 'contract_id', 'id');
     }
 
+    public function property()
+    {
+        return $this->belongsTo(Property::class, 'property_id', 'id');
+    }
+
+    public function apartment()
+    {
+        return $this->belongsTo(Apartment::class, 'apartment_id', 'id');
+    }
+
     public function maintenanceCompany()
     {
         return $this->belongsTo(MaintenanceCompany::class, 'maintenance_company_id', 'id');
@@ -154,7 +164,8 @@ class Ticket extends Model
     {
         return $query->where(function ($query) use ($search) {
             return $query->where('subject', 'like', '%'. $search .'%')
-                ->orWhere('description', 'like', '%'. $search .'%');
+                ->orWhere('description', 'like', '%'. $search .'%')
+                ->orWhere('no', 'like', '%'. $search .'%');
         });
     }
 

@@ -19,14 +19,31 @@
         <div class="row g-9 mb-8">
             <!--begin::Col-->
             <div class="col-md-6 fv-row">
-                <label class="required fs-6 fw-semibold mb-2">عقد الإيجار</label>
-                <select wire:model.defer="selected_contract" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a product" name="product">
+                <label class="required fs-6 fw-semibold mb-2">العقار</label>
+                <select wire:model="selected_property" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a product" name="product">
                     <option value="">-- اختيار --</option>
-                    @foreach($this->contracts ?? [] as $contract)
-                        <option value="{{ $contract->id }}">(#{{ $contract->id }}): {{ $contract->start_at_human }}</option>
+                    @foreach($this->properties ?? [] as $property)
+                        <option value="{{ $property->id }}">{{ $property->name }}</option>
                     @endforeach
                 </select>
-                @error('selected_contract')
+                @error('selected_property')
+                <span class="text-danger">
+                    {{ $message }}
+                </span>
+                @enderror
+            </div>
+            <!--end::Col-->
+
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+                <label class="required fs-6 fw-semibold mb-2">الوحدة السكنية</label>
+                <select wire:model.defer="selected_contract_apartment" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a product" name="product">
+                    <option value="">-- اختيار --</option>
+                    @foreach($this->apartments ?? [] as $apartment)
+                        <option value="{{ $apartment->contract_apartment_id }}">{{ $apartment->name }}</option>
+                    @endforeach
+                </select>
+                @error('selected_contract_apartment')
                 <span class="text-danger">
                     {{ $message }}
                 </span>
