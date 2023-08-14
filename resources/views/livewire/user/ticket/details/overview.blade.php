@@ -58,6 +58,57 @@
                         </div>
                         <!--end::Details-->
 
+                        @if($this->ticket->hasVisitAvailablityTime())
+                            <!--begin::Details-->
+                            <div class="mt-8">
+
+                                <!--begin::Alert-->
+                                <div class="alert alert-primary d-flex align-items-center p-5">
+                                    <!--begin::Icon-->
+                                    <i class="ki-duotone ki-calendar-2 fs-2hx text-primary me-4">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                        <span class="path3"></span>
+                                        <span class="path4"></span>
+                                        <span class="path5"></span>
+                                    </i>
+                                    <!--end::Icon-->
+
+                                    <!--begin::Wrapper-->
+                                    <div class="d-flex flex-column">
+                                        <!--begin::Title-->
+                                        <h4 class="mb-1 text-dark">الوقت الوقت للزيارة</h4>
+                                        <!--end::Title-->
+
+                                        <!--begin::Content-->
+                                        <span>
+                                            الوقت المتاح للزيارة
+
+                                            @if ($this->ticket->visit_availability_start)
+                                                من الساعة
+                                                <b>
+                                                {{ $this->ticket->visit_availability_start_human }}
+                                                </b>
+                                            @endif
+
+                                            @if ($this->ticket->visit_availability_end)
+                                                لغاية الساعة
+                                                <b>
+                                                {{ $this->ticket->visit_availability_end_human }}
+                                                </b>
+                                            @endif
+                                            .
+                                        </span>
+                                        <!--end::Content-->
+                                    </div>
+                                    <!--end::Wrapper-->
+                                </div>
+                                <!--end::Alert-->
+
+                            </div>
+                            <!--end::Details-->
+                        @endif
+
                         <!--begin::Details-->
                         <div class="mb-0">
                             <!--begin::Description-->

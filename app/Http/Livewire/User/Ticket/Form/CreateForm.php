@@ -6,6 +6,7 @@ use App\Models\ContractApartment;
 use App\Models\Property;
 use App\Models\Ticket;
 use App\Traits\WithAlert;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -31,6 +32,12 @@ class CreateForm extends Component
     public $attachments;
     public $attachment;
 
+    public $visit_availability_start_hour;
+    public $visit_availability_start_min;
+
+    public $visit_availability_end_hour;
+    public $visit_availability_end_min;
+
     public function rules()
     {
         return [
@@ -39,6 +46,10 @@ class CreateForm extends Component
             'subject' => 'required',
             'description' => 'required|max:5000',
             'attachments.*' => 'required|mimes:png,jpg,jpeg|max:1024',
+            'visit_availability_start_hour' => 'nullable|numeric',
+            'visit_availability_start_min' => 'nullable|numeric',
+            'visit_availability_end_hour' => 'nullable|numeric',
+            'visit_availability_end_min' => 'nullable|numeric',
         ];
     }
 
@@ -100,6 +111,24 @@ class CreateForm extends Component
             ])->get();
     }
 
+    public function getHoursProperty()
+    {
+        $hoursArray = [];
+        for ($hour = 0; $hour < 24; $hour++) {
+            $hoursArray[] = str_pad($hour, 2, '0', STR_PAD_LEFT);
+        }
+        return $hoursArray;
+    }
+
+    public function getMinutesProperty()
+    {
+        $minutesArray = [];
+        for ($minute = 0; $minute <= 55; $minute += 5) {
+            $minutesArray[] = str_pad($minute, 2, '0', STR_PAD_LEFT);
+        }
+        return $minutesArray;
+    }
+
     public function fetchProperties()
     {
         $contracts = $this->getContracts();
@@ -127,6 +156,24 @@ class CreateForm extends Component
         return $apartments;
     }
 
+    public function resolveVisitAvailabilityStart()
+    {
+        $date = null;
+        if ($this->visit_availability_start_hour and $this->visit_availability_start_min) {
+            $date = Carbon::createFromTime($this->visit_availability_start_hour, $this->visit_availability_start_min);
+        }
+        return $date;
+    }
+
+    public function resolveVisitAvailabilityEnd()
+    {
+        $date = null;
+        if ($this->visit_availability_end_hour and $this->visit_availability_end_min) {
+            $date = Carbon::createFromTime($this->visit_availability_end_hour, $this->visit_availability_end_min);
+        }
+        return $date;
+    }
+
     public function submit()
     {
         $validated_data = $this->validate();
@@ -140,6 +187,10 @@ class CreateForm extends Component
         $ticket->apartment_id = $contract_apartment->apartment_id;
         $ticket->subject = $validated_data['subject'];
         $ticket->description = $validated_data['description'];
+
+        $ticket->visit_availability_start = $this->resolveVisitAvailabilityStart();
+        $ticket->visit_availability_end = $this->resolveVisitAvailabilityEnd();
+
         if ($ticket->save()) {
             $attachments = [];
             foreach ($validated_data['attachments'] ?? [] as $attachment) {
@@ -172,6 +223,10 @@ class CreateForm extends Component
             'description',
             'attachment',
             'attachments',
+            'visit_availability_start_hour',
+            'visit_availability_start_min',
+            'visit_availability_end_hour',
+            'visit_availability_end_min',
         ]);
     }
 }

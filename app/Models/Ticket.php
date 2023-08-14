@@ -38,6 +38,8 @@ class Ticket extends Model
         'description',
         'visit_at',
         'visited_at',
+        'visit_availability_start',
+        'visit_availability_end',
     ];
 
     protected $hidden = [
@@ -48,6 +50,8 @@ class Ticket extends Model
         'id' => 'string',
         'visit_at' => 'date:Y-m-d H:i',
         'visited_at' => 'date:Y-m-d H:i',
+        'visit_availability_start' => 'date:H:i',
+        'visit_availability_end' => 'date:H:i',
     ];
 
     public static function boot()
@@ -195,6 +199,21 @@ class Ticket extends Model
         $truncatedString = implode(' ', array_slice($words, 0, $wordCount));
 
         return $truncatedString . $append;
+    }
+
+    public function getVisitAvailabilityStartHumanAttribute()
+    {
+        return ($this->visit_availability_start) ? $this->visit_availability_start->format('H:i') : '-';
+    }
+
+    public function getVisitAvailabilityEndHumanAttribute()
+    {
+        return ($this->visit_availability_end) ? $this->visit_availability_end->format('H:i') : '-';
+    }
+
+    public function hasVisitAvailablityTime()
+    {
+        return ($this->visit_availability_start or $this->visit_availability_end) === true;
     }
 
     public static function getStatusList()

@@ -81,7 +81,7 @@
                                     <!--begin::Info-->
                                     <div class="d-flex flex-column justify-content-center">
                                         <a href="{{ route('maintenance.tickets.details', ['ticket_id' => $ticket->id]) }}" class="mb-1 text-gray-800 text-hover-primary">{{ $ticket->contract->user->name }}</a>
-                                        <div class="fw-semibold fs-6 text-gray-400">{{ $ticket->ticketCategory->title }}</div>
+                                        <div class="fw-semibold fs-6 text-gray-400">{{ optional($ticket->ticketCategory)->title }}</div>
                                     </div>
                                     <!--end::Info-->
                                 </div>

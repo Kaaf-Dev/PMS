@@ -30,6 +30,44 @@
                     </div>
                 @endif
 
+                @if($this->ticket->hasVisitAvailablityTime())
+                    <!--begin::Details-->
+                    <div class="mt-8">
+
+                        <!--begin::Alert-->
+                        <div class="alert alert-primary d-flex align-items-center border border-dashed border-primary p-5">
+                            <!--begin::Wrapper-->
+                            <div class="d-flex flex-column">
+                              <!--begin::Content-->
+                                <span>
+                                            الوقت المتاح للزيارة
+
+                                            @if ($this->ticket->visit_availability_start)
+                                        من الساعة
+                                        <b>
+                                                {{ $this->ticket->visit_availability_start_human }}
+                                                </b>
+                                    @endif
+
+                                    @if ($this->ticket->visit_availability_end)
+                                        لغاية الساعة
+                                        <b>
+                                                {{ $this->ticket->visit_availability_end_human }}
+                                                </b>
+                                    @endif
+                                             بحسب رغبة المستأجر.
+                                        </span>
+                                <!--end::Content-->
+                            </div>
+                            <!--end::Wrapper-->
+                        </div>
+                        <!--end::Alert-->
+
+                    </div>
+                    <!--end::Details-->
+                @endif
+
+
             </div>
         </div>
         <!--end::Card body-->
