@@ -34,6 +34,8 @@
     <!--begin::Content-->
     <div id="kt_app_content" class="app-content flex-column-fluid">
 
+        @livewire('user.ticket.details.rating', ['ticket' => $this->ticket->id])
+
         @livewire('user.ticket.details.overview', ['ticket' => $this->ticket->id])
 
         @livewire('user.ticket.details.replies', ['ticket' => $this->ticket->id])

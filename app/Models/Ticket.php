@@ -40,6 +40,8 @@ class Ticket extends Model
         'visited_at',
         'visit_availability_start',
         'visit_availability_end',
+        'rate_stars',
+        'rate_notes',
     ];
 
     protected $hidden = [
@@ -52,6 +54,7 @@ class Ticket extends Model
         'visited_at' => 'date:Y-m-d H:i',
         'visit_availability_start' => 'date:H:i',
         'visit_availability_end' => 'date:H:i',
+        'rate_star' => 'integer',
     ];
 
     public static function boot()
@@ -399,6 +402,11 @@ class Ticket extends Model
             $date = Carbon::parse($this->visited_at)->format('Y.m.d H:ia');
         }
         return $date;
+    }
+
+    public function getIsRatableAttribute()
+    {
+        return (!$this->rate_star and $this->status == SELF::STATUS_COMPLETE);
     }
 
     public function generateVerificationCode()
