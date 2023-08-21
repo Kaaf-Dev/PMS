@@ -1,7 +1,4 @@
 <div>
-
-
-
     <!--begin::Toolbar-->
     <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
         <!--begin::Toolbar container-->
@@ -51,6 +48,7 @@
 
                 <div class="col-md-9 col-sm-12">
                     @livewire('admin.ticket.details.overview', ['ticket' => $this->ticket->id])
+                    @livewire('admin.ticket.details.rating', ['ticket' => $this->ticket->id])
                     @livewire('admin.ticket.details.replies', ['ticket' => $this->ticket->id])
                 </div>
 
