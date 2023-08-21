@@ -53,6 +53,11 @@ class TicketReply extends Model
         }
     }
 
+    public function attachments()
+    {
+        return $this->hasMany(TicketReplyAttachment::class, 'ticket_reply_id', 'id');
+    }
+
     public function getAuthorNameAttribute()
     {
         $name = '-';

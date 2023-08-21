@@ -406,7 +406,7 @@ class Ticket extends Model
 
     public function getIsRatableAttribute()
     {
-        return (!$this->rate_star and $this->status == SELF::STATUS_COMPLETE);
+        return ((!$this->rate_stars or $this->rate_stars < 1) and $this->status == SELF::STATUS_COMPLETE);
     }
 
     public function generateVerificationCode()
