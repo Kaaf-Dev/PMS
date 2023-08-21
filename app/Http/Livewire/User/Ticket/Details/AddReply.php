@@ -56,7 +56,6 @@ class AddReply extends Component
         $this->reset([
             'attachment',
         ]);
-        $this->showSuccessAlert('تمت إضافة المرفق بنجاح!');
     }
 
     public function cancelAttachment($attachment)

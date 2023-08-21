@@ -7,20 +7,26 @@ use App\Traits\WithAlert;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class AddReply extends Component
 {
 
     use AuthorizesRequests;
+    use WithFileUploads;
     use WithAlert;
 
     public $ticket_id;
     public $reply;
 
+    public $attachments;
+    public $attachment;
+
     public function rules()
     {
         return [
             'reply' => 'required|string|max:2000',
+            'attachments.*' => 'required|mimes:png,jpg,jpeg|max:1024',
         ];
     }
 
@@ -48,6 +54,24 @@ class AddReply extends Component
         return view('livewire.maintenance.ticket.details.add-reply');
     }
 
+    public function updatedAttachment()
+    {
+        $this->validate([
+            'attachment' => 'required|mimes:png,jpg,jpeg|max:10240', // 1MB Max
+        ]);
+        $this->attachments[md5(time())] = $this->attachment;
+        $this->reset([
+            'attachment',
+        ]);
+    }
+
+    public function cancelAttachment($attachment)
+    {
+        if (isset($this->attachments[$attachment])) {
+            unset($this->attachments[$attachment]);
+        }
+    }
+
     public function getTicketProperty()
     {
         return Ticket::findOrFail($this->ticket_id);
@@ -64,6 +88,14 @@ class AddReply extends Component
         ]);
 
         if ($reply) {
+            $attachments = [];
+            foreach ($validated_data['attachments'] ?? [] as $attachment) {
+                $attachments[] = [
+                    'path' =>  $attachment->store('reply-' . md5($reply->id), 'ticket_attachments'),
+                    'file_name' => $attachment->getClientOriginalName(),
+                ];
+            }
+            $reply->attachments()->createMany($attachments);
             $this->ticket->touch();
             $this->resetInputs();
             $this->emit('reply-added');
@@ -76,6 +108,8 @@ class AddReply extends Component
     {
         $this->reset([
             'reply',
+            'attachments',
+            'attachment',
         ]);
     }
 

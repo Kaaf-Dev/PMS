@@ -69,21 +69,16 @@
                                                 <p class="fw-normal fs-5 text-gray-700 m-0">
                                                     {{ $reply->content }}
                                                 </p>
+                                                <!--end::Desc-->
 
                                                 <!--begin::Details-->
                                                 <div class="mb-0">
                                                     <!--begin::Description-->
                                                     <div class="fs-5 fw-normal text-gray-800">
                                                         @foreach($reply->attachments ?? [] as $attachment)
+                                                            <div class="separator my-4"></div>
                                                             <!--begin::Item-->
                                                             <div class="d-flex align-items-sm-center mb-7">
-                                                                <!--begin::Symbol-->
-                                                                <div class="symbol symbol-60px me-4">
-                                            <span class="symbol-label bg-light-primary">
-                                                <i class="ki-solid ki-file fs-2x text-primary"></i>
-                                            </span>
-                                                                </div>
-                                                                <!--end::Symbol-->
                                                                 <!--begin::Content-->
                                                                 <div class="d-flex flex-row-fluid align-items-center flex-wrap my-lg-0 me-2">
                                                                     <!--begin::Title-->
@@ -112,7 +107,6 @@
                                                 </div>
                                                 <!--end::Details-->
 
-                                                <!--end::Desc-->
                                             </div>
                                             <!--end::Body-->
                                         </div>
