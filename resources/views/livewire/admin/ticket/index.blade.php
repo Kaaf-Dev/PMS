@@ -31,6 +31,16 @@
                 <!--end::Breadcrumb-->
             </div>
             <!--end::Page title-->
+
+            <!--begin::Actions-->
+            <div class="d-flex align-items-center gap-2 gap-lg-3">
+                <button wire:click="createTicket" class="btn btn-primary">
+                    <i class="ki-outline ki-plus fs-1"></i>
+                    إضافة طلب جديد
+                </button>
+            </div>
+            <!--end::Actions-->
+
         </div>
         <!--end::Toolbar container-->
     </div>

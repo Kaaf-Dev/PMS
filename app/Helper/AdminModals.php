@@ -227,5 +227,16 @@ function getAdminGlobalModals()
             ]
         ],
 
+        [
+            'modal_id' => 'kt_modal_create_ticket',
+            'livewire_component' => 'admin.ticket.forms.create-new',
+            'emit_show' => 'show-ticket-create-modal',
+            'emit_hide' => 'hide-ticket-create-modal',
+            'details' => [
+                'title' => 'إنشاء تذكرة جديدة',
+                'modal_dialog_class' => 'mw-650px',
+            ]
+        ],
+
     ];
 }
