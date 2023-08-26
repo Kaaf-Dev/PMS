@@ -22,7 +22,7 @@ class CreateNew extends Component
 
     public $properties;
 
-    public $selected_user_id = 1;
+    public $selected_user_id;
     public $selected_property;
     public $selected_contract_apartment;
     public $subject;
@@ -40,6 +40,7 @@ class CreateNew extends Component
     public function rules()
     {
         return [
+            'selected_user_id' => 'required|exists:users,id',
             'selected_property' => 'required|exists:properties,id',
             'selected_contract_apartment' => 'required|exists:contract_apartment,id',
             'subject' => 'required',
@@ -75,11 +76,22 @@ class CreateNew extends Component
         return view('livewire.admin.ticket.forms.create-new');
     }
 
+    public function updated($property)
+    {
+        if ($property == 'selected_user_id') {
+            $this->fetchProperties();
+        }
+    }
+
     public function resolveParams($params = [])
     {
         $this->resetInputs();
         $this->resetErrorBag();
-        $this->fetchProperties();
+    }
+
+    public function getUsersProperty()
+    {
+        return User::all();
     }
 
     public function getUserProperty()

@@ -4,6 +4,42 @@
         <div class="d-flex flex-column mb-8 fv-row">
             <!--begin::Label-->
             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                <span class="required">المستأجر</span>
+            </label>
+            <!--end::Label-->
+            <select wire:model="selected_user_id" id="users_list" class="form-select form-select-solid">
+                @foreach($this->users ?? [] as $user)
+                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                @endforeach
+            </select>
+            @error('selected_user_id')
+            <span class="text-danger">
+                    {{ $message }}
+                </span>
+            @enderror
+        </div>
+
+        <script>
+            document.addEventListener("livewire:load", () => {
+                Livewire.hook('message.processed', (message, component) => {
+                    $('#users_list')
+                        .select2({
+                            placeholder: "اختيار مستأجر",
+                            dropdownParent: $("#kt_modal_create_ticket")
+                        })
+                        .on('change',function () {
+                            var data = $('#users_list').select2("val");
+                            @this.set('selected_user_id', data);
+                        });
+                })
+            });
+        </script>
+
+        <!--end::Input group-->
+        <!--begin::Input group-->
+        <div class="d-flex flex-column mb-8 fv-row">
+            <!--begin::Label-->
+            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                 <span class="required">الموضوع</span>
             </label>
             <!--end::Label-->
@@ -52,81 +88,7 @@
             <!--end::Col-->
         </div>
         <!--end::Input group-->
-        <!--begin::Input group-->
-        <div class="row g-9">
-            <h6>الوقت المتاح للزيارة</h6>
-        </div>
-        <div class="row g-9 mb-8">
-            <!--begin::Col-->
-            <div class="col-md-12 fv-row">
-                <label class="fs-6 fw-semibold mb-2">متاح من:</label>
-                <div class="row">
-                    <div class="col-md-3">
-                        <select wire:model.defer="visit_availability_start_min" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a product" name="product">
-                            <option value="">-- الدقيقة --</option>
-                            @foreach($this->minutes ?? [] as $minute)
-                                <option value="{{ $minute }}">{{ $minute }}</option>
-                            @endforeach
-                        </select>
-                        @error('visit_availability_start_min')
-                        <span class="text-danger">
-                                {{ $message }}
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="col-md-3">
-                        <select wire:model.defer="visit_availability_start_hour" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a product" name="product">
-                            <option value="">-- الساعة --</option>
-                            @foreach($this->hours ?? [] as $hour)
-                                <option value="{{ $hour }}">{{ $hour }}</option>
-                            @endforeach
-                        </select>
-                        @error('visit_availability_start_hour')
-                        <span class="text-danger">
-                                {{ $message }}
-                            </span>
-                        @enderror
-                    </div>
-                </div>
-            </div>
-            <!--end::Col-->
 
-            <!--begin::Col-->
-            <div class="col-md-12 fv-row">
-                <label class="fs-6 fw-semibold mb-2">ولغاية:</label>
-                <div class="row">
-                    <div class="col-md-3">
-                        <select wire:model.defer="visit_availability_end_min" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a product" name="product">
-                            <option value="">-- دقيقة --</option>
-                            @foreach($this->minutes ?? [] as $minute)
-                                <option value="{{ $minute }}">{{ $minute }}</option>
-                            @endforeach
-                        </select>
-                        @error('visit_availability_end_min')
-                        <span class="text-danger">
-                                {{ $message }}
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="col-md-3">
-                        <select wire:model.defer="visit_availability_end_hour" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a product" name="product">
-                            <option value="">-- الساعة --</option>
-                            @foreach($this->hours ?? [] as $hour)
-                                <option value="{{ $hour }}">{{ $hour }}</option>
-                            @endforeach
-                        </select>
-                        @error('visit_availability_end_hour')
-                        <span class="text-danger">
-                                {{ $message }}
-                            </span>
-                        @enderror
-                    </div>
-                </div>
-            </div>
-            <!--end::Col-->
-
-        </div>
-        <!--end::Input group-->
         <!--begin::Input group-->
         <div class="d-flex flex-column mb-8 fv-row">
             <label class="fs-6 fw-semibold mb-2">وصف طلب الصيانة</label>
