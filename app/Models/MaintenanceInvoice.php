@@ -31,7 +31,7 @@ class MaintenanceInvoice extends Model
         'amount' => 'float',
     ];
 
-    protected $no_prefix = 'Inv-';
+    protected $no_prefix = 'INV-';
 
     public static function boot()
     {
@@ -130,6 +130,11 @@ class MaintenanceInvoice extends Model
             SELF::STATUS_REJECTED => 'cross-circle',
         ];
         return $status_classes[$status] ?? $status_classes[SELF::STATUS_PENDING];
+    }
+
+    public function getMaintenanceAmountHumanAttribute()
+    {
+        return number_format($this->maintenance_amount, '2') . 'د.ب.';
     }
 
 }

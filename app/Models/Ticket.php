@@ -419,6 +419,11 @@ class Ticket extends Model
         return $this->rate_stars > 0;
     }
 
+    public function getInvoicableAttribute()
+    {
+        return ($this->status == Ticket::STATUS_COMPLETE and $this->maintenanceInvoices->count() == 0);
+    }
+
     public function generateVerificationCode()
     {
         $verification_code = rand(100000, 999999);

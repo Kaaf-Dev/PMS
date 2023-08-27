@@ -24,5 +24,16 @@ function getMaintenanceGlobalModals()
                 'modal_dialog_class' => 'mw-650px',
             ]
         ],
+
+        [
+            'modal_id' => 'maintenance_invoice_show',
+            'livewire_component' => 'maintenance.invoice.form.show-details',
+            'emit_show' => 'show-maintenance-invoice-show-modal',
+            'emit_hide' => 'hide-maintenance-invoice-show-modal',
+            'details' => [
+                'title' => 'بيانات الفاتورة',
+                'modal_dialog_class' => 'mw-650px',
+            ]
+        ],
     ];
 }

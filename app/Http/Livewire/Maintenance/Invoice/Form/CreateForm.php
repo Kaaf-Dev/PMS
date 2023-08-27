@@ -6,6 +6,7 @@ use App\Models\MaintenanceInvoice;
 use App\Models\Ticket;
 use App\Traits\WithAlert;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -29,8 +30,8 @@ class CreateForm extends Component
         return [
             'selected_ticket_id' => 'required|exists:tickets,id',
             'maintenance_amount' => 'required|numeric',
-            'notes' => 'required|string|max:2000',
-            'attachments.*' => 'required|mimes:png,jpg,jpeg|max:1024',
+            'notes' => 'nullable|string|max:2000',
+            'attachments.*' => 'nullable|mimes:png,jpg,jpeg|max:1024',
         ];
     }
 
@@ -77,15 +78,16 @@ class CreateForm extends Component
         return Ticket::find($this->selected_ticket_id);
     }
 
-    public function save()
+    public function submit()
     {
         $validated_data = $this->validate();
         $this->authorize('createInvoice', $this->ticket);
 
         $invoice = new MaintenanceInvoice();
         $invoice->ticket_id = $validated_data['selected_ticket_id'];
+        $invoice->maintenance_company_id = Auth::user()->id;
         $invoice->maintenance_amount = $validated_data['maintenance_amount'];
-        $invoice->motes = $validated_data['notes'];
+        $invoice->notes = $validated_data['notes'];
         if ($invoice->save()) {
             $attachments = [];
             foreach ($validated_data['attachments'] ?? [] as $attachment) {
@@ -97,8 +99,8 @@ class CreateForm extends Component
 
             $invoice->attachments()->createMany($attachments);
             $this->closeMe();
-            $this->showWarningAlert('تمت العملية بنجاح');
-            $this->emit('reply-added');
+            $this->showSuccessAlert('تمت العملية بنجاح');
+            $this->emit('invoice-added');
 
         } else {
             $this->showWarningAlert('يرجى المحاولة مرة أخرى!');
@@ -115,7 +117,9 @@ class CreateForm extends Component
     public function resetInputs()
     {
         $this->reset([
-            'reply',
+            'selected_ticket_id',
+            'maintenance_amount',
+            'notes',
             'attachments',
             'attachment',
         ]);

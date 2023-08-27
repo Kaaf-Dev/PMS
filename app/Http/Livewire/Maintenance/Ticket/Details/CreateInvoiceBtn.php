@@ -37,8 +37,12 @@ class CreateInvoiceBtn extends Component
         $this->emit('show-maintenance-invoice-create-modal', [
             'ticket_id' => $this->ticket_id,
         ]);
+    }
 
-        // todo: إضافة فورم إضافة الفاتورة Blade
-        // todo: شرط إضافة فاتورة مرتبط مع حالة الفاتورة وعدد الفواتير السابقة = 0
+    public function showInvoice($maintenance_invoice_id)
+    {
+        $this->emit('show-maintenance-invoice-show-modal', [
+            'maintenance_invoice_id' => $maintenance_invoice_id,
+        ]);
     }
 }

@@ -6,11 +6,11 @@
 
             @livewire('maintenance.ticket.details.finish-ticket-btn', ['ticket' => $this->ticket->id])
 
-            @livewire('maintenance.ticket.details.create-invoice-btn', ['ticket' => $this->ticket->id])
-
             @livewire('maintenance.ticket.details.info', ['ticket' => $this->ticket->id])
 
             @livewire('maintenance.ticket.details.manage', ['ticket' => $this->ticket->id])
+
+            @livewire('maintenance.ticket.details.create-invoice-btn', ['ticket' => $this->ticket->id])
 
         </div>
         <!--end::Aside column-->
