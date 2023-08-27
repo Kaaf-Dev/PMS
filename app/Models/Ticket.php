@@ -134,6 +134,11 @@ class Ticket extends Model
         return $this->hasMany(TicketAttachment::class, 'ticket_id', 'id');
     }
 
+    public function maintenanceInvoices()
+    {
+        return $this->hasMany(MaintenanceInvoice::class, 'ticket_id', 'id');
+    }
+
     public function scopeOpened($query)
     {
         return $query->where(function () use ($query) {

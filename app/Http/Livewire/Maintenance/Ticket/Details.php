@@ -27,7 +27,10 @@ class Details extends Component
 
     public function getTicketProperty()
     {
-        $ticket = Ticket::findOrFail($this->ticket_id);
+        $ticket = Ticket::withCount('maintenanceInvoices')
+            ->findOrFail($this->ticket_id);
+
+//        ddd($ticket);
 
         if ( $this->authorize('view', $ticket) ) {
             return $ticket;

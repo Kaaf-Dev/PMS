@@ -155,4 +155,18 @@ class TicketPolicy
         return $allow;
 
     }
+
+    public function createInvoice($user, Ticket $ticket)
+    {
+        $allow = false;
+        if (Auth::guard('admin')->check()) {
+            $allow = true;
+
+        } elseif (Auth::guard('maintenance_company')->check()) {
+            if ($user->tickets->contains($ticket)) {
+                $allow = true;
+            }
+        }
+        return $allow;
+    }
 }

@@ -60,6 +60,18 @@ class Contract extends Model
         return $this->hasMany(ContractReply::class, 'contract_id', 'id');
     }
 
+    public function maintenanceInvoices()
+    {
+        return $this->hasManyThrough(
+            MaintenanceInvoice::class,
+            Ticket::class,
+            'contract_id',
+            'ticket_id',
+            'id',
+            'id',
+        );
+    }
+
     public function scopeActive($query, Carbon $date = null)
     {
         $current_date = $date ?? Carbon::now(); // get date from parameter or get now date
