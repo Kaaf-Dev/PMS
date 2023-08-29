@@ -11,6 +11,12 @@
                         <th class="min-w-auto">
                             الفاتورة
                         </th>
+                        <th class="min-w-auto">
+                            تكلفة الصيانة
+                        </th>
+                        <th class="min-w-auto">
+                            القيمة المعتمدة
+                        </th>
                         <th class="min-w-125px">
                             شركة الصيانة
                         </th>
@@ -62,6 +68,14 @@
                                     <!--end::Info-->
                                 </div>
                                 <!--end::User-->
+                            </td>
+
+                            <td>
+                                {{ $maintenance_invoice->maintenance_amount_human }}
+                            </td>
+
+                            <td>
+                                {{ $maintenance_invoice->amount_human }}
                             </td>
 
                             <td>
@@ -124,48 +138,6 @@
                                 <a wire:click="showMaintenanceInvoice('{{ $maintenance_invoice->id }}')" class="btn btn-light btn-sm">إدارة</a>
                             </td>
 
-{{--                           --}}
-{{--                            <td>--}}
-{{--                                <!--begin::Subject-->--}}
-{{--                                <div class="d-flex align-items-center">--}}
-{{--                                    <!--begin::Info-->--}}
-{{--                                    <div class="d-flex flex-column justify-content-center">--}}
-{{--                                        <a href="tel:{{$ticket->contract->user->phone_human}}" class="mb-1 text-gray-800 text-hover-primary">--}}
-{{--                                            {{ $ticket->contract->user->phone_human }}</a>--}}
-{{--                                    </div>--}}
-{{--                                    <!--end::Subject-->--}}
-{{--                                </div>--}}
-{{--                                <!--end::User-->--}}
-{{--                            </td>--}}
-
-{{--                            <td>--}}
-{{--                                <!--begin::Maintenance Company-->--}}
-{{--                                <div class="d-flex align-items-center">--}}
-{{--                                    <!--begin::Info-->--}}
-{{--                                    <div class="d-flex flex-column justify-content-center">--}}
-{{--                                        <a href="{{ route('admin.tickets.details', ['ticket_id' => $ticket->id]) }}" class="mb-1 text-gray-800 text-hover-primary">--}}
-{{--                                            {{ ($ticket->maintenanceCompany) ? $ticket->maintenanceCompany->name : '-'  }}--}}
-{{--                                        </a>--}}
-{{--                                    </div>--}}
-{{--                                    <!--end::Maintenance Company-->--}}
-{{--                                </div>--}}
-{{--                                <!--end::User-->--}}
-{{--                            </td>--}}
-{{--                            <td>--}}
-{{--                                {{ optional($ticket->ticketCategory)->title }}--}}
-{{--                            </td>--}}
-{{--                            <td>--}}
-{{--                                {{ $ticket->updated_at_date_human }}--}}
-{{--                            </td>--}}
-{{--                            <td>--}}
-{{--                                {{ $ticket->visit_in_date_human }}--}}
-{{--                            </td>--}}
-{{--                            <td>--}}
-{{--                                <span class="badge badge-light-{{ $ticket->status_class }} fw-bold px-4 py-3">{{ $ticket->status_string }}</span>--}}
-{{--                            </td>--}}
-{{--                            <td class="text-end">--}}
-{{--                                <a href="{{ route('admin.tickets.details', ['ticket_id' => $ticket->id]) }}" class="btn btn-light btn-sm">عرض</a>--}}
-{{--                            </td>--}}
                         </tr>
                     @empty
                         <tr>

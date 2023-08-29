@@ -152,7 +152,11 @@ class MaintenanceInvoice extends Model
 
     public function getAmountHumanAttribute()
     {
-        return number_format($this->amount, '2') . 'د.ب.';
+        $amount = '(غير محدد)';
+        if ($this->amount) {
+            $amount = number_format($this->amount, '2') . 'د.ب.';
+        }
+        return $amount;
     }
 
     public function getCreatedAtHumanAttribute()
