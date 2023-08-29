@@ -238,5 +238,16 @@ function getAdminGlobalModals()
             ]
         ],
 
+        [
+            'modal_id' => 'kt_modal_maintenance_invoice_manage',
+            'livewire_component' => 'admin.maintenance-invoice.form.manage',
+            'emit_show' => 'show-maintenance-invoice-manage-modal',
+            'emit_hide' => 'hide-maintenance-invoice-manage-modal',
+            'details' => [
+                'title' => 'إدارة فواتير الصيانة',
+                'modal_dialog_class' => 'mw-650px',
+            ]
+        ],
+
     ];
 }

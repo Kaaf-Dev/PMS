@@ -87,22 +87,5 @@
             </div>
             <!--end::Details-->
         @endif
-
-        <!--begin::Actions-->
-        <div class="text-center">
-            <button wire:click="hideMe" type="button" id="kt_modal_new_ticket_cancel" class="btn btn-light me-3">
-                إلغاء
-            </button>
-            <button type="submit" id="kt_modal_new_ticket_submit" class="btn btn-primary">
-                <span wire:loading.remove wire:target="submit">تأكيد</span>
-                <!--begin::Indicator progress-->
-                <span wire:loading wire:target="submit">
-                    الرجاء الانتظار
-					<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                </span>
-                <!--end::Indicator progress-->
-            </button>
-        </div>
-        <!--end::Actions-->
     @endif
 </div>

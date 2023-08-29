@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -79,9 +80,21 @@ class MaintenanceInvoice extends Model
         return $this->belongsTo(Ticket::class, 'ticket_id', 'id');
     }
 
+    public function maintenanceCompany()
+    {
+        return $this->belongsTo(MaintenanceCompany::class, 'maintenance_company_id', 'id');
+    }
+
     public function attachments()
     {
         return $this->hasMany(MaintenanceInvoiceAttachment::class, 'maintenance_invoice_id', 'id');
+    }
+
+    public function scopeSearch($query, $search)
+    {
+        return $query->where(function ($query) use ($search) {
+            return $query->where('no', 'like', '%'. $search .'%');
+        });
     }
 
     public static function getStatusList()
@@ -135,6 +148,31 @@ class MaintenanceInvoice extends Model
     public function getMaintenanceAmountHumanAttribute()
     {
         return number_format($this->maintenance_amount, '2') . 'د.ب.';
+    }
+
+    public function getAmountHumanAttribute()
+    {
+        return number_format($this->amount, '2') . 'د.ب.';
+    }
+
+    public function getCreatedAtHumanAttribute()
+    {
+        return Carbon::parse($this->created_at)->diffForHumans();
+    }
+
+    public function getCreatedAtDateHumanAttribute()
+    {
+        return Carbon::parse($this->created_at)->format('Y.m.d H:ia');
+    }
+
+    public function getUpdatedAtHumanAttribute()
+    {
+        return Carbon::parse($this->updated_at)->diffForHumans();
+    }
+
+    public function getUpdatedAtDateHumanAttribute()
+    {
+        return Carbon::parse($this->updated_at)->format('Y.m.d H:ia');
     }
 
 }

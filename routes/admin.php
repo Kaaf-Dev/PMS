@@ -100,6 +100,15 @@ Route::prefix('admin')->group(function () {
             Route::get('/', Admin\Lawyer\Index::class)->name('admin.lawyers');
         });
 
+        Route::group([
+            'prefix' => 'maintenance-invoices',
+            'middleware' => [
+                'auth:admin',
+            ],
+        ], function () {
+            Route::get('/', Admin\MaintenanceInvoice\Index::class)->name('admin.maintenance-invoices');
+        });
+
 
 
     });
