@@ -32,9 +32,11 @@ class MaintenanceInvoicePolicy
      */
     public function view($user, MaintenanceInvoice $maintenanceInvoice)
     {
+        $allow = false;
         if (optional($maintenanceInvoice->ticket)->maintenance_company_id == $user->id) {
-
+            $allow = true;
         }
+        return $allow;
     }
 
     /**

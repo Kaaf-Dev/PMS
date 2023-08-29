@@ -26,8 +26,11 @@ class ShowDetails extends Component
 
     public function getMaintenanceInvoiceProperty()
     {
-        $maintenance_invoice = MaintenanceInvoice::findOrFail($this->maintenance_invoice_id);
-        $this->authorize('show', $maintenance_invoice);
+        $maintenance_invoice = MaintenanceInvoice::find($this->maintenance_invoice_id);
+        if ($maintenance_invoice) {
+            $this->authorize('view', $maintenance_invoice);
+        }
+        return $maintenance_invoice;
     }
 
     public function resolveParams($params = [])
