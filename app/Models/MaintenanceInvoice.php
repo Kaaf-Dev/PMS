@@ -102,7 +102,7 @@ class MaintenanceInvoice extends Model
         return [
             SELF::STATUS_PENDING => 'بانتظار الموافقة',
             SELF::STATUS_APPROVED => 'تمت الموافقة',
-            SELF::STATUS_REJECTED => 'مرفوضة',
+//            SELF::STATUS_REJECTED => 'مرفوضة',
         ];
     }
 
@@ -111,7 +111,7 @@ class MaintenanceInvoice extends Model
         return [
             SELF::STATUS_PENDING,
             SELF::STATUS_APPROVED,
-            SELF::STATUS_REJECTED,
+//            SELF::STATUS_REJECTED,
         ];
     }
 
@@ -129,7 +129,7 @@ class MaintenanceInvoice extends Model
         $status_classes = [
             SELF::STATUS_PENDING => 'primary',
             SELF::STATUS_APPROVED => 'success',
-            SELF::STATUS_REJECTED => 'danger',
+//            SELF::STATUS_REJECTED => 'danger',
         ];
         return $status_classes[$status] ?? $status_classes[SELF::STATUS_PENDING];
     }
@@ -140,7 +140,7 @@ class MaintenanceInvoice extends Model
         $status_classes = [
             SELF::STATUS_PENDING => 'delivery-time',
             SELF::STATUS_APPROVED => 'file-added',
-            SELF::STATUS_REJECTED => 'cross-circle',
+//            SELF::STATUS_REJECTED => 'cross-circle',
         ];
         return $status_classes[$status] ?? $status_classes[SELF::STATUS_PENDING];
     }

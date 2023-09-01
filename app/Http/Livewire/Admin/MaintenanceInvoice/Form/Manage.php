@@ -18,10 +18,6 @@ class Manage extends Component
     {
         return [
             'maintenance_invoice.amount' => 'required|numeric',
-            'maintenance_invoice.status' => [
-                'required',
-                Rule::in(MaintenanceInvoice::getStatusValues()),
-            ],
         ];
     }
 
@@ -60,6 +56,7 @@ class Manage extends Component
     public function submit()
     {
         $validated_data = $this->validate();
+        $this->maintenance_invoice->status = MaintenanceInvoice::STATUS_APPROVED;
         if ($this->maintenance_invoice->save()) {
             $this->showSuccessAlert('تمت العملية بنجاح!');
             $this->emit('maintenance-invoice-updated');

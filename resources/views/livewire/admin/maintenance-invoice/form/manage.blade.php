@@ -7,17 +7,11 @@
                     <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                         <span>الحالة</span>
                     </label>
-                    <select wire:model.defer="maintenance_invoice.status" class="form-select">
-                        @foreach($this->statusList ?? [] as $key => $status)
-                            <option value="{{ $key }}">{{ $status }}</option>
-                        @endforeach
-                    </select>
-                    <!--end::Label-->
-                    @error('maintenance_invoice.status')
-                    <span class="text-danger">
-                        {{ $message }}
-                    </span>
-                    @enderror
+                    <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                        <div class="badge badge-{{ $this->maintenance_invoice->status_class }}">
+                            {{ $this->maintenance_invoice->status_string }}
+                        </div>
+                    </label>
                 </div>
             </div>
 
@@ -104,7 +98,7 @@
             <!--begin::Actions-->
             <div class="text-center">
                 <button wire:click="hideMe" type="button" class="btn btn-light me-3">
-                    إلغاء
+                    عودة
                 </button>
                 <button type="submit" class="btn btn-primary">
                     <span wire:loading.remove wire:target="submit">تأكيد</span>
