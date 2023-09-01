@@ -6,6 +6,7 @@ use App\Models\MaintenanceCompany;
 use App\Models\Ticket;
 use App\Models\TicketCategory;
 use App\Traits\WithAlert;
+use Carbon\Carbon;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 
@@ -96,6 +97,10 @@ class Info extends Component
 
         if (!isset($validated_data['ticket']['priority']) or empty($validated_data['ticket']['priority'])) {
             $this->ticket->priority = null;
+        }
+
+        if ($this->ticket->isDirty('maintenance_company_id')) {
+            $this->ticket->assigned_at = Carbon::now();
         }
 
         if ($this->ticket->save()) {

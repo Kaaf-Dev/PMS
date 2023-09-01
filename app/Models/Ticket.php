@@ -38,6 +38,7 @@ class Ticket extends Model
         'description',
         'visit_at',
         'visited_at',
+        'assigned_at',
         'visit_availability_start',
         'visit_availability_end',
         'rate_stars',
@@ -52,6 +53,7 @@ class Ticket extends Model
         'id' => 'string',
         'visit_at' => 'date:Y-m-d H:i',
         'visited_at' => 'date:Y-m-d H:i',
+        'assigned_at' => 'date:Y-m-d H:i',
         'visit_availability_start' => 'date:H:i',
         'visit_availability_end' => 'date:H:i',
         'rate_star' => 'integer',
@@ -405,6 +407,24 @@ class Ticket extends Model
         $date = '-';
         if ($this->visited_at) {
             $date = Carbon::parse($this->visited_at)->format('Y.m.d H:ia');
+        }
+        return $date;
+    }
+
+    public function getAssignedAtHumanAttribute()
+    {
+        $date = '-';
+        if ($this->assigned_at) {
+            $date = Carbon::parse($this->assigned_at)->diffForHumans();
+        }
+        return $date;
+    }
+
+    public function getAssignedAtDateHumanAttribute()
+    {
+        $date = '-';
+        if ($this->assigned_at) {
+            $date = Carbon::parse($this->assigned_at)->format('Y.m.d H:ia');
         }
         return $date;
     }
