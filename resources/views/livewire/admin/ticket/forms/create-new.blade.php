@@ -56,7 +56,7 @@
             <!--begin::Col-->
             <div class="col-md-6 fv-row">
                 <label class="required fs-6 fw-semibold mb-2">العقار</label>
-                <select wire:model="selected_property" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a product" name="product">
+                <select wire:model="selected_property" class="form-select form-select-solid">
                     <option value="">-- اختيار --</option>
                     @foreach($this->properties ?? [] as $property)
                         <option value="{{ $property->id }}">{{ $property->name }}</option>
@@ -73,7 +73,7 @@
             <!--begin::Col-->
             <div class="col-md-6 fv-row">
                 <label class="required fs-6 fw-semibold mb-2">الوحدة السكنية</label>
-                <select wire:model.defer="selected_contract_apartment" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a product" name="product">
+                <select wire:model.defer="selected_contract_apartment" class="form-select form-select-solid">
                     <option value="">-- اختيار --</option>
                     @foreach($this->apartments ?? [] as $apartment)
                         <option value="{{ $apartment->contract_apartment_id }}">{{ $apartment->name }}</option>
@@ -84,6 +84,81 @@
                     {{ $message }}
                 </span>
                 @enderror
+            </div>
+            <!--end::Col-->
+        </div>
+        <!--end::Input group-->
+
+        <!--begin::Input group-->
+        <div class="row g-9">
+            <h6>الوقت المتاح للزيارة</h6>
+        </div>
+        <div class="row g-9 mb-8">
+            <!--begin::Col-->
+            <div class="col-md-12 fv-row">
+                <label class="fs-6 fw-semibold mb-2">متاح من:</label>
+                <div class="row">
+                    <div class="col-md-3">
+                        <select wire:model.defer="visit_availability_start_min" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a product" name="product">
+                            <option value="">-- الدقيقة --</option>
+                            @foreach($this->minutes ?? [] as $minute)
+                                <option value="{{ $minute }}">{{ $minute }}</option>
+                            @endforeach
+                        </select>
+                        @error('visit_availability_start_min')
+                        <span class="text-danger">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="col-md-3">
+                        <select wire:model.defer="visit_availability_start_hour" class="form-select form-select-solid">
+                            <option value="">-- الساعة --</option>
+                            @foreach($this->hours ?? [] as $hour)
+                                <option value="{{ $hour }}">{{ $hour }}</option>
+                            @endforeach
+                        </select>
+                        @error('visit_availability_start_hour')
+                        <span class="text-danger">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+            <!--end::Col-->
+
+            <!--begin::Col-->
+            <div class="col-md-12 fv-row">
+                <label class="fs-6 fw-semibold mb-2">ولغاية:</label>
+                <div class="row">
+                    <div class="col-md-3">
+                        <select wire:model.defer="visit_availability_end_min" class="form-select form-select-solid">
+                            <option value="">-- دقيقة --</option>
+                            @foreach($this->minutes ?? [] as $minute)
+                                <option value="{{ $minute }}">{{ $minute }}</option>
+                            @endforeach
+                        </select>
+                        @error('visit_availability_end_min')
+                        <span class="text-danger">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="col-md-3">
+                        <select wire:model.defer="visit_availability_end_hour" class="form-select form-select-solid">
+                            <option value="">-- الساعة --</option>
+                            @foreach($this->hours ?? [] as $hour)
+                                <option value="{{ $hour }}">{{ $hour }}</option>
+                            @endforeach
+                        </select>
+                        @error('visit_availability_end_hour')
+                        <span class="text-danger">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+                </div>
             </div>
             <!--end::Col-->
         </div>
