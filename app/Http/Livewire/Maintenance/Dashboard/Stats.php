@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Maintenance\Dashboard;
 
+use App\Models\Ticket;
 use App\Traits\WithLazyLoad;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -10,26 +11,24 @@ class Stats extends Component
 {
     use WithLazyLoad;
 
-
-
     public function render()
     {
-        $contracts_count = ($this->ready_to_load)
-            ? Auth::user()->contracts()->count()
+        $tickets_new_count = ($this->ready_to_load)
+            ? Auth::user()->tickets()->where('status', '=', Ticket::STATUS_NEW)->count()
             : '';
 
-        $invoices_amount = ($this->ready_to_load)
-            ? number_format(Auth::user()->invoices()->unPaid()->sum('amount'), 2)
+        $tickets_under_processing_count = ($this->ready_to_load)
+            ? Auth::user()->tickets()->where('status', '=', Ticket::STATUS_UNDER_PROCESSING)->count()
             : '';
 
-        $tickets_count = ($this->ready_to_load)
-            ? Auth::user()->tickets()->opened()->count()
+        $tickets_completed_count = ($this->ready_to_load)
+            ? Auth::user()->tickets()->where('status', '=', Ticket::STATUS_COMPLETE)->count()
             : '';
-        \Debugbar::info(Auth::user()->tickets()->opened()->toSql());
+
         return view('livewire.maintenance.dashboard.stats',[
-            'contracts_count' => $contracts_count,
-            'invoices_amount' => $invoices_amount,
-            'tickets_count' => $tickets_count,
+            'tickets_new_count' => $tickets_new_count,
+            'tickets_under_processing_count' => $tickets_under_processing_count,
+            'tickets_completed_count' => $tickets_completed_count,
         ]);
     }
 }

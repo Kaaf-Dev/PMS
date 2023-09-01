@@ -27,7 +27,7 @@
     <div id="kt_app_content" class="app-content flex-column-fluid">
         <!--begin::Row-->
         <div>
-{{--            <livewire:maintenance.dashboard.stats />--}}
+            <livewire:maintenance.dashboard.stats />
         </div>
         <!--end::Row-->
         <!--begin::Row-->
