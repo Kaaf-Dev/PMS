@@ -125,6 +125,96 @@
 
     <form wire:submit.prevent="save" class="form fv-plugins-bootstrap5 fv-plugins-framework" action="#">
 
+        @if($this->selected_lawyer)
+            <!--begin::Input group-->
+            <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                <!--begin::Label-->
+                <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                    <span>المبلغ المطلوب</span>
+                </label>
+                <!--end::Label-->
+
+                <!--begin::Input-->
+                <div class="input-group mb-5">
+                    <input type="text" class="form-control form-control-solid" value="{{ $contract->total_amount_remaining_human }}" readonly>
+                    <span class="input-group-text">د.ب.</span>
+                </div>
+                <!--end::Input-->
+            </div>
+            <!--end::Input group-->
+
+            <!--begin::Input group-->
+            <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                <!--begin::Label-->
+                <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                    <span class="required">الطرف الأول</span>
+                </label>
+                <!--end::Label-->
+
+                <!--begin::Input-->
+                <input wire:model.defer="first_side" type="text" class="form-control">
+                <!--end::Input-->
+                @error('first_side')
+                <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            <!--end::Input group-->
+
+            <!--begin::Input group-->
+            <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                <!--begin::Label-->
+                <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                    <span class="required">الطرف الثاني</span>
+                </label>
+                <!--end::Label-->
+
+                <!--begin::Input-->
+                <input wire:model.defer="second_side" type="text" class="form-control">
+                <!--end::Input-->
+                @error('second_side')
+                <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            <!--end::Input group-->
+
+            <!--begin::Input group-->
+            <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                <!--begin::Label-->
+                <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                    <span class="required">موضوع الدعوى</span>
+                </label>
+                <!--end::Label-->
+
+                <!--begin::Input-->
+                <input wire:model.defer="subject" type="text" class="form-control">
+                <!--end::Input-->
+                @error('subject')
+                <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            <!--end::Input group-->
+
+
+            <!--begin::Input group-->
+            <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                <!--begin::Label-->
+                <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                    <span class="required">الإجراء المطلوب</span>
+                </label>
+                <!--end::Label-->
+
+                <!--begin::Input-->
+                <input wire:model.defer="needed_action" type="text" class="form-control">
+                <!--end::Input-->
+                @error('needed_action')
+                <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            <!--end::Input group-->
+
+
+        @endif
+
         <!--begin::Actions-->
         <div class="text-center">
             <button wire:click="closeModal" type="button" class="btn btn-light me-3">

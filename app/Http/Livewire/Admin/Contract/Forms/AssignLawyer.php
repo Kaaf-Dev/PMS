@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin\Contract\Forms;
 
 use App\Models\Contract;
 use App\Models\Lawyer;
+use App\Models\LawyerCase;
 use App\Traits\WithAlert;
 use Livewire\Component;
 
@@ -14,13 +15,24 @@ class AssignLawyer extends Component
     public $contract;
     public $lawyers;
     public $selected_lawyer;
-    public $search;
 
+    public $subject;
+    public $first_side;
+    public $second_side;
+    public $amount;
+    public $needed_action;
+
+    public $search;
 
     public function rules()
     {
         return [
             'selected_lawyer' => 'required',
+            'subject' => 'required',
+            'first_side' => 'required',
+            'second_side' => 'required',
+            'amount' => 'required',
+            'needed_action' => 'required',
         ];
     }
 
@@ -56,6 +68,9 @@ class AssignLawyer extends Component
         $this->resetFields();
         $contract_id = $params['contract_id'] ?? 0;
         $this->contract = Contract::findOrFail($contract_id);
+        $this->amount = $this->contract->total_amount_remaining;
+        $this->first_side = $this->contract->first_side;
+        $this->second_side = $this->contract->second_side;
         $this->fetchLawyers();
     }
 
@@ -97,6 +112,11 @@ class AssignLawyer extends Component
             'selected_lawyer',
             'lawyers',
             'search',
+            'subject',
+            'first_side',
+            'second_side',
+            'amount',
+            'needed_action',
         ]);
     }
 
@@ -108,8 +128,17 @@ class AssignLawyer extends Component
     public function save()
     {
         $validated_data = $this->validate();
-        $this->contract->lawyer_id = $this->selected_lawyer->id;
-        if ($this->contract->save()) {
+
+        $lawyer_case = new LawyerCase();
+        $lawyer_case->lawyer_id = $this->selected_lawyer->id;
+        $lawyer_case->contract_id = $this->contract->id;
+        $lawyer_case->subject = $validated_data['subject'];
+        $lawyer_case->needed_action = $validated_data['needed_action'];
+        $lawyer_case->first_side = $validated_data['first_side'];
+        $lawyer_case->second_side = $validated_data['second_side'];
+        $lawyer_case->amount = $validated_data['amount'];
+
+        if ($lawyer_case->save()) {
             $this->showSuccessAlert('تمت العملية بنجاح');
             $this->emit('contract-lawyer-assigned');
             $this->closeModal();

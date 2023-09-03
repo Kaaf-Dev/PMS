@@ -35,9 +35,9 @@ class Contract extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function Lawyer()
+    public function LawyerCase()
     {
-        return $this->belongsTo(Lawyer::class);
+        return $this->hasOne(LawyerCase::class, 'contract_id', 'id');
     }
 
     public function apartments()
@@ -192,6 +192,28 @@ class Contract extends Model
 
     public function getIsLawyerableAttribute()
     {
-        return !($this->lawyer) == false;
+        return !($this->lawyerCase) == false;
+    }
+
+    public function getFirstSideAttribute()
+    {
+        $side = '';
+        if (isset($this->apartments[0])) {
+            if ($this->apartments[0]->property) {
+                if ($this->apartments[0]->property->category) {
+                    $side = $this->apartments[0]->property->category->name;
+                }
+            }
+        }
+        return $side;
+    }
+
+    public function getSecondSideAttribute()
+    {
+        $side = '';
+        if (isset($this->user)) {
+            $side = $this->user->name;
+        }
+        return $side;
     }
 }

@@ -175,16 +175,16 @@
                     <div class="d-flex align-items-center">
                         <!--begin::Avatar-->
                         <div class="symbol symbol-60px symbol-circle me-3">
-                            <img alt="{{ $this->contract->lawyer->name }}" src="{{ $this->contract->lawyer->profilePhotoUrl }}">
+                            <img alt="{{ $this->contract->lawyerCase->lawyer->name }}" src="{{ $this->contract->lawyerCase->lawyer->profilePhotoUrl }}">
                         </div>
                         <!--end::Avatar-->
                         <!--begin::Info-->
                         <div class="d-flex flex-column">
                             <!--begin::Name-->
-                            <a href="{{ route('admin.users.details', ['user_id' => $this->contract->user->id]) }}" class="fs-4 fw-bold text-gray-900 text-hover-primary me-2">{{ $this->contract->lawyer->name }}</a>
+                            <a class="fs-4 fw-bold text-gray-900 text-hover-primary me-2">{{ $this->contract->lawyerCase->lawyer->name }}</a>
                             <!--end::Name-->
                             <!--begin::Email-->
-                            <a href="{{ route('admin.users.details', ['user_id' => $this->contract->user->id]) }}" class="fw-semibold text-gray-600 text-hover-primary">{{ $this->contract->lawyer->contact_name }}</a>
+                            <a class="fw-semibold text-gray-600 text-hover-primary">{{ $this->contract->lawyerCase->lawyer->contact_name }}</a>
                             <!--end::Email-->
                         </div>
                         <!--end::Info-->
@@ -202,7 +202,7 @@
                                 تم تحويل هذا العقد إلى المحامي
                             </div>
                         </div>
-                        <button wire:click="unassignLawyer" class="btn btn-warning btn-sm">إلغاء التوكيل</button>
+{{--                        <button wire:click="unassignLawyer" class="btn btn-warning btn-sm">إلغاء التوكيل</button>--}}
                         <!--end::Content-->
                     </div>
                     <!--end::Wrapper-->

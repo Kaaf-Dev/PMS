@@ -32,7 +32,7 @@ class Summary extends Component
 
     public function getContractProperty()
     {
-        return Contract::with('lawyer')
+        return Contract::with('lawyerCase')
             ->findOrFail($this->contract_id);
     }
 

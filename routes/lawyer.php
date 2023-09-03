@@ -40,5 +40,15 @@ Route::prefix('lawyer')->group(function () {
             Route::get('/{contract_id}/details', Lawyer\Contract\Details::class)->name('lawyer.contracts.details');
         });
 
+        Route::group([
+            'prefix' => 'cases',
+            'middleware' => [
+                'auth:lawyer',
+            ],
+        ], function () {
+            Route::get('/', Lawyer\LawyerCase\Index::class)->name('lawyer.cases');
+            Route::get('/{lawyer_case_id}/details', Lawyer\LawyerCase\Details::class)->name('lawyer.cases.details');
+        });
+
     });
 });
