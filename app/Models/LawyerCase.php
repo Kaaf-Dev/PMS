@@ -38,4 +38,9 @@ class LawyerCase extends Model
         return $this->belongsTo(Contract::class, 'contract_id', 'id');
     }
 
+    public function getAmountHumanAttribute()
+    {
+        return number_format($this->amount, '2') . ' د.ب.';
+    }
+
 }

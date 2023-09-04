@@ -31,10 +31,10 @@ class Lawyer extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function contracts()
-    {
-        return $this->hasMany(Contract::class);
-    }
+//    public function contracts()
+//    {
+//        return $this->hasMany(Contract::class);
+//    }
 
     public function contractReplies()
     {

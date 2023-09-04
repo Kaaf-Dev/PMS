@@ -8,6 +8,7 @@ class Index extends Component
 {
     public function render()
     {
-        return view('livewire.lawyer.lawyer-case.index');
+        return view('livewire.lawyer.lawyer-case.index')
+            ->layout('layouts.lawyer.app');
     }
 }
