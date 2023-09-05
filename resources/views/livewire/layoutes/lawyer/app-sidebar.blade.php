@@ -20,7 +20,7 @@
                             </span>
                             <!--end::Icon-->
                             <!--begin::Label-->
-                            <span class="fs-7 fw-bold">عقود الإيجار</span>
+                            <span class="fs-7 fw-bold">القضايا</span>
                             <!--end::Label-->
                         </a>
                         <!--end::Link-->

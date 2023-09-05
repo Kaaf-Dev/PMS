@@ -28,6 +28,10 @@ class LawyerCase extends Model
         'collected_amount',
     ];
 
+    protected $casts = [
+        'court_date' => 'date:Y-m-d',
+    ];
+
     public function lawyer()
     {
         return $this->belongsTo(Lawyer::class, 'lawyer_id', 'id');
