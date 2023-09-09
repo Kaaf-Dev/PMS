@@ -13,6 +13,7 @@ class InvoicesList extends Component
     {
         return [
             'invoice_added' => '$refresh',
+            'invoice_paid' => '$refresh',
         ];
     }
 

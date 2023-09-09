@@ -50,6 +50,11 @@ class Contract extends Model
         return $this->hasMany(Invoice::class);
     }
 
+    public function unPaidInvoices()
+    {
+        return $this->hasMany(Invoice::class)->unPaid();
+    }
+
     public function tickets()
     {
         return $this->hasMany(Ticket::class, 'contract_id', 'id');

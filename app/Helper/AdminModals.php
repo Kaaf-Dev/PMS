@@ -249,5 +249,16 @@ function getAdminGlobalModals()
             ]
         ],
 
+        [
+            'modal_id' => 'kt_modal_receipt_create_form',
+            'livewire_component' => 'admin.receipt.form.create-form',
+            'emit_show' => 'show-admin-receipt-create-modal',
+            'emit_hide' => 'hide-admin-receipt-create-modal',
+            'details' => [
+                'title' => 'دفع فواتير',
+                'modal_dialog_class' => 'mw-900px',
+            ]
+        ],
+
     ];
 }

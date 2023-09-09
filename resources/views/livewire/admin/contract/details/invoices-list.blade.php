@@ -55,7 +55,7 @@
                                                 <a href="#{{ $invoice->id }}" class="text-gray-600 text-hover-primary">{{ $invoice->no }}</a>
                                             </td>
                                             <td class="text-{{ $invoice->paid_class }}">
-                                                {{ $invoice->amount }}
+                                                {{ $invoice->amount_human }}
                                             </td>
                                             <td>
                                                 <span class="badge badge-light-{{ $invoice->paid_class }}">{{ $invoice->paid_string }}</span>

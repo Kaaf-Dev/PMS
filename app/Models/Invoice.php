@@ -107,6 +107,15 @@ class Invoice extends Model
         return $this->receipts->sum('amount');
     }
 
+    public function getUnPaidAmountAttribute(){
+        return $this->amount - $this->getPaidAmountAttribute();
+    }
+
+    public function getUnPaidAmountHumanAttribute()
+    {
+        return number_format($this->getUnPaidAmountAttribute(), '2');
+    }
+
     public function getTypeStringAttribute()
     {
         $strings = [

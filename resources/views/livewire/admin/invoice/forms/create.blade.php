@@ -291,7 +291,7 @@
                     عودة
                 </button>
 
-                <button type="submit" id="kt_modal_new_target_submit" class="btn btn-danger">
+                <button type="submit" id="kt_modal_new_target_submit" class="btn btn-primary">
                     <!--begin::Indicator label-->
                     <span wire:loading.remove wire:target="save">تأكيد العملية</span>
                     <!--end::Indicator label-->

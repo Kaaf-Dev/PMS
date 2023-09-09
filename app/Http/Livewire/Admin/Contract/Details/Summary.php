@@ -92,4 +92,11 @@ class Summary extends Component
         ]);
     }
 
+    public function payInvoice()
+    {
+        $this->emit('show-admin-receipt-create-modal', [
+            'contract_id' => $this->contract_id,
+        ]);
+    }
+
 }

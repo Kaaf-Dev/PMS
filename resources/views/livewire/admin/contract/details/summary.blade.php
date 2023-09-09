@@ -38,8 +38,8 @@
                     <!--end::Menu item-->
                     <!--begin::Menu item-->
                     <div class="menu-item px-3">
-                        <a href="#" class="menu-link px-3">
-                            <span class="">تسجيل دفعة</span>
+                        <a wire:click="payInvoice" class="menu-link px-3">
+                            <span class="">دفع فواتير</span>
                         </a>
                     </div>
                     <!--end::Menu item-->
