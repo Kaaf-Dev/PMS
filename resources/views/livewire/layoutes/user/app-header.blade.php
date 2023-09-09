@@ -12,8 +12,8 @@
                 <!--end::Logo wrapper-->
                 <!--begin::Logo image-->
                 <a href="{{ route('user.dashboard') }}">
-                    <img alt="Logo" src="{{ asset('user-assets/media/logos/default-small.svg') }}" class="h-30px h-lg-40px theme-light-show" />
-                    <img alt="Logo" src="{{ asset('user-assets/media/logos/default-small-dark.svg') }}" class="h-30px h-lg-40px theme-dark-show" />
+                    <img alt="Logo" src="{{ asset('user-assets/media/logos/logo_light_ar.png') }}" class="h-125px theme-light-show" />
+                    <img alt="Logo" src="{{ asset('user-assets/media/logos/logo_light_ar.png') }}" class="h-125px theme-dark-show" />
                 </a>
                 <!--end::Logo image-->
             </div>
