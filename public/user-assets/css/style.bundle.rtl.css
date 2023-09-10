@@ -47908,7 +47908,7 @@ body,
   }
 }
 [data-bs-theme=light] {
-  --bs-header-bg: linear-gradient(90deg, rgb(228, 239, 249) 0%, rgb(228, 239, 249) 100%);
+  --bs-header-bg: linear-gradient(90deg, #eed7ff 0%, #eed7ff 100%);
 }
 
 [data-bs-theme=dark] {
