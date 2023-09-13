@@ -291,42 +291,101 @@
 
                     @if(isset($this->selected_invoices['invoices']))
 
+                        <!--begin::Input group-->
+                        <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                            <!--begin::Label-->
+                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                <span class="required">طريقة الدفع</span>
+                            </label>
+                            <!--end::Label-->
+                            <!--begin::Input -->
+                            <select wire:model="payment_method" class="form-control form-select">
+                                <option value="">اختيار</option>
+                                @foreach($this->paymentMethods as $key => $payment_method)
+                                    <option value="{{ $key }}">{{ $payment_method }}</option>
+                                @endforeach
+                            </select>
+                            @error('payment_method')
+                            <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                            @enderror
+                            <!--end::Input -->
+                        </div>
+                        <!--end::Input group-->
+
+                        @if ($this->payment_method == \App\Models\Receipt::PAYMENT_METHOD_CHEQUE or $this->payment_method == \App\Models\Receipt::PAYMENT_METHOD_BANK)
+                            <!--begin::Input group-->
+                            <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                    <span class="required">اسم البنك</span>
+                                </label>
+                                <!--end::Label-->
+
+                                <input wire:model.defer="bank_name" type="text" class="form-control">
+                                @error('bank_name')
+                                <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <!--end::Input group-->
+                        @endif
+
+                        @if ($this->payment_method == \App\Models\Receipt::PAYMENT_METHOD_CHEQUE)
+                            <!--begin::Input group-->
+                            <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                    <span class="required">رقم الشيك</span>
+                                </label>
+                                <!--end::Label-->
+
+                                <input wire:model.defer="cheque_number" type="text" class="form-control">
+                                @error('cheque_number')
+                                <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <!--end::Input group-->
+                        @endif
+
                         <label class="form-label fs-6 fw-bold text-gray-700 mb-3">
                             الفواتير المحددة:
                         </label>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped">
-                                <thead>
-                                <tr class="bg-dark text-white">
-                                    <td>الفاتورة</td>
-                                    <td>قيمة الفاتورة</td>
-                                    <td>القيمة المدفوعة</td>
-                                    <td></td>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($this->selected_invoices['invoices'] ?? [] as $selected_invoice)
-                                    <tr>
-                                        <td>{{ $selected_invoice['no'] }}</td>
-                                        <td>{{ $selected_invoice['origin_amount'] }}</td>
-                                        <td>
-                                            <!--begin::Input group-->
-                                            <input wire:model="selected_invoices.invoices.{{ $selected_invoice['id'] }}.amount" type="number" step="0.01" class="form-control form-control-sm" />
-                                            <!--end::Input group-->
-                                        </td>
-                                        <td>
-                                            <button wire:click="removeInvoice('{{ $selected_invoice['id'] }}')" type="button" class="btn btn-danger btn-sm"><i class="ki-outline ki-trash m-0 p-0"></i></button>
-                                        </td>
+
+
+                        <div class="mh-400px scroll-y p2 mt-4">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                    <tr class="bg-dark text-white">
+                                        <td>الفاتورة</td>
+                                        <td>قيمة الفاتورة</td>
+                                        <td>القيمة المدفوعة</td>
+                                        <td></td>
                                     </tr>
-                                @endforeach
-                                </tbody>
-                                <thead>
-                                <tr class="bg-dark text-white">
-                                    <td>المجموع</td>
-                                    <td colspan="3">{{ $this->selected_invoices['total'] }}</td>
-                                </tr>
-                                </thead>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($this->selected_invoices['invoices'] ?? [] as $selected_invoice)
+                                        <tr>
+                                            <td>{{ $selected_invoice['no'] }}</td>
+                                            <td>{{ $selected_invoice['origin_amount'] }}</td>
+                                            <td>
+                                                <!--begin::Input group-->
+                                                <input wire:model="selected_invoices.invoices.{{ $selected_invoice['id'] }}.amount" type="number" step="0.01" class="form-control form-control-sm" />
+                                                <!--end::Input group-->
+                                            </td>
+                                            <td>
+                                                <button wire:click="removeInvoice('{{ $selected_invoice['id'] }}')" type="button" class="btn btn-danger btn-sm"><i class="ki-outline ki-trash m-0 p-0"></i></button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                    <thead>
+                                    <tr class="bg-dark text-white">
+                                        <td>المجموع</td>
+                                        <td colspan="3">{{ $this->selected_invoices['total'] }}</td>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
                         </div>
                     @endif
 

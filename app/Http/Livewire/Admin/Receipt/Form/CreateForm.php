@@ -7,6 +7,7 @@ use App\Models\Invoice;
 use App\Models\Receipt;
 use App\Traits\WithAlert;
 use Carbon\Carbon;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 
 class CreateForm extends Component
@@ -16,6 +17,9 @@ class CreateForm extends Component
     public $selected_contract;
     public $search_contract;
     public $contracts;
+    public $payment_method;
+    public $bank_name;
+    public $cheque_number;
 
     public $selected_invoices;
 
@@ -23,6 +27,27 @@ class CreateForm extends Component
     {
         return [
             'selected_invoices.invoices.*.amount' => 'integer',
+            'payment_method' => [
+                'required',
+                Rule::in(Receipt::getPaymentMethodValues())
+            ],
+            'bank_name' => [
+                Rule::requiredIf(function () {
+                    return $this->payment_method == Receipt::PAYMENT_METHOD_CHEQUE or $this->payment_method == Receipt::PAYMENT_METHOD_BANK;
+                })
+            ],
+            'cheque_number' => [
+                Rule::requiredIf(function () {
+                    return $this->payment_method == Receipt::PAYMENT_METHOD_CHEQUE;
+                })
+            ],
+        ];
+    }
+
+    public function getMessages()
+    {
+        return [
+            'required' => 'هذا الحقل مطلوب',
         ];
     }
 
@@ -74,6 +99,9 @@ class CreateForm extends Component
         $this->reset([
             'selected_contract',
             'selected_invoices',
+            'payment_method',
+            'bank_name',
+            'cheque_number',
         ]);
     }
 
@@ -102,6 +130,9 @@ class CreateForm extends Component
         } else {
             $this->reset([
                 'selected_contract',
+                'payment_method',
+                'bank_name',
+                'cheque_number',
             ]);
         }
     }
@@ -137,8 +168,14 @@ class CreateForm extends Component
         $this->selected_invoices['total'] = $total;
     }
 
+    public function getPaymentMethodsProperty()
+    {
+        return Receipt::getPaymentMethodList();
+    }
+
     public function save()
     {
+        $validated_data = $this->validate();
         if(isset($this->selected_invoices['invoices'])) {
             $date = Carbon::now();
             foreach ($this->selected_invoices['invoices'] as $invoice) {
@@ -146,6 +183,19 @@ class CreateForm extends Component
                 $receipt->invoice_id = $invoice['id'];
                 $receipt->amount = $invoice['amount'];
                 $receipt->date = $date;
+
+                if (isset($validated_data['payment_method'])) {
+                    $receipt->payment_method = $validated_data['payment_method'];
+                }
+
+                if (isset($validated_data['bank_name'])) {
+                    $receipt->bank_name = $validated_data['bank_name'];
+                }
+
+                if (isset($validated_data['cheque_number'])) {
+                    $receipt->cheque_number = $validated_data['cheque_number'];
+                }
+
                 $receipt->save();
             }
 
