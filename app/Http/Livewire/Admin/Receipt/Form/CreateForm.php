@@ -77,7 +77,7 @@ class CreateForm extends Component
     }
 
 
-    public function resolveParams($params)
+    public function resolveParams($params = [])
     {
         $this->resetFields();
         $this->fetchContracts();

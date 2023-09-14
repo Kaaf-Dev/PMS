@@ -5,7 +5,7 @@
             <!--begin::Row-->
             <div class="row gx-10 mb-5">
                 <!--begin::Col-->
-                <div class="col-lg-6">
+                <div class="col-lg-4 col-md-6">
                     <label class="form-label fs-6 fw-bold text-gray-700 mb-3">العقد</label>
                     @error('invoice.contract_id')
                     <div class="text-danger">
@@ -287,10 +287,8 @@
                 <!--end::Col-->
 
                 <!--begin::Col-->
-                <div class="col-lg-6">
-
+                <div class="col-lg-4 col-md-6">
                     @if(isset($this->selected_invoices['invoices']))
-
                         <!--begin::Input group-->
                         <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
                             <!--begin::Label-->
@@ -311,6 +309,7 @@
                             <!--end::Input -->
                         </div>
                         <!--end::Input group-->
+                    @endif
 
                         @if ($this->payment_method == \App\Models\Receipt::PAYMENT_METHOD_CHEQUE or $this->payment_method == \App\Models\Receipt::PAYMENT_METHOD_BANK)
                             <!--begin::Input group-->
@@ -346,6 +345,14 @@
                             <!--end::Input group-->
                         @endif
 
+                </div>
+                <!--end::Col-->
+
+                <!--begin::Col-->
+                <div class="col-lg-4 col-md-6">
+
+                    @if(isset($this->selected_invoices['invoices']))
+
                         <label class="form-label fs-6 fw-bold text-gray-700 mb-3">
                             الفواتير المحددة:
                         </label>
@@ -355,7 +362,7 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped">
                                     <thead>
-                                    <tr class="bg-dark text-white">
+                                    <tr class="text-white" style="background-color: #481F66">
                                         <td>الفاتورة</td>
                                         <td>قيمة الفاتورة</td>
                                         <td>القيمة المدفوعة</td>
@@ -379,7 +386,7 @@
                                     @endforeach
                                     </tbody>
                                     <thead>
-                                    <tr class="bg-dark text-white">
+                                    <tr class="text-white" style="background-color: #481F66">
                                         <td>المجموع</td>
                                         <td colspan="3">{{ $this->selected_invoices['total'] }}</td>
                                     </tr>

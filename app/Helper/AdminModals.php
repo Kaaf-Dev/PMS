@@ -256,7 +256,7 @@ function getAdminGlobalModals()
             'emit_hide' => 'hide-admin-receipt-create-modal',
             'details' => [
                 'title' => 'دفع فواتير',
-                'modal_dialog_class' => 'mw-900px',
+                'modal_dialog_class' => 'modal-fullscreen',
             ]
         ],
 

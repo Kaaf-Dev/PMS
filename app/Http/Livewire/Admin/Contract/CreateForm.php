@@ -106,7 +106,7 @@ class CreateForm extends Component
 
     }
 
-    public function refreshData($params)
+    public function refreshData($params = [])
     {
         $this->setStepNo(1);
         $this->reset([
