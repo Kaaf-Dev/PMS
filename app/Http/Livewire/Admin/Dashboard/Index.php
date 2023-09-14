@@ -11,4 +11,14 @@ class Index extends Component
         return view('livewire.admin.dashboard.index')
             ->layout('layouts.admin.app');
     }
+
+    public function payInvoice()
+    {
+        $this->emit('show-admin-receipt-create-modal');
+    }
+
+    public function createContract()
+    {
+        $this->emit('show-contract-new-modal');
+    }
 }

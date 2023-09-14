@@ -1,6 +1,6 @@
 <div wire:init="load">
     <!--begin::Report-->
-    <div class="card card-xl-stretch mb-xl-8">
+    <div class="card card-xl-stretch">
         <!--begin::Body-->
         <div class="card-body p-0 d-flex justify-content-between flex-column overflow-hidden">
             <!--begin::Hidden-->
