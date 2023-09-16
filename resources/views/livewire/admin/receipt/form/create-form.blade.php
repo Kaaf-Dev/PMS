@@ -415,6 +415,7 @@
                                         <td>الفاتورة</td>
                                         <td>قيمة الفاتورة</td>
                                         <td>القيمة المدفوعة</td>
+                                        <td>قيمة الخصم</td>
                                         <td></td>
                                     </tr>
                                     </thead>
@@ -429,6 +430,11 @@
                                                 <!--end::Input group-->
                                             </td>
                                             <td>
+                                                <!--begin::Input group-->
+                                                <input wire:model="selected_invoices.invoices.{{ $selected_invoice['id'] }}.discount" type="number" step="0.01" class="form-control form-control-sm" />
+                                                <!--end::Input group-->
+                                            </td>
+                                            <td>
                                                 <button wire:click="removeInvoice('{{ $selected_invoice['id'] }}')" type="button" class="btn btn-danger btn-sm"><i class="ki-outline ki-trash m-0 p-0"></i></button>
                                             </td>
                                         </tr>
@@ -437,7 +443,7 @@
                                     <thead>
                                     <tr class="text-white" style="background-color: #481F66">
                                         <td>المجموع</td>
-                                        <td colspan="3">{{ $this->selected_invoices['total'] }}</td>
+                                        <td colspan="100%">{{ $this->selected_invoices['total'] }}</td>
                                     </tr>
                                     </thead>
                                 </table>

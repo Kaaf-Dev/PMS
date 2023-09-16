@@ -66,26 +66,52 @@ class Invoice extends Model
         return $this->hasMany(Receipt::class);
     }
 
+    public function discounts()
+    {
+        return $this->hasMany(Discount::class, 'invoice_id', 'id');
+    }
+
     public function scopePaid($query)
     {
         $query->whereExists(function ($query) {
             $query->selectRaw('1')
                 ->from('receipts')
+                ->leftJoin('discounts', 'receipts.invoice_id', '=', 'discounts.invoice_id')
                 ->whereColumn('receipts.invoice_id', '=', 'invoices.id')
-                ->whereColumn('receipts.amount', '>=', 'invoices.amount');
+                ->groupBy('invoices.id')
+                ->havingRaw('SUM(receipts.amount) + IFNULL(SUM(discounts.amount), 0) >= invoices.amount');
         });
 
     }
 
-    public function scopeUnPaid($query)
+    public function scopeUnpaid($query)
     {
-        $query->whereNotExists(function ($query) {
-            $query->selectRaw('1')
-                ->from('receipts')
-                ->whereColumn('receipts.invoice_id', '=', 'invoices.id')
-                ->whereColumn('receipts.amount', '>=', 'invoices.amount');
+        $query->where(function ($query) {
+            $query->orWhereDoesntHave('receipts', function ($subQuery) {
+                $subQuery->whereNull('receipts.deleted_at');
+            })->orWhere(function ($subQuery) {
+                $subQuery->whereExists(function ($existsQuery) {
+                    $existsQuery->select(DB::raw(1))
+                        ->from('receipts')
+                        ->whereColumn('receipts.invoice_id', 'invoices.id')
+                        ->whereNull('receipts.deleted_at')
+                        ->groupBy('receipts.invoice_id')
+                        ->havingRaw('SUM(receipts.amount) + IFNULL((SELECT SUM(amount) FROM discounts WHERE invoice_id = invoices.id AND discounts.deleted_at IS NULL), 0) < invoices.amount');
+                });
+            });
+        })->orWhere(function ($query) {
+            $query->orWhereDoesntHave('discounts', function ($subQuery) {
+                $subQuery->whereNull('discounts.deleted_at');
+            })->orWhere(function ($subQuery) {
+                $subQuery->whereExists(function ($existsQuery) {
+                    $existsQuery->select(DB::raw(1))
+                        ->from('discounts')
+                        ->whereColumn('discounts.invoice_id', 'invoices.id')
+                        ->groupBy('discounts.invoice_id')
+                        ->havingRaw('SUM(discounts.amount) >= invoices.amount');
+                });
+            });
         });
-
     }
 
     public function getIsPaidAttribute()
@@ -162,6 +188,11 @@ class Invoice extends Model
     public function getDueHumanAttribute()
     {
         return $this->due->format('Y/m/d');
+    }
+
+    public function getAmountAttribute()
+    {
+        return $this->getRawOriginal('amount') - $this->discounts()->sum('amount');
     }
 
     public function getAmountHumanAttribute()

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin\Receipt\Form;
 
 use App\Models\Contract;
+use App\Models\Discount;
 use App\Models\Invoice;
 use App\Models\Receipt;
 use App\Traits\WithAlert;
@@ -28,9 +29,12 @@ class CreateForm extends Component
     {
         return [
             'selected_invoices.invoices.*.amount' => 'numeric',
+            'selected_invoices.invoices.*.discount' => 'numeric',
             'payment_method' => [
-                'required',
-                Rule::in(Receipt::getPaymentMethodValues())
+                Rule::requiredIf(function () {
+                    $this->updateSelectedInvoicesTotal();
+                    return $this->selected_invoices['total'] > 0;
+                }),
             ],
             'bank_name' => [
                 Rule::requiredIf(function () {
@@ -70,7 +74,6 @@ class CreateForm extends Component
         if ($property == 'search_contract') {
             $this->fetchContracts();
         }
-        // todo:: update amount and total for selected invoices;
     }
 
     public function updatedSelectedInvoices()
@@ -150,6 +153,7 @@ class CreateForm extends Component
                 'amount' => $invoice->unPaidAmount,
                 'origin_amount' => $invoice->unPaidAmount,
                 'due' => $invoice->due,
+                'discount' => 0,
             ];
         }
         $this->updateSelectedInvoicesTotal();
@@ -186,24 +190,34 @@ class CreateForm extends Component
                 if (isset($validated_data['receipt_date_as_invoice_due']) and $validated_data['receipt_date_as_invoice_due']) {
                     $date = $invoice['due'];
                 }
-                $receipt = new Receipt();
-                $receipt->invoice_id = $invoice['id'];
-                $receipt->amount = $invoice['amount'];
-                $receipt->date = $date;
 
-                if (isset($validated_data['payment_method'])) {
-                    $receipt->payment_method = $validated_data['payment_method'];
+                if ($invoice['amount'] > 0) { // create receipt
+                    $receipt = new Receipt();
+                    $receipt->invoice_id = $invoice['id'];
+                    $receipt->amount = $invoice['amount'];
+                    $receipt->date = $date;
+
+                    if (isset($validated_data['payment_method'])) {
+                        $receipt->payment_method = $validated_data['payment_method'];
+                    }
+
+                    if (isset($validated_data['bank_name'])) {
+                        $receipt->bank_name = $validated_data['bank_name'];
+                    }
+
+                    if (isset($validated_data['cheque_number'])) {
+                        $receipt->cheque_number = $validated_data['cheque_number'];
+                    }
+
+                    $receipt->save();
                 }
 
-                if (isset($validated_data['bank_name'])) {
-                    $receipt->bank_name = $validated_data['bank_name'];
+                if ($invoice['discount'] > 0) { // create discount
+                    $discount = new Discount();
+                    $discount->invoice_id = $invoice['id'];
+                    $discount->amount = $invoice['discount'];
+                    $discount->save();
                 }
-
-                if (isset($validated_data['cheque_number'])) {
-                    $receipt->cheque_number = $validated_data['cheque_number'];
-                }
-
-                $receipt->save();
             }
 
             $this->emit('invoice_paid');
