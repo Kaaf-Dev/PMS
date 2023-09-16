@@ -20,13 +20,14 @@ class CreateForm extends Component
     public $payment_method;
     public $bank_name;
     public $cheque_number;
+    public $receipt_date_as_invoice_due = true;
 
     public $selected_invoices;
 
     public function rules()
     {
         return [
-            'selected_invoices.invoices.*.amount' => 'integer',
+            'selected_invoices.invoices.*.amount' => 'numeric',
             'payment_method' => [
                 'required',
                 Rule::in(Receipt::getPaymentMethodValues())
@@ -41,6 +42,7 @@ class CreateForm extends Component
                     return $this->payment_method == Receipt::PAYMENT_METHOD_CHEQUE;
                 })
             ],
+            'receipt_date_as_invoice_due' => 'nullable|boolean',
         ];
     }
 
@@ -103,6 +105,7 @@ class CreateForm extends Component
             'bank_name',
             'cheque_number',
         ]);
+        $this->receipt_date_as_invoice_due = true;
     }
 
     public function fetchContracts()
@@ -146,6 +149,7 @@ class CreateForm extends Component
                 'no' => $invoice->no,
                 'amount' => $invoice->unPaidAmount,
                 'origin_amount' => $invoice->unPaidAmount,
+                'due' => $invoice->due,
             ];
         }
         $this->updateSelectedInvoicesTotal();
@@ -179,6 +183,9 @@ class CreateForm extends Component
         if(isset($this->selected_invoices['invoices'])) {
             $date = Carbon::now();
             foreach ($this->selected_invoices['invoices'] as $invoice) {
+                if (isset($validated_data['receipt_date_as_invoice_due']) and $validated_data['receipt_date_as_invoice_due']) {
+                    $date = $invoice['due'];
+                }
                 $receipt = new Receipt();
                 $receipt->invoice_id = $invoice['id'];
                 $receipt->amount = $invoice['amount'];

@@ -380,6 +380,20 @@
                             <!--end::Input group-->
                         @endif
 
+                        @if(isset($this->selected_invoices['invoices']))
+                            <!--begin::Input group-->
+                            <div class="form-check">
+                                <input wire:model="receipt_date_as_invoice_due" class="form-check-input" type="checkbox" id="receipt_date_as_invoice_due" />
+                                <label class="form-check-label text-black" for="receipt_date_as_invoice_due">
+                                    السداد بتاريخ استحقاق الفاتورة
+                                </label>
+                                @error('receipt_date_as_invoice_due')
+                                <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <!--end::Input group-->
+                        @endif
+
                 </div>
                 <!--end::Col-->
 
