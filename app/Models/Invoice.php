@@ -99,18 +99,6 @@ class Invoice extends Model
                         ->havingRaw('SUM(receipts.amount) + IFNULL((SELECT SUM(amount) FROM discounts WHERE invoice_id = invoices.id AND discounts.deleted_at IS NULL), 0) < invoices.amount');
                 });
             });
-        })->orWhere(function ($query) {
-            $query->orWhereDoesntHave('discounts', function ($subQuery) {
-                $subQuery->whereNull('discounts.deleted_at');
-            })->orWhere(function ($subQuery) {
-                $subQuery->whereExists(function ($existsQuery) {
-                    $existsQuery->select(DB::raw(1))
-                        ->from('discounts')
-                        ->whereColumn('discounts.invoice_id', 'invoices.id')
-                        ->groupBy('discounts.invoice_id')
-                        ->havingRaw('SUM(discounts.amount) >= invoices.amount');
-                });
-            });
         });
     }
 
