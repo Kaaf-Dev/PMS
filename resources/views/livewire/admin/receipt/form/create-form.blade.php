@@ -19,7 +19,7 @@
                                 <!--begin::Info-->
                                 <div class="d-flex flex-column">
                                     <!--begin::Name-->
-                                    <a href="#" class="fs-4 fw-bold text-gray-900 text-hover-primary me-2">
+                                    <a href="#" class="fs-4 fw-bold text-gray-900 text-hover-primary">
                                         رقم العقد#: {{ $this->selected_contract->id}}
                                         <br>
                                         {{ $this->selected_contract->user->name }}
@@ -43,12 +43,31 @@
 
                         </div>
 
+                        <button wire:click="selectAll" type="button" class="btn btn-primary w-100 mt-4">
+                            <!--begin::Indicator label-->
+                            <span wire:loading.remove wire:target="selectAll">
+                                                        <i class="fas fa-list-check"></i>
+                                اختيار جميع الفواتير
+                                                    </span>
+                            <!--end::Indicator label-->
+                            <!--begin::Indicator progress-->
+                            <span wire:loading wire:target="selectAll">
+                                                        الرجاء الانتظار
+                                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                                    </span>
+                            <!--end::Indicator progress-->
+                        </button>
+
                         <div class="mh-350px scroll-y p2 mt-4">
 
                             @forelse($this->selected_contract->unPaidInvoices ?? [] as $invoice)
 
                                 <!--begin::Apartment-->
-                                <div class="border border-dashed border-primary p-7 rounded mb-7">
+                                <div class="border border-dashed border-primary p-7 rounded mb-7
+                                @if($this->isSelected($invoice->id))
+                                bg-light-primary
+                                @endif
+                                ">
                                     <!--begin::Id-->
                                     <div class="d-flex flex-stack">
                                         <div class="d-flex">
@@ -99,22 +118,38 @@
 
                                                 <!--end::Button-->
                                                 <!--begin::Button-->
-                                                <a wire:click="selectInvoice('{{ $invoice->id }}')" class="btn btn-sm btn-primary">
-                                                    <!--begin::Indicator label-->
-                                                    <span wire:loading.remove wire:target="selectInvoice('{{ $invoice->id }}')">
-                                                        <i class="fas fa-check"></i>
-                                                        اختيار
+
+                                                @if($this->isSelected($invoice->id))
+                                                    <a wire:click="removeInvoice('{{ $invoice->id }}')" class="btn btn-sm btn-danger">
+                                                        <!--begin::Indicator label-->
+                                                        <span wire:loading.remove wire:target="removeInvoice('{{ $invoice->id }}')">
+                                                        <i class="fas fa-trash"></i>
+                                                        حذف من قائمة الاختيار
                                                     </span>
-                                                    <!--end::Indicator label-->
-                                                    <!--begin::Indicator progress-->
-                                                    <span wire:loading wire:target="selectInvoice('{{ $invoice->id }}')">
+                                                        <!--end::Indicator label-->
+                                                        <!--begin::Indicator progress-->
+                                                        <span wire:loading wire:target="removeInvoice('{{ $invoice->id }}')">
                                                         الرجاء الانتظار
                                                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                                                     </span>
-                                                    <!--end::Indicator progress-->
-
-
-                                                </a>
+                                                        <!--end::Indicator progress-->
+                                                    </a>
+                                                @else
+                                                    <a wire:click="selectInvoice('{{ $invoice->id }}')" class="btn btn-sm btn-primary">
+                                                        <!--begin::Indicator label-->
+                                                        <span wire:loading.remove wire:target="selectInvoice('{{ $invoice->id }}')">
+                                                        <i class="fas fa-check"></i>
+                                                        اختيار
+                                                    </span>
+                                                        <!--end::Indicator label-->
+                                                        <!--begin::Indicator progress-->
+                                                        <span wire:loading wire:target="selectInvoice('{{ $invoice->id }}')">
+                                                        الرجاء الانتظار
+                                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                                    </span>
+                                                        <!--end::Indicator progress-->
+                                                    </a>
+                                                @endif
                                                 <!--end::Button-->
                                             </div>
                                             <!--end::Action-->

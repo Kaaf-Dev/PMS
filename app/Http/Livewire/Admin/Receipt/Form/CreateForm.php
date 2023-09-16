@@ -206,4 +206,20 @@ class CreateForm extends Component
         }
     }
 
+    public function selectAll()
+    {
+        foreach($this->selected_contract->unPaidInvoices ?? [] as $invoice) {
+            $this->selectInvoice($invoice->id);
+        }
+    }
+
+    public function isSelected($invoice_id)
+    {
+        $is_selected = false;
+        if (isset($this->selected_invoices['invoices']) and isset($this->selected_invoices['invoices'][$invoice_id])) {
+            $is_selected = true;
+        }
+        return $is_selected;
+    }
+
 }
