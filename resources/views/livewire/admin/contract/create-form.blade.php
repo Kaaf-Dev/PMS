@@ -100,7 +100,7 @@
                                                     <!--end::Table head-->
                                                     <!--begin::Table body-->
                                                     <tbody>
-                                                    @forelse($this->selected_apartments ?? [] as $selected_apartment)
+                                                    @forelse($this->selected_apartments ?? [] as $selected_apartment_id => $selected_apartment)
                                                         <tr>
                                                             <td>
                                                                 <!--begin::Avatar-->
@@ -120,7 +120,7 @@
                                                                 </span>
                                                             </td>
                                                             <td class="text-end">
-                                                                <span class="text-muted fw-bold">{{ $selected_apartment['cost'] }} / شهري</span>
+                                                                <input wire:model.defer="selected_apartments.{{ $selected_apartment_id }}.contract_cost" class="form-control form-control-sm"/>
                                                             </td>
                                                             <td class="text-end">
                                                                 <a wire:click="unselectApartment({{ $selected_apartment['id'] }})" class="btn btn-sm btn-outline btn-outline-dashed btn-outline-danger btn-active-light-danger">
@@ -557,7 +557,7 @@
                                         <!--begin::Input-->
 
                                         <div class="mt-2">
-                                            <input wire:ignore  class="form-control form-control-solid" value="" placeholder="Pick date rage" id="kt_contract_duration"/>
+                                            <input wire:ignore  class="form-control form-control" value="" placeholder="Pick date rage" id="kt_contract_duration"/>
                                             <style>
                                                 .daterangepicker{
                                                     z-index: 10000 !important;
@@ -599,26 +599,6 @@
                                     <!--begin::Input group-->
                                     <div class="fv-row mb-10">
                                         <!--begin::Label-->
-                                        <label class="required fs-5 fw-semibold">قيمة الإيجار:</label>
-
-                                        <!--begin::Input-->
-                                        <div class="input-group mb-5">
-                                            <input wire:model.defer="cost" type="text" class="form-control">
-                                            <span class="input-group-text" id="basic-addon2">د.ب. / شهري</span>
-                                        </div>
-                                        <!--end::Input-->
-
-                                        @error('cost')
-                                        <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                        <!--end::Label-->
-
-                                    </div>
-                                    <!--end::Input group-->
-
-                                    <!--begin::Input group-->
-                                    <div class="fv-row mb-10">
-                                        <!--begin::Label-->
                                         <label class="fs-5 fw-semibold">ملاحظات:</label>
 
                                         <!--begin::Input-->
@@ -629,11 +609,8 @@
                                         <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
                                         @enderror
                                         <!--end::Label-->
-
                                     </div>
                                     <!--end::Input group-->
-
-
                                 </div>
                             </div>
                             <!--end::Step 3-->
@@ -643,7 +620,6 @@
                             <!--begin::Step 4-->
                             <div class="current">
                                 <div class="w-100">
-
 
                                     <!--begin::Section-->
                                     <div class="mb-7">

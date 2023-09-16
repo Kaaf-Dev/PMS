@@ -17,6 +17,7 @@ class ContractApartment extends Model
     protected $fillable = [
         'contract_id',
         'apartment_id',
+        'cost',
     ];
 
     public function contract()

@@ -46,6 +46,7 @@ class CreateForm extends Component
                 'selected_apartments' => 'required|array',
                 'selected_apartments.*' => 'array',
                 'selected_apartments.*.id' => 'exists:apartments,id',
+                'selected_apartments.*.contract_cost' => 'required|numeric',
             ],
 
             2 => [
@@ -154,7 +155,7 @@ class CreateForm extends Component
         if ($this->step_no == 2) {
             $cost = 0;
             foreach ($this->selected_apartments ?? [] as $selected_apartment) {
-                $cost += $selected_apartment['cost'];
+                $cost += $selected_apartment['contract_cost'];
             }
             $this->cost = $cost;
         }
@@ -162,7 +163,6 @@ class CreateForm extends Component
         if ($this->step_no >= $this->max_step_no) {
             $Contract = new Contract();
             $Contract->user_id = $this->selected_user->id;
-            $Contract->cost = $this->cost;
             $Contract->notes = $this->notes;
             $Contract->active = true;
             $start_at = Carbon::create(Date('Y-m-01', strtotime($this->start_at)));
@@ -171,7 +171,7 @@ class CreateForm extends Component
             $Contract->end_at = $end_at;
 
             if ($Contract->save()) { // saved successfully
-                $apartment_ids = array_keys($validated_data['selected_apartments']);
+                $apartment_ids = $this->getApartmentsIds();
                 $Contract->apartments()->attach($apartment_ids);
                 $this->contract_id = $Contract->id;
                 $this->emit('contract_added');
@@ -266,6 +266,8 @@ class CreateForm extends Component
                 ->findOrFail($apartment)->append('icon_svg');
             if ($apartment->is_available) {
                 $this->selected_apartments[$apartment->id] = $apartment->toArray();
+                $this->selected_apartments[$apartment->id]['contract_cost'] = $apartment->cost;
+                \Debugbar::info($this->selected_apartments);
             } else {
                 if ($show_error_msg) {
                     $this->showErrorAlert('هذه الوحدة مؤجرة في الوقت الحالي');
@@ -301,6 +303,18 @@ class CreateForm extends Component
         } else {
             $this->showWarningAlert('لا يوجد بيانات حاليًا');
         }
+    }
+
+    public function getApartmentsIds()
+    {
+        $apartments = $this->selected_apartments;
+        $apartments_ids = [];
+        foreach ( $apartments as $apartment_id => $apartment ) {
+            $apartments_ids[$apartment_id] = [
+                'cost' => $apartment['contract_cost'],
+            ];
+        }
+        return $apartments_ids;
     }
 
 }

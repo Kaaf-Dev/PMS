@@ -14,7 +14,6 @@ class Contract extends Model
 
     protected $fillable = [
         'user_id',
-        'cost',
         'notes',
         'active',
         'start_at',
@@ -23,11 +22,16 @@ class Contract extends Model
 
     protected $casts = [
         'active' => 'boolean',
+        'cost' => 'float',
     ];
 
     protected $dates = [
         'start_at',
         'end_at',
+    ];
+
+    protected $appends = [
+        'cost',
     ];
 
     public function User()
@@ -43,6 +47,11 @@ class Contract extends Model
     public function apartments()
     {
         return $this->belongsToMany(Apartment::class, 'contract_apartment');
+    }
+
+    public function contractApartments()
+    {
+        return $this->hasMany(ContractApartment::class, 'contract_id', 'id');
     }
 
     public function invoices()
@@ -129,6 +138,11 @@ class Contract extends Model
         ];
 
         return $strings[$this->active_status ?? 0];
+    }
+
+    public function getCostAttribute()
+    {
+        return $this->apartments()->sum('contract_apartment.cost');
     }
 
     public function getCostHumanAttribute()

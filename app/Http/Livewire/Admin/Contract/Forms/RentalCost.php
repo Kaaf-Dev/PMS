@@ -12,11 +12,12 @@ class RentalCost extends Component
     use WithAlert;
 
     public $contract;
+    public $selected_apartments;
 
     public function rules()
     {
         return [
-            'contract.cost' => 'required|numeric',
+            'selected_apartments.*.cost' => 'required|numeric',
         ];
     }
 
@@ -37,6 +38,7 @@ class RentalCost extends Component
         $this->resetFields();
         $contract_id = $params['contract_id'] ?? 0;
         $this->contract = Contract::findOrFail($contract_id);
+        $this->selected_apartments = $this->contract->contractApartments;
     }
 
     public function resetFields()
@@ -44,6 +46,7 @@ class RentalCost extends Component
         $this->resetErrorBag();
         $this->reset([
             'contract',
+            'selected_apartments',
         ]);
     }
 
@@ -55,13 +58,11 @@ class RentalCost extends Component
     public function save()
     {
         $this->validate();
-        if ($this->contract->save()) {
-            $this->showSuccessAlert('تمت العملية بنجاح');
-            $this->emit('contract-updated-rental-cost');
-            $this->closeModal();
-        } else {
-            $this->showWarningAlert('يرجى المحاولة لاحقًا!');
+        foreach ($this->selected_apartments as $selected_apartment) {
+            $selected_apartment->save();
         }
-
+        $this->showSuccessAlert('تمت العملية بنجاح');
+        $this->emit('contract-updated-rental-cost');
+        $this->closeModal();
     }
 }
