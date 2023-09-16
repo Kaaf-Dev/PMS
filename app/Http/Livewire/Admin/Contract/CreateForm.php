@@ -37,6 +37,7 @@ class CreateForm extends Component
     public $cost;
     public $notes;
 
+    public $property_category;
 
     public function rules()
     {
@@ -122,6 +123,7 @@ class CreateForm extends Component
             'end_at',
             'cost',
             'notes',
+            'property_category'
         ]);
 
         $this->resetErrorBag();
@@ -254,7 +256,17 @@ class CreateForm extends Component
             'selected_property',
         ]);
         if ($property) {
-            $this->selected_property = Property::findOrfail($property);
+
+            $property = Property::findOrfail($property);
+
+            if ($this->property_category and $property->category_id) {
+                if ($this->property_category != $property->category_id) {
+                    $this->showWarningAlert('لا يمكن إضافة وحدات من فئة عقار مختلف');
+                    return;
+                }
+            }
+
+            $this->selected_property = $property;
             $this->fetchApartments();
         }
     }
@@ -267,7 +279,11 @@ class CreateForm extends Component
             if ($apartment->is_available) {
                 $this->selected_apartments[$apartment->id] = $apartment->toArray();
                 $this->selected_apartments[$apartment->id]['contract_cost'] = $apartment->cost;
-                \Debugbar::info($this->selected_apartments);
+                if (is_null($this->property_category)) {
+                    if ($apartment->property->category_id) {
+                        $this->property_category = $apartment->property->category_id;
+                    }
+                }
             } else {
                 if ($show_error_msg) {
                     $this->showErrorAlert('هذه الوحدة مؤجرة في الوقت الحالي');
