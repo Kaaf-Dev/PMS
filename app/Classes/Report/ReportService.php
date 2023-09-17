@@ -2,6 +2,8 @@
 
 namespace App\Classes\Report;
 
+use App\Models\Apartment;
+use App\Models\Contract;
 use App\Models\MaintenanceInvoice;
 use App\Models\Receipt;
 
@@ -74,4 +76,105 @@ class ReportService
             'expensive_per_month' => array_values($expensive_per_month),
         ];
     }
+
+    public static function getOccupancyOverview()
+    {
+
+        // Prepare variables //
+        $rented_count = 0;
+        $rented_percent = 0;
+        $available_count = 0;
+        $available_percent = 0;
+
+        $apartment_count = 0;
+        $apartment_percent = 0;
+        $apartment_rented_count = 0;
+        $apartment_rented_percent = 0;
+        $apartment_available_count = 0;
+        $apartment_available_percent = 0;
+
+        $store_count = 0;
+        $store_percent = 0;
+        $store_rented_count = 0;
+        $store_rented_percent = 0;
+        $store_available_count = 0;
+        $store_available_percent = 0;
+
+        // fetch data from database //
+        $all_apartments_count = Apartment::get()
+            ->groupBy('type')
+            ->map(function ($apartments) {
+                return $apartments->count();
+            });
+
+        $types_rented = Contract::active()
+            ->with('apartments.property')
+            ->get()
+            ->pluck('apartments')
+            ->flatten()
+            ->groupBy('type') // Group apartments by type
+            ->map(function ($apartments) {
+                return $apartments->count();
+            });
+
+
+        // data processing //
+        foreach ($all_apartments_count as $type => $type_count) {
+            if ($type == Apartment::TYPE_HOUSE) {
+                $apartment_count = $type_count;
+
+            } elseif ($type == Apartment::TYPE_STORE) {
+                $store_count = $type_count;
+            }
+        }
+
+        foreach ($types_rented as $type => $type_rented) {
+            if ($type == Apartment::TYPE_HOUSE) {
+                $apartment_rented_count = $type_rented;
+
+            } elseif ($type == Apartment::TYPE_STORE) {
+                $store_rented_count = $type_rented;
+            }
+        }
+
+        // data calculations //
+        $apartment_available_count = $apartment_count - $apartment_rented_count;
+        $store_available_count = $store_count - $store_rented_count;
+
+        $rented_count = $apartment_rented_count + $store_rented_count;
+        $available_count = $apartment_available_count + $store_available_count;
+
+        $rented_percent = round(($rented_count / ($available_count + $rented_count)) * 100);
+        $available_percent = round(($available_count / ($available_count + $rented_count)) * 100);
+
+        $apartment_rented_percent = round( ($apartment_rented_count / ($apartment_available_count + $apartment_rented_count)) * 100 );
+        $apartment_available_percent = round( ($apartment_available_count / ($apartment_available_count + $apartment_rented_count)) * 100 );
+
+        $store_rented_percent = round( ($store_rented_count / ($store_available_count + $store_rented_count)) * 100 );
+        $store_available_percent = round( ($store_available_count / ($store_available_count + $store_rented_count)) * 100 );
+
+        // return data //
+        return [
+            'rented_count' => $rented_count,
+            'rented_percent' => $rented_percent,
+
+            'available_count' => $available_count,
+            'available_percent' => $available_percent,
+
+            'apartment_count' => $apartment_count,
+            'apartment_percent' => $apartment_percent,
+            'apartment_rented_count' => $apartment_rented_count,
+            'apartment_rented_percent' => $apartment_rented_percent,
+            'apartment_available_count' => $apartment_available_count,
+            'apartment_available_percent' => $apartment_available_percent,
+
+            'store_count' => $store_count,
+            'store_percent' => $store_percent,
+            'store_rented_count' => $store_rented_count,
+            'store_rented_percent' => $store_rented_percent,
+            'store_available_count' => $store_available_count,
+            'store_available_percent' => $store_available_percent,
+        ];
+    }
+
 }
