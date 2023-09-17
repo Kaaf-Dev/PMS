@@ -18,7 +18,7 @@
                         <!--begin::Symbol-->
                         <div class="symbol symbol-40px me-3">
                             <div class="symbol-label bg-light">
-                                <i class="ki-duotone ki-abstract-42 fs-1 text-dark"><span class="path1"></span><span class="path2"></span></i>                        </div>
+                                <i class="ki-duotone ki-abstract-43 fs-1 text-dark"><span class="path1"></span><span class="path2"></span></i>                        </div>
                         </div>
                         <!--end::Symbol-->
 
@@ -41,7 +41,7 @@
                         <!--begin::Symbol-->
                         <div class="symbol symbol-40px me-3">
                             <div class="symbol-label bg-light">
-                                <i class="ki-duotone ki-abstract-45 fs-1 text-dark"><span class="path1"></span><span class="path2"></span></i>                        </div>
+                                <i class="ki-duotone ki-save-2 fs-1 text-dark"><span class="path1"></span><span class="path2"></span></i>                        </div>
                         </div>
                         <!--end::Symbol-->
 
@@ -64,7 +64,7 @@
                         <!--begin::Symbol-->
                         <div class="symbol symbol-40px me-3">
                             <div class="symbol-label bg-light">
-                                <i class="ki-duotone ki-abstract-21 fs-1 text-dark"><span class="path1"></span><span class="path2"></span></i>                        </div>
+                                <i class="ki-duotone ki-abstract-43 fs-1 text-dark"><span class="path1"></span><span class="path2"></span></i>                        </div>
                         </div>
                         <!--end::Symbol-->
 
@@ -87,7 +87,7 @@
                         <!--begin::Symbol-->
                         <div class="symbol symbol-40px me-3">
                             <div class="symbol-label bg-light">
-                                <i class="ki-duotone ki-abstract-44 fs-1 text-dark"><span class="path1"></span><span class="path2"></span></i>                        </div>
+                                <i class="ki-duotone ki-save-2 fs-1 text-dark"><span class="path1"></span><span class="path2"></span></i>                        </div>
                         </div>
                         <!--end::Symbol-->
 
@@ -110,7 +110,7 @@
                         <!--begin::Symbol-->
                         <div class="symbol symbol-40px me-3">
                             <div class="symbol-label bg-light">
-                                <i class="ki-duotone ki-abstract-21 fs-1 text-dark"><span class="path1"></span><span class="path2"></span></i>                        </div>
+                                <i class="ki-duotone ki-abstract-43 fs-1 text-dark"><span class="path1"></span><span class="path2"></span></i>                        </div>
                         </div>
                         <!--end::Symbol-->
 
@@ -133,7 +133,7 @@
                         <!--begin::Symbol-->
                         <div class="symbol symbol-40px me-3">
                             <div class="symbol-label bg-light">
-                                <i class="ki-duotone ki-abstract-44 fs-1 text-dark"><span class="path1"></span><span class="path2"></span></i>                        </div>
+                                <i class="ki-duotone ki-save-2 fs-1 text-dark"><span class="path1"></span><span class="path2"></span></i>                        </div>
                         </div>
                         <!--end::Symbol-->
 
