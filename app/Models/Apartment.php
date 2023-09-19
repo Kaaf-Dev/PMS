@@ -51,6 +51,14 @@ class Apartment extends Model
         return $this->activeContracts()->first();
     }
 
+    public function scopeAvailable($query)
+    {
+        $query->whereDoesntHave('contracts', function ($query) {
+            $query->active();
+        });
+    }
+
+
     public function getTypeStringAttribute()
     {
         $strings = [

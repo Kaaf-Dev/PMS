@@ -144,14 +144,29 @@ class ReportService
         $rented_count = $apartment_rented_count + $store_rented_count;
         $available_count = $apartment_available_count + $store_available_count;
 
-        $rented_percent = round(($rented_count / ($available_count + $rented_count)) * 100);
-        $available_percent = round(($available_count / ($available_count + $rented_count)) * 100);
+        if ($available_count + $rented_count > 0) {
+            $rented_percent = round(($rented_count / ($available_count + $rented_count)) * 100);
+        }
 
-        $apartment_rented_percent = round( ($apartment_rented_count / ($apartment_available_count + $apartment_rented_count)) * 100 );
-        $apartment_available_percent = round( ($apartment_available_count / ($apartment_available_count + $apartment_rented_count)) * 100 );
+        if ($available_count + $rented_count > 0) {
+            $available_percent = round(($available_count / ($available_count + $rented_count)) * 100);
+        }
 
-        $store_rented_percent = round( ($store_rented_count / ($store_available_count + $store_rented_count)) * 100 );
-        $store_available_percent = round( ($store_available_count / ($store_available_count + $store_rented_count)) * 100 );
+        if ($apartment_available_count + $apartment_rented_count) {
+            $apartment_rented_percent = round( ($apartment_rented_count / ($apartment_available_count + $apartment_rented_count)) * 100 );
+        }
+
+        if ($apartment_available_count + $apartment_rented_count > 0) {
+            $apartment_available_percent = round( ($apartment_available_count / ($apartment_available_count + $apartment_rented_count)) * 100 );
+        }
+
+        if ($store_available_count + $store_rented_count > 0) {
+            $store_rented_percent = round( ($store_rented_count / ($store_available_count + $store_rented_count)) * 100 );
+        }
+
+        if ($store_available_count + $store_rented_count) {
+            $store_available_percent = round( ($store_available_count / ($store_available_count + $store_rented_count)) * 100 );
+        }
 
         // return data //
         return [
@@ -173,6 +188,108 @@ class ReportService
             'store_rented_count' => $store_rented_count,
             'store_rented_percent' => $store_rented_percent,
             'store_available_count' => $store_available_count,
+            'store_available_percent' => $store_available_percent,
+        ];
+    }
+
+    public static function getRentalsOverview()
+    {
+
+        $rents_amount = 0;
+        $rents_percent = 0;
+
+        $available_amount = 0;
+        $available_percent = 0;
+
+        $apartment_rents_amount = 0;
+        $apartment_rents_percent = 0;
+
+        $apartment_available_amount = 0;
+        $apartment_available_percent = 0;
+
+        $store_rents_amount = 0;
+        $store_rents_percent = 0;
+
+        $store_available_amount = 0;
+        $store_available_percent = 0;
+
+        $reports_rents = Contract::active()
+            ->join('contract_apartment', 'contracts.id', '=', 'contract_apartment.contract_id')
+            ->join('apartments', 'apartments.id', '=', 'contract_apartment.apartment_id')
+            ->whereNull('contracts.deleted_at')
+            ->select('apartments.type', \DB::raw('SUM(contract_apartment.cost) as total_cost'))
+            ->groupBy('apartments.type')
+            ->get();
+
+        $reports_available = Apartment::available()
+            ->select('type', \DB::raw('SUM(cost) as total_cost'))
+            ->groupBy('type')
+            ->get();
+
+        foreach ($reports_rents as $report_rent) {
+            if ($report_rent->type == Apartment::TYPE_HOUSE) {
+                $apartment_rents_amount = $report_rent->total_cost;
+            }
+
+            if ($report_rent->type == Apartment::TYPE_STORE) {
+                $store_rents_amount = $report_rent->total_cost;
+            }
+        }
+
+        foreach ($reports_available as $report_available) {
+            if ($report_available->type == Apartment::TYPE_HOUSE) {
+                $apartment_available_amount = $report_available->total_cost;
+            }
+
+            if ($report_available->type == Apartment::TYPE_STORE) {
+                $store_available_amount = $report_available->total_cost;
+            }
+        }
+
+        $rents_amount = $apartment_rents_amount + $store_rents_amount;
+        $available_amount = $apartment_available_amount + $store_available_amount;
+
+        if ($rents_amount + $available_amount > 0) {
+            $rents_percent = round( ($rents_amount / ($rents_amount + $available_amount) ) * 100 );
+        }
+
+        if ($rents_amount + $available_amount > 0) {
+            $available_percent = round( ($available_amount / ($rents_amount + $available_amount) ) * 100 );
+        }
+
+        if ($apartment_rents_amount + $apartment_available_amount > 0) {
+            $apartment_rents_percent = round( ($apartment_rents_amount / ($apartment_rents_amount + $apartment_available_amount)) * 100 );
+        }
+
+        if ($apartment_rents_amount + $apartment_available_amount > 0) {
+            $apartment_available_percent = round( ($apartment_available_amount / ($apartment_rents_amount + $apartment_available_amount)) * 100 );
+        }
+
+        if ($store_rents_amount + $store_available_amount > 0) {
+            $store_rents_percent = round( ($store_rents_amount / ($store_rents_amount + $store_available_amount)) * 100 );
+        }
+
+        if ($store_rents_amount + $store_available_amount > 0) {
+            $store_available_percent = round( ($store_available_amount / ($store_rents_amount + $store_available_amount)) * 100 );
+        }
+
+        return [
+            'rents_amount' => $rents_amount,
+            'rents_percent' => $rents_percent,
+
+            'available_amount' => $available_amount,
+            'available_percent' => $available_percent,
+
+            'apartment_rents_amount' => $apartment_rents_amount,
+            'apartment_rents_percent' => $apartment_rents_percent,
+
+            'apartment_available_amount' => $apartment_available_amount,
+            'apartment_available_percent' => $apartment_available_percent,
+
+            'store_rents_amount' => $store_rents_amount,
+            'store_rents_percent' => $store_rents_percent,
+
+            'store_available_amount' => $store_available_amount,
             'store_available_percent' => $store_available_percent,
         ];
     }
