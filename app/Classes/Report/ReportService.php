@@ -4,6 +4,8 @@ namespace App\Classes\Report;
 
 use App\Models\Apartment;
 use App\Models\Contract;
+use App\Models\Discount;
+use App\Models\Invoice;
 use App\Models\MaintenanceInvoice;
 use App\Models\Receipt;
 
@@ -292,6 +294,22 @@ class ReportService
             'store_available_amount' => $store_available_amount,
             'store_available_percent' => $store_available_percent,
         ];
+    }
+
+    public static function getCollectionOverview()
+    {
+        $invoices_amount = Invoice::sum('amount');
+        $collected_amount = Receipt::sum('amount');
+        $discount_amount = Discount::sum('amount');
+        $coming_amount = $invoices_amount - ($collected_amount + $discount_amount);
+
+        return [
+            'invoices_amount' => $invoices_amount,
+            'collected_amount' => $collected_amount,
+            'discount_amount' => $discount_amount,
+            'coming_amount' => $coming_amount,
+        ];
+
     }
 
 }

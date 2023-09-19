@@ -1,4 +1,4 @@
-<div>
+<div wire:init="load">
     <div>
         <div class="card theme-dark-bg-body" style="background-color: #E82E56">
             <!--begin::Body-->
@@ -25,8 +25,11 @@
 
                             <!--begin::Title-->
                             <div>
-                                <div class="fs-5 text-white fw-bold lh-1">$50K</div>
-                                <div class="fs-7 text-gray-100 fw-bold">Sales</div>
+                                <div class="fs-5 text-white fw-bold lh-1">
+                                    <span wire:loading wire:target="load"><span class="text-white spinner-border spinner-border-sm fs-4 d-block"></span></span>
+                                    <span wire:loading.remove wire:target="load">{{ $this->invoices_amount }}</span>
+                                </div>
+                                <div class="fs-7 text-gray-100 fw-bold">مجموع الإيجارات</div>
                             </div>
                             <!--end::Title-->
                         </div>
@@ -45,8 +48,11 @@
 
                             <!--begin::Title-->
                             <div>
-                                <div class="fs-5 text-white fw-bold lh-1">$4,5K</div>
-                                <div class="fs-7 text-gray-100 fw-bold">Revenue</div>
+                                <div class="fs-5 text-white fw-bold lh-1">
+                                    <span wire:loading wire:target="load"><span class="text-white spinner-border spinner-border-sm fs-4 d-block"></span></span>
+                                    <span wire:loading.remove wire:target="load">{{ $this->collected_amount }}</span>
+                                </div>
+                                <div class="fs-7 text-gray-100 fw-bold">مجموع المحصل</div>
                             </div>
                             <!--end::Title-->
                         </div>
@@ -65,8 +71,11 @@
 
                             <!--begin::Title-->
                             <div>
-                                <div class="fs-5 text-white fw-bold lh-1">40</div>
-                                <div class="fs-7 text-gray-100 fw-bold">Tasks</div>
+                                <div class="fs-5 text-white fw-bold lh-1">
+                                    <span wire:loading wire:target="load"><span class="text-white spinner-border spinner-border-sm fs-4 d-block"></span></span>
+                                    <span wire:loading.remove wire:target="load">{{ $this->discount_amount }}</span>
+                                </div>
+                                <div class="fs-7 text-gray-100 fw-bold">مجموع الخصومات</div>
                             </div>
                             <!--end::Title-->
                         </div>
@@ -85,8 +94,11 @@
 
                             <!--begin::Title-->
                             <div>
-                                <div class="fs-5 text-white fw-bold lh-1">$5.8M</div>
-                                <div class="fs-7 text-gray-100 fw-bold">Sales</div>
+                                <div class="fs-5 text-white fw-bold lh-1">
+                                    <span wire:loading wire:target="load"><span class="text-white spinner-border spinner-border-sm fs-4 d-block"></span></span>
+                                    <span wire:loading.remove wire:target="load">{{ $this->coming_amount }}</span>
+                                </div>
+                                <div class="fs-7 text-gray-100 fw-bold">غير محصل للآن</div>
                             </div>
                             <!--end::Title-->
                         </div>
