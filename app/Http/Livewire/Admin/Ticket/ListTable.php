@@ -15,14 +15,21 @@ class ListTable extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $filters;
-    public $order_by;
+    public $order_by = 'updated_at';
     public $order_as = 'asc';
+
+    public $for_dashboard = false;
 
     public function getListeners()
     {
         return [
             'tickets-filter' => 'updateFilters',
         ];
+    }
+
+    public function mount($for_dashboard = false)
+    {
+        $this->for_dashboard = $for_dashboard;
     }
 
     public function render()
@@ -69,6 +76,10 @@ class ListTable extends Component
             'property',
         ]);
 
+        if ($this->for_dashboard) {
+            $tickets = $tickets->opened();
+        }
+
         if (isset($this->filters['search'])) {
             $tickets = $tickets->search($this->filters['search']);
         }
@@ -97,7 +108,10 @@ class ListTable extends Component
             $tickets = $tickets->orderBy($order_by, $order_as);
         }
 
-        return $tickets->paginate(15, ['*'], 'ticketsPage');
+        $per_page = ($this->for_dashboard)
+            ? 4
+            : 15;
+        return $tickets->paginate($per_page, ['*'], 'ticketsPage');
 
     }
 

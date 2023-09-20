@@ -149,6 +149,13 @@ class Ticket extends Model
         });
     }
 
+    public function scopeFinished($query)
+    {
+        return $query->where(function () use ($query){
+            return $query->where('status', '=', Ticket::STATUS_COMPLETE);
+        });
+    }
+
     public function scopeVisitIn($query, $visit_in)
     {
         if ( in_array($visit_in, [

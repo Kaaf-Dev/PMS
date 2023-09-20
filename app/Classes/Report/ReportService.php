@@ -8,6 +8,7 @@ use App\Models\Discount;
 use App\Models\Invoice;
 use App\Models\MaintenanceInvoice;
 use App\Models\Receipt;
+use App\Models\Ticket;
 
 class ReportService
 {
@@ -308,6 +309,32 @@ class ReportService
             'collected_amount' => $collected_amount,
             'discount_amount' => $discount_amount,
             'coming_amount' => $coming_amount,
+        ];
+    }
+
+    public static function getMaintenanceOverview()
+    {
+        $tickets_total = 0;
+        $tickets_finished_count = 0;
+        $tickets_finished_percent = 0;
+        $tickets_open_count = 0;
+        $tickets_open_percent = 0;
+
+        $tickets_finished_count = Ticket::finished()->count();
+        $tickets_open_count = Ticket::opened()->count();
+        $tickets_total = $tickets_finished_count + $tickets_open_count;
+
+        if ($tickets_total > 0) {
+            $tickets_finished_percent = round( ($tickets_finished_count / $tickets_total) * 100 );
+            $tickets_open_percent = round( ($tickets_open_count / $tickets_total) * 100 );
+        }
+
+        return [
+            'tickets_total' => $tickets_total,
+            'tickets_finished_count' => $tickets_finished_count,
+            'tickets_finished_percent' => $tickets_finished_percent,
+            'tickets_open_count' => $tickets_open_count,
+            'tickets_open_percent' => $tickets_open_percent,
         ];
 
     }
