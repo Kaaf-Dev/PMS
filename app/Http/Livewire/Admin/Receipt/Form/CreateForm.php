@@ -27,27 +27,38 @@ class CreateForm extends Component
 
     public function rules()
     {
-        return [
+        $rules =  [
             'selected_invoices.invoices.*.amount' => 'numeric',
             'selected_invoices.invoices.*.discount' => 'numeric',
-            'payment_method' => [
-                Rule::requiredIf(function () {
-                    $this->updateSelectedInvoicesTotal();
-                    return $this->selected_invoices['total'] > 0;
-                }),
-            ],
-            'bank_name' => [
-                Rule::requiredIf(function () {
-                    return $this->payment_method == Receipt::PAYMENT_METHOD_CHEQUE or $this->payment_method == Receipt::PAYMENT_METHOD_BANK;
-                })
-            ],
-            'cheque_number' => [
-                Rule::requiredIf(function () {
-                    return $this->payment_method == Receipt::PAYMENT_METHOD_CHEQUE;
-                })
-            ],
-            'receipt_date_as_invoice_due' => 'nullable|boolean',
+            'selected_invoices.invoices.*.receipt_date_as_invoice_due' => 'nullable|boolean',
         ];
+
+        foreach ($this->selected_invoices['invoices'] ?? [] as $key => $invoice) {
+
+            $rules['selected_invoices.invoices.' . $key . '.payment_method'] = [
+                Rule::requiredIf(function () use ($invoice) {
+                    $this->updateSelectedInvoicesTotal();
+                    return $invoice['amount'] > 0;
+                }),
+            ];
+
+            $rules['selected_invoices.invoices.' . $key . '.bank_name'] = [
+                Rule::requiredIf(function () use ($key){
+                    return in_array($this->selected_invoices['invoices'][$key]['payment_method'], [
+                        Receipt::PAYMENT_METHOD_CHEQUE,
+                        Receipt::PAYMENT_METHOD_BANK,
+                    ]);
+                })
+            ];
+
+            $rules['selected_invoices.invoices.' . $key . '.cheque_number'] = [
+                Rule::requiredIf(function () use ($key){
+                    return $this->selected_invoices['invoices'][$key]['payment_method'] == Receipt::PAYMENT_METHOD_CHEQUE;
+                })
+            ];
+        }
+
+        return $rules;
     }
 
     public function getMessages()
@@ -104,9 +115,6 @@ class CreateForm extends Component
         $this->reset([
             'selected_contract',
             'selected_invoices',
-            'payment_method',
-            'bank_name',
-            'cheque_number',
         ]);
         $this->receipt_date_as_invoice_due = true;
     }
@@ -136,9 +144,6 @@ class CreateForm extends Component
         } else {
             $this->reset([
                 'selected_contract',
-                'payment_method',
-                'bank_name',
-                'cheque_number',
             ]);
         }
     }
@@ -154,6 +159,10 @@ class CreateForm extends Component
                 'origin_amount' => $invoice->unPaidAmount,
                 'due' => $invoice->due,
                 'discount' => 0,
+                'payment_method' => null,
+                'bank_name' => null,
+                'cheque_number' => null,
+                'receipt_date_as_invoice_due' => 1,
             ];
         }
         $this->updateSelectedInvoicesTotal();
@@ -187,7 +196,7 @@ class CreateForm extends Component
         if(isset($this->selected_invoices['invoices'])) {
             $date = Carbon::now();
             foreach ($this->selected_invoices['invoices'] as $invoice) {
-                if (isset($validated_data['receipt_date_as_invoice_due']) and $validated_data['receipt_date_as_invoice_due']) {
+                if (isset($invoice['receipt_date_as_invoice_due']) and $invoice['receipt_date_as_invoice_due']) {
                     $date = $invoice['due'];
                 }
 
@@ -197,16 +206,16 @@ class CreateForm extends Component
                     $receipt->amount = $invoice['amount'];
                     $receipt->date = $date;
 
-                    if (isset($validated_data['payment_method'])) {
-                        $receipt->payment_method = $validated_data['payment_method'];
+                    if (isset($invoice['payment_method'])) {
+                        $receipt->payment_method = $invoice['payment_method'];
                     }
 
-                    if (isset($validated_data['bank_name'])) {
-                        $receipt->bank_name = $validated_data['bank_name'];
+                    if (isset($invoice['bank_name'])) {
+                        $receipt->bank_name = $invoice['bank_name'];
                     }
 
-                    if (isset($validated_data['cheque_number'])) {
-                        $receipt->cheque_number = $validated_data['cheque_number'];
+                    if (isset($invoice['cheque_number'])) {
+                        $receipt->cheque_number = $invoice['cheque_number'];
                     }
 
                     $receipt->save();

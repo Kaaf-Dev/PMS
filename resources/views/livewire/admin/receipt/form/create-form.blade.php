@@ -322,6 +322,110 @@
                 <!--end::Col-->
 
                 <!--begin::Col-->
+                <div class="col-lg-8 col-md-6">
+
+                    @if(isset($this->selected_invoices['invoices']))
+
+                        <label class="form-label fs-6 fw-bold text-gray-700 mb-3">
+                            الفواتير المحددة:
+                        </label>
+
+
+                        <div class="mh-400px scroll-y p2 mt-4">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                    <tr class="text-white" style="background-color: #481F66">
+                                        <td>الفاتورة</td>
+                                        <td>قيمة الفاتورة</td>
+                                        <td>القيمة المدفوعة</td>
+                                        <td>قيمة الخصم</td>
+                                        <td>طريقة الدفع</td>
+                                        <td>تاريخ السداد</td>
+                                        <td></td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($this->selected_invoices['invoices'] ?? [] as $key => $selected_invoice)
+                                        <tr wire:key="selected_invoice-{{ $key }}">
+                                            <td>{{ $selected_invoice['no'] }}</td>
+                                            <td>{{ $selected_invoice['origin_amount'] }}</td>
+                                            <td>
+                                                <!--begin::Input group-->
+                                                <input wire:model="selected_invoices.invoices.{{ $selected_invoice['id'] }}.amount" type="number" step="0.01" class="form-control form-control-sm" />
+                                                <!--end::Input group-->
+                                            </td>
+                                            <td>
+                                                <!--begin::Input group-->
+                                                <input wire:model="selected_invoices.invoices.{{ $selected_invoice['id'] }}.discount" type="number" step="0.01" class="form-control form-control-sm" />
+                                                <!--end::Input group-->
+                                            </td>
+                                            <td>
+                                                <!--begin::Input -->
+                                                <select wire:model="selected_invoices.invoices.{{ $key }}.payment_method" class="form-control form-select">
+                                                    <option value="">اختيار</option>
+                                                    @foreach($this->paymentMethods as $payment_method_key => $payment_method)
+                                                        <option value="{{ $payment_method_key }}">{{ $payment_method }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('selected_invoices.invoices.'. $key .'.payment_method')
+                                                <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                                <!--end::Input -->
+
+                                                @if ($this->selected_invoices['invoices'][$key]['payment_method']  == \App\Models\Receipt::PAYMENT_METHOD_CHEQUE or $this->selected_invoices['invoices'][$key]['payment_method'] == \App\Models\Receipt::PAYMENT_METHOD_BANK)
+                                                    <!--begin::Input group-->
+                                                        <input wire:model.defer="selected_invoices.invoices.{{ $key }}.bank_name" type="text" class="form-control" placeholder="اسم البنك">
+                                                        @error('selected_invoices.invoices.'. $key .'.bank_name')
+                                                        <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                                        @enderror
+                                                    <!--end::Input group-->
+                                                @endif
+
+                                                @if ($this->selected_invoices['invoices'][$key]['payment_method'] == \App\Models\Receipt::PAYMENT_METHOD_CHEQUE)
+                                                    <!--begin::Input group-->
+                                                        <input wire:model.defer="selected_invoices.invoices.{{ $key }}.cheque_number" type="text" class="form-control" placeholder="رقم الشيك">
+                                                        @error('selected_invoices.invoices.'. $key .'.cheque_number')
+                                                        <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                                        @enderror
+                                                    <!--end::Input group-->
+                                                @endif
+
+                                            </td>
+                                            <td>
+                                                <!--begin::Input group-->
+                                                <div class="form-check">
+                                                    <input wire:model="selected_invoices.invoices.{{ $key }}.receipt_date_as_invoice_due" class="form-check-input" type="checkbox" id="receipt_date_as_invoice_due_{{ $key }}" />
+                                                    <label class="form-check-label text-black" for="receipt_date_as_invoice_due_{{ $key }}">
+                                                        السداد بتاريخ استحقاق الفاتورة
+                                                    </label>
+                                                    @error('receipt_date_as_invoice_due')
+                                                    <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <!--end::Input group-->
+                                            </td>
+                                            <td>
+                                                <button wire:click="removeInvoice('{{ $selected_invoice['id'] }}')" type="button" class="btn btn-danger btn-sm"><i class="ki-outline ki-trash m-0 p-0"></i></button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                    <thead>
+                                    <tr class="text-white" style="background-color: #481F66">
+                                        <td>المجموع</td>
+                                        <td colspan="100%">{{ $this->selected_invoices['total'] }}</td>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    @endif
+
+                </div>
+                <!--end::Col-->
+
+                <!--begin::Col-->
                 <div class="col-lg-4 col-md-6">
                     @if(isset($this->selected_invoices['invoices']))
                         <!--begin::Input group-->
@@ -346,113 +450,57 @@
                         <!--end::Input group-->
                     @endif
 
-                        @if ($this->payment_method == \App\Models\Receipt::PAYMENT_METHOD_CHEQUE or $this->payment_method == \App\Models\Receipt::PAYMENT_METHOD_BANK)
-                            <!--begin::Input group-->
-                            <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
-                                <!--begin::Label-->
-                                <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                    <span class="required">اسم البنك</span>
-                                </label>
-                                <!--end::Label-->
+                    @if ($this->payment_method == \App\Models\Receipt::PAYMENT_METHOD_CHEQUE or $this->payment_method == \App\Models\Receipt::PAYMENT_METHOD_BANK)
+                        <!--begin::Input group-->
+                        <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                            <!--begin::Label-->
+                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                <span class="required">اسم البنك</span>
+                            </label>
+                            <!--end::Label-->
 
-                                <input wire:model.defer="bank_name" type="text" class="form-control">
-                                @error('bank_name')
-                                <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <!--end::Input group-->
-                        @endif
+                            <input wire:model.defer="bank_name" type="text" class="form-control">
+                            @error('bank_name')
+                            <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <!--end::Input group-->
+                    @endif
 
-                        @if ($this->payment_method == \App\Models\Receipt::PAYMENT_METHOD_CHEQUE)
-                            <!--begin::Input group-->
-                            <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
-                                <!--begin::Label-->
-                                <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                    <span class="required">رقم الشيك</span>
-                                </label>
-                                <!--end::Label-->
+                    @if ($this->payment_method == \App\Models\Receipt::PAYMENT_METHOD_CHEQUE)
+                        <!--begin::Input group-->
+                        <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                            <!--begin::Label-->
+                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                <span class="required">رقم الشيك</span>
+                            </label>
+                            <!--end::Label-->
 
-                                <input wire:model.defer="cheque_number" type="text" class="form-control">
-                                @error('cheque_number')
-                                <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <!--end::Input group-->
-                        @endif
-
-                        @if(isset($this->selected_invoices['invoices']))
-                            <!--begin::Input group-->
-                            <div class="form-check">
-                                <input wire:model="receipt_date_as_invoice_due" class="form-check-input" type="checkbox" id="receipt_date_as_invoice_due" />
-                                <label class="form-check-label text-black" for="receipt_date_as_invoice_due">
-                                    السداد بتاريخ استحقاق الفاتورة
-                                </label>
-                                @error('receipt_date_as_invoice_due')
-                                <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <!--end::Input group-->
-                        @endif
-
-                </div>
-                <!--end::Col-->
-
-                <!--begin::Col-->
-                <div class="col-lg-4 col-md-6">
+                            <input wire:model.defer="cheque_number" type="text" class="form-control">
+                            @error('cheque_number')
+                            <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <!--end::Input group-->
+                    @endif
 
                     @if(isset($this->selected_invoices['invoices']))
-
-                        <label class="form-label fs-6 fw-bold text-gray-700 mb-3">
-                            الفواتير المحددة:
-                        </label>
-
-
-                        <div class="mh-400px scroll-y p2 mt-4">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped">
-                                    <thead>
-                                    <tr class="text-white" style="background-color: #481F66">
-                                        <td>الفاتورة</td>
-                                        <td>قيمة الفاتورة</td>
-                                        <td>القيمة المدفوعة</td>
-                                        <td>قيمة الخصم</td>
-                                        <td></td>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($this->selected_invoices['invoices'] ?? [] as $selected_invoice)
-                                        <tr>
-                                            <td>{{ $selected_invoice['no'] }}</td>
-                                            <td>{{ $selected_invoice['origin_amount'] }}</td>
-                                            <td>
-                                                <!--begin::Input group-->
-                                                <input wire:model="selected_invoices.invoices.{{ $selected_invoice['id'] }}.amount" type="number" step="0.01" class="form-control form-control-sm" />
-                                                <!--end::Input group-->
-                                            </td>
-                                            <td>
-                                                <!--begin::Input group-->
-                                                <input wire:model="selected_invoices.invoices.{{ $selected_invoice['id'] }}.discount" type="number" step="0.01" class="form-control form-control-sm" />
-                                                <!--end::Input group-->
-                                            </td>
-                                            <td>
-                                                <button wire:click="removeInvoice('{{ $selected_invoice['id'] }}')" type="button" class="btn btn-danger btn-sm"><i class="ki-outline ki-trash m-0 p-0"></i></button>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                    <thead>
-                                    <tr class="text-white" style="background-color: #481F66">
-                                        <td>المجموع</td>
-                                        <td colspan="100%">{{ $this->selected_invoices['total'] }}</td>
-                                    </tr>
-                                    </thead>
-                                </table>
-                            </div>
+                        <!--begin::Input group-->
+                        <div class="form-check">
+                            <input wire:model="receipt_date_as_invoice_due" class="form-check-input" type="checkbox" id="receipt_date_as_invoice_due" />
+                            <label class="form-check-label text-black" for="receipt_date_as_invoice_due">
+                                السداد بتاريخ استحقاق الفاتورة
+                            </label>
+                            @error('receipt_date_as_invoice_due')
+                            <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
+                        <!--end::Input group-->
                     @endif
 
                 </div>
                 <!--end::Col-->
+
             </div>
             <!--end::Row-->
 

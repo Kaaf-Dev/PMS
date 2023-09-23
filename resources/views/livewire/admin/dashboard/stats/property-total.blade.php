@@ -22,6 +22,7 @@
         <div class="card-body d-flex justify-content-between flex-column pt-1 px-0 pb-0">
             <!--begin::Wrapper-->
             <div class="d-flex flex-wrap px-9 mb-5">
+
                 <!--begin::Stat-->
                 <div class="rounded min-w-125px py-3 px-4 my-1 me-6" style="border: 1px dashed rgba(255, 255, 255, 0.2)">
                     <!--begin::Number-->
@@ -55,6 +56,24 @@
                     <!--end::Label-->
                 </div>
                 <!--end::Stat-->
+
+                <!--begin::Stat-->
+                <div class="rounded min-w-125px py-3 px-4 my-1 me-6" style="border: 1px dashed rgba(255, 255, 255, 0.2)">
+                    <!--begin::Number-->
+                    <div class="d-flex align-items-center">
+                        <div class="text-white fs-2 fw-bold counted">
+                            <span wire:loading wire:target="load"><span class="text-white spinner-border spinner-border-sm fs-4 d-block"></span></span>
+                            <span wire:loading.remove wire:target="load">{{ $this->total }}</span>
+                        </div>
+                    </div>
+                    <!--end::Number-->
+
+                    <!--begin::Label-->
+                    <div class="fw-semibold fs-6 text-white opacity-50">المجموع</div>
+                    <!--end::Label-->
+                </div>
+                <!--end::Stat-->
+
             </div>
 
             <!--end::Wrapper-->

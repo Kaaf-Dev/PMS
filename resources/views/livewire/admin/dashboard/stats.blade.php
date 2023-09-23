@@ -42,11 +42,6 @@
             @livewire('admin.dashboard.stats.maintenance-overview')
         </div>
         <!--end::Col-->
-        <!--begin::Col-->
-        <div class="col-md-8">
-            @livewire('admin.ticket.list-table', ['for_dashboard' => true])
-        </div>
-        <!--end::Col-->
     </div>
     <!--end::Row-->
 </div>

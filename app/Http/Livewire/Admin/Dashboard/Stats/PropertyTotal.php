@@ -10,6 +10,7 @@ class PropertyTotal extends Component
 {
 
     public $ready_to_load = false;
+    public $total = 0;
     public $stores_count = 0;
     public $apartments_count = 0;
 
@@ -41,5 +42,6 @@ class PropertyTotal extends Component
                 $this->stores_count = $apartment->count;
             }
         }
+        $this->total = $this->apartments_count + $this->stores_count;
     }
 }
