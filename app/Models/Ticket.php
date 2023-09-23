@@ -24,6 +24,9 @@ class Ticket extends Model
     const PRIORITY_NORMAL = '1';
     const PRIORITY_URGENT = '2';
 
+    const VISIT_AVAILABILITY_AT_FIRST = 1;
+    const VISIT_AVAILABILITY_AT_SECOND = 2;
+    const VISIT_AVAILABILITY_AT_THIRD = 3;
 
     public $incrementing = false;
 
@@ -41,6 +44,7 @@ class Ticket extends Model
         'assigned_at',
         'visit_availability_start',
         'visit_availability_end',
+        'visit_availability_at',
         'rate_stars',
         'rate_notes',
     ];
@@ -228,9 +232,9 @@ class Ticket extends Model
         return ($this->visit_availability_end) ? $this->visit_availability_end->format('H:i') : '-';
     }
 
-    public function hasVisitAvailablityTime()
+    public function hasVisitAvailabilityTime()
     {
-        return ($this->visit_availability_start or $this->visit_availability_end) === true;
+        return ($this->visit_availability_at);
     }
 
     public static function getStatusList()
@@ -330,6 +334,32 @@ class Ticket extends Model
             Ticket::PRIORITY_URGENT => 'information-2',
         ];
         return $priority_classes[$priority] ?? $priority_classes[1];
+    }
+
+    public static function getVisitAvailabilityAtList()
+    {
+        return [
+            Ticket::VISIT_AVAILABILITY_AT_FIRST => 'فترة أولى: من 7 إلى 10 صباحًا',
+            Ticket::VISIT_AVAILABILITY_AT_SECOND => 'فترة ثانية: من 10 إلى 1 مساءً',
+            Ticket::VISIT_AVAILABILITY_AT_THIRD => 'فترة ثالثة: من 1 إلى 4 مساءً',
+        ];
+    }
+
+    public static function getVisitAvailabilityAtValues()
+    {
+        return [
+            Ticket::VISIT_AVAILABILITY_AT_FIRST,
+            Ticket::VISIT_AVAILABILITY_AT_SECOND,
+            Ticket::VISIT_AVAILABILITY_AT_THIRD,
+        ];
+    }
+
+    public function getVisitAvailabilityAtStringAttribute()
+    {
+        $visit_availability_at = $this->visit_availability_at ?? 1;
+
+        $strings = $this->getVisitAvailabilityAtList();
+        return $strings[$visit_availability_at];
     }
 
     public function getCancelableAttribute()

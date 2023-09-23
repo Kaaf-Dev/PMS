@@ -30,7 +30,7 @@
                     </div>
                 @endif
 
-                @if($this->ticket->hasVisitAvailablityTime())
+                @if($this->ticket->hasVisitAvailabilityTime())
                     <!--begin::Details-->
                     <div class="mt-8">
 
@@ -40,23 +40,12 @@
                             <div class="d-flex flex-column">
                               <!--begin::Content-->
                                 <span>
-                                            الوقت المتاح للزيارة
-
-                                            @if ($this->ticket->visit_availability_start)
-                                        من الساعة
-                                        <b>
-                                                {{ $this->ticket->visit_availability_start_human }}
-                                                </b>
-                                    @endif
-
-                                    @if ($this->ticket->visit_availability_end)
-                                        لغاية الساعة
-                                        <b>
-                                                {{ $this->ticket->visit_availability_end_human }}
-                                                </b>
-                                    @endif
-                                             بحسب رغبة المستأجر.
-                                        </span>
+                                    الوقت المتاح للزيارة
+                                    <b>
+                                        {{ $this->ticket->visit_availability_at_string }}
+                                    </b>
+                                    بحسب رغبة المستأجر.
+                                </span>
                                 <!--end::Content-->
                             </div>
                             <!--end::Wrapper-->

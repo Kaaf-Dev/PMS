@@ -58,7 +58,7 @@
                         </div>
                         <!--end::Details-->
 
-                        @if($this->ticket->hasVisitAvailablityTime())
+                        @if($this->ticket->hasVisitAvailabilityTime())
                             <!--begin::Details-->
                             <div class="mt-8">
 
@@ -77,26 +77,15 @@
                                     <!--begin::Wrapper-->
                                     <div class="d-flex flex-column">
                                         <!--begin::Title-->
-                                        <h4 class="mb-1 text-dark">الوقت الوقت للزيارة</h4>
+                                        <h4 class="mb-1 text-dark">ملاحظات</h4>
                                         <!--end::Title-->
 
                                         <!--begin::Content-->
                                         <span>
                                             الوقت المتاح للزيارة
-
-                                            @if ($this->ticket->visit_availability_start)
-                                                من الساعة
-                                                <b>
-                                                {{ $this->ticket->visit_availability_start_human }}
-                                                </b>
-                                            @endif
-
-                                            @if ($this->ticket->visit_availability_end)
-                                                لغاية الساعة
-                                                <b>
-                                                {{ $this->ticket->visit_availability_end_human }}
-                                                </b>
-                                            @endif
+                                            <b>
+                                                {{ $this->ticket->visit_availability_at_string }}
+                                            </b>
                                             .
                                         </span>
                                         <!--end::Content-->

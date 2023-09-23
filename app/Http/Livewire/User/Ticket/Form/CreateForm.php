@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -32,11 +33,7 @@ class CreateForm extends Component
     public $attachments;
     public $attachment;
 
-    public $visit_availability_start_hour;
-    public $visit_availability_start_min;
-
-    public $visit_availability_end_hour;
-    public $visit_availability_end_min;
+    public $visit_availability_at;
 
     public function rules()
     {
@@ -46,10 +43,10 @@ class CreateForm extends Component
             'subject' => 'required',
             'description' => 'required|max:5000',
             'attachments.*' => 'required|mimes:png,jpg,jpeg|max:1024',
-            'visit_availability_start_hour' => 'nullable|numeric',
-            'visit_availability_start_min' => 'nullable|numeric',
-            'visit_availability_end_hour' => 'nullable|numeric',
-            'visit_availability_end_min' => 'nullable|numeric',
+            'visit_availability_at' => [
+                'required',
+                Rule::in(Ticket::getVisitAvailabilityAtValues()),
+            ],
         ];
     }
 
@@ -156,6 +153,11 @@ class CreateForm extends Component
         return $apartments;
     }
 
+    public function getVisitAvailabilityAtListProperty()
+    {
+        return Ticket::getVisitAvailabilityAtList();
+    }
+
     public function resolveVisitAvailabilityStart()
     {
         $date = null;
@@ -188,8 +190,7 @@ class CreateForm extends Component
         $ticket->subject = $validated_data['subject'];
         $ticket->description = $validated_data['description'];
 
-        $ticket->visit_availability_start = $this->resolveVisitAvailabilityStart();
-        $ticket->visit_availability_end = $this->resolveVisitAvailabilityEnd();
+        $ticket->visit_availability_at = $validated_data['visit_availability_at'];
 
         if ($ticket->save()) {
             $attachments = [];
@@ -223,10 +224,7 @@ class CreateForm extends Component
             'description',
             'attachment',
             'attachments',
-            'visit_availability_start_hour',
-            'visit_availability_start_min',
-            'visit_availability_end_hour',
-            'visit_availability_end_min',
+            'visit_availability_at',
         ]);
     }
 }
