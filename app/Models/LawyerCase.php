@@ -47,4 +47,9 @@ class LawyerCase extends Model
         return number_format($this->amount, '2') . ' د.ب.';
     }
 
+    public function invoices()
+    {
+        return $this->hasMany(LawyerInvoice::class, 'lawyer_case_id', 'id');
+    }
+
 }
