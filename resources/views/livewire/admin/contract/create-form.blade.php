@@ -543,54 +543,39 @@
                                 <div class="w-100">
                                     <!--begin::Input group-->
                                     <div class="fv-row mb-10">
-                                        <!--begin::Label-->
-                                        <label class="required fs-5 fw-semibold">مدة العقد:</label>
-                                        @error('start_at')
-                                        <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
-                                        @enderror
-
-                                        @error('end_at')
-                                        <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
-                                        @enderror
-
-                                        <!--end::Label-->
                                         <!--begin::Input-->
-
                                         <div class="mt-2">
-                                            <input wire:ignore  class="form-control form-control" value="" placeholder="Pick date rage" id="kt_contract_duration"/>
-                                            <style>
-                                                .daterangepicker{
-                                                    z-index: 10000 !important;
-                                                }
-                                            </style>
-                                            <script wire:ignore>
+                                            <div class="row mb-4">
+                                                <label class="required fs-5 fw-semibold mb-2">تاريخ بداية العقد: </label>
+                                                <div class="col-3">
+                                                    <input wire:model.defer="start_at_year" type="number" class="form-control form-control" placeholder="سنة" />
+                                                    @error('start_at_year')
+                                                    <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <div class="col-3">
+                                                    <input wire:model.defer="start_at_month" type="number" class="form-control form-control" placeholder="شهر" />
+                                                    @error('start_at_month')
+                                                    <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
 
-                                                var start = moment();
-                                                var end = moment();
-
-                                                @this.set('start_at', start);
-                                                @this.set('end_at', end);
-
-                                                $("#kt_contract_duration").daterangepicker({
-                                                    startDate: start,
-                                                    endDate: end,
-                                                    showDropdowns: true,
-                                                    linkedCalendars: false,
-                                                    ranges: {
-                                                        "شهر": [moment(), moment().add(1, 'months')],
-                                                        "6 أشهر": [moment(), moment().add(6, 'month')],
-                                                        "1 سنة": [moment(), moment().add(1, 'years')],
-                                                        "5 سنوات": [moment(), moment().add(5, 'years')],
-                                                    },
-                                                    locale: {
-                                                        format: 'MM/YYYY'
-                                                    },
-                                                }, function(start, end, label) {
-                                                @this.set('start_at', start);
-                                                @this.set('end_at', end);
-                                                });
-
-                                            </script>
+                                            <div class="row mb-4">
+                                                <label class="required fs-5 fw-semibold mb-2">تاريخ نهاية العقد: </label>
+                                                <div class="col-3">
+                                                    <input wire:model.defer="end_at_year" type="number" class="form-control form-control" placeholder="سنة" />
+                                                    @error('end_at_year')
+                                                    <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <div class="col-3">
+                                                    <input wire:model.defer="end_at_month" type="number" class="form-control form-control" placeholder="شهر" />
+                                                    @error('end_at_month')
+                                                    <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
                                         </div>
                                         <!--end::Input-->
                                     </div>
@@ -667,7 +652,7 @@
                                             <tr class="">
                                                 <td class="text-gray-400">تاريخ البداية: </td>
                                                 <td class="text-gray-800">
-                                                    {{ \Carbon\Carbon::make($this->start_at)->format('Y/m') }}
+                                                    {{ $this->start_at_year }}/{{ $this->start_at_month }}
                                                 </td>
                                             </tr>
                                             <!--end::Row-->
@@ -675,7 +660,7 @@
                                             <tr class="">
                                                 <td class="text-gray-400">تاريخ النهاية: </td>
                                                 <td class="text-gray-800">
-                                                    {{ \Carbon\Carbon::make($this->end_at)->format('Y/m') }}
+                                                    {{ $this->end_at_year }}/{{ $this->end_at_month }}
                                                 </td>
                                             </tr>
                                             <!--end::Row-->

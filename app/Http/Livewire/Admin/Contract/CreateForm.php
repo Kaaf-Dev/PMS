@@ -32,8 +32,11 @@ class CreateForm extends Component
     public $selected_apartments;
     public $selected_user;
 
-    public $start_at;
-    public $end_at;
+    public $start_at_year;
+    public $start_at_month;
+    public $end_at_year;
+    public $end_at_month;
+
     public $cost;
     public $notes;
 
@@ -55,8 +58,10 @@ class CreateForm extends Component
             ],
 
             3 => [
-                'start_at' => 'required|date',
-                'end_at' => 'required|date',
+                'start_at_year' => 'required|integer',
+                'start_at_month' => 'required|integer',
+                'end_at_year' => 'required|integer',
+                'end_at_month' => 'required|integer',
                 'cost' => 'required|numeric',
                 'notes' => 'nullable',
             ],
@@ -92,7 +97,7 @@ class CreateForm extends Component
         return view('livewire.admin.contract.create-form');
     }
 
-    public function updated($property)
+    public function updated($property, $value)
     {
         if ($property == 'search_property') {
             $this->fetchProperties();
@@ -119,8 +124,10 @@ class CreateForm extends Component
             'search_property',
             'search_apartment',
             'search_user',
-            'start_at',
-            'end_at',
+            'start_at_year',
+            'start_at_month',
+            'end_at_year',
+            'end_at_month',
             'cost',
             'notes',
             'property_category'
@@ -167,8 +174,18 @@ class CreateForm extends Component
             $Contract->user_id = $this->selected_user->id;
             $Contract->notes = $this->notes;
             $Contract->active = true;
-            $start_at = Carbon::create(Date('Y-m-01', strtotime($this->start_at)));
-            $end_at = Carbon::create(Date('Y-m-t', strtotime($this->end_at)));
+            $start_at = Carbon::create(
+                $this->start_at_year,
+                $this->start_at_month,
+                1)
+                ->startOfMonth()
+                ->format('Y-m-d');
+            $end_at = Carbon::create(
+                $this->end_at_year,
+                $this->end_at_month,
+                1)
+                ->startOfMonth()
+                ->format('Y-m-d');
             $Contract->start_at = $start_at;
             $Contract->end_at = $end_at;
 
