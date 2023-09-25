@@ -260,5 +260,27 @@ function getAdminGlobalModals()
             ]
         ],
 
+        [
+            'modal_id' => 'kt_modal_lawyer_case_invoice_create_form',
+            'livewire_component' => 'admin.lawyer-case.invoice.form.create-form',
+            'emit_show' => 'show-admin-lawyer-case-invoice-create-modal',
+            'emit_hide' => 'hide-admin-lawyer-case-invoice-create-modal',
+            'details' => [
+                'title' => 'فاتورة جديدة',
+                'modal_dialog_class' => 'mw-650px',
+            ]
+        ],
+
+        [
+            'modal_id' => 'kt_modal_lawyer_case_invoice_update_form',
+            'livewire_component' => 'admin.lawyer-case.invoice.form.update-form',
+            'emit_show' => 'show-admin-lawyer-case-invoice-update-modal',
+            'emit_hide' => 'hide-admin-lawyer-case-invoice-update-modal',
+            'details' => [
+                'title' => 'تفاصيل الفاتورة',
+                'modal_dialog_class' => 'mw-650px',
+            ]
+        ],
+
     ];
 }

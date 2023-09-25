@@ -54,7 +54,11 @@
                     <!--end::Card-->
 
                     @if($this->contract->is_lawyerable)
+
                         @livewire('admin.lawyer-case.details.overview', ['lawyer_case' => $this->contract->lawyerCase->id])
+
+                        @livewire('admin.lawyer-case.invoice.list-table', ['lawyer_case' => $this->contract->lawyerCase->id])
+
                     @endif
 
                     @if($this->contract->contract_replies_count > 0 or $this->contract->is_lawyerable)
