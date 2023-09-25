@@ -54,7 +54,9 @@
                                 <a class="text-dark fw-bold text-hover-primary fs-6">{{ $lawyer_invoice->other }}</a>
                             </td>
                             <td>
-{{--                                <span class="badge badge-light-success">Approved</span>--}}
+                                <span class="badge badge-light-{{ $lawyer_invoice->status_class }}">
+                                    {{ $lawyer_invoice->status_string }}
+                                </span>
                             </td>
                         </tr>
                     @empty
