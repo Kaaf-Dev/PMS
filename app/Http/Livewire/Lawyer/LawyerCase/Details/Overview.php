@@ -3,7 +3,9 @@
 namespace App\Http\Livewire\Lawyer\LawyerCase\Details;
 
 use App\Http\Middleware\PreventRequestsDuringMaintenance;
+use App\Models\Court;
 use App\Models\LawyerCase;
+use App\Models\lawyerCaseStatus;
 use App\Traits\WithAlert;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -21,13 +23,11 @@ class Overview extends Component
     public function rules()
     {
         return [
-            'lawyer_case.action' => 'nullable',
-            'lawyer_case.court_date' => 'nullable',
+            'lawyer_case.court_id' => 'nullable',
+            'lawyer_case.status_id' => 'nullable',
             'lawyer_case.decision' => 'nullable',
-            'lawyer_case.decision_details' => 'nullable',
             'lawyer_case.collected_amount' => 'nullable',
-            'lawyer_case.attorneys_fees' => 'nullable',
-            'lawyer_case.court_fees' => 'nullable',
+            'lawyer_case.case_no' => 'nullable',
         ];
     }
 
@@ -49,6 +49,16 @@ class Overview extends Component
     public function render()
     {
         return view('livewire.lawyer.lawyer-case.details.overview');
+    }
+
+    public function getCourtsProperty()
+    {
+        return Court::all();
+    }
+
+    public function getStatusesProperty()
+    {
+        return lawyerCaseStatus::all();
     }
 
     public function selectCourtDate($court_date)

@@ -12,24 +12,16 @@ class LawyerCase extends Model
     use SoftDeletes;
 
     protected $fillable = [
+        'court_id',
         'lawyer_id',
         'contract_id',
-        'subject',
-        'needed_action',
-        'action',
-        'court_date',
+        'status_id',
+        'case_no',
         'decision',
-        'decision_details',
-        'attorneys_fees',
-        'court_fees',
         'first_side',
         'second_side',
         'amount',
         'collected_amount',
-    ];
-
-    protected $casts = [
-        'court_date' => 'date:Y-m-d',
     ];
 
     public function lawyer()
@@ -42,14 +34,24 @@ class LawyerCase extends Model
         return $this->belongsTo(Contract::class, 'contract_id', 'id');
     }
 
-    public function getAmountHumanAttribute()
+    public function court()
     {
-        return number_format($this->amount, '2') . ' د.ب.';
+        return $this->belongsTo(Court::class, 'court_id', 'id');
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(lawyerCaseStatus::class, 'status_id', 'id');
     }
 
     public function invoices()
     {
         return $this->hasMany(LawyerInvoice::class, 'lawyer_case_id', 'id');
+    }
+
+    public function getAmountHumanAttribute()
+    {
+        return number_format($this->amount, '2') . ' د.ب.';
     }
 
 }

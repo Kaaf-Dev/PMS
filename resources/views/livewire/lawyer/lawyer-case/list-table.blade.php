@@ -8,10 +8,11 @@
                 <table class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold">
                     <thead class="fs-7 text-gray-400 text-uppercase">
                     <tr>
-                        <th class="">المستأجر</th>
-                        <th class="">الموضوع</th>
-                        <th class="">الإجراء المطلوب</th>
-                        <th class="">المبلغ المطلوب</th>
+                        <th class="">رقم الدعوة</th>
+                        <th class="">الحالة</th>
+                        <th class="">المنفذ له</th>
+                        <th class="">المنفذ ضده</th>
+                        <th class="">المبلغ المحكوم</th>
                         <th class="">رقم العقد</th>
                         <th class="">حالة العقد</th>
                         <th class="min-w-50px text-end">إدارة</th>
@@ -21,31 +22,16 @@
                     @forelse($lawyer_cases ?? [] as $lawyer_case)
                         <tr>
                             <td>
-                                <!--begin::User-->
-                                <div class="d-flex align-items-center">
-                                    <!--begin::Wrapper-->
-                                    <div class="me-5 position-relative">
-                                        <!--begin::Avatar-->
-                                        <div class="symbol symbol-35px me-3">
-                                            <img src="{{ $lawyer_case->contract->user->profile_photo_url }}" class="" alt="">
-                                        </div>
-                                        <!--end::Avatar-->
-                                    </div>
-                                    <!--end::Wrapper-->
-                                    <!--begin::Info-->
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <span class="mb-1 text-gray-800">{{ $lawyer_case->contract->user->name }}</span>
-                                        <div class="fw-semibold fs-6 text-gray-400">CPR: {{ $lawyer_case->contract->user->cpr }}</div>
-                                    </div>
-                                    <!--end::Info-->
-                                </div>
-                                <!--end::User-->
+                                {{ $lawyer_case->case_no }}
                             </td>
                             <td>
-                                {{ $lawyer_case->subject }}
+                                {{ optional($lawyer_case->status)->title }}
                             </td>
                             <td>
-                                {{ $lawyer_case->needed_action }}
+                                {{ $lawyer_case->first_side }}
+                            </td>
+                            <td>
+                                {{ $lawyer_case->second_side }}
                             </td>
                             <td>
                                 {{ $lawyer_case->amount_human }}
