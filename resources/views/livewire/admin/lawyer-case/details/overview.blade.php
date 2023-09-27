@@ -17,12 +17,12 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label fw-semibold fs-6">الموضوع</label>
+                            <label class="col-lg-4 col-form-label fw-semibold fs-6">المنفذ له</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                                <input wire:model.defer="lawyer_case.subject" type="text" class="form-control form-control-lg">
-                                @error('lawyer_case.subject')
+                                <input wire:model.defer="lawyer_case.first_side" type="text" class="form-control form-control-lg">
+                                @error('lawyer_case.needed_action')
                                 <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -33,37 +33,11 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label fw-semibold fs-6">الطرف الأول</label>
+                            <label class="col-lg-4 col-form-label fw-semibold fs-6">المنفذ ضده</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                                <input type="text" class="form-control form-control-lg form-control-solid" value="{{ $this->lawyer_case->first_side }}" readonly>
-                            </div>
-                            <!--end::Col-->
-                        </div>
-                        <!--end::Input group-->
-
-                        <!--begin::Input group-->
-                        <div class="row mb-6">
-                            <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label fw-semibold fs-6">الطرف الثاني</label>
-                            <!--end::Label-->
-                            <!--begin::Col-->
-                            <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                                <input type="text" class="form-control form-control-lg form-control-solid" value="{{ $this->lawyer_case->second_side }}" readonly>
-                            </div>
-                            <!--end::Col-->
-                        </div>
-                        <!--end::Input group-->
-
-                        <!--begin::Input group-->
-                        <div class="row mb-6">
-                            <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label fw-semibold fs-6">الإجراء المطلوب</label>
-                            <!--end::Label-->
-                            <!--begin::Col-->
-                            <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                                <input wire:model.defer="lawyer_case.needed_action" type="text" class="form-control form-control-lg">
+                                <input wire:model.defer="lawyer_case.second_side" type="text" class="form-control form-control-lg">
                                 @error('lawyer_case.needed_action')
                                 <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -88,7 +62,7 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label fw-semibold fs-6">قيمة المديونية</label>
+                            <label class="col-lg-4 col-form-label fw-semibold fs-6">المبلغ المحكوم به</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row fv-plugins-icon-container">
@@ -104,12 +78,17 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label fw-semibold fs-6">الإجراء الذي تم</label>
+                            <label class="col-lg-4 col-form-label fw-semibold fs-6">المحكمة</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                                <input wire:model.defer="lawyer_case.action" type="text" class="form-control form-control-lg">
-                                @error('lawyer_case.action')
+                                <select wire:model.defer="lawyer_case.court_id" class="form-select">
+                                    <option value="">-- اختيار --</option>
+                                    @foreach($this->courts ?? [] as $court)
+                                        <option value="{{ $court->id }}"> {{ $court->name }} </option>
+                                    @endforeach
+                                </select>
+                                @error('lawyer_case.court_id')
                                 <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -120,24 +99,17 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label fw-semibold fs-6">موعد المحكمة</label>
+                            <label class="col-lg-4 col-form-label fw-semibold fs-6">الحالة</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                                <input wire:ignore wire:model.defer="lawyer_case.court_date"  class="form-control form-control-lg" value="" id="kt_lawyer_case_court_date"/>
-                                @push('js')
-                                    <script wire:ignore>
-
-                                        $("#kt_lawyer_case_court_date").flatpickr({
-                                            onChange: function(selectedDates, dateStr, instance) {
-                                                Livewire.emit('lawyer_case_select_court_date', dateStr);
-                                            }
-                                        });
-
-                                    </script>
-                                @endpush
-
-                                @error('lawyer_case.court_date')
+                                <select wire:model.defer="lawyer_case.status_id" class="form-select">
+                                    <option value="">-- اختيار --</option>
+                                    @foreach($this->statuses ?? [] as $status)
+                                        <option value="{{ $status->id }}"> {{ $status->title }} </option>
+                                    @endforeach
+                                </select>
+                                @error('lawyer_case.status_id')
                                 <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -148,7 +120,23 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label fw-semibold fs-6">الحكم الصادر</label>
+                            <label class="col-lg-4 col-form-label fw-semibold fs-6">رقم الدعوى</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                                <input wire:model.defer="lawyer_case.case_no" type="text" class="form-control form-control-lg">
+                                @error('lawyer_case.case_no')
+                                <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label fw-semibold fs-6">الحكم</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row fv-plugins-icon-container">
@@ -164,60 +152,12 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label fw-semibold fs-6">تفاصيل الحكم</label>
-                            <!--end::Label-->
-                            <!--begin::Col-->
-                            <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                                <textarea wire:model.defer="lawyer_case.decision_details" class="form-control form-control-lg"></textarea>
-                                @error('lawyer_case.decision_details')
-                                <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <!--end::Col-->
-                        </div>
-                        <!--end::Input group-->
-
-                        <!--begin::Input group-->
-                        <div class="row mb-6">
-                            <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label fw-semibold fs-6">المبلغ المحصل من المستأجر</label>
+                            <label class="col-lg-4 col-form-label fw-semibold fs-6">المبلغ المدفوع</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row fv-plugins-icon-container">
                                 <input wire:model.defer="lawyer_case.collected_amount" type="number" step="0.01" class="form-control form-control-lg">
                                 @error('lawyer_case.collected_amount')
-                                <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <!--end::Col-->
-                        </div>
-                        <!--end::Input group-->
-
-                        <!--begin::Input group-->
-                        <div class="row mb-6">
-                            <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label fw-semibold fs-6">أتعاب المحامي</label>
-                            <!--end::Label-->
-                            <!--begin::Col-->
-                            <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                                <input wire:model.defer="lawyer_case.attorneys_fees" type="number" step="0.01" class="form-control form-control-lg">
-                                @error('lawyer_case.attorneys_fees')
-                                <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <!--end::Col-->
-                        </div>
-                        <!--end::Input group-->
-
-                        <!--begin::Input group-->
-                        <div class="row mb-6">
-                            <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label fw-semibold fs-6">رسوم المحكمة</label>
-                            <!--end::Label-->
-                            <!--begin::Col-->
-                            <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                                <input wire:model.defer="lawyer_case.court_fees" type="number" step="0.01" class="form-control form-control-lg">
-                                @error('lawyer_case.court_fees')
                                 <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>

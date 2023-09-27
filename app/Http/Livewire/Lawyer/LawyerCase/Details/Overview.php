@@ -61,11 +61,6 @@ class Overview extends Component
         return lawyerCaseStatus::all();
     }
 
-    public function selectCourtDate($court_date)
-    {
-        $this->lawyer_case->court_date = Carbon::parse($court_date);
-    }
-
     public function save()
     {
         $this->validate();
