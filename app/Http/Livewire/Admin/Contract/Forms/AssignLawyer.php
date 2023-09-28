@@ -16,11 +16,9 @@ class AssignLawyer extends Component
     public $lawyers;
     public $selected_lawyer;
 
-    public $subject;
     public $first_side;
     public $second_side;
     public $amount;
-    public $needed_action;
 
     public $search;
 
@@ -28,11 +26,9 @@ class AssignLawyer extends Component
     {
         return [
             'selected_lawyer' => 'required',
-            'subject' => 'required',
             'first_side' => 'required',
             'second_side' => 'required',
             'amount' => 'required',
-            'needed_action' => 'required',
         ];
     }
 
@@ -112,11 +108,9 @@ class AssignLawyer extends Component
             'selected_lawyer',
             'lawyers',
             'search',
-            'subject',
             'first_side',
             'second_side',
             'amount',
-            'needed_action',
         ]);
     }
 
@@ -132,8 +126,6 @@ class AssignLawyer extends Component
         $lawyer_case = new LawyerCase();
         $lawyer_case->lawyer_id = $this->selected_lawyer->id;
         $lawyer_case->contract_id = $this->contract->id;
-        $lawyer_case->subject = $validated_data['subject'];
-        $lawyer_case->needed_action = $validated_data['needed_action'];
         $lawyer_case->first_side = $validated_data['first_side'];
         $lawyer_case->second_side = $validated_data['second_side'];
         $lawyer_case->amount = $validated_data['amount'];

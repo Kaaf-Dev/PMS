@@ -130,7 +130,7 @@
             <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
                 <!--begin::Label-->
                 <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                    <span>المبلغ المطلوب</span>
+                    <span>المبلغ المحكوم به</span>
                 </label>
                 <!--end::Label-->
 
@@ -147,7 +147,7 @@
             <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
                 <!--begin::Label-->
                 <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                    <span class="required">الطرف الأول</span>
+                    <span class="required">المنفذ له</span>
                 </label>
                 <!--end::Label-->
 
@@ -164,7 +164,7 @@
             <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
                 <!--begin::Label-->
                 <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                    <span class="required">الطرف الثاني</span>
+                    <span class="required">المنفذ ضده</span>
                 </label>
                 <!--end::Label-->
 
@@ -176,43 +176,6 @@
                 @enderror
             </div>
             <!--end::Input group-->
-
-            <!--begin::Input group-->
-            <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
-                <!--begin::Label-->
-                <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                    <span class="required">موضوع الدعوى</span>
-                </label>
-                <!--end::Label-->
-
-                <!--begin::Input-->
-                <input wire:model.defer="subject" type="text" class="form-control">
-                <!--end::Input-->
-                @error('subject')
-                <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-            <!--end::Input group-->
-
-
-            <!--begin::Input group-->
-            <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
-                <!--begin::Label-->
-                <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                    <span class="required">الإجراء المطلوب</span>
-                </label>
-                <!--end::Label-->
-
-                <!--begin::Input-->
-                <input wire:model.defer="needed_action" type="text" class="form-control">
-                <!--end::Input-->
-                @error('needed_action')
-                <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-            <!--end::Input group-->
-
-
         @endif
 
         <!--begin::Actions-->
