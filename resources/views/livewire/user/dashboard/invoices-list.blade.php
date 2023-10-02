@@ -31,6 +31,7 @@
                             <th class="p-0 min-w-auto"></th>
                             <th class="p-0 min-w-auto"></th>
                             <th class="p-0 min-w-auto"></th>
+                            <th class="p-0 min-w-auto"></th>
                         </tr>
                         </thead>
                         <!--end::Table head-->
@@ -57,6 +58,12 @@
                                     <span class="badge badge-light-{{ $invoice->paid_class }} fs-7 fw-bold">
                                         {{ $invoice->paid_string }}
                                     </span>
+                                </td>
+
+                                <td class="">
+                                    @if ($invoice->unPaidAmount > 0)
+                                        <button wire:click="payInvoice('{{ $invoice->id }}')" class="btn btn-sm btn-light btn-active-light-primary">دفع</button>
+                                    @endif
                                 </td>
                             </tr>
                         @empty

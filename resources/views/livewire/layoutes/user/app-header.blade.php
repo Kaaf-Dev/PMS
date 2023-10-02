@@ -80,44 +80,6 @@
                                                     <!--end:Menu item-->
                                                 </div>
                                                 <!--end:Col-->
-                                                <!--begin:Col-->
-                                                <div class="col-lg-6 mb-3">
-                                                    <!--begin:Menu item-->
-                                                    <div class="menu-item p-0 m-0">
-                                                        <!--begin:Menu link-->
-                                                        <a href="#" class="menu-link">
-																			<span class="menu-custom-icon d-flex flex-center flex-shrink-0 rounded w-40px h-40px me-3">
-																				<i class="ki-outline ki-wallet text-info fs-1"></i>
-																			</span>
-                                                            <span class="d-flex flex-column">
-																				<span class="fs-6 fw-bold text-gray-800">المالية</span>
-																				<span class="fs-7 fw-semibold text-muted">الفواتير المستحقة والمدفوعة</span>
-																			</span>
-                                                        </a>
-                                                        <!--end:Menu link-->
-                                                    </div>
-                                                    <!--end:Menu item-->
-                                                </div>
-                                                <!--end:Col-->
-                                                <!--begin:Col-->
-                                                <div class="col-lg-6 mb-3">
-                                                    <!--begin:Menu item-->
-                                                    <div class="menu-item p-0 m-0">
-                                                        <!--begin:Menu link-->
-                                                        <a href="#" class="menu-link">
-																			<span class="menu-custom-icon d-flex flex-center flex-shrink-0 rounded w-40px h-40px me-3">
-																				<i class="ki-outline ki-chart-pie-simple text-success fs-1"></i>
-																			</span>
-                                                            <span class="d-flex flex-column">
-																				<span class="fs-6 fw-bold text-gray-800">التقارير</span>
-																				<span class="fs-7 fw-semibold text-muted">سجل الحركات والإجراءات</span>
-																			</span>
-                                                        </a>
-                                                        <!--end:Menu link-->
-                                                    </div>
-                                                    <!--end:Menu item-->
-                                                </div>
-                                                <!--end:Col-->
                                             </div>
                                             <!--end:Row-->
                                         </div>

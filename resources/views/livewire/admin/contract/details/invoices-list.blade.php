@@ -74,7 +74,7 @@
                                                 @endif
                                             </td>
                                             <td class="">
-                                                <button class="btn btn-sm btn-light btn-active-light-primary">Download</button>
+
                                             </td>
                                         </tr>
                                     @endforeach

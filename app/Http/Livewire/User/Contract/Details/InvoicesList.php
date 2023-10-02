@@ -9,6 +9,13 @@ class InvoicesList extends Component
 {
     public $contract_id;
 
+    public function getListeners()
+    {
+        return [
+            'invoice-paid' => '$refresh',
+        ];
+    }
+
     public function mount($contract_id)
     {
         $this->contract_id = $contract_id;
@@ -31,5 +38,12 @@ class InvoicesList extends Component
         return $invoices->groupBy(function ($item, $key) { // arrange by year
             return $item->date->format('Y');
         });
+    }
+
+    public function payInvoice($invoice_id)
+    {
+        $this->emit('show-user-pay-invoice-modal', [
+            'invoice_id' => $invoice_id,
+        ]);
     }
 }

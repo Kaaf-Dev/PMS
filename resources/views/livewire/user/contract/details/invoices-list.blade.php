@@ -74,7 +74,9 @@
                                                 @endif
                                             </td>
                                             <td class="">
-                                                <button class="btn btn-sm btn-light btn-active-light-primary">Download</button>
+                                                @if ($invoice->unPaidAmount > 0)
+                                                    <button wire:click="payInvoice('{{ $invoice->id }}')" class="btn btn-sm btn-light btn-active-light-primary">دفع</button>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

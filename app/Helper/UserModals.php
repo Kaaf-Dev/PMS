@@ -13,5 +13,16 @@ function getUserGlobalModals()
                 'modal_dialog_class' => 'mw-650px',
             ]
         ],
+
+        [
+            'modal_id' => 'user_pay_invoice',
+            'livewire_component' => 'user.payment.pay-invoice',
+            'emit_show' => 'show-user-pay-invoice-modal',
+            'emit_hide' => 'hide-user-pay-invoice-modal',
+            'details' => [
+                'title' => 'دفع الفواتير',
+                'modal_dialog_class' => 'mw-650px',
+            ]
+        ],
     ];
 }
