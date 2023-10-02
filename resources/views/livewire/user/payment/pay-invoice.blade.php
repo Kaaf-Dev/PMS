@@ -83,7 +83,7 @@
                 <!--end::Col-->
                 <!--begin::Col-->
                 <div class="col-6">
-                    <select wire:model.defer="card_year_exp" class="form-select form-select-sm form-select-solid">
+                    <select wire:model.defer="card_year_exp" class="form-select form-select-sm">
                         <option>السنة</option>
                         @foreach($expiryYears as $year)
                             <option value="{{$year['label']}}">{{$year['label']}}</option>
@@ -108,7 +108,7 @@
             <!--begin::Input wrapper-->
             <div class="position-relative">
                 <!--begin::Input-->
-                <input wire:model.defer="card_cvv" type="text" class="form-control form-control-sm form-control-solid" minlength="3" maxlength="3" placeholder="CVV" />
+                <input wire:model.defer="card_cvv" type="text" class="form-control form-control-sm" minlength="3" maxlength="3" placeholder="CVV" />
                 <!--end::Input-->
                 @error('card_cvv')
                 <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
