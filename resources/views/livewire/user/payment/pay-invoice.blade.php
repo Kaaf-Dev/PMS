@@ -5,7 +5,7 @@
     <div class="d-flex flex-column mb-7 fv-row">
         <!--begin::Label-->
         <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-            <span class="required">قيمة الفاتورةالمستحقة</span>
+            <span class="required">قيمة الفاتورة المستحقة</span>
         </label>
         <!--end::Label-->
         <input type="number" class="form-control form-control-solid" value="{{ $this->invoice->unPaidAmount }}" readonly/>
@@ -122,7 +122,7 @@
     <!--begin::Actions-->
     <div class="text-center pt-15">
         <button wire:click="closeMe" type="reset" id="kt_modal_new_card_cancel" class="btn btn-light me-3">الغاء</button>
-        <button wire:click="pay" id="kt_modal_new_card_submit" class="btn btn-primary">
+        <button wire:click="pay" wire:loading.attr="disabled" class="btn btn-primary">
             <span wire:loading.remove  class="indicator-label">دفع</span>
             <span wire:loading class="indicator-progress">الرجاء الانتظار
                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>

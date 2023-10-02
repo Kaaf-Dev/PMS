@@ -17,7 +17,9 @@ class saveCardToken
             'card_year' => 'required', 'regex:/^[0-9]{2}$/',
             'card_cvv' => 'required', 'regex:/^[0-9]{3}$/',
         ];
-        $validator = \Validator::make($card_details, $rules);
+        $validator = \Validator::make($card_details, $rules, [
+            'required' => 'هذا الحقل إجباري',
+        ]);
 
         if (!($validator->fails())) {
             $user_id = $card_details['user_id'] ?? null;

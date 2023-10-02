@@ -25,6 +25,12 @@ class PayInvoice extends Component
         ];
     }
 
+    public function getMessages()
+    {
+        return [
+            'required' => 'هذا الحقل إجباري',
+        ];
+    }
 
     public function getListeners()
     {
