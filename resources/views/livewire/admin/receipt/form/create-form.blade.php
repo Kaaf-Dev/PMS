@@ -193,7 +193,7 @@
                                         </span>
                                 <!--end::Spinner-->
                                 <!--begin::Reset-->
-                                <span wire:click="clearSearchApartment" wire:loading.remove wire:target="search_contract" class="btn btn-flush btn-active-color-primary position-absolute top-50 end-0 translate-middle-y lh-0 me-5 @if(!$search_contract) d-none @endif">
+                                <span wire:click="clearSearchContracts" wire:loading.remove wire:target="search_contract" class="btn btn-flush btn-active-color-primary position-absolute top-50 end-0 translate-middle-y lh-0 me-5 @if(!$search_contract) d-none @endif">
                                             <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                             <span class="svg-icon svg-icon-2 svg-icon-lg-1 me-0">
                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

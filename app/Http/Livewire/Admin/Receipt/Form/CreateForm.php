@@ -103,6 +103,14 @@ class CreateForm extends Component
         }
     }
 
+    public function clearSearchContracts()
+    {
+        $this->fill([
+            'search_contract' => null,
+        ]);
+        $this->fetchContracts();
+    }
+
     public function closeModal()
     {
         $this->emit('hide-admin-receipt-create-modal');
