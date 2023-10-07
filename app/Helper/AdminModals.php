@@ -282,5 +282,16 @@ function getAdminGlobalModals()
             ]
         ],
 
+        [
+            'modal_id' => 'kt_modal_admin_report_executive_summary',
+            'livewire_component' => 'admin.report.form.executive-summary',
+            'emit_show' => 'show-admin-report-executive-summary-modal',
+            'emit_hide' => 'hide-admin-report-executive-summary-modal',
+            'details' => [
+                'title' => 'تقرير الملخص التنفيذي للعقارات',
+                'modal_dialog_class' => 'mw-650px',
+            ]
+        ],
+
     ];
 }
