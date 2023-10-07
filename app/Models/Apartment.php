@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Apartment extends Model
 {
@@ -86,6 +87,19 @@ class Apartment extends Model
     public function getIsAvailableAttribute()
     {
         return $this->activeContracts()->doesntExist();
+    }
+
+    public function getCurrentRentedCostAttribute()
+    {
+        $cost = 0;
+        if ($this->activeContracts) {
+            $cost = DB::table('contract_apartment')
+                ->select('cost')
+                ->where('contract_id', '=', $this->currentContract->id)
+                ->where('apartment_id', '=', $this->id)
+                ->first();
+        }
+        return $cost->cost;
     }
 
     public function getIconSvgAttribute()

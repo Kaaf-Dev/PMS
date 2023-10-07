@@ -293,5 +293,16 @@ function getAdminGlobalModals()
             ]
         ],
 
+        [
+            'modal_id' => 'kt_modal_admin_report_properties_occupancy',
+            'livewire_component' => 'admin.report.form.properties-occupancy',
+            'emit_show' => 'show-admin-report-properties-occupancy-modal',
+            'emit_hide' => 'hide-admin-report-properties-occupancy-modal',
+            'details' => [
+                'title' => 'تقرير إشغال العقارات',
+                'modal_dialog_class' => 'mw-650px',
+            ]
+        ],
+
     ];
 }
