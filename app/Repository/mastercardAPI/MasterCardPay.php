@@ -8,12 +8,15 @@ class MasterCardPay
 {
     public $card_cvv, $card_token, $transaction_amount, $transaction_id, $error_msg;
 
-    public function __construct($card_cvv, $card_token, $transaction_amount,  $transaction_id)
+    protected $payment_gateway;
+
+    public function __construct($card_cvv, $card_token, $transaction_amount,  $transaction_id, $payment_gateway)
     {
         $this->setCardCvv($card_cvv);
         $this->setCardToken($card_token);
         $this->setTransactionAmount($transaction_amount);
         $this->setTransactionId($transaction_id);
+        $this->setPaymentGateway($payment_gateway);
     }
 
     /**
@@ -96,10 +99,29 @@ class MasterCardPay
         $this->error_msg = $error_msg;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getPaymentGateway()
+    {
+        return $this->payment_gateway;
+    }
+
+    /**
+     * @param mixed $payment_gateway
+     */
+    public function setPaymentGateway($payment_gateway): void
+    {
+        $this->payment_gateway = $payment_gateway;
+    }
+
+
+
 
     public function pay()
     {
-        $masterCardApi = new MasterCardApi();
+        $payment_gateway = $this->getPaymentGateway();
+        $masterCardApi = new MasterCardApi($payment_gateway);
         $payResponse = $masterCardApi->transactionPay(
             [
                 'card_token' => $this->getCardToken(),

@@ -7,6 +7,36 @@ use App\Repository\mastercardAPI\MasterCardToken;
 
 class saveCardToken
 {
+
+    protected $payment_gateway;
+
+    /**
+     * @param $payment_gateway
+     */
+    public function __construct($payment_gateway = 'eslah')
+    {
+        $this->payment_gateway = $payment_gateway;
+    }
+
+    /**
+     * @return mixed|string
+     */
+    public function getPaymentGateway()
+    {
+        return $this->payment_gateway;
+    }
+
+    /**
+     * @param mixed|string $payment_gateway
+     */
+    public function setPaymentGateway($payment_gateway): void
+    {
+        $this->payment_gateway = $payment_gateway;
+    }
+
+
+
+
     public function storeCreditCard($card_details)
     {
         $rules = [
@@ -29,7 +59,9 @@ class saveCardToken
             $card_year = $card_details['card_year'];
             $card_cvv = $card_details['card_cvv'];
 
-            $master_card_token = new MasterCardToken($card_number, $card_name, $card_month, $card_year, $card_cvv);
+            $payment_gateway = $this->getPaymentGateway();
+
+            $master_card_token = new MasterCardToken($card_number, $card_name, $card_month, $card_year, $card_cvv, $payment_gateway);
             $master_card_token->tokenize();
             if ($master_card_token->isIsTokenized()) {
                 $token = $master_card_token->getCardToken();

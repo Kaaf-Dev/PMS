@@ -6,12 +6,20 @@ use Illuminate\Support\Facades\Http;
 
 class MasterCardApi
 {
-    private $api_username, $api_password;
+    private $api_username, $api_password, $end_point;
 
-    public function __construct()
+    public function __construct($payment_gateway = 'eslah')
     {
-        $this->setApiPassword(env('PAYMENT_GATEWAY_MASTERCARD_API_PASSWORD', 'secure'));
-        $this->setApiUsername(env('PAYMENT_GATEWAY_MASTERCARD_API_USERNAME', 'username'));
+        if ($payment_gateway == 'eslah') {
+            $this->setApiPassword(env('PAYMENT_GATEWAY_MASTERCARD_API_PASSWORD', 'secure'));
+            $this->setApiUsername(env('PAYMENT_GATEWAY_MASTERCARD_API_USERNAME', 'username'));
+            $this->setEndPoint(env('PAYMENT_GATEWAY_MASTERCARD_API_BASE_END_POINT', 'localhost'));
+
+        } elseif($payment_gateway == 'kaaf') {
+            $this->setApiPassword(env('PAYMENT_GATEWAY_KAAF_MASTERCARD_API_PASSWORD', 'secure'));
+            $this->setApiUsername(env('PAYMENT_GATEWAY_KAAF_MASTERCARD_API_USERNAME', 'username'));
+            $this->setEndPoint(env('PAYMENT_GATEWAY_KAAF_MASTERCARD_API_BASE_END_POINT', 'localhost'));
+        }
     }
 
     /**
@@ -45,6 +53,24 @@ class MasterCardApi
         $this->api_password = $api_password;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getEndPoint()
+    {
+        return $this->end_point;
+    }
+
+    /**
+     * @param mixed $end_point
+     */
+    public function setEndPoint($end_point): void
+    {
+        $this->end_point = $end_point;
+    }
+
+
+
     public function executeApi($end_point, $method, $payload, $headers = [])
     {
         $response = Http::withBasicAuth($this->getApiUsername(), $this->getApiPassword())
@@ -56,7 +82,7 @@ class MasterCardApi
 
     public function tokenize(array $card)
     {
-        $end_point = env('PAYMENT_GATEWAY_MASTERCARD_API_BASE_END_POINT', 'localhost') . '/token';
+        $end_point = $this->getEndPoint() . '/token';
         $method = 'POST';
         $payload = [
             'transaction' => [
@@ -82,7 +108,7 @@ class MasterCardApi
 
     public function transactionPay(array $card, array $order)
     {
-        $end_point = env('PAYMENT_GATEWAY_MASTERCARD_API_BASE_END_POINT', 'localhost')
+        $end_point = $this->getEndPoint()
             . '/order/' . $order['transaction_id']
             . '/transaction/' . $order['transaction_id'];
         $method = 'PUT';

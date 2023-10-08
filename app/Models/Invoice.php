@@ -214,4 +214,25 @@ class Invoice extends Model
         return $next_no;
     }
 
+    public function getPaymentGatewayAttribute()
+    {
+        $payment_gateway = 'eslah';
+        if ($this->contract) {
+            if ($this->contract->apartments and isset($this->contract->apartments[0])) {
+                if ($this->contract->apartments[0]->property) {
+                    if ($this->contract->apartments[0]->property->category) {
+                        $category = $this->contract->apartments[0]->property->category;
+                        if (in_array($category->payment_gateway, [
+                            'eslah',
+                            'kaaf'
+                        ])) {
+                            $payment_gateway = $category->payment_gateway;
+                        }
+                    }
+                }
+            }
+        }
+        return $payment_gateway;
+    }
+
 }

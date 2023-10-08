@@ -7,13 +7,16 @@ class MasterCardToken
 {
     private $card_no, $card_name, $card_month, $card_year, $card_brand, $card_cvv, $card_token, $error_msg, $is_tokenized = false;
 
-    public function __construct($card_no, $card_name, $card_month, $card_year, $card_cvv)
+    protected $payment_gateway;
+
+    public function __construct($card_no, $card_name, $card_month, $card_year, $card_cvv, $payment_gateway)
     {
         $this->setCardNo($card_no);
         $this->setCardName($card_name);
         $this->setCardMonth($card_month);
         $this->setCardYear($card_year);
         $this->setCardCvv($card_cvv);
+        $this->setPaymentGateway($payment_gateway);
     }
 
     /**
@@ -144,6 +147,24 @@ class MasterCardToken
         $this->error_msg = $error_msg;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getPaymentGateway()
+    {
+        return $this->payment_gateway;
+    }
+
+    /**
+     * @param mixed $payment_gateway
+     */
+    public function setPaymentGateway($payment_gateway): void
+    {
+        $this->payment_gateway = $payment_gateway;
+    }
+
+
+
     public function isIsTokenized(): bool
     {
         return $this->is_tokenized;
@@ -156,7 +177,8 @@ class MasterCardToken
 
     public function tokenize()
     {
-        $masterCardApi = new MasterCardApi();
+        $payment_gateway = $this->getPaymentGateway();
+        $masterCardApi = new MasterCardApi($payment_gateway);
         $token_response = $masterCardApi->tokenize([
             'card_no' => $this->getCardNo(),
             'card_name' => $this->getCardName(),

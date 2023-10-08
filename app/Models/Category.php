@@ -13,6 +13,7 @@ class Category extends Model
 
     protected $fillable = [
         'name',
+        'payment_gateway',
     ];
 
     public function properties()

@@ -83,8 +83,11 @@ class PayInvoice extends Component
             'card_year' => $this->card_year_exp,
             'card_cvv' => $this->card_cvv,
         ];
-        $creditCardProvider = new saveCardToken();
-        $payment_gateway = new paymentGateway();
+
+        $payment_gateway = $this->invoice->payment_gateway;
+
+        $creditCardProvider = new saveCardToken($payment_gateway);
+        $payment_gateway = new paymentGateway($payment_gateway);
         $store_card = $creditCardProvider->storeCreditCard($card_data);
         if ($store_card['status']) {
             $card_token = $store_card['data'];

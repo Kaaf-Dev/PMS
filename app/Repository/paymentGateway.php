@@ -11,15 +11,47 @@ use Carbon\Carbon;
 
 class paymentGateway
 {
+
+    protected $payment_gateway;
+
+    /**
+     * @param $payment_gateway
+     */
+    public function __construct($payment_gateway = 'eslah')
+    {
+        $this->payment_gateway = $payment_gateway;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getPaymentGateway()
+    {
+        return $this->payment_gateway;
+    }
+
+    /**
+     * @param mixed $payment_gateway
+     */
+    public function setPaymentGateway($payment_gateway): void
+    {
+        $this->payment_gateway = $payment_gateway;
+    }
+
+
+
     public function PayByMasterCardDirectPay($card_token, $invoice_id)
     {
+        $payment_gateway = $this->getPaymentGateway();
+
         $userToken = UserToken::findOrFail($card_token->id);
         $invoice = Invoice::findOrFail($invoice_id);
         $transaction_amount = $invoice->unPaidAmount;
 
         //createTransaction
         $transaction = $this->initiateTransaction('directPay', $invoice_id, $userToken->user_id);
-        $masterCardPay = new MasterCardPay($userToken->cvv, $userToken->token, $transaction_amount, $transaction->trx_id);
+        $masterCardPay = new MasterCardPay($userToken->cvv, $userToken->token, $transaction_amount, $transaction->trx_id, $payment_gateway);
         $masterCardPayResult = $masterCardPay->pay();
 
         //createTransaction
