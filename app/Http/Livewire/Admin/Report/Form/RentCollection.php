@@ -17,7 +17,7 @@ class RentCollection extends Component
     public function rules()
     {
         return [
-            'selected_category' => 'nullable',
+            'selected_user' => 'nullable',
         ];
     }
 

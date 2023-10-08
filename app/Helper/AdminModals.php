@@ -315,5 +315,16 @@ function getAdminGlobalModals()
             ]
         ],
 
+        [
+            'modal_id' => 'kt_modal_admin_report_ticket_list',
+            'livewire_component' => 'admin.report.form.ticket-list',
+            'emit_show' => 'show-admin-report-ticket-list-modal',
+            'emit_hide' => 'hide-admin-report-ticket-list-modal',
+            'details' => [
+                'title' => 'قائمة طلبات الصيانة',
+                'modal_dialog_class' => 'mw-650px',
+            ]
+        ],
+
     ];
 }
