@@ -4,13 +4,15 @@ namespace App\Http\Livewire\Admin\Report\Form;
 
 use App\Exports\RentCollectionReport;
 use App\Models\Category;
+use App\Models\Contract;
+use App\Models\User;
 use Livewire\Component;
 use Maatwebsite\Excel\Facades\Excel;
 
 class RentCollection extends Component
 {
 
-    public $selected_category;
+    public $selected_user;
 
     public function rules()
     {
@@ -36,14 +38,16 @@ class RentCollection extends Component
         $this->reset();
     }
 
-    public function getCategoriesProperty()
+    public function getUsersProperty()
     {
-        return Category::all();
+        return User::all();
     }
 
     public function export()
     {
-        return Excel::download(new RentCollectionReport($this->selected_category), 'rent-collection.xlsx');
+        return Excel::download(new RentCollectionReport([
+            'user_id' => $this->selected_user
+        ]), 'rent-collection.xlsx');
     }
 
     public function closeModal()

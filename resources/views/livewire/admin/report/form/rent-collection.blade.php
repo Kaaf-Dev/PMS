@@ -5,14 +5,14 @@
         <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
             <!--begin::Label-->
             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                <span class="required">الفئة</span>
+                <span>المستأجر</span>
             </label>
             <!--end::Label-->
 
-            <select wire:model.defer="selected_category" class="form-select">
+            <select wire:model.defer="selected_user" class="form-select">
                 <option value="">الكل</option>
-                @foreach($this->categories ?? [] as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @foreach($this->users ?? [] as $user)
+                    <option value="{{ $user->id }}">{{ $user->name }}</option>
                 @endforeach
             </select>
 
