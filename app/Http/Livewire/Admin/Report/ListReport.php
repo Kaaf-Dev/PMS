@@ -16,6 +16,7 @@ class ListReport extends Component
         $reports = [
             'executive-summary' => 'show-admin-report-executive-summary-modal',
             'properties-occupancy' => 'show-admin-report-properties-occupancy-modal',
+            'rent-collection' => 'show-admin-report-rent-collection-modal',
         ];
 
         if (isset($reports[$report])) {

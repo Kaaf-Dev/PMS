@@ -33,6 +33,23 @@
             <!--end::Statistics Widget 5-->
         </div>
 
+
+        <div class="col-xl-4">
+
+            <!--begin::Statistics Widget 5-->
+            <a wire:click="showReport('rent-collection')" class="card bg-danger hoverable card-xl-stretch mb-xl-8 cursor-pointer">
+                <!--begin::Body-->
+                <div class="card-body">
+                    <i class="ki-outline ki-cheque text-white fs-2x ms-n1"></i>
+                    <div class="text-white fw-bold fs-2 mb-2 mt-5">
+                        تقرير التحصيل المالي
+                    </div>
+                </div>
+                <!--end::Body-->
+            </a>
+            <!--end::Statistics Widget 5-->
+        </div>
+
         <div class="col-xl-4">
 
             <!--begin::Statistics Widget 5-->

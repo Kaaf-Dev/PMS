@@ -93,13 +93,32 @@ class Apartment extends Model
     {
         $cost = 0;
         if ($this->activeContracts) {
-            $cost = DB::table('contract_apartment')
+            $cost_query = DB::table('contract_apartment')
                 ->select('cost')
                 ->where('contract_id', '=', $this->currentContract->id)
                 ->where('apartment_id', '=', $this->id)
                 ->first();
+            $cost = $cost_query->cost;
         }
-        return $cost->cost;
+        return $cost;
+    }
+
+    public function getTotalCurrentRentedCostAttribute()
+    {
+        $cost = $this->currentRentedCost;
+        if ($this->activeContracts) {
+            $contract_apartment = ContractApartment::where([
+                ['contract_id', '=', $this->currentContract->id],
+                ['apartment_id', '=', $this->id],
+            ])
+            ->with('contract')
+            ->first();
+            $contract = $contract_apartment->contract;
+
+            $months = $contract->end_at->diffInMonths($contract->start_at);
+            $cost = $cost * $months;
+        }
+        return $cost;
     }
 
     public function getIconSvgAttribute()

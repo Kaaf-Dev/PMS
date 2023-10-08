@@ -191,6 +191,11 @@ class Contract extends Model
 
     }
 
+    public function getTotalAmountPaidAttribute()
+    {
+        return $this->receipts_total ?? 0;
+    }
+
     public function getTotalAmountRemainingAttribute()
     {
         $total = $this->invoices_total ?? 0;

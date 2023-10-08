@@ -304,5 +304,16 @@ function getAdminGlobalModals()
             ]
         ],
 
+        [
+            'modal_id' => 'kt_modal_admin_report_rent_collection',
+            'livewire_component' => 'admin.report.form.rent-collection',
+            'emit_show' => 'show-admin-report-rent-collection-modal',
+            'emit_hide' => 'hide-admin-report-rent-collection-modal',
+            'details' => [
+                'title' => 'تقرير التحصيل المالي',
+                'modal_dialog_class' => 'mw-650px',
+            ]
+        ],
+
     ];
 }
