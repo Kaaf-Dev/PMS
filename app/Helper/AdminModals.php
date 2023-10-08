@@ -326,5 +326,16 @@ function getAdminGlobalModals()
             ]
         ],
 
+        [
+            'modal_id' => 'kt_modal_admin_report_lawyer_cases',
+            'livewire_component' => 'admin.report.form.lawyer-cases',
+            'emit_show' => 'show-admin-report-lawyer-cases-modal',
+            'emit_hide' => 'hide-admin-report-lawyer-cases-modal',
+            'details' => [
+                'title' => 'تقرير القضايا',
+                'modal_dialog_class' => 'mw-650px',
+            ]
+        ],
+
     ];
 }

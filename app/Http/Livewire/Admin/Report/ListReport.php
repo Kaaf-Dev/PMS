@@ -18,6 +18,7 @@ class ListReport extends Component
             'properties-occupancy' => 'show-admin-report-properties-occupancy-modal',
             'rent-collection' => 'show-admin-report-rent-collection-modal',
             'ticket-list' => 'show-admin-report-ticket-list-modal',
+            'lawyer-cases' => 'show-admin-report-lawyer-cases-modal',
         ];
 
         if (isset($reports[$report])) {

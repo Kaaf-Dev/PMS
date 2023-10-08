@@ -21,7 +21,7 @@ class TicketList extends Component
     public function getListeners()
     {
         return [
-            'show-admin-report-rent-ticket-list' => 'resolveParams',
+            'show-admin-report-ticket-list-modal' => 'resolveParams',
         ];
     }
 
