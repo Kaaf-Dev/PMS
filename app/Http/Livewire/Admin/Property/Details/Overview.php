@@ -3,6 +3,8 @@
 namespace App\Http\Livewire\Admin\Property\Details;
 
 use App\Models\Property;
+use App\Models\Ticket;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Overview extends Component
@@ -35,6 +37,13 @@ class Overview extends Component
     public function render()
     {
         return view('livewire.admin.property.details.overview');
+    }
+
+    public function getOpenTicketsProperty()
+    {
+        return Ticket::where('property_id', '=', $this->property_id)
+            ->opened()
+            ->count();
     }
 
 }
