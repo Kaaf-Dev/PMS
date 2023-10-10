@@ -107,6 +107,17 @@ function getAdminGlobalModals()
         ],
 
         [
+            'modal_id' => 'contract_active_modal',
+            'livewire_component' => 'admin.contract.forms.active-contract',
+            'emit_show' => 'show-contract-active-modal',
+            'emit_hide' => 'hide-contract-active-modal',
+            'details' => [
+                'title' => 'تفعيل العقد',
+                'modal_dialog_class' => 'mw-650px',
+            ]
+        ],
+
+        [
             'modal_id' => 'invoice_create_modal',
             'livewire_component' => 'admin.invoice.forms.create',
             'emit_show' => 'show-invoice-create-modal',

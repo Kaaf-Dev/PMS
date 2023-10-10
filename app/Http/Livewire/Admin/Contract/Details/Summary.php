@@ -71,6 +71,13 @@ class Summary extends Component
         ]);
     }
 
+    public function reactiveContract()
+    {
+        $this->emit('show-contract-active-modal', [
+            'contract_id' => $this->contract_id,
+        ]);
+    }
+
     public function createInvoice()
     {
         $this->emit('show-invoice-create-modal', [

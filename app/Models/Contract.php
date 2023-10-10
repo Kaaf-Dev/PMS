@@ -156,6 +156,12 @@ class Contract extends Model
         return ($this->save());
     }
 
+    public function Reactive()
+    {
+        $this->active = true;
+        return ($this->save());
+    }
+
     public function getStartAtHumanAttribute()
     {
         $human = '-';

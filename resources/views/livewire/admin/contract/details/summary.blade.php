@@ -122,7 +122,7 @@
                     @else
                         <!--begin::Menu item-->
                         <div class="menu-item px-3">
-                            <a class="menu-link text-muted px-3">إيقاف العقد (غير فعّال)</a>
+                            <a wire:click="reactiveContract" class="menu-link text-muted px-3">تفعيل العقد</a>
                         </div>
                         <!--end::Menu item-->
                     @endif
