@@ -46,7 +46,6 @@ class CreateForm extends Component
                 Rule::requiredIf(function () use ($key){
                     return in_array($this->selected_invoices['invoices'][$key]['payment_method'], [
                         Receipt::PAYMENT_METHOD_CHEQUE,
-                        Receipt::PAYMENT_METHOD_BANK,
                     ]);
                 })
             ];

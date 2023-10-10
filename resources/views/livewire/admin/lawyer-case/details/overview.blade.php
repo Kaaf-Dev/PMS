@@ -49,6 +49,40 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label fw-semibold fs-6">عنوان القضية</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                                <input wire:model.defer="lawyer_case.lawyer_case" type="text" class="form-control form-control-lg">
+                                @error('lawyer_case.lawyer_case')
+                                <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label fw-semibold fs-6">القرار المطلوب تنفيذه</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                                <textarea wire:model.defer="lawyer_case.required_case" class="form-control form-control-lg"></textarea>
+                                @error('lawyer_case.required_case')
+                                <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+
+
+
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
                             <label class="col-lg-4 col-form-label fw-semibold fs-6">رقم العقد</label>
                             <!--end::Label-->
                             <!--begin::Col-->
@@ -62,12 +96,28 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label fw-semibold fs-6">المبلغ المحكوم به</label>
+                            <label class="col-lg-4 col-form-label fw-semibold fs-6">مبلغ المديونية</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row fv-plugins-icon-container">
                                 <input wire:model.defer="lawyer_case.amount" type="number" step="0.01" class="form-control form-control-lg">
                                 @error('lawyer_case.amount')
+                                <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label fw-semibold fs-6">مبلغ المحكوم به</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                                <input wire:model.defer="lawyer_case.judgment_amount" type="number" step="0.01" class="form-control form-control-lg">
+                                @error('lawyer_case.judgment_amount')
                                 <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>

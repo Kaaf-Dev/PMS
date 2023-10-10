@@ -21,6 +21,8 @@ class LawyerCase extends Model
         'first_side',
         'second_side',
         'amount',
+        'case_title',
+        'required_case',
         'collected_amount',
     ];
 

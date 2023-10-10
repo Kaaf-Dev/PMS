@@ -43,6 +43,34 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label fw-semibold fs-6">عنوان القضية</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                                <input type="text" class="form-control form-control-lg form-control-solid" value="{{ $this->lawyer_case->lawyer_case }}" readonly>
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label fw-semibold fs-6">القرار المطلوب تنفيذه</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                                <textarea class="form-control form-control-lg form-control-solid"  readonly>
+                                    {{ $this->lawyer_case->required_case }}
+                                </textarea>
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
                             <label class="col-lg-4 col-form-label fw-semibold fs-6">رقم العقد</label>
                             <!--end::Label-->
                             <!--begin::Col-->
@@ -56,11 +84,24 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label fw-semibold fs-6">المبلغ المحكوم به</label>
+                            <label class="col-lg-4 col-form-label fw-semibold fs-6">مبلغ المديونية</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row fv-plugins-icon-container">
                                 <input type="text" class="form-control form-control-lg form-control-solid" value="{{ $this->lawyer_case->amount_human }}" readonly>
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label fw-semibold fs-6">مبلغ المحكوم به</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                                <input type="number" wire:model.defer="lawyer_case.judgment_amount" class="form-control form-control-lg form-control-solid"  >
                             </div>
                             <!--end::Col-->
                         </div>

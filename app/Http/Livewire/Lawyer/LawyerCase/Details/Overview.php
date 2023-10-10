@@ -27,6 +27,7 @@ class Overview extends Component
             'lawyer_case.status_id' => 'nullable',
             'lawyer_case.decision' => 'nullable',
             'lawyer_case.collected_amount' => 'nullable',
+            'lawyer_case.judgment_amount' => 'nullable',
             'lawyer_case.case_no' => 'nullable',
         ];
     }

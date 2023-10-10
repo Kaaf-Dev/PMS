@@ -19,6 +19,8 @@ class AssignLawyer extends Component
     public $first_side;
     public $second_side;
     public $amount;
+    public $case_title;
+    public $required_case;
 
     public $search;
 
@@ -28,6 +30,8 @@ class AssignLawyer extends Component
             'selected_lawyer' => 'required',
             'first_side' => 'required',
             'second_side' => 'required',
+            'case_title' => 'required',
+            'required_case' => 'required',
             'amount' => 'required',
         ];
     }
@@ -111,6 +115,8 @@ class AssignLawyer extends Component
             'first_side',
             'second_side',
             'amount',
+            'case_title',
+            'required_case',
         ]);
     }
 
@@ -129,6 +135,8 @@ class AssignLawyer extends Component
         $lawyer_case->first_side = $validated_data['first_side'];
         $lawyer_case->second_side = $validated_data['second_side'];
         $lawyer_case->amount = $validated_data['amount'];
+        $lawyer_case->lawyer_case = $validated_data['case_title'];
+        $lawyer_case->required_case = $validated_data['required_case'];
 
         if ($lawyer_case->save()) {
             $this->showSuccessAlert('تمت العملية بنجاح');

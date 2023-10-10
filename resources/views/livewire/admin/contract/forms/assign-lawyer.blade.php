@@ -49,11 +49,11 @@
                         <!--begin::Icon-->
                         <!--begin::Svg Icon -->
                         <span class="svg-icon svg-icon-2 svg-icon-lg-1 svg-icon-gray-500 position-absolute top-50 ms-5 translate-middle-y">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor"></rect>
-                                                <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor"></path>
-                                            </svg>
-                                        </span>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor"></rect>
+                                <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor"></path>
+                            </svg>
+                        </span>
                         <!--end::Svg Icon-->
                         <!--end::Icon-->
                         <!--begin::Input-->
@@ -61,20 +61,20 @@
                         <!--end::Input-->
                         <!--begin::Spinner-->
                         <span wire:loading.class.remove="d-none" wire:target="search" class="position-absolute top-50 end-0 translate-middle-y lh-0 me-5 d-none">
-                                            <span class="spinner-border h-15px w-15px align-middle text-muted"></span>
-                                        </span>
+                            <span class="spinner-border h-15px w-15px align-middle text-muted"></span>
+                        </span>
                         <!--end::Spinner-->
                         <!--begin::Reset-->
                         <span wire:click="clearSearchLawyer" wire:loading.remove wire:target="search" class="btn btn-flush btn-active-color-primary position-absolute top-50 end-0 translate-middle-y lh-0 me-5 @if(!$search) d-none @endif">
                                             <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
-                                            <span class="svg-icon svg-icon-2 svg-icon-lg-1 me-0">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor"></rect>
-                                                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor"></rect>
-                                                </svg>
-                                            </span>
+                            <span class="svg-icon svg-icon-2 svg-icon-lg-1 me-0">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor"></rect>
+                                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor"></rect>
+                                </svg>
+                            </span>
                             <!--end::Svg Icon-->
-                                        </span>
+                        </span>
                         <!--end::Reset-->
                     </div>
 
@@ -130,13 +130,13 @@
             <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
                 <!--begin::Label-->
                 <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                    <span>المبلغ المحكوم به</span>
+                    <span>مبلغ المديونية</span>
                 </label>
                 <!--end::Label-->
 
                 <!--begin::Input-->
                 <div class="input-group mb-5">
-                    <input type="text" class="form-control form-control-solid" value="{{ $contract->total_amount_remaining_human }}" readonly>
+                    <input type="number" class="form-control form-control-solid" wire:model.defer="amount">
                     <span class="input-group-text">د.ب.</span>
                 </div>
                 <!--end::Input-->
@@ -172,6 +172,39 @@
                 <input wire:model.defer="second_side" type="text" class="form-control">
                 <!--end::Input-->
                 @error('second_side')
+                <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            <!--end::Input group-->
+
+
+            <!--begin::Input group-->
+            <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                <!--begin::Label-->
+                <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                    <span class="required">عنوان القضية</span>
+                </label>
+                <!--end::Label-->
+
+                <!--begin::Input-->
+                <input wire:model.defer="case_title" type="text" class="form-control">
+                <!--end::Input-->
+                @error('case_title')
+                <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            <!--end::Input group-->
+
+            <!--begin::Input group-->
+            <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                <!--begin::Label-->
+                <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                    <span class="required">القرار المطلوب تنفيذه</span>
+                </label>
+                <!--end::Label-->
+                <textarea wire:model.defer="required_case" class="form-control"></textarea>
+
+                @error('required_case')
                 <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>

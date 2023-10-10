@@ -373,7 +373,7 @@
                                                 @enderror
                                                 <!--end::Input -->
 
-                                                @if ($this->selected_invoices['invoices'][$key]['payment_method']  == \App\Models\Receipt::PAYMENT_METHOD_CHEQUE or $this->selected_invoices['invoices'][$key]['payment_method'] == \App\Models\Receipt::PAYMENT_METHOD_BANK)
+                                                @if ($this->selected_invoices['invoices'][$key]['payment_method']  == \App\Models\Receipt::PAYMENT_METHOD_CHEQUE)
                                                     <!--begin::Input group-->
                                                         <input wire:model.defer="selected_invoices.invoices.{{ $key }}.bank_name" type="text" class="form-control" placeholder="اسم البنك">
                                                         @error('selected_invoices.invoices.'. $key .'.bank_name')
