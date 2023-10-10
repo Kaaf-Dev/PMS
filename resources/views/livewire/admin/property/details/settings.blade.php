@@ -117,6 +117,22 @@
                         </div>
                         <!--end::Input group-->
 
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label required fw-semibold fs-6">القيمة التسويقية</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                                <input wire:model="property.market_value" type="number" class="form-control form-control-lg form-control-solid" placeholder="لقيمة التسويقية">
+                                @error('property.market_value')
+                                <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+
                     </div>
                     <!--end::Card body-->
                     <!--begin::Actions-->

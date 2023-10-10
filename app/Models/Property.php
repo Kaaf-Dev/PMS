@@ -15,6 +15,7 @@ class Property extends Model
         'name',
         'floors_count',
         'area',
+        'market_value',
         'construction_date',
     ];
 

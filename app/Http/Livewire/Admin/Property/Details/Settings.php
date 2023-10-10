@@ -20,6 +20,7 @@ class Settings extends Component
             'property.category_id' => 'required',
             'property.name' => 'required',
             'property.area' => 'required|numeric',
+            'property.market_value' => 'required|numeric',
             'property.floors_count' => 'required|numeric',
             'property.construction_date' => 'required',
         ];

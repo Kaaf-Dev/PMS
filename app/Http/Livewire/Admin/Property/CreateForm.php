@@ -16,6 +16,7 @@ class CreateForm extends Component
     public $category_id;
     public $name;
     public $area;
+    public $market_value;
     public $floors_count;
     public $construction_date;
     public $apartments_house_count;
@@ -28,6 +29,7 @@ class CreateForm extends Component
             'category_id' => 'required',
             'name' => 'required',
             'area' => 'required|numeric',
+            'market_value' => 'required|numeric',
             'floors_count' => 'required|integer',
             'construction_date' => 'required|integer',
             'apartments_house_count' => 'nullable|integer',
@@ -67,6 +69,7 @@ class CreateForm extends Component
             'category_id',
             'name',
             'area',
+            'market_value',
             'floors_count',
             'construction_date',
             'apartments_house_count',
