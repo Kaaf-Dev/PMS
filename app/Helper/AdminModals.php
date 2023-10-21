@@ -348,5 +348,27 @@ function getAdminGlobalModals()
             ]
         ],
 
+        [
+            'modal_id' => 'kt_modal_admin_property_file_create',
+            'livewire_component' => 'admin.property.details.files.form.file-create',
+            'emit_show' => 'show-add-property-file-modal',
+            'emit_hide' => 'hide-add-property-file-modal',
+            'details' => [
+                'title' => 'إضافة مرفق',
+                'modal_dialog_class' => 'mw-650px',
+            ]
+        ],
+
+        [
+            'modal_id' => 'kt_modal_admin_property_file_delete',
+            'livewire_component' => 'admin.property.details.files.form.file-delete',
+            'emit_show' => 'show-delete-property-file-modal',
+            'emit_hide' => 'hide-delete-property-file-modal',
+            'details' => [
+                'title' => 'حذف المرفق',
+                'modal_dialog_class' => '',
+            ]
+        ],
+
     ];
 }

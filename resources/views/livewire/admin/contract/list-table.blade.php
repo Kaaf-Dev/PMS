@@ -2,55 +2,88 @@
     <!--begin::Card-->
     <div wire:init="load" class="card">
         <!--begin::Card header-->
-        <div class="card-header border-0 pt-6">
+        <div class="card-header border-0 pt-6 d-flex justify-content-between">
             <!--begin::Card title-->
             <div class="card-title">
                 <!--begin::Search-->
-{{--                <div class="d-flex align-items-center position-relative my-1">--}}
-{{--                    <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->--}}
-{{--                    <span class="svg-icon svg-icon-1 position-absolute ms-6">--}}
-{{--                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"--}}
-{{--                         xmlns="http://www.w3.org/2000/svg">--}}
-{{--                        <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546"--}}
-{{--                              height="2" rx="1"--}}
-{{--                              transform="rotate(45 17.0365 15.1223)"--}}
-{{--                              fill="currentColor"/>--}}
-{{--                        <path--}}
-{{--                            d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"--}}
-{{--                            fill="currentColor"/>--}}
-{{--                    </svg>--}}
-{{--                </span>--}}
-{{--                    <!--end::Svg Icon-->--}}
-{{--                    <input wire:model="search" type="text" class="form-control form-control-solid w-250px ps-14"--}}
-{{--                           placeholder="Search"/>--}}
-{{--                </div>--}}
+                <div class="d-flex align-items-center position-relative my-1">
+                    <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+                    <span class="svg-icon svg-icon-1 position-absolute ms-6">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
+                            <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor" />
+                        </svg>
+                    </span>
+                    <!--end::Svg Icon-->
+                    <input wire:model="search" type="text" class="form-control form-control-solid w-250px ps-14" placeholder="بحث" />
+                </div>
                 <!--end::Search-->
             </div>
             <!--begin::Card title-->
             <!--begin::Card toolbar-->
             <div class="card-toolbar">
-                <!--begin::Toolbar-->
-                <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                    <!--begin::Add user-->
-                    <button wire:click="showAddContract" type="button" class="btn btn-primary" data-bs-toggle="modal">
-                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
-                        <span class="svg-icon svg-icon-2">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <rect opacity="0.5" x="11.364" y="20.364" width="16"
-                                      height="2" rx="1"
-                                      transform="rotate(-90 11.364 20.364)"
-                                      fill="currentColor"/>
-                                <rect x="4.36396" y="11.364" width="16" height="2" rx="1"
-                                      fill="currentColor"/>
+                <!--begin::Actions-->
+                <div class="d-flex gap-2 gap-lg-3">
+                    <!--begin::Filter menu-->
+                    <div class="m-0">
+                        <!--begin::Menu toggle-->
+                        <a href="#" class="btn btn-sm btn-flex  btn-info btn-active-color-white fw-bold" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                            <i class="ki-duotone ki-filter fs-6 text-white me-1">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>بحث</a>
+                        <!--end::Menu toggle-->
+                        <!--begin::Menu 1-->
+                        <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true" id="kt_menu_641ac4061cc0f">
+                            <!--begin::Header-->
+                            <div class="px-7 py-5">
+                                <div class="fs-5 text-dark fw-bold">خيارات البحث</div>
+                            </div>
+                            <!--end::Header-->
+                            <!--begin::Menu separator-->
+                            <div class="separator border-gray-200"></div>
+                            <!--end::Menu separator-->
+                            <!--begin::Form-->
+                            <div class="px-7 py-5">
+                                <!--begin::Input group-->
+                                <div class="mb-10">
+                                    <!--begin::Label-->
+                                    <label class="form-label fw-semibold">حالة العقد:</label>
+                                    <!--end::Label-->
+                                    <!--begin::Input-->
+                                    <div>
+                                        <select wire:model="active_status" class="form-select form-select-solid" data-kt-select2="true" data-placeholder="Select option" data-dropdown-parent="#kt_menu_641ac4061cc0f" data-allow-clear="true">
+                                            <option label="الجميع"></option>
+                                            <option value="1">فعال</option>
+                                            <option value="2">عقد منتهي</option>
+                                            <option value="3">غير فعال</option>
+                                            <option value="4">محول الى المحامي</option>
+                                        </select>
+                                    </div>
+                                    <!--end::Input-->
+                                </div>
+                                <!--end::Input group-->
+                            </div>
+                            <!--end::Form-->
+                        </div>
+                        <!--end::Menu 1-->
+                    </div>
+                    <!--end::Filter menu-->
+                    <!--begin::Secondary button-->
+                    <!--end::Secondary button-->
+                    <!--begin::Primary button-->
+                    <button wire:click="showAddContract" class="btn btn-sm fw-bold btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">
+                         <span class="svg-icon svg-icon-2">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="currentColor" />
+                                <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor" />
                             </svg>
                         </span>
-                        <!--end::Svg Icon-->تسجيل عقد
+                        تسجيل عقد
                     </button>
-                    <!--end::Add user-->
+                    <!--end::Primary button-->
                 </div>
-                <!--end::Toolbar-->
-
+                <!--end::Actions-->
             </div>
             <!--end::Card toolbar-->
         </div>

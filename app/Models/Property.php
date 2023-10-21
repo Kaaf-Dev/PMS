@@ -29,6 +29,11 @@ class Property extends Model
         return $this->hasMany(Apartment::class, 'property_id', 'id');
     }
 
+    public function files()
+    {
+        return $this->hasMany(PropertyFile::class, 'property_id');
+    }
+
     public function getCategoryNameAttribute()
     {
         return optional($this->Category)->name ?? '';

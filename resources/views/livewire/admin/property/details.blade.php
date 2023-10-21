@@ -82,6 +82,13 @@
 
                         <!--begin:::Tab item-->
                         <li class="nav-item">
+                            <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab"
+                               href="#kt_property_files_tab">المرفقات</a>
+                        </li>
+                        <!--end:::Tab item-->
+
+                        <!--begin:::Tab item-->
+                        <li class="nav-item">
                             <a class="nav-link text-active-primary pb-4" data-kt-countup-tabs="true"
                                data-bs-toggle="tab" href="#kt_property_settings_tab">الإعدادات</a>
                         </li>
@@ -104,6 +111,14 @@
                         <div class="tab-pane fade " id="kt_property_apartments_tab" role="tabpanel">
                             <!--begin::Card-->
                             @livewire('admin.property.details.apartments', ['property_id' => $this->property->id])
+                            <!--end::Card-->
+                        </div>
+                        <!--end:::Tab pane-->
+
+                        <!--begin:::Tab pane-->
+                        <div class="tab-pane fade " id="kt_property_files_tab" role="tabpanel">
+                            <!--begin::Card-->
+                            @livewire('admin.property.details.files', ['property_id' => $this->property->id])
                             <!--end::Card-->
                         </div>
                         <!--end:::Tab pane-->

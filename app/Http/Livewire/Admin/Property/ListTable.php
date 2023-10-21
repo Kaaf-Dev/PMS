@@ -9,10 +9,12 @@ use Livewire\WithPagination;
 class ListTable extends Component
 {
     use WithPagination;
+
     protected $paginationTheme = 'bootstrap';
 
     public $ready_to_load = false;
     public $search;
+    public $category_id;
 
     public function rules()
     {
@@ -52,8 +54,12 @@ class ListTable extends Component
 
     public function loadProperties()
     {
-        return Property::where('name', 'like', '%'. $this->search .'%')
-            ->withCount('apartments')
+        return Property::when($this->search, function ($query) {
+            $query->where('name', 'like', '%' . $this->search . '%');
+        })
+            ->when($this->category_id, function ($query) {
+                $query->where('category_id', '=', $this->category_id);
+            })->withCount('apartments')
             ->orderBy('id', 'desc')
             ->paginate();
     }
