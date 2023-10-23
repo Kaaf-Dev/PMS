@@ -6,9 +6,11 @@ use App\Models\Contract;
 use App\Models\Property;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Events\AfterSheet;
 
-class RentCollectionReport implements FromCollection, WithHeadings
+class RentCollectionReport implements FromCollection, WithHeadings,WithEvents
 {
     protected $contract_id;
     protected $user_id;
@@ -72,6 +74,15 @@ class RentCollectionReport implements FromCollection, WithHeadings
             "مبلغ التحصيل",
             "المحصل فعليًا",
             "نسبة التحصيل",
+        ];
+    }
+
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class    => function(AfterSheet $event) {
+                $event->sheet->getDelegate()->setRightToLeft(true);
+            },
         ];
     }
 }

@@ -23,6 +23,9 @@ class Settings extends Component
             'property.market_value' => 'required|numeric',
             'property.floors_count' => 'required|numeric',
             'property.construction_date' => 'required',
+            'property.place' => 'nullable',
+            'property.block' => 'nullable',
+            'property.road' => 'nullable',
         ];
     }
 

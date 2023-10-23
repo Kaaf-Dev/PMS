@@ -15,6 +15,7 @@ class Attachments extends Component
     public $cpr_image_path;
     public $iban_image_path;
     public $merchant_image_path;
+    public $passport_path;
 
 
     public $attachments_list = [

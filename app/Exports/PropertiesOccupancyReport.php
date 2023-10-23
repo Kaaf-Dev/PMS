@@ -5,9 +5,11 @@ namespace App\Exports;
 use App\Models\Property;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Events\AfterSheet;
 
-class PropertiesOccupancyReport implements FromCollection, WithHeadings
+class PropertiesOccupancyReport implements FromCollection, WithHeadings, WithEvents
 {
     protected $category;
     public function __construct($category = null)
@@ -77,6 +79,15 @@ class PropertiesOccupancyReport implements FromCollection, WithHeadings
             "نسبة الوحدات غير المؤجرة",
 
             "مجموع الوحدات",
+        ];
+    }
+
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class    => function(AfterSheet $event) {
+                $event->sheet->getDelegate()->setRightToLeft(true);
+            },
         ];
     }
 }

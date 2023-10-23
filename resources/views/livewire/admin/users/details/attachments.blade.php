@@ -29,7 +29,7 @@
 
                     @foreach($attachments as $attachment)
                             <!--begin::File-->
-                            <div class="d-flex align-items-center mb-5">
+                            <div class="d-flex align-items-center mb-5" >
                                 <!--begin::Icon-->
                                 <div class="symbol symbol-30px me-5">
                                     <img alt="Icon" src="{{ asset('admin-assets/media/svg/files/pdf.svg') }}"/>
@@ -77,7 +77,7 @@
                                     <!--end::Svg Icon-->
                                 </button>
                                 <!--begin::Menu 1-->
-                                <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px"
+                                <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" wire:ignore
                                      data-kt-menu="true" id="">
                                     <!--begin::Header-->
                                     <div class="px-7 py-5">
@@ -96,7 +96,7 @@
                                             <!--end::Label-->
                                             <!--begin::Input-->
                                             <div>
-                                                <input wire:model="{{ $attachment['attribute'] }}" type="file" class="form-control mb-4" accept=".pdf">
+                                                <input wire:model.defer="{{ $attachment['attribute'] }}" type="file" class="form-control mb-4" accept=".pdf">
                                             </div>
                                             <!--end::Input-->
                                             <button wire:click="save('{{ $attachment['attribute'] }}')" class="btn btn-primary btn-sm w-100 mb-4">

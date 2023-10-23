@@ -54,7 +54,10 @@ class ListTable extends Component
     public function loadUsers()
     {
         $users = User::where('name', 'like', '%' . $this->search . '%')
-            ->orWhere('email', 'like', '%' . $this->search . '%');
+            ->orWhere('email', 'like', '%' . $this->search . '%')
+            ->orWhere('cpr', 'like', '%' . $this->search . '%')
+            ->orWhere('contact_phone', 'like', '%' . $this->search . '%')
+            ->orWhere('whatsapp_phone', 'like', '%' . $this->search . '%');
         return $users->paginate();
     }
 

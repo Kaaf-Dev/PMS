@@ -33,6 +33,14 @@
                                 <span class="path2"></span>
                             </i>بحث</a>
                         <!--end::Menu toggle-->
+
+                        <!--begin::Menu toggle-->
+                        <button wire:click="exportExcel" class="btn btn-sm btn-flex  btn-success btn-active-color-white fw-bold" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                            <i class="ki-duotone ki-file-up fs-6 text-white me-1">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>تصدير</button>
+                        <!--end::Menu toggle-->
                         <!--begin::Menu 1-->
                         <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true" id="kt_menu_641ac4061cc0f">
                             <!--begin::Header-->
@@ -55,12 +63,67 @@
                                         <select wire:model="status" class="form-select form-select-solid" data-kt-select2="true" data-placeholder="Select option" data-dropdown-parent="#kt_menu_641ac4061cc0f" data-allow-clear="true">
                                             <option label="الجميع"></option>
                                             <option value="1">مؤجر</option>
-                                            <option value="2">غير مؤجر</option>
+                                            <option value="2">متاح للتأجير</option>
                                         </select>
                                     </div>
                                     <!--end::Input-->
                                 </div>
                                 <!--end::Input group-->
+
+
+                                <!--begin::Input group-->
+                                <div class="mb-10">
+                                    <!--begin::Label-->
+                                    <label class="form-label fw-semibold">العقار:</label>
+                                    <!--end::Label-->
+                                    <!--begin::Input-->
+                                    <div>
+                                        <select wire:model.defer="property_id" id="property_id" class="form-select form-select-solid select-multi" data-kt-select2="true" data-placeholder="الجميع" data-allow-clear="true">
+                                            <option label="الجميع"></option>
+                                            @foreach($properties as $property)
+                                                <option value="{{$property->id}}">{{$property->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <!--end::Input-->
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="mb-10">
+                                    <!--begin::Label-->
+                                    <label class="form-label fw-semibold">الفئة:</label>
+                                    <!--end::Label-->
+                                    <!--begin::Input-->
+                                    <div>
+                                        <select wire:model="category_id" class="form-select form-select-solid" data-kt-select2="true" data-placeholder="Select option" data-dropdown-parent="#kt_menu_641ac4061cc0f" data-allow-clear="true">
+                                            <option label="الجميع"></option>
+                                            <option value="1">كاف</option>
+                                            <option value="2">جمعية الإصلاح</option>
+                                        </select>
+                                    </div>
+                                    <!--end::Input-->
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="mb-10">
+                                    <!--begin::Label-->
+                                    <label class="form-label fw-semibold">التصنيف:</label>
+                                    <!--end::Label-->
+                                    <!--begin::Input-->
+                                    <div>
+                                        <select wire:model="type_id" class="form-select form-select-solid" data-kt-select2="true" data-placeholder="Select option" data-dropdown-parent="#kt_menu_641ac4061cc0f" data-allow-clear="true">
+                                            <option label="الجميع"></option>
+                                            <option value="1">شقة</option>
+                                            <option value="2">محل تجاري</option>
+                                        </select>
+                                    </div>
+                                    <!--end::Input-->
+                                </div>
+                                <!--end::Input group-->
+
+
                                 {{--                                <!--begin::Actions-->--}}
                                 {{--                                <div class="d-flex justify-content-end">--}}
                                 {{--                                    <button type="reset" class="btn btn-sm btn-light btn-active-light-primary me-2" data-kt-menu-dismiss="true">Reset</button>--}}
@@ -94,8 +157,9 @@
                     <!--begin::Table row-->
                     <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
                         <th class="w-10px pe-2">#</th>
-                        <th class="w-10px pe-2">الفئة</th>
+                        <th class="min-w-125px">الفئة</th>
                         <th class="min-w-125px">الوحدة السكنية</th>
+                        <th class="min-w-125px">العقار</th>
                         <th class="min-w-125px">الحالة</th>
                         <th class="min-w-125px">قيمة الاجار</th>
                         <th class="min-w-125px">عدد الغرف</th>
@@ -120,24 +184,18 @@
                                     {{ $apartment->TypeString }}
                                 </td>
                                 <!--begin::Property=-->
-                                <td class="d-flex align-items-center">
-                                    <!--begin::Property details-->
-                                    <div class="d-flex flex-column">
-                                        <a href="{{ route('admin.property.apartment.details', ['property_id' => $apartment->property_id,'apartment_id' => $apartment->id]) }}"
-                                           class="text-gray-800 text-hover-primary mb-1">{{ $apartment->name }}</a>
-                                    </div>
-                                    <!--end::Property details-->
+                                <td>
+                                    <a href="{{ route('admin.property.apartment.details', ['property_id' => $apartment->property_id,'apartment_id' => $apartment->id]) }}"
+                                       class="text-gray-800 text-hover-primary mb-1">{{ $apartment->name }}</a>
                                 </td>
                                 <!--end::Property-->
 
                                 <!--begin::Property=-->
-                                <td class="d-flex align-items-center">
-                                    <!--begin::Property details-->
-                                    <div class="d-flex flex-column">
-                                        <a href="{{ route('admin.property.details', ['property_id' => $apartment->property_id]) }}"
-                                           class="text-gray-800 text-hover-primary mb-1">{{ $apartment->Property->name ?? '' }}</a>
-                                    </div>
-                                    <!--end::Property details-->
+                                <td>
+
+                                    <a href="{{ route('admin.property.details', ['property_id' => $apartment->property_id]) }}"
+                                       class="text-gray-800 text-hover-primary mb-1">{{ $apartment->Property->name ?? '' }}</a>
+
                                 </td>
                                 <!--end::Property-->
                                 <!--begin::category=-->
@@ -203,3 +261,18 @@
     </div>
     <!--end::Card-->
 </div>
+@push('js')
+    <script>
+        document.addEventListener('livewire:load', function (event) {
+            window.Livewire.hook('message.processed', () => {
+                $('.select-multi').select2();
+
+                $('#property_id').on('change', function (e) {
+                    let elementName = $(this).attr('id');
+                    var data = $(this).select2("val");
+                @this.set(elementName, data);
+                });
+            });
+        });
+    </script>
+@endpush

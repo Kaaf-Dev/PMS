@@ -7,9 +7,11 @@ use App\Models\Property;
 use App\Models\Ticket;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Events\AfterSheet;
 
-class TicketListReport implements FromCollection, WithHeadings
+class TicketListReport implements FromCollection, WithHeadings, WithEvents
 {
     protected $selected_year;
 
@@ -80,6 +82,15 @@ class TicketListReport implements FromCollection, WithHeadings
             "تاريخ إنجاز الصيانة",
             "مبلغ التكلفة",
             "الحالة",
+        ];
+    }
+
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class    => function(AfterSheet $event) {
+                $event->sheet->getDelegate()->setRightToLeft(true);
+            },
         ];
     }
 }
