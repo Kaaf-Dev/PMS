@@ -66,6 +66,15 @@ Route::prefix('admin')->group(function () {
         });
 
         Route::group([
+            'prefix' => 'invoices',
+            'middleware' => [
+                'auth:admin',
+            ],
+        ], function () {
+            Route::get('/', Admin\Invoice\Index::class)->name('admin.invoices');
+        });
+
+        Route::group([
             'prefix' => 'tickets',
             'middleware' => [
                 'auth:admin',

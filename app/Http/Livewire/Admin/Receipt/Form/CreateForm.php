@@ -100,6 +100,9 @@ class CreateForm extends Component
         if (isset($params['contract_id'])) {
             $this->selectContract($params['contract_id']);
         }
+        if (isset($params['invoice_id'])){
+            $this->selectInvoice($params['invoice_id']);
+        }
     }
 
     public function clearSearchContracts()

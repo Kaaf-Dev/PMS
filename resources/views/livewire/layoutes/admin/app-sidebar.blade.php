@@ -150,6 +150,23 @@
                     <!--begin:Menu item-->
                     <div class="menu-item">
                         <!--begin:Menu link-->
+                        <a class="menu-link" href="{{ route('admin.invoices') }}">
+                            <span class="menu-icon">
+                            <i class="ki-duotone ki-dollar fs-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                                <span class="path3"></span>
+                            </i>
+                            </span>
+                            <span class="menu-title">المالية والتسديدات</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+
+                    <!--begin:Menu item-->
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
                         <a class="menu-link" href="{{ route('admin.tickets') }}">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-wrench fs-2">
