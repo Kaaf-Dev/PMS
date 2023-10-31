@@ -82,7 +82,7 @@ class Attachments extends Component
         $validated_data = $this->validate([
             $attachment => [
                 'required',
-                'mimes:pdf',
+                'mimes:pdf,jpg,png,jpeg',
             ],
         ]);
 
