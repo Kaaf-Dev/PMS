@@ -40,6 +40,7 @@ class FileDelete extends Component
             $this->emit('hide-delete-property-file-modal');
             $this->emit('refreshPropertyFileTable');
             $this->showSuccessAlert('تم حذف بنجاح');
+            $this->reset();
 
         } else {
             abort(404);
