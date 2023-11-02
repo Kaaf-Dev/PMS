@@ -58,11 +58,12 @@ class FileCreate extends Component
             $property_file->property_id = $this->property_id;
             $property_file->file_path = $file->store($this->property_id, 'property_file');
             $property_file->save();
-            $this->reset();
+         
+        }
+           $this->reset();
             $this->emit('hide-add-property-file-modal');
             $this->showSuccessAlert('تم الحفظ بنجاح');
             $this->emit('refreshPropertyFileTable');
-        }
     }
 
 
