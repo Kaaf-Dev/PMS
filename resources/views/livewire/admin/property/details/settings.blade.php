@@ -137,7 +137,7 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label fw-semibold fs-6">المنطقة</label>
+                            <label class="col-lg-4 col-form-label fw-semibold fs-6">رقم العقار</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row fv-plugins-icon-container">

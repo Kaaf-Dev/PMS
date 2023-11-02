@@ -23,7 +23,7 @@
             <!--begin::Card toolbar-->
             <div class="card-toolbar">
                 <!--begin::Actions-->
-                <div class="d-flex align-items-center gap-2 gap-lg-3">
+                <div class="d-flex align-items-center gap-2 gap-lg-3" >
                     <!--begin::Filter menu-->
                     <div class="m-0">
                         <!--begin::Menu toggle-->
@@ -56,14 +56,14 @@
                                 <!--begin::Input group-->
                                 <div class="mb-10">
                                     <!--begin::Label-->
-                                    <label class="form-label fw-semibold">الحالة:</label>
+                                    <label class="form-label fw-semibold">الفئة:</label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
                                     <div>
-                                        <select wire:model="status" class="form-select form-select-solid" data-kt-select2="true" data-placeholder="Select option" data-dropdown-parent="#kt_menu_641ac4061cc0f" data-allow-clear="true">
+                                        <select wire:model="category_id" class="form-select form-select-solid" data-kt-select2="true" data-placeholder="Select option" data-dropdown-parent="#kt_menu_641ac4061cc0f" data-allow-clear="true">
                                             <option label="الجميع"></option>
-                                            <option value="1">مؤجر</option>
-                                            <option value="2">متاح للتأجير</option>
+                                            <option value="1">كاف</option>
+                                            <option value="2">جمعية الإصلاح</option>
                                         </select>
                                     </div>
                                     <!--end::Input-->
@@ -92,14 +92,14 @@
                                 <!--begin::Input group-->
                                 <div class="mb-10">
                                     <!--begin::Label-->
-                                    <label class="form-label fw-semibold">الفئة:</label>
+                                    <label class="form-label fw-semibold">التصنيف:</label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
                                     <div>
-                                        <select wire:model="category_id" class="form-select form-select-solid" data-kt-select2="true" data-placeholder="Select option" data-dropdown-parent="#kt_menu_641ac4061cc0f" data-allow-clear="true">
+                                        <select wire:model="type_id" class="form-select form-select-solid" data-kt-select2="true" data-placeholder="Select option" data-dropdown-parent="#kt_menu_641ac4061cc0f" data-allow-clear="true">
                                             <option label="الجميع"></option>
-                                            <option value="1">كاف</option>
-                                            <option value="2">جمعية الإصلاح</option>
+                                            <option value="1">شقة</option>
+                                            <option value="2">محل تجاري</option>
                                         </select>
                                     </div>
                                     <!--end::Input-->
@@ -109,14 +109,14 @@
                                 <!--begin::Input group-->
                                 <div class="mb-10">
                                     <!--begin::Label-->
-                                    <label class="form-label fw-semibold">التصنيف:</label>
+                                    <label class="form-label fw-semibold">الحالة:</label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
                                     <div>
-                                        <select wire:model="type_id" class="form-select form-select-solid" data-kt-select2="true" data-placeholder="Select option" data-dropdown-parent="#kt_menu_641ac4061cc0f" data-allow-clear="true">
+                                        <select wire:model="status" class="form-select form-select-solid" data-kt-select2="true" data-placeholder="Select option" data-dropdown-parent="#kt_menu_641ac4061cc0f" data-allow-clear="true">
                                             <option label="الجميع"></option>
-                                            <option value="1">شقة</option>
-                                            <option value="2">محل تجاري</option>
+                                            <option value="1">مؤجر</option>
+                                            <option value="2">متاح للتأجير</option>
                                         </select>
                                     </div>
                                     <!--end::Input-->
