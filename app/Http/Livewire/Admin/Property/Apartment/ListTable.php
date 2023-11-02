@@ -31,7 +31,10 @@ class ListTable extends Component
     public function render()
     {
         $apartments = $this->ready_load ? $this->getApartments()->paginate() : [];
-        $properties = Property::all();
+        $properties = [];
+        if ($this->category_id) {
+            $properties = Property::where('category_id', $this->category_id)->get();
+        }
         $view_data = [
             'apartments' => $apartments,
             'properties' => $properties,
