@@ -16,6 +16,7 @@ class Attachments extends Component
     public $iban_image_path;
     public $merchant_image_path;
     public $passport_path;
+    public $corporate_register_path;
 
 
     public $attachments_list = [
@@ -39,8 +40,8 @@ class Attachments extends Component
         ],
         'corporate' => [
             [
-                'title' => 'سند التسجيل',
-                'attribute' => 'merchant_image_path',
+                'title' => 'البطاقة الشخصية',
+                'attribute' => 'cpr_image_path',
             ],
             [
                 'title' => 'السجل التجاري',
