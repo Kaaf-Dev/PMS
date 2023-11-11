@@ -39,6 +39,11 @@ class Contract extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function attachments()
+    {
+        return $this->hasMany(ContractAttachment::class, 'contract_id');
+    }
+
     public function LawyerCase()
     {
         return $this->hasOne(LawyerCase::class, 'contract_id', 'id');
@@ -90,7 +95,7 @@ class Contract extends Model
     {
         $current_date = $date ?? Carbon::now(); // get date from parameter or get now date
         $query->where('active', '=', '1') // check activation flag
-            ->whereDate('start_at', '<=', $current_date);
+        ->whereDate('start_at', '<=', $current_date);
 //        ->where(function($query) use ($current_date){ // check date flag
 //            $query->whereRaw('? BETWEEN `start_at` AND `end_at`', [$current_date->format('Y-m-01')])
 //                ->orWhereRaw('`start_at` <= ? and `end_at` IS NULL', [$current_date->format('Y-m-01')]);

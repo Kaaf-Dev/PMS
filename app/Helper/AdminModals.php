@@ -369,6 +369,38 @@ function getAdminGlobalModals()
                 'modal_dialog_class' => '',
             ]
         ],
+        [
+            'modal_id' => 'kt_modal_admin_report_late_rent',
+            'livewire_component' => 'admin.report.form.late-rent',
+            'emit_show' => 'show-admin-report-late-rent-modal',
+            'emit_hide' => 'hide-admin-report-late-rent-modal',
+            'details' => [
+                'title' => 'تقرير متأخرات الإيجارات ',
+                'modal_dialog_class' => 'mw-650px',
+            ]
+        ],
+        [
+            'modal_id' => 'kt_modal_admin_contract_file_create',
+            'livewire_component' => 'admin.contract.forms.create-file-attach',
+            'emit_show' => 'show-add-contract-file-modal',
+            'emit_hide' => 'hide-add-contract-file-modal',
+            'details' => [
+                'title' => 'إضافة مرفق',
+                'modal_dialog_class' => 'mw-650px',
+            ]
+        ],
+
+        [
+            'modal_id' => 'kt_modal_admin_contract_file_delete',
+            'livewire_component' => 'admin.contract.forms.delete-file-attac',
+            'emit_show' => 'show-delete-contract-file-modal',
+            'emit_hide' => 'hide-delete-contract-file-modal',
+            'details' => [
+                'title' => 'حذف المرفق',
+                'modal_dialog_class' => '',
+            ]
+        ],
+
 
     ];
 }

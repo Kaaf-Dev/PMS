@@ -53,6 +53,10 @@
                         @livewire('admin.contract.details.invoices-list', ['contract_id' => $this->contract->id])
                     <!--end::Card-->
 
+                    <!--begin::Card-->
+                        @livewire('admin.contract.details.attachment-list', ['contract_id' => $this->contract->id])
+                    <!--end::Card-->
+
                     @if($this->contract->is_lawyerable)
 
                         @livewire('admin.lawyer-case.details.overview', ['lawyer_case' => $this->contract->lawyerCase->id])

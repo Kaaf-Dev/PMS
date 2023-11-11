@@ -10,9 +10,13 @@
 
             @livewire('lawyer.contract.details.overview', ['contract' => $this->lawyer_case->contract->id])
 
+            @livewire('lawyer.contract.details.file-attachment', ['contract' => $this->lawyer_case->contract->id])
+
             @livewire('lawyer.contract.details.invoices-list', ['contract' => $this->lawyer_case->contract->id])
 
             @livewire('lawyer.contract.details.replies', ['contract' => $this->lawyer_case->contract->id])
+
+
 
         </div>
         <!--end::Aside column-->

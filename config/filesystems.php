@@ -63,6 +63,13 @@ return [
             'visibility' => 'public',
         ],
 
+        'contract_file' => [
+            'driver' => 'local',
+            'root' => public_path('/contract-file'),
+            'url' => env('APP_URL') . '/contract-file',
+            'visibility' => 'public',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

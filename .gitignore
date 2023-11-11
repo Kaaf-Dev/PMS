@@ -16,3 +16,4 @@ yarn-error.log
 /public/user-image
 /public/ticket-attachments
 /public/property-file
+/public/contract-file
