@@ -12,10 +12,12 @@ use Maatwebsite\Excel\Events\AfterSheet;
 class LateRentReport implements FromCollection, WithHeadings, WithEvents
 {
     protected $month_count;
+    protected $selected_category;
 
-    public function __construct($month_count = 3)
+    public function __construct($data)
     {
-        $this->month_count = $month_count;
+        $this->month_count = $data['month_count'];
+        $this->selected_category = $data['selected_category'];
     }
 
 
@@ -36,11 +38,15 @@ class LateRentReport implements FromCollection, WithHeadings, WithEvents
             ->Join('invoices', 'contracts.id', '=', 'invoices.contract_id')
             ->leftJoin('receipts', 'invoices.id', '=', 'receipts.invoice_id')
             ->selectRaw('COUNT(invoices.id) as unpaid_invoices')
-            ->having('unpaid_invoices', $this->month_count)
+            ->having('unpaid_invoices', '>=', $this->month_count)
+            ->when($this->selected_category, function ($query){
+                $query->where('category_id', $this->selected_category);
+            })
             ->groupBy('receipts.id', 'users.name', 'users.phone', 'properties.ky_no', 'properties.name',
                 'contract_apartment.cost', 'contracts.id')
             ->distinct()
             ->get();
+
 
         $report = [];
 
