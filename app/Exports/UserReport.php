@@ -40,7 +40,6 @@ class UserReport implements FromCollection, WithHeadings, WithEvents
                 'user_blood' => $user->user_blood,
                 'date_of_berth' => $user->date_of_berth,
                 'whatsapp_phone' => $user->whatsapp_phone,
-                'contact_phone' => $user->contact_phone,
                 'unpaid_invoices' => $user->unpaid_invoices,
 
             ];
