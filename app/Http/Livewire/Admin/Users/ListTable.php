@@ -2,9 +2,12 @@
 
 namespace App\Http\Livewire\Admin\Users;
 
+use App\Exports\LateRentReport;
+use App\Exports\UserReport;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ListTable extends Component
 {
@@ -59,6 +62,12 @@ class ListTable extends Component
             ->orWhere('contact_phone', 'like', '%' . $this->search . '%')
             ->orWhere('whatsapp_phone', 'like', '%' . $this->search . '%');
         return $users->paginate();
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new UserReport(), 'users.xlsx');
+
     }
 
     public function showAddUser()

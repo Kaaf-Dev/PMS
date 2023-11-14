@@ -37,7 +37,7 @@ class LateRentReport implements FromCollection, WithHeadings, WithEvents
             ->Join('properties', 'apartments.property_id', '=', 'properties.id')
             ->Join('invoices', 'contracts.id', '=', 'invoices.contract_id')
             ->leftJoin('receipts', 'invoices.id', '=', 'receipts.invoice_id')
-            ->selectRaw('COUNT(invoices.id) as unpaid_invoices')
+            ->selectRaw('COUNT(CASE WHEN receipts.invoice_id IS NULL THEN invoices.id END) as unpaid_invoices')
             ->having('unpaid_invoices', '>=', $this->month_count)
             ->when($this->selected_category, function ($query){
                 $query->where('category_id', $this->selected_category);
