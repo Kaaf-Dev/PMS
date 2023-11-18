@@ -7,7 +7,7 @@
             <div class="card-header mt-6">
                 <!--begin::Card title-->
                 <div class="card-title flex-column">
-                    <h3 class="fw-bold mb-1">الوحدات السكنية</h3>
+                    <h3 class="fw-bold mb-1">الوحدات والاراضي</h3>
                 </div>
                 <!--end::Card title-->
             </div>

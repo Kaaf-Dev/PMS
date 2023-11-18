@@ -111,9 +111,11 @@
                                     <div class="d-flex flex-column justify-content-center">
                                         <a href="{{ route('admin.tickets.details', ['ticket_id' => $ticket->id]) }}" class="mb-1 text-gray-800 text-hover-primary">
                                             {{ $ticket->subject }}</a>
-                                            <a class="fw-semibold fs-6 text-gray-400" href="{{ route('admin.users.details', ['user_id' => $ticket->contract->user->id]) }}">
-                                                {{ $ticket->contract->user->name }}
+                                            <a class="fw-semibold fs-6 text-gray-400" href="{{ route('admin.users.details', ['user_id' => $ticket->TicketUserId]) }}">
+                                                {{ $ticket->TicketName }}
                                             </a>
+
+
                                     </div>
                                     <!--end::Subject-->
                                 </div>
@@ -127,9 +129,11 @@
                                     <div class="d-flex flex-column justify-content-center">
                                         <a href="{{ route('admin.tickets.details', ['ticket_id' => $ticket->id]) }}" class="mb-1 text-gray-800 text-hover-primary">
                                             {{ optional($ticket->property)->name }}</a>
-                                            <a class="fw-semibold fs-6 text-gray-400" href="{{ route('admin.users.details', ['user_id' => $ticket->contract->user->id]) }}">
+
+                                            <a lass="fw-semibold fs-6 text-gray-400" href="{{ route('admin.users.details', ['user_id' => $ticket->TicketUserId]) }}">
                                                 {{ optional($ticket->apartment)->name }}
                                             </a>
+
                                     </div>
                                     <!--end::Subject-->
                                 </div>
@@ -139,12 +143,13 @@
                             <td>
                                 <!--begin::Subject-->
                                 <div class="d-flex align-items-center">
-                                    <!--begin::Info-->
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <a href="tel:{{$ticket->contract->user->phone_human}}" class="mb-1 text-gray-800 text-hover-primary">
-                                            {{ $ticket->contract->user->phone_human }}</a>
-                                    </div>
-                                    <!--end::Subject-->
+                                        <!--begin::Info-->
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <a href="tel:{{$ticket->TicketUserPhone}}" class="mb-1 text-gray-800 text-hover-primary">
+                                                {{ $ticket->TicketUserPhone }}</a>
+                                        </div>
+                                        <!--end::Subject-->
+
                                 </div>
                                 <!--end::User-->
                             </td>

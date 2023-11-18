@@ -26,12 +26,13 @@
                                         <span class="badge badge-{{ $this->ticket->status_class }}">{{ $this->ticket->status_string }}</span>
                                     </span>
                                     <!--end::Label-->
-                                    <!--begin::Label-->
-                                    <span class="fw-semibold text-muted me-6">
+                                        <!--begin::Label-->
+                                        <span class="fw-semibold text-muted me-6">
                                         العقد:
-                                        <a href="#" class="text-muted text-hover-primary">#{{ $this->ticket->contract->id }}</a>
+                                        <a href="#" class="text-muted text-hover-primary">#{{ $this->ticket->TicketUserContractId }}</a>
                                     </span>
-                                    <!--end::Label-->
+                                        <!--end::Label-->
+
                                     <!--begin::Label-->
                                     <span class="fw-semibold text-muted">
                                         آخر تحديث:

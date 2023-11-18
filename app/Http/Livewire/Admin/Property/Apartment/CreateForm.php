@@ -30,6 +30,7 @@ class CreateForm extends Component
 
     public $type_house = Apartment::TYPE_HOUSE;
     public $type_store = Apartment::TYPE_STORE;
+    public $type_earth = Apartment::TYPE_EARTH;
 
     public function rules()
     {
@@ -40,6 +41,7 @@ class CreateForm extends Component
                 Rule::in([
                     Apartment::TYPE_HOUSE,
                     Apartment::TYPE_STORE,
+                    Apartment::TYPE_EARTH,
                 ])
             ],
             'name' => 'required',

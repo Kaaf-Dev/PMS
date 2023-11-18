@@ -57,7 +57,7 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label required fw-semibold fs-6">اسم العقار</label>
+                            <label class="col-lg-4 col-form-label required fw-semibold fs-6">الاسم</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row fv-plugins-icon-container">
@@ -72,7 +72,7 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label required fw-semibold fs-6">مساحة العقار</label>
+                            <label class="col-lg-4 col-form-label required fw-semibold fs-6">المساحة</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row fv-plugins-icon-container">
@@ -85,37 +85,6 @@
                         </div>
                         <!--end::Input group-->
 
-                        <!--begin::Input group-->
-                        <div class="row mb-6">
-                            <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label required fw-semibold fs-6">عدد الطوابق</label>
-                            <!--end::Label-->
-                            <!--begin::Col-->
-                            <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                                <input wire:model="property.floors_count" type="number" class="form-control form-control-lg form-control-solid" placeholder="عدد الطوابق">
-                                @error('property.floors_count')
-                                <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <!--end::Col-->
-                        </div>
-                        <!--end::Input group-->
-
-                        <!--begin::Input group-->
-                        <div class="row mb-6">
-                            <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label required fw-semibold fs-6">سنة التأسيس</label>
-                            <!--end::Label-->
-                            <!--begin::Col-->
-                            <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                                <input wire:model="property.construction_date" type="number" class="form-control form-control-lg form-control-solid" placeholder="سنة التأسيس">
-                                @error('property.construction_date')
-                                <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <!--end::Col-->
-                        </div>
-                        <!--end::Input group-->
 
                         <!--begin::Input group-->
                         <div class="row mb-6">
@@ -133,55 +102,189 @@
                         </div>
                         <!--end::Input group-->
 
+                        @if($property->IsTypeProperty)
 
-                        <!--begin::Input group-->
-                        <div class="row mb-6">
-                            <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label fw-semibold fs-6">رقم العقار</label>
-                            <!--end::Label-->
-                            <!--begin::Col-->
-                            <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                                <input wire:model="property.place" type="text" class="form-control form-control-lg form-control-solid">
-                                @error('property.place')
-                                <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
-                                @enderror
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label required fw-semibold fs-6">عدد الطوابق</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                                    <input wire:model="property.floors_count" type="number" class="form-control form-control-lg form-control-solid" placeholder="عدد الطوابق">
+                                    @error('property.floors_count')
+                                    <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <!--end::Col-->
                             </div>
-                            <!--end::Col-->
-                        </div>
-                        <!--end::Input group-->
+                            <!--end::Input group-->
 
-                        <!--begin::Input group-->
-                        <div class="row mb-6">
-                            <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label fw-semibold fs-6">المجمع</label>
-                            <!--end::Label-->
-                            <!--begin::Col-->
-                            <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                                <input wire:model="property.block" type="text" class="form-control form-control-lg form-control-solid">
-                                @error('property.block')
-                                <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
-                                @enderror
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label required fw-semibold fs-6">سنة التأسيس</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                                    <input wire:model="property.construction_date" type="number" class="form-control form-control-lg form-control-solid" placeholder="سنة التأسيس">
+                                    @error('property.construction_date')
+                                    <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <!--end::Col-->
                             </div>
-                            <!--end::Col-->
-                        </div>
-                        <!--end::Input group-->
+                            <!--end::Input group-->
 
 
-                        <!--begin::Input group-->
-                        <div class="row mb-6">
-                            <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label fw-semibold fs-6">الطريق</label>
-                            <!--end::Label-->
-                            <!--begin::Col-->
-                            <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                                <input wire:model="property.road" type="text" class="form-control form-control-lg form-control-solid" >
-                                @error('property.road')
-                                <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
-                                @enderror
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-semibold fs-6">رقم العقار</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                                    <input wire:model="property.place" type="text" class="form-control form-control-lg form-control-solid">
+                                    @error('property.place')
+                                    <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <!--end::Col-->
                             </div>
-                            <!--end::Col-->
-                        </div>
-                        <!--end::Input group-->
+                            <!--end::Input group-->
+
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-semibold fs-6">المجمع</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                                    <input wire:model="property.block" type="text" class="form-control form-control-lg form-control-solid">
+                                    @error('property.block')
+                                    <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+
+
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-semibold fs-6">الطريق</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                                    <input wire:model="property.road" type="text" class="form-control form-control-lg form-control-solid" >
+                                    @error('property.road')
+                                    <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+
+                        @else
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-semibold fs-6">رقم المقدمة</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                                    <input wire:model="property.register_number" type="number" class="form-control form-control-lg form-control-solid" >
+                                    @error('property.register_number')
+                                    <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-semibold fs-6">سنة المقدمة</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                                    <input wire:model="property.register_year" type="number" class="form-control form-control-lg form-control-solid" >
+                                    @error('property.register_year')
+                                    <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-semibold fs-6">رقم الوثيقة</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                                    <input wire:model="property.document_no" type="number" class="form-control form-control-lg form-control-solid" >
+                                    @error('property.document_no')
+                                    <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-semibold fs-6">اسم المالك السابق</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                                    <input wire:model="property.owner_name" type="text" class="form-control form-control-lg form-control-solid" >
+                                    @error('property.owner_name')
+                                    <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-semibold fs-6">هاتف المالك السابق</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                                    <input wire:model="property.owner_phone" type="number" class="form-control form-control-lg form-control-solid" >
+                                    @error('property.owner_phone')
+                                    <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+
+
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-semibold fs-6">الرقم الشخصي المالك السابق</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                                    <input wire:model="property.owner_cpr" type="number" class="form-control form-control-lg form-control-solid" >
+                                    @error('property.owner_cpr')
+                                    <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                        @endif
+
 
                     </div>
                     <!--end::Card body-->

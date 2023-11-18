@@ -76,7 +76,7 @@
                         <!--begin:::Tab item-->
                         <li class="nav-item">
                             <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab"
-                               href="#kt_property_apartments_tab">الوحدات السكنية</a>
+                               href="#kt_property_apartments_tab">الوحدات والاراضي</a>
                         </li>
                         <!--end:::Tab item-->
 

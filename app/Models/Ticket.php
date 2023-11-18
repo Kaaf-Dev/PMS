@@ -67,7 +67,7 @@ class Ticket extends Model
     {
         parent::boot();
         self::creating(function ($model) {
-            $model->id = (string)  Str::uuid();
+            $model->id = (string)Str::uuid();
             if (!$model->status) {
                 $model->status = Ticket::STATUS_NEW;
             }
@@ -79,7 +79,7 @@ class Ticket extends Model
         });
     }
 
-    public function nextNo ()
+    public function nextNo()
     {
         $year = date('Y'); // Current year
         $month = date('n'); // Current month
@@ -89,13 +89,13 @@ class Ticket extends Model
             ->max('no');
 
         $max_order = substr($max_order, -7);
-        $max_order = (int) $max_order;
+        $max_order = (int)$max_order;
         $next_order = $max_order + 1;
 
 
         $no = substr($year, 2, 2)
-            .str_pad($month, 2, '0', STR_PAD_LEFT)
-            .str_pad($next_order, 7, '0', STR_PAD_LEFT);
+            . str_pad($month, 2, '0', STR_PAD_LEFT)
+            . str_pad($next_order, 7, '0', STR_PAD_LEFT);
 
         return $this->getNoPrefix() . $no;
     }
@@ -155,18 +155,18 @@ class Ticket extends Model
 
     public function scopeFinished($query)
     {
-        return $query->where(function () use ($query){
+        return $query->where(function () use ($query) {
             return $query->where('status', '=', Ticket::STATUS_COMPLETE);
         });
     }
 
     public function scopeVisitIn($query, $visit_in)
     {
-        if ( in_array($visit_in, [
+        if (in_array($visit_in, [
             'day',
             'week',
             'month',
-        ]))  {
+        ])) {
 
             $now = Carbon::now();
             $start_of_range = $now->format('Y-m-d H:i:s');
@@ -177,7 +177,7 @@ class Ticket extends Model
             } elseif ($visit_in == 'week') {
                 $end_of_range = $now->addDays(7)->format('Y-m-d H:i:s');
 
-            } elseif($visit_in == 'month') {
+            } elseif ($visit_in == 'month') {
                 $end_of_range = $now->addMonth()->format('Y-m-d H:i:s');
 
             }
@@ -188,9 +188,9 @@ class Ticket extends Model
     public function scopeSearch($query, $search)
     {
         return $query->where(function ($query) use ($search) {
-            return $query->where('subject', 'like', '%'. $search .'%')
-                ->orWhere('description', 'like', '%'. $search .'%')
-                ->orWhere('no', 'like', '%'. $search .'%');
+            return $query->where('subject', 'like', '%' . $search . '%')
+                ->orWhere('description', 'like', '%' . $search . '%')
+                ->orWhere('no', 'like', '%' . $search . '%');
         });
     }
 
@@ -491,5 +491,50 @@ class Ticket extends Model
     {
         $this->visited_at = now();
         $this->status = SELF::STATUS_COMPLETE;
+    }
+
+    public function getTicketNameAttribute()
+    {
+        $userName = 'صيانة عامة';
+        if ($this->contract) {
+            $userName = $this->contract->user->name;
+        }
+        return $userName;
+    }
+
+    public function getTicketUserPhoneAttribute()
+    {
+        $userPhone = 'غير محدد';
+        if ($this->contract) {
+            $userPhone = $this->contract->user->phone;
+        }
+        return $userPhone;
+    }
+
+
+    public function getTicketImagePathAttribute()
+    {
+        $imagePath = '#';
+        if ($this->contract) {
+            $imagePath = $this->contract->user->profile_photo_url;
+        }
+        return $imagePath;
+    }
+    public function getTicketUserContractIdAttribute()
+    {
+        $contract_id = '#';
+        if ($this->contract) {
+            $contract_id = $this->contract->id;
+        }
+        return $contract_id;
+    }
+
+    public function getTicketUserIdAttribute()
+    {
+        $user_id = '#';
+        if ($this->contract) {
+            $user_id = $this->contract->user->id;
+        }
+        return $user_id;
     }
 }

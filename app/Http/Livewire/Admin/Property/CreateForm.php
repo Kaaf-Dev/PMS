@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin\Property;
 
 use App\Models\Apartment;
 use App\Models\Category;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 use App\Models\Property;
 use App\Traits\WithAlert;
@@ -21,6 +22,14 @@ class CreateForm extends Component
     public $construction_date;
     public $apartments_house_count;
     public $apartments_market_count;
+    public $item_type;
+
+    public $register_number;
+    public $register_year;
+    public $document_no;
+    public $owner_name;
+    public $owner_phone;
+    public $owner_cpr;
 
     public function rules()
     {
@@ -28,12 +37,19 @@ class CreateForm extends Component
             'ky_no' => 'nullable|integer',
             'category_id' => 'required',
             'name' => 'required',
+            'item_type' => 'required',
             'area' => 'required|numeric',
             'market_value' => 'required|numeric',
-            'floors_count' => 'required|integer',
-            'construction_date' => 'required|integer',
+            'floors_count' => 'nullable|integer',
+            'construction_date' => 'nullable|integer',
             'apartments_house_count' => 'nullable|integer',
             'apartments_market_count' => 'nullable|integer',
+            'register_number' => [Rule::requiredIf($this->item_type == 2), 'nullable'],
+            'register_year' => [Rule::requiredIf($this->item_type == 2), 'nullable'],
+            'document_no' => [Rule::requiredIf($this->item_type == 2), 'nullable'],
+            'owner_name' => ['nullable'],
+            'owner_phone' => ['nullable','numeric'],
+            'owner_cpr' => ['nullable','numeric'],
         ];
     }
 
@@ -87,6 +103,7 @@ class CreateForm extends Component
     public function save()
     {
         $validated_data = $this->validate();
+
         $property = Property::create($validated_data);
         if ($property) {
             $this->showSuccessAlert('تمت العملية بنجاح');

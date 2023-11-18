@@ -39,7 +39,7 @@
             <div class="row g-9">
 
                 <!--begin::Col-->
-                <div class="col-md-6 col-lg-12 col-xxl-6">
+                <div class="col-md-4 col-lg-4 col-xxl-4">
                     <label class="btn btn-outline btn-outline-dashed btn-active-light-primary d-flex text-start p-6 @if($this->type == $type_house) active @endif">
                         <!--begin::Radio button-->
                         <span class="form-check form-check-custom form-check-solid form-check-sm align-items-start mt-1">
@@ -68,7 +68,7 @@
                 </div>
                 <!--end::Col-->
                 <!--begin::Col-->
-                <div class="col-md-6 col-lg-12 col-xxl-6">
+                <div class="col-md-4 col-lg-4 col-xxl-4">
                     <label class="btn btn-outline btn-outline-dashed btn-active-light-primary d-flex text-start p-6 @if($this->type == $type_store) active @endif ">
                         <!--begin::Radio button-->
                         <span class="form-check form-check-custom form-check-solid form-check-sm align-items-start mt-1">
@@ -93,6 +93,36 @@
                                 </div>
                             </div>
                             <span class="fs-4 fw-bold mb-1 d-block">محل تجاري</span>
+                        </span>
+                    </label>
+                </div>
+                <!--end::Col-->
+
+                <!--begin::Col-->
+                <div class="col-md-4 col-lg-4 col-xxl-4">
+                    <label class="btn btn-outline btn-outline-dashed btn-active-light-primary d-flex text-start p-6 @if($this->type == $type_earth) active @endif ">
+                        <!--begin::Radio button-->
+                        <span class="form-check form-check-custom form-check-solid form-check-sm align-items-start mt-1">
+                            <input wire:model="type" class="form-check-input" type="radio" value="{{ $type_earth }}" />
+                        </span>
+                        <!--end::Radio button-->
+                        <span class="ms-5">
+                            <div class="symbol symbol-75px symbol-circle mb-7">
+                                <div class="symbol-label fs-2 fw-semibold bg-gray text-inverse-gray">
+                                 <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/keenthemes/metronic/docs/core/html/src/media/icons/duotune/maps/map002.svg-->
+                                    <span class="svg-icon svg-icon-3x svg-icon-primary">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.7 4.19995L4 6.30005V18.8999L8.7 16.8V19L3.1 21.5C2.6 21.7 2 21.4 2 20.8V6C2 5.4 2.3 4.89995 2.9 4.69995L8.7 2.09998V4.19995Z" fill="currentColor"/>
+                                            <path d="M15.3 19.8L20 17.6999V5.09992L15.3 7.19989V4.99994L20.9 2.49994C21.4 2.29994 22 2.59989 22 3.19989V17.9999C22 18.5999 21.7 19.1 21.1 19.3L15.3 21.8998V19.8Z" fill="currentColor"/>
+                                            <path opacity="0.3" d="M15.3 7.19995L20 5.09998V17.7L15.3 19.8V7.19995Z" fill="currentColor"/>
+                                            <path opacity="0.3" d="M8.70001 4.19995V2L15.4 5V7.19995L8.70001 4.19995ZM8.70001 16.8V19L15.4 22V19.8L8.70001 16.8Z" fill="currentColor"/>
+                                            <path opacity="0.3" d="M8.7 16.8L4 18.8999V6.30005L8.7 4.19995V16.8Z" fill="currentColor"/>
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                </div>
+                            </div>
+                            <span class="fs-4 fw-bold mb-1 d-block">قطعة أرض</span>
                         </span>
                     </label>
                 </div>

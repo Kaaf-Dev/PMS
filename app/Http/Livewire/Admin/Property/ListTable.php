@@ -15,6 +15,7 @@ class ListTable extends Component
     public $ready_to_load = false;
     public $search;
     public $category_id;
+    public $item_type;
 
     public function rules()
     {
@@ -59,6 +60,8 @@ class ListTable extends Component
         })
             ->when($this->category_id, function ($query) {
                 $query->where('category_id', '=', $this->category_id);
+            }) ->when($this->item_type, function ($query) {
+                $query->where('item_type', '=', $this->item_type);
             })->withCount('apartments')
             ->orderBy('id', 'desc')
             ->paginate();

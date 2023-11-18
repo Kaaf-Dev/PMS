@@ -9,13 +9,13 @@
             <div class="d-flex flex-center flex-column py-5">
                 <!--begin::Avatar-->
                 <div class="symbol symbol-100px symbol-circle mb-7">
-                    <img src="{{ $this->ticket->contract->user->profile_photo_url }}" alt="image">
+                    <img src="{{ $this->ticket->TicketImagePath }}" alt="image">
                 </div>
                 <!--end::Avatar-->
 
                 <!--begin::Name-->
                 <a class="fs-3 text-gray-800 text-hover-primary fw-bold mb-3">
-                    {{ $this->ticket->contract->user->name }}
+                    {{ $this->ticket->TicketName }}
                 </a>
                 <!--end::Name-->
             </div>
@@ -41,11 +41,11 @@
                 <div class="pb-5 fs-6">
                     <!--begin::Details item-->
                     <div class="fw-bold mt-5">العقار</div>
-                    <div class="text-gray-600">{{ $this->ticket->contract->apartments[0]->property->name }}</div>
+                    <div class="text-gray-600">{{ $this->ticket->property->name }}</div>
                     <!--begin::Details item-->
                     <!--begin::Details item-->
                     <div class="fw-bold mt-5">رقم الهاتف</div>
-                    <div class="text-gray-600"><a class="text-gray-600 text-hover-primary">{{ $this->ticket->contract->user->phone }}</a></div>
+                    <div class="text-gray-600"><a class="text-gray-600 text-hover-primary">{{ $this->ticket->TicketUserPhone }}</a></div>
                     <!--begin::Details item-->
                 </div>
             </div>

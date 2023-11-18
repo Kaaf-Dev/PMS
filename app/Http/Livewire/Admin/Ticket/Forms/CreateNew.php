@@ -38,9 +38,9 @@ class CreateNew extends Component
     public function rules()
     {
         return [
-            'selected_user_id' => 'required|exists:users,id',
+            'selected_user_id' => 'nullable|exists:users,id',
             'selected_property' => 'required|exists:properties,id',
-            'selected_contract_apartment' => 'required|exists:contract_apartment,id',
+            'selected_contract_apartment' => 'nullable|exists:contract_apartment,id',
             'subject' => 'required',
             'description' => 'required|max:5000',
             'attachments.*' => 'required|mimes:png,jpg,jpeg|max:1024',
@@ -69,6 +69,7 @@ class CreateNew extends Component
         ];
     }
 
+
     public function render()
     {
         return view('livewire.admin.ticket.forms.create-new');
@@ -83,6 +84,7 @@ class CreateNew extends Component
 
     public function resolveParams($params = [])
     {
+        $this->fetchProperties();
         $this->resetInputs();
         $this->resetErrorBag();
     }
@@ -124,6 +126,7 @@ class CreateNew extends Component
                 ->with([
                     'apartments.property',
                 ])->get();
+
         }
         return $contracts;
     }
@@ -137,10 +140,14 @@ class CreateNew extends Component
                 ->join('apartments', 'contract_apartment.apartment_id', '=', 'apartments.id')
                 ->whereIn('contract_id', $contract_ids)
                 ->get();
+
             $property_ids = $apartments->pluck('property_id')->toArray();
             $this->properties = Property::whereIn('id', $property_ids)->get();
         } else {
-            return [];
+            $apartments = DB::table('apartments')->get();
+            $property_ids = $apartments->pluck('property_id')->toArray();
+            $this->properties = Property::whereIn('id', $property_ids)->get();
+
         }
     }
 
@@ -158,7 +165,14 @@ class CreateNew extends Component
 
             return $apartments;
         } else {
-            return [];
+            if ($this->properties){
+                $apartments = DB::table('apartments')
+                    ->selectRaw('*, apartments.property_id as contract_apartment_id')
+                    ->where('property_id', '=', $this->selected_property)
+                    ->get();
+                return $apartments;
+            }
+
         }
     }
 
@@ -209,10 +223,15 @@ class CreateNew extends Component
         $ticket = new Ticket();
 
         $contract_apartment = ContractApartment::find($this->selected_contract_apartment);
+        if ($contract_apartment){
+            $ticket->contract_id = $contract_apartment->contract_id;
 
-        $ticket->contract_id = $contract_apartment->contract_id;
+        }
         $ticket->property_id = $validated_data['selected_property'];
-        $ticket->apartment_id = $contract_apartment->apartment_id;
+        if ($contract_apartment){
+            $ticket->apartment_id = $contract_apartment->apartment_id;
+
+        }
         $ticket->subject = $validated_data['subject'];
         $ticket->description = $validated_data['description'];
 
@@ -222,7 +241,7 @@ class CreateNew extends Component
             $attachments = [];
             foreach ($validated_data['attachments'] ?? [] as $attachment) {
                 $attachments[] = [
-                    'path' =>  $attachment->store(md5($ticket->id), 'ticket_attachments'),
+                    'path' => $attachment->store(md5($ticket->id), 'ticket_attachments'),
                     'file_name' => $attachment->getClientOriginalName(),
                 ];
             }

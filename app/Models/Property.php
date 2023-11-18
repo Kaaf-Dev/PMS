@@ -11,13 +11,22 @@ class Property extends Model
 
     protected $fillable = [
         'ky_no',
+        'item_type',
         'category_id',
         'name',
         'floors_count',
         'area',
         'market_value',
         'construction_date',
+        'owner_cpr',
+        'owner_phone',
+        'owner_name',
+        'document_no',
+        'register_year',
+        'register_number',
     ];
+    const TYPE_PROPERTY =1 ;
+    const TYPE_EARTH = 2;
 
     public function Category()
     {
@@ -38,6 +47,16 @@ class Property extends Model
     {
         return optional($this->Category)->name ?? '';
     }
+    public function getIsTypePropertyAttribute()
+    {
+        return $this->item_type == self::TYPE_PROPERTY;
+    }
+
+    public function getIsTypeEarthAttribute()
+    {
+        return $this->item_type == self::TYPE_EARTH;
+    }
+
 
     public function getRentedApartmentsCountAttribute()
     {
@@ -62,5 +81,18 @@ class Property extends Model
             $rental_apartments_avg = ($this->getRentedApartmentsCountAttribute() / $this->apartments->count()) * 100;
         }
         return round($rental_apartments_avg, 2);
+    }
+
+    public function getPropertyItemTypeAttribute()
+    {
+        $type = 'غير محدد';
+        $types = [
+            1 => 'عقار',
+            2 => 'أرض',
+        ];
+        if (isset($types[$this->item_type])) {
+            $type = $types[$this->item_type];
+        }
+        return $type;
     }
 }

@@ -61,6 +61,23 @@
                                     <!--end::Input-->
                                 </div>
                                 <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="mb-10">
+                                    <!--begin::Label-->
+                                    <label class="form-label fw-semibold">النوع:</label>
+                                    <!--end::Label-->
+                                    <!--begin::Input-->
+                                    <div>
+                                        <select wire:model="item_type" class="form-select form-select-solid" data-kt-select2="true" data-placeholder="Select option" data-dropdown-parent="#kt_menu_641ac4061cc0f" data-allow-clear="true">
+                                            <option label="الجميع"></option>
+                                            <option value="1">عقار</option>
+                                            <option value="2">أرض</option>
+                                        </select>
+                                    </div>
+                                    <!--end::Input-->
+                                </div>
+                                <!--end::Input group-->
 {{--                                <!--begin::Actions-->--}}
 {{--                                <div class="d-flex justify-content-end">--}}
 {{--                                    <button type="reset" class="btn btn-sm btn-light btn-active-light-primary me-2" data-kt-menu-dismiss="true">Reset</button>--}}
@@ -110,6 +127,7 @@
                         <th class="w-10px pe-2">رقم البند</th>
                         <th class="min-w-125px">العقار</th>
                         <th class="min-w-125px">التصنيف</th>
+                        <th class="min-w-125px">النوع</th>
                         <th class="min-w-125px">القيمة التسويقية</th>
                         <th class="min-w-125px">المؤجر</th>
                         <th class="min-w-125px">غير المؤجر</th>
@@ -146,6 +164,9 @@
                                 <!--end::Property-->
                                 <!--begin::category=-->
                                 <td>{{ $property->category_name }}</td>
+                                <!--end::category-->
+                                <!--begin::category=-->
+                                <td>{{ $property->PropertyItemType }} </td>
                                 <!--end::category-->
                                 <!--begin::category=-->
                                 <td>{{ $property->market_value }} دب </td>
