@@ -22,6 +22,23 @@
         <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
             <!--begin::Label-->
             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                <span>الحالة</span>
+            </label>
+            <!--end::Label-->
+
+            <select wire:model.defer="lawyer_cases" class="form-select">
+                <option value="">الكل</option>
+               <option value="1">غير محول الى المحامي</option>
+               <option value="2">محول الى المحامي</option>
+            </select>
+
+        </div>
+        <!--end::Input group-->
+
+        <!--begin::Input group-->
+        <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+            <!--begin::Label-->
+            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                 <span>عدد أشهر المتأخرات</span>
             </label>
             <!--end::Label-->

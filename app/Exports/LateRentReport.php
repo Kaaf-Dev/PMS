@@ -2,6 +2,7 @@
 
 namespace App\Exports;
 
+use App\Models\LawyerCase;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithEvents;
@@ -13,11 +14,13 @@ class LateRentReport implements FromCollection, WithHeadings, WithEvents
 {
     protected $month_count;
     protected $selected_category;
+    protected $lawyer_cases;
 
     public function __construct($data)
     {
         $this->month_count = $data['month_count'];
         $this->selected_category = $data['selected_category'];
+        $this->lawyer_cases = $data['lawyer_cases'];
     }
 
 
@@ -39,13 +42,21 @@ class LateRentReport implements FromCollection, WithHeadings, WithEvents
             ->leftJoin('receipts', 'invoices.id', '=', 'receipts.invoice_id')
             ->selectRaw('COUNT(CASE WHEN receipts.invoice_id IS NULL THEN invoices.id END) as unpaid_invoices')
             ->having('unpaid_invoices', '>=', $this->month_count)
-            ->when($this->selected_category, function ($query){
+            ->when($this->selected_category, function ($query) {
                 $query->where('category_id', $this->selected_category);
             })
             ->groupBy('receipts.id', 'users.name', 'users.phone', 'properties.ky_no', 'properties.name',
                 'contract_apartment.cost', 'contracts.id')
             ->distinct()
             ->get();
+
+        $lawyer_cases = LawyerCase::pluck('contract_id');
+
+        if ($this->lawyer_cases == 1) {
+            $users = $users->whereNotIn('contract_id', $lawyer_cases);
+        } elseif ($this->lawyer_cases == 2) {
+            $users = $users->whereIn('contract_id', $lawyer_cases);
+        }
 
 
         $report = [];

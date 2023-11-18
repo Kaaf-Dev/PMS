@@ -11,12 +11,14 @@ class LateRent extends Component
 {
     public $month_count = 3;
     public $selected_category;
+    public $lawyer_cases;
 
     public function rules()
     {
         return [
             'month_count' => 'nullable|numeric|min:1',
             'selected_category' => 'nullable',
+            'lawyer_cases' => 'nullable',
         ];
     }
 
@@ -34,7 +36,8 @@ class LateRent extends Component
     {
         $data = [
             'month_count' => $this->month_count,
-            'selected_category' => $this->selected_category
+            'selected_category' => $this->selected_category,
+            'lawyer_cases' => $this->lawyer_cases,
         ];
         return Excel::download(new LateRentReport($data), 'late-rent.xlsx');
     }
