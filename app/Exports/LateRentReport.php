@@ -31,21 +31,24 @@ class LateRentReport implements FromCollection, WithHeadings, WithEvents
     public function collection()
     {
         $users = DB::table('users')
-            ->select('users.name as user_name', 'users.phone as user_phone', 'users.id as user_id')
+            ->select('users.name as user_name', 'users.phone as user_phone', 'users.id as user_id', 'contracts.id as contract_id')
             ->join('contracts', 'users.id', '=', 'contracts.user_id')
             ->Join('invoices', 'contracts.id', '=', 'invoices.contract_id')
-            ->leftJoin('receipts', 'invoices.id', '=', 'receipts.invoice_id')
+            ->leftJoin('receipts', function ($join) {
+                $join->on('invoices.id', '=', 'receipts.invoice_id')
+                    ->whereRaw('contracts.id = invoices.contract_id');
+            })
             ->selectRaw('COUNT(CASE WHEN receipts.invoice_id IS NULL THEN invoices.id END) as unpaid_invoices')
             ->selectRaw('SUM(CASE WHEN receipts.invoice_id IS NULL THEN invoices.amount ELSE 0 END) as unpaid_invoices_sum')
             ->having('unpaid_invoices', '>=', $this->month_count)
-            ->groupBy('users.id', 'users.name', 'users.phone')
+            ->groupBy('users.id', 'users.name', 'users.phone', 'contracts.id')
+            ->distinct('contracts.id')
             ->get();
-
 
         $report = [];
         $lawyer_cases = LawyerCase::pluck('contract_id');
         foreach ($users as $user) {
-            $contracts = Contract::where('user_id', $user->user_id)->get();
+            $contracts = Contract::where('user_id', $user->user_id)->where('id', $user->contract_id)->get();
             if ($this->lawyer_cases == 1) {
                 $contracts = $contracts->whereNotIn('id', $lawyer_cases);
             } elseif ($this->lawyer_cases == 2) {
@@ -56,7 +59,7 @@ class LateRentReport implements FromCollection, WithHeadings, WithEvents
                 foreach ($apartments as $contractApartment) {
                     $category = $contractApartment->apartment->Property->category;
                     if ($category->id == $this->selected_category or $this->selected_category == null) {
-                        $report[$user->user_id] = [
+                        $report[$user->user_id . $user->contract_id] = [
                             'user_name' => $user->user_name,
                             'user_phone' => $user->user_phone,
                             'property_no' => $contractApartment->apartment->Property->ky_no,
