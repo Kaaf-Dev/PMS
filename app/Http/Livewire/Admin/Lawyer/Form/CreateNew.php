@@ -14,6 +14,7 @@ class CreateNew extends Component
     use WithAlert;
 
     public $name;
+    public $email;
     public $contact_name;
     public $contact_phone;
     public $contact_address;
@@ -24,6 +25,7 @@ class CreateNew extends Component
     {
         return [
             'name' => 'required',
+            'email' => 'required|email',
             'contact_name' => 'required',
             'contact_phone' => 'required',
             'contact_address' => 'required',

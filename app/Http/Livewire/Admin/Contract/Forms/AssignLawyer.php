@@ -142,6 +142,8 @@ class AssignLawyer extends Component
             $this->showSuccessAlert('تمت العملية بنجاح');
             $this->emit('contract-lawyer-assigned');
             $this->closeModal();
+            dispatch(new \App\Jobs\LawyerContractEmail($this->selected_lawyer));
+
         } else {
             $this->showWarningAlert('يرجى المحاولة لاحقًا!');
         }

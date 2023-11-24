@@ -16,6 +16,7 @@ class Lawyer extends Authenticatable
 
     protected $fillable = [
         'name',
+        'email',
         'contact_name',
         'contact_phone',
         'contact_address',

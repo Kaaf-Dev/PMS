@@ -19,6 +19,7 @@ class UpdateForm extends Component
     {
         return [
             'lawyer.name' => 'required',
+            'lawyer.email' => 'required|email',
             'lawyer.contact_name' => 'required',
             'lawyer.contact_phone' => 'required',
             'lawyer.contact_address' => 'required',
