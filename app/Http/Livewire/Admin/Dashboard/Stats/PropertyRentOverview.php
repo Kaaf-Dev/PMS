@@ -9,6 +9,21 @@ class PropertyRentOverview extends Component
 {
     public $ready_to_load = false;
 
+
+    public $type;
+
+    public function getListeners()
+    {
+        return [
+            'changeDashboardType',
+        ];
+    }
+
+    public function changeDashboardType($type)
+    {
+        $this->type = $type;
+    }
+
     public function render()
     {
         if ($this->ready_to_load) {
@@ -24,7 +39,7 @@ class PropertyRentOverview extends Component
 
     public function initChart()
     {
-        $report = ReportService::getPropertyRentOverview();
+        $report = ReportService::getPropertyRentOverview(null, $this->type);
         $this->emit('init-property-rent-overview-chart', [
             'series' => [
                 [

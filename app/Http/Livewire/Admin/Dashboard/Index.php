@@ -6,19 +6,17 @@ use Livewire\Component;
 
 class Index extends Component
 {
+    public $type;
+
     public function render()
     {
         return view('livewire.admin.dashboard.index')
             ->layout('layouts.admin.app');
     }
 
-    public function payInvoice()
+    public function changeDashboard($type = null)
     {
-        $this->emit('show-admin-receipt-create-modal');
-    }
-
-    public function createContract()
-    {
-        $this->emit('show-contract-new-modal');
+        $this->type = $type;
+        $this->emit('changeDashboardType', $this->type);
     }
 }

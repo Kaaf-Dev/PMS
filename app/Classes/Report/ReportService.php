@@ -9,24 +9,53 @@ use App\Models\Invoice;
 use App\Models\MaintenanceInvoice;
 use App\Models\Receipt;
 use App\Models\Ticket;
+use Illuminate\Support\Facades\DB;
 
 class ReportService
 {
-    public static function getPropertyRentOverview($year = 0)
+    public static function getPropertyRentOverview($year = 0, $type = 1)
     {
         $year = ($year != 0)
             ? $year
             : Date('Y');
 
-        $receipts = Receipt::selectRaw('YEAR(date) as year, MONTH(date) as month, SUM(amount) as total_amount')
-            ->whereYear('date', $year)
+//        $receipts = Receipt::selectRaw('YEAR(date) as year, MONTH(date) as month, SUM(amount) as total_amount')
+//            ->whereYear('date', $year)
+//            ->groupBy('year', 'month')
+//            ->orderBy('year', 'asc')
+//            ->orderBy('month', 'asc')
+//            ->get();
+
+        $receipts = DB::table('properties')
+            ->when($type, function ($query) use ($type) {
+                $query->where('properties.category_id', '=', $type);
+            })
+            ->selectRaw('YEAR(receipts.date) as year, MONTH(receipts.date) as month, SUM(receipts.amount) as total_amount')
+            ->join('apartments', 'properties.id', '=', 'apartments.property_id')
+            ->join('contract_apartment', 'apartments.id', '=', 'contract_apartment.apartment_id')
+            ->join('invoices', 'contract_apartment.contract_id', '=', 'invoices.contract_id')
+            ->join('receipts', 'invoices.id', '=', 'receipts.invoice_id')
+            ->whereYear('receipts.date', $year)
             ->groupBy('year', 'month')
             ->orderBy('year', 'asc')
             ->orderBy('month', 'asc')
             ->get();
 
-        $maintenance_invoices = MaintenanceInvoice::selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, SUM(amount) as total_amount')
-            ->whereYear('created_at', $year)
+//        $maintenance_invoices = MaintenanceInvoice::selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, SUM(amount) as total_amount')
+//            ->whereYear('created_at', $year)
+//            ->groupBy('year', 'month')
+//            ->orderBy('year', 'asc')
+//            ->orderBy('month', 'asc')
+//            ->get();
+
+        $maintenance_invoices = DB::table('tickets')
+            ->selectRaw('YEAR(maintenance_invoices.created_at) as year, MONTH(maintenance_invoices.created_at) as month, SUM(maintenance_invoices.amount) as total_amount')
+            ->join('properties', 'tickets.property_id', '=', 'properties.id')
+            ->when($type, function ($query) use ($type) {
+                $query->where('properties.category_id', '=', $type);
+            })
+            ->join('maintenance_invoices', 'tickets.id', '=', 'maintenance_invoices.ticket_id')
+            ->whereYear('maintenance_invoices.created_at', $year)
             ->groupBy('year', 'month')
             ->orderBy('year', 'asc')
             ->orderBy('month', 'asc')
@@ -156,19 +185,19 @@ class ReportService
         }
 
         if ($apartment_available_count + $apartment_rented_count) {
-            $apartment_rented_percent = round( ($apartment_rented_count / ($apartment_available_count + $apartment_rented_count)) * 100 );
+            $apartment_rented_percent = round(($apartment_rented_count / ($apartment_available_count + $apartment_rented_count)) * 100);
         }
 
         if ($apartment_available_count + $apartment_rented_count > 0) {
-            $apartment_available_percent = round( ($apartment_available_count / ($apartment_available_count + $apartment_rented_count)) * 100 );
+            $apartment_available_percent = round(($apartment_available_count / ($apartment_available_count + $apartment_rented_count)) * 100);
         }
 
         if ($store_available_count + $store_rented_count > 0) {
-            $store_rented_percent = round( ($store_rented_count / ($store_available_count + $store_rented_count)) * 100 );
+            $store_rented_percent = round(($store_rented_count / ($store_available_count + $store_rented_count)) * 100);
         }
 
         if ($store_available_count + $store_rented_count) {
-            $store_available_percent = round( ($store_available_count / ($store_available_count + $store_rented_count)) * 100 );
+            $store_available_percent = round(($store_available_count / ($store_available_count + $store_rented_count)) * 100);
         }
 
         // return data //
@@ -253,27 +282,27 @@ class ReportService
         $available_amount = $apartment_available_amount + $store_available_amount;
 
         if ($rents_amount + $available_amount > 0) {
-            $rents_percent = round( ($rents_amount / ($rents_amount + $available_amount) ) * 100 );
+            $rents_percent = round(($rents_amount / ($rents_amount + $available_amount)) * 100);
         }
 
         if ($rents_amount + $available_amount > 0) {
-            $available_percent = round( ($available_amount / ($rents_amount + $available_amount) ) * 100 );
+            $available_percent = round(($available_amount / ($rents_amount + $available_amount)) * 100);
         }
 
         if ($apartment_rents_amount + $apartment_available_amount > 0) {
-            $apartment_rents_percent = round( ($apartment_rents_amount / ($apartment_rents_amount + $apartment_available_amount)) * 100 );
+            $apartment_rents_percent = round(($apartment_rents_amount / ($apartment_rents_amount + $apartment_available_amount)) * 100);
         }
 
         if ($apartment_rents_amount + $apartment_available_amount > 0) {
-            $apartment_available_percent = round( ($apartment_available_amount / ($apartment_rents_amount + $apartment_available_amount)) * 100 );
+            $apartment_available_percent = round(($apartment_available_amount / ($apartment_rents_amount + $apartment_available_amount)) * 100);
         }
 
         if ($store_rents_amount + $store_available_amount > 0) {
-            $store_rents_percent = round( ($store_rents_amount / ($store_rents_amount + $store_available_amount)) * 100 );
+            $store_rents_percent = round(($store_rents_amount / ($store_rents_amount + $store_available_amount)) * 100);
         }
 
         if ($store_rents_amount + $store_available_amount > 0) {
-            $store_available_percent = round( ($store_available_amount / ($store_rents_amount + $store_available_amount)) * 100 );
+            $store_available_percent = round(($store_available_amount / ($store_rents_amount + $store_available_amount)) * 100);
         }
 
         return [
@@ -312,7 +341,7 @@ class ReportService
         ];
     }
 
-    public static function getMaintenanceOverview()
+    public static function getMaintenanceOverview($type)
     {
         $tickets_total = 0;
         $tickets_finished_count = 0;
@@ -320,13 +349,22 @@ class ReportService
         $tickets_open_count = 0;
         $tickets_open_percent = 0;
 
-        $tickets_finished_count = Ticket::finished()->count();
-        $tickets_open_count = Ticket::opened()->count();
+        $tickets = DB::table('tickets')
+            ->selectRaw('tickets.status')
+            ->join('properties', 'tickets.property_id', '=', 'properties.id')
+            ->when($type, function ($query) use ($type) {
+                $query->where('properties.category_id', '=', $type);
+            })
+            ->get();
+
+
+        $tickets_finished_count = $tickets->where('status',3)->count();
+        $tickets_open_count = $tickets->where('status',1)->count();
         $tickets_total = $tickets_finished_count + $tickets_open_count;
 
         if ($tickets_total > 0) {
-            $tickets_finished_percent = round( ($tickets_finished_count / $tickets_total) * 100 );
-            $tickets_open_percent = round( ($tickets_open_count / $tickets_total) * 100 );
+            $tickets_finished_percent = round(($tickets_finished_count / $tickets_total) * 100);
+            $tickets_open_percent = round(($tickets_open_count / $tickets_total) * 100);
         }
 
         return [

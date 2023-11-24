@@ -16,6 +16,20 @@ class MaintenanceOverview extends Component
 
     public $ready_to_load = false;
 
+    public $type;
+
+    public function getListeners()
+    {
+        return [
+            'changeDashboardType',
+        ];
+    }
+
+    public function changeDashboardType($type)
+    {
+        $this->type = $type;
+    }
+
     public function render()
     {
         if ($this->ready_to_load) $this->fetchData();
@@ -29,7 +43,7 @@ class MaintenanceOverview extends Component
 
     public function fetchData()
     {
-        $report = ReportService::getMaintenanceOverview();
+        $report = ReportService::getMaintenanceOverview($this->type);
         $this->fill($report);
     }
 }

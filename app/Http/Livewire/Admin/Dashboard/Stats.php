@@ -6,6 +6,7 @@ use Livewire\Component;
 
 class Stats extends Component
 {
+
     public function render()
     {
         return view('livewire.admin.dashboard.stats');

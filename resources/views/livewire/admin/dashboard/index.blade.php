@@ -6,7 +6,12 @@
             <!--begin::Page title-->
             <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
                 <!--begin::Title-->
-                <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">نظام إدارة العقارات</h1>
+                <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
+                    نظام إدارة العقارات -
+                {{$type == 1 ? 'كاف الإنسانية' : ''}}
+                {{$type == 2 ? 'جمعية الإصلاح' : ''}}
+                {{$type == null ? 'الجميع' : ''}}
+                </h1>
                 <!--end::Title-->
                 <!--begin::Breadcrumb-->
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
@@ -30,10 +35,15 @@
             <!--begin::Actions-->
             <div class="d-flex align-items-center gap-2 gap-lg-3">
                 <!--begin::Secondary button-->
-                <a wire:click="payInvoice" class="btn btn-sm fw-bold bg-body btn-color-gray-700 btn-active-color-primary">دفع فواتير</a>
+                <a wire:click="changeDashboard()" class="btn btn-sm fw-bold btn-primary">الجميع</a>
                 <!--end::Secondary button-->
+
+                <!--begin::Secondary button-->
+                <a wire:click="changeDashboard(1)" class="btn btn-sm fw-bold btn-info">كاف</a>
+                <!--end::Secondary button-->
+
                 <!--begin::Primary button-->
-                <a wire:click="createContract" class="btn btn-sm fw-bold btn-primary">إنشاء عقد</a>
+                <a wire:click="changeDashboard(2)" class="btn btn-sm fw-bold btn-success">الإصلاح</a>
                 <!--end::Primary button-->
             </div>
             <!--end::Actions-->

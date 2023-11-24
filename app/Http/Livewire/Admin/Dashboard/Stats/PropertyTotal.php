@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin\Dashboard\Stats;
 
 use App\Models\Apartment;
+use App\Models\Property;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
@@ -13,6 +14,20 @@ class PropertyTotal extends Component
     public $total = 0;
     public $stores_count = 0;
     public $apartments_count = 0;
+
+    public $type;
+
+    public function getListeners()
+    {
+        return [
+            'changeDashboardType',
+        ];
+    }
+
+    public function changeDashboardType($type)
+    {
+        $this->type = $type;
+    }
 
     public function render()
     {
@@ -29,8 +44,15 @@ class PropertyTotal extends Component
 
     public function fetchData()
     {
-        $apartments = Apartment::select('type', DB::raw('COUNT(*) as count'))
-            ->groupBy('type')
+//        $apartments = Apartment::select('type', DB::raw('COUNT(*) as count'))
+//            ->groupBy('type')
+//            ->get();
+        $apartments = DB::table('properties')->select('apartments.type', DB::raw('COUNT(*) as count'))
+            ->when($this->type, function ($query) {
+                $query->where('properties.category_id', '=', $this->type);
+            })
+            ->join('apartments', 'properties.id', '=', 'apartments.property_id')
+            ->groupBy('apartments.type')
             ->get();
 
         foreach ($apartments as $apartment) {
