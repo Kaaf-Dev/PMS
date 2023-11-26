@@ -15,7 +15,7 @@ class Login extends Component
     public function rules()
     {
         return [
-            'username' => 'required',
+            'username' => 'required|email',
             'password' => 'required',
         ];
     }
@@ -32,7 +32,7 @@ class Login extends Component
         $username = $validated_data['username'];
         $password = $validated_data['password'];
 
-        if (Auth::attempt(['username' => $username, 'password' => $password])) {
+        if (Auth::attempt(['email' => $username, 'password' => $password])) {
             return redirect()->intended(route('user.dashboard'));
         }
 
