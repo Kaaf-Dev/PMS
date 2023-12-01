@@ -43,7 +43,7 @@
 
                                         Below are the new login credentials to access the system:
                                         <br/>
-                                        Username: <br/> {{$selected_user->username}}
+                                        Username: <br/> {{$selected_user->email}}
                                         Password: <br/> {{$selected_user->cpr}}
                                         <br/>
                                         Please visit <a href="{{route('user.auth.login')}}">our new system</a> and use the aforementioned login credentials to access the system. Upon logging in, you will find a user-friendly interface that allows you to quickly and easily make rent payments.
