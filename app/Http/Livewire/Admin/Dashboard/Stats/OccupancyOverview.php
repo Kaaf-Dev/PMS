@@ -28,6 +28,20 @@ class OccupancyOverview extends Component
     public $store_available_count = 0;
     public $store_available_percent = 0;
 
+    public $type;
+
+    public function getListeners()
+    {
+        return [
+            'changeDashboardType',
+        ];
+    }
+
+    public function changeDashboardType($type)
+    {
+        $this->type = $type;
+    }
+
     public function render()
     {
         if ($this->ready_to_load) $this->fetchData();
@@ -36,7 +50,7 @@ class OccupancyOverview extends Component
 
     public function fetchData()
     {
-        $occupancy = ReportService::getOccupancyOverview();
+        $occupancy = ReportService::getOccupancyOverview($this->type);
         $this->fill($occupancy);
         \Debugbar::info('occupancy: ');
         \Debugbar::info($occupancy);

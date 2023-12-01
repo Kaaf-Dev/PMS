@@ -17,7 +17,7 @@
                 <!--begin::Row-->
                 <div class="row g-3 g-lg-6">
                     <!--begin::Col-->
-                    <div class="col-6">
+                    <div class="col-4">
                         <!--begin::Items-->
                         <div class="bg-gray-100 bg-opacity-70 rounded-2 px-6 py-5">
                             <!--begin::Symbol-->
@@ -47,8 +47,40 @@
                         <!--end::Items-->
                     </div>
                     <!--end::Col-->
+
                     <!--begin::Col-->
-                    <div class="col-6">
+                    <div class="col-4">
+                        <!--begin::Items-->
+                        <div class="bg-gray-100 bg-opacity-70 rounded-2 px-6 py-5">
+                            <!--begin::Symbol-->
+                            <div class="symbol symbol-30px me-5 mb-8">
+                                    <span class="symbol-label">
+                                       <i class="ki-duotone ki-abstract-18 text-primary fs-1">
+                                           <span class="path1"></span>
+                                           <span class="path2"></span>
+                                       </i>
+                                    </span>
+                            </div>
+                            <!--end::Symbol-->
+                            <!--begin::Stats-->
+                            <div class="m-0">
+                                <!--begin::Number-->
+                                <span class="text-gray-700 fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">
+                                    <span wire:loading wire:target="load"><span class="text-white spinner-border spinner-border-sm fs-5 d-block"></span></span>
+                                    <span wire:loading.remove wire:target="load">{{ $this->tickets_under_process_count }} <span class="fs-2">({{ $this->tickets_under_process_percent }}%)</span></span>
+                                </span>
+                                <!--end::Number-->
+                                <!--begin::Desc-->
+                                <span class="text-gray-500 fw-semibold fs-6">طلبات الصيانة قيد الإنجاز</span>
+                                <!--end::Desc-->
+                            </div>
+                            <!--end::Stats-->
+                        </div>
+                        <!--end::Items-->
+                    </div>
+                    <!--end::Col-->
+                    <!--begin::Col-->
+                    <div class="col-4">
                         <!--begin::Items-->
                         <div class="bg-gray-100 bg-opacity-70 rounded-2 px-6 py-5">
                             <!--begin::Symbol-->

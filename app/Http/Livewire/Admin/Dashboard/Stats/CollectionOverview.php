@@ -15,6 +15,20 @@ class CollectionOverview extends Component
 
     public $ready_to_load = false;
 
+    public $type;
+
+    public function getListeners()
+    {
+        return [
+            'changeDashboardType',
+        ];
+    }
+
+    public function changeDashboardType($type)
+    {
+        $this->type = $type;
+    }
+
     public function render()
     {
         if ($this->ready_to_load) $this->fetchData();
@@ -28,7 +42,7 @@ class CollectionOverview extends Component
 
     public function fetchData()
     {
-        $report = ReportService::getCollectionOverview();
+        $report = ReportService::getCollectionOverview($this->type);
         $properties = [];
         foreach ($report as $property => $value) {
             $properties[$property] = number_format($value);

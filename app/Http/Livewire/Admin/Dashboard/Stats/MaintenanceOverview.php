@@ -13,6 +13,8 @@ class MaintenanceOverview extends Component
     public $tickets_finished_percent = 0;
     public $tickets_open_count = 0;
     public $tickets_open_percent = 0;
+    public $tickets_under_process_count = 0;
+    public $tickets_under_process_percent = 0;
 
     public $ready_to_load = false;
 

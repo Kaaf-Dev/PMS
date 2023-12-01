@@ -10,7 +10,7 @@ class RentalsOverview extends Component
     public $rents_amount = 0;
     public $rents_percent = 0;
 
-    public  $available_amount = 0;
+    public $available_amount = 0;
     public $available_percent = 0;
 
     public $apartment_rents_amount = 0;
@@ -27,6 +27,20 @@ class RentalsOverview extends Component
 
     public $ready_to_load = false;
 
+    public $type;
+
+    public function getListeners()
+    {
+        return [
+            'changeDashboardType',
+        ];
+    }
+
+    public function changeDashboardType($type)
+    {
+        $this->type = $type;
+    }
+
     public function render()
     {
         if ($this->ready_to_load) $this->fetchData();
@@ -40,7 +54,7 @@ class RentalsOverview extends Component
 
     public function fetchData()
     {
-        $report = ReportService::getRentalsOverview();
+        $report = ReportService::getRentalsOverview($this->type);
         $properties = [];
         foreach ($report as $property => $value) {
             $properties[$property] = number_format($value);

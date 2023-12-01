@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 class ReportService
 {
-    public static function getPropertyRentOverview($year = 0, $type = 1)
+    public static function getPropertyRentOverview($year = 0, $type)
     {
         $year = ($year != 0)
             ? $year
@@ -109,7 +109,7 @@ class ReportService
         ];
     }
 
-    public static function getOccupancyOverview()
+    public static function getOccupancyOverview($type)
     {
 
         // Prepare variables //
@@ -133,39 +133,50 @@ class ReportService
         $store_available_percent = 0;
 
         // fetch data from database //
-        $all_apartments_count = Apartment::get()
+//        $all_apartments_count = Apartment::get()
+//
+//            ->groupBy('type')
+//            ->map(function ($apartments) {
+//                return $apartments->count();
+//            });
+
+        $all_apartments_count = DB::table('apartments')
+            ->join('properties', 'apartments.property_id', '=', 'properties.id')
+            ->when($type, function ($query) use ($type) {
+                $query->where('properties.category_id', '=', $type);
+            })
+            ->select('type', DB::raw('count(*) as count'))
             ->groupBy('type')
-            ->map(function ($apartments) {
-                return $apartments->count();
-            });
+            ->get();
 
         $types_rented = Contract::active()
-            ->with('apartments.property')
-            ->get()
-            ->pluck('apartments')
-            ->flatten()
-            ->groupBy('type') // Group apartments by type
-            ->map(function ($apartments) {
-                return $apartments->count();
-            });
+            ->join('contract_apartment', 'contracts.id', '=', 'contract_apartment.contract_id')
+            ->join('apartments', 'apartments.id', '=', 'contract_apartment.apartment_id')
+            ->join('properties', 'apartments.property_id', '=', 'properties.id')
+            ->when($type, function ($query) use ($type) {
+                $query->where('properties.category_id', '=', $type);
+            })
+            ->select('apartments.type', DB::raw('count(*) as count'))
+            ->groupBy('apartments.type') // Group apartments by type
+            ->get();
 
 
         // data processing //
         foreach ($all_apartments_count as $type => $type_count) {
-            if ($type == Apartment::TYPE_HOUSE) {
-                $apartment_count = $type_count;
+            if ($type_count->type == Apartment::TYPE_HOUSE) {
+                $apartment_count = $type_count->count;
 
-            } elseif ($type == Apartment::TYPE_STORE) {
-                $store_count = $type_count;
+            } elseif ($type_count->type == Apartment::TYPE_STORE) {
+                $store_count = $type_count->count;
             }
         }
 
         foreach ($types_rented as $type => $type_rented) {
-            if ($type == Apartment::TYPE_HOUSE) {
-                $apartment_rented_count = $type_rented;
+            if ($type_rented->type == Apartment::TYPE_HOUSE) {
+                $apartment_rented_count = $type_rented->count;
 
-            } elseif ($type == Apartment::TYPE_STORE) {
-                $store_rented_count = $type_rented;
+            } elseif ($type_rented->type == Apartment::TYPE_STORE) {
+                $store_rented_count = $type_rented->count;
             }
         }
 
@@ -224,7 +235,7 @@ class ReportService
         ];
     }
 
-    public static function getRentalsOverview()
+    public static function getRentalsOverview($type)
     {
 
         $rents_amount = 0;
@@ -248,12 +259,20 @@ class ReportService
         $reports_rents = Contract::active()
             ->join('contract_apartment', 'contracts.id', '=', 'contract_apartment.contract_id')
             ->join('apartments', 'apartments.id', '=', 'contract_apartment.apartment_id')
+            ->join('properties', 'apartments.property_id', '=', 'properties.id')
+            ->when($type, function ($query) use ($type) {
+                $query->where('properties.category_id', '=', $type);
+            })
             ->whereNull('contracts.deleted_at')
             ->select('apartments.type', \DB::raw('SUM(contract_apartment.cost) as total_cost'))
             ->groupBy('apartments.type')
             ->get();
 
         $reports_available = Apartment::available()
+            ->join('properties', 'apartments.property_id', '=', 'properties.id')
+            ->when($type, function ($query) use ($type) {
+                $query->where('properties.category_id', '=', $type);
+            })
             ->select('type', \DB::raw('SUM(cost) as total_cost'))
             ->groupBy('type')
             ->get();
@@ -326,11 +345,40 @@ class ReportService
         ];
     }
 
-    public static function getCollectionOverview()
+    public static function getCollectionOverview($type)
     {
-        $invoices_amount = Invoice::sum('amount');
-        $collected_amount = Receipt::sum('amount');
-        $discount_amount = Discount::sum('amount');
+//        $invoices_amount = Invoice::sum('amount');
+        $invoices_amount = DB::table('invoices')
+            ->select('invoices.amount as invoice_amount', 'invoices.contract_id as contract_id')
+            ->join('contract_apartment', 'invoices.contract_id', '=', 'contract_apartment.contract_id')
+            ->join('apartments', 'contract_apartment.apartment_id', '=', 'apartments.id')
+            ->join('properties', 'apartments.property_id', '=', 'properties.id')
+            ->when($type, function ($query) use ($type) {
+                $query->where('properties.category_id', '=', $type);
+            })->sum('invoices.amount');
+
+//        $collected_amount = Receipt::sum('amount');
+        $collected_amount = DB::table('receipts')
+            ->select('receipts.amount as receipts_amount', 'receipts.invoice_id as invoice_id')
+            ->join('invoices', 'receipts.invoice_id', '=', 'invoices.id')
+            ->join('contract_apartment', 'invoices.contract_id', '=', 'contract_apartment.contract_id')
+            ->join('apartments', 'contract_apartment.apartment_id', '=', 'apartments.id')
+            ->join('properties', 'apartments.property_id', '=', 'properties.id')
+            ->when($type, function ($query) use ($type) {
+                $query->where('properties.category_id', '=', $type);
+            })->sum('receipts.amount');
+
+//        $discount_amount = Discount::sum('amount');
+        $discount_amount = DB::table('discounts')
+            ->select('discounts.amount as discounts_amount', 'discounts.invoice_id as invoice_id')
+            ->join('invoices', 'discounts.invoice_id', '=', 'invoices.id')
+            ->join('contract_apartment', 'invoices.contract_id', '=', 'contract_apartment.contract_id')
+            ->join('apartments', 'contract_apartment.apartment_id', '=', 'apartments.id')
+            ->join('properties', 'apartments.property_id', '=', 'properties.id')
+            ->when($type, function ($query) use ($type) {
+                $query->where('properties.category_id', '=', $type);
+            })->sum('discounts.amount');
+
         $coming_amount = $invoices_amount - ($collected_amount + $discount_amount);
 
         return [
@@ -358,13 +406,15 @@ class ReportService
             ->get();
 
 
-        $tickets_finished_count = $tickets->where('status',3)->count();
-        $tickets_open_count = $tickets->where('status',1)->count();
-        $tickets_total = $tickets_finished_count + $tickets_open_count;
+        $tickets_finished_count = $tickets->where('status', 3)->count();
+        $tickets_open_count = $tickets->where('status', 1)->count();
+        $tickets_under_process_count = $tickets->where('status', 2)->count();
+        $tickets_total = $tickets_finished_count + $tickets_open_count + $tickets_under_process_count;
 
         if ($tickets_total > 0) {
             $tickets_finished_percent = round(($tickets_finished_count / $tickets_total) * 100);
             $tickets_open_percent = round(($tickets_open_count / $tickets_total) * 100);
+            $tickets_under_process_percent = round(($tickets_under_process_count / $tickets_total) * 100);
         }
 
         return [
@@ -373,6 +423,8 @@ class ReportService
             'tickets_finished_percent' => $tickets_finished_percent,
             'tickets_open_count' => $tickets_open_count,
             'tickets_open_percent' => $tickets_open_percent,
+            'tickets_under_process_count' => $tickets_under_process_count,
+            'tickets_under_process_percent' => $tickets_open_percent,
         ];
 
     }
