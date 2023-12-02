@@ -102,8 +102,17 @@ class Info extends Component
         if ($this->ticket->isDirty('maintenance_company_id')) {
             $this->ticket->assigned_at = Carbon::now();
         }
+        if ($this->ticket->isDirty('maintenance_company_id')) {
+            if ($validated_data['ticket']['maintenance_company_id']) {
+                $maintenance_company = MaintenanceCompany::findOrFail($validated_data['ticket']['maintenance_company_id']);
+                if ($maintenance_company) {
+                    dispatch(new \App\Jobs\MaintenanceTicketEmail(['ticket' => $this->ticket, 'company' => $maintenance_company]));
+                }
+            }
+        }
 
         if ($this->ticket->save()) {
+
             $this->emit('ticket-updated');
             $this->showSuccessAlert('تمت العملية بنجاح');
         } else {

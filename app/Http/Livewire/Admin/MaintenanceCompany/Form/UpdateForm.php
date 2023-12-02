@@ -18,6 +18,7 @@ class UpdateForm extends Component
     {
         return [
             'maintenance_company.name' => 'required',
+            'maintenance_company.email' => 'required|email',
             'maintenance_company.contact_name' => 'required',
             'maintenance_company.contact_phone' => 'required',
             'maintenance_company.contact_address' => 'required',

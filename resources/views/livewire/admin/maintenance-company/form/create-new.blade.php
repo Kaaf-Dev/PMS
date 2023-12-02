@@ -4,7 +4,9 @@
 
 
         <!--begin::Scroll-->
-        <div class="scroll-y me-n7 pe-7" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_customer_header" data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
+        <div class="scroll-y me-n7 pe-7" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}"
+             data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_customer_header"
+             data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
             <!--begin::Input group-->
             <div class="fv-row mb-7">
                 <!--begin::Label-->
@@ -15,6 +17,24 @@
                 <input wire:model.defer="name" class="form-control form-control-solid"/>
                 <!--end::Input-->
                 @error('name')
+                <div class="text-danger">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+            <!--end::Input group-->
+
+
+            <!--begin::Input group-->
+            <div class="fv-row mb-7">
+                <!--begin::Label-->
+                <label class="required fs-6 fw-semibold mb-2">البريد الإلكتروني</label>
+                <!--end::Label-->
+
+                <!--begin::Input-->
+                <input wire:model.defer="email" class="form-control form-control-solid" type="email"/>
+                <!--end::Input-->
+                @error('email')
                 <div class="text-danger">
                     {{ $message }}
                 </div>

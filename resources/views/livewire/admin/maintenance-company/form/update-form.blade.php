@@ -27,6 +27,23 @@
                 <!--begin::Input group-->
                 <div class="fv-row mb-7">
                     <!--begin::Label-->
+                    <label class="required fs-6 fw-semibold mb-2">البريد الإلكتروني</label>
+                    <!--end::Label-->
+
+                    <!--begin::Input-->
+                    <input wire:model.defer="maintenance_company.email" class="form-control form-control-solid"/>
+                    <!--end::Input-->
+                    @error('maintenance_company.email')
+                    <div class="text-danger">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group-->
+                <div class="fv-row mb-7">
+                    <!--begin::Label-->
                     <label class="required fs-6 fw-semibold mb-2">اسم مسؤول التواصل</label>
                     <!--end::Label-->
 
