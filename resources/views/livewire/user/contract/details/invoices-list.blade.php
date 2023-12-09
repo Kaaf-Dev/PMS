@@ -76,6 +76,12 @@
                                             <td class="">
                                                 @if ($invoice->unPaidAmount > 0)
                                                     <button wire:click="payInvoice('{{ $invoice->id }}')" class="btn btn-sm btn-light btn-active-light-primary">دفع</button>
+                                                @else
+
+                                                    <button wire:click="printReceipt('{{$invoice->id}}')" class="btn btn-sm btn-light btn-active-light-primary">
+                                                        طباعة
+                                                    </button>
+
                                                 @endif
                                             </td>
                                         </tr>

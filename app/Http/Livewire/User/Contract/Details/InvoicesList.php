@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\User\Contract\Details;
 
 use App\Models\Invoice;
+use App\Repository\printPDF;
 use Livewire\Component;
 
 class InvoicesList extends Component
@@ -45,5 +46,11 @@ class InvoicesList extends Component
         $this->emit('show-user-pay-invoice-modal', [
             'invoice_id' => $invoice_id,
         ]);
+    }
+
+    public function printReceipt($invoice_id)
+    {
+        $invoice = Invoice::findOrFail($invoice_id);
+        return printPDF::createPdf($invoice, 'pdf.invoice', [400, 295], 'invoices_file');
     }
 }

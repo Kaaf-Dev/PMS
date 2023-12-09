@@ -5,7 +5,7 @@
             <!--begin::Title-->
             <h3 class="card-title align-items-start flex-column">
                 <span class="card-label fw-bold text-gray-800">
-                    الفواتير المستحقة
+                    التسديدات
                 </span>
             </h3>
             <!--end::Title-->
@@ -60,9 +60,11 @@
                                 </td>
 
                                 <td class="">
-                                    @if ($invoice->unPaidAmount > 0)
-                                        <button wire:click="payInvoice('{{ $invoice->id }}')" class="btn btn-sm btn-light btn-active-light-primary">دفع</button>
-                                    @endif
+
+                                    <button wire:click="printReceipt('{{$invoice->id}}')" class="btn btn-sm btn-light btn-active-light-primary">
+                                        طباعة
+                                    </button>
+
                                 </td>
                             </tr>
                         @empty
