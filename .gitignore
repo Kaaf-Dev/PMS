@@ -17,3 +17,4 @@ yarn-error.log
 /public/ticket-attachments
 /public/property-file
 /public/contract-file
+/public/invoice-files

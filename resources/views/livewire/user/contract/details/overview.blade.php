@@ -152,41 +152,7 @@
                     </div>
                     <!--end::Section-->
                 </div>
-                <div class="flex-column flex-lg-row-auto w-25 mw-lg-300px mw-xxl-350px">
 
-                    <a href="#" class="card bg-success mb-5">
-                        <!--begin::Body-->
-                        <div class="card-body">
-                            <i class="ki-outline ki-wallet text-white fs-2x ms-n1"></i>
-
-                            <div class="text-white fw-bold fs-2 mb-2 mt-5">
-                                {{ $this->contract->total_amount_remaining_human }}
-                            </div>
-
-                            <div class="fw-semibold text-white">
-                                الفواتير المستحقة
-                            </div>
-                        </div>
-                        <!--end::Body-->
-                    </a>
-
-                    <a href="{{ route('user.tickets', ['contract_id' => $this->contract->id]) }}" class="card bg-info mb-5">
-                        <!--begin::Body-->
-                        <div class="card-body">
-                            <i class="ki-outline ki-office-bag text-white fs-2x ms-n1"></i>
-
-                            <div class="text-white fw-bold fs-2 mb-2 mt-5">
-                                {{ $this->contract->total_ticket_opened }}
-                            </div>
-
-                            <div class="fw-semibold text-white">
-                                طلبات الصيانة المفتوحة
-                            </div>
-                        </div>
-                        <!--end::Body-->
-                    </a>
-
-                </div>
             </div>
         </div>
         <!--end::Card body-->

@@ -70,6 +70,13 @@ return [
             'visibility' => 'public',
         ],
 
+        'invoices_file' => [
+            'driver' => 'local',
+            'root' => public_path('/invoice-files'),
+            'url' => env('APP_URL') . '/invoice-files',
+            'visibility' => 'public',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

@@ -33,16 +33,24 @@
         <!--begin::Row-->
         <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
             <!--begin::Col-->
-            <div class="col-xl-6">
+            <div class="col-xl-4">
                 <!--begin::contracts list-->
                 <livewire:user.dashboard.contracts-list />
                 <!--end::contracts list-->
             </div>
             <!--end::Col-->
             <!--begin::Col-->
-            <div class="col-xl-6">
+            <div class="col-xl-8">
                 <!--begin::contracts list-->
                 <livewire:user.dashboard.invoices-list />
+                <!--end::contracts list-->
+            </div>
+            <!--end::Col-->
+
+            <!--begin::Col-->
+            <div class="col-xl-12">
+                <!--begin::contracts list-->
+                <livewire:user.dashboard.receipt-list />
                 <!--end::contracts list-->
             </div>
             <!--end::Col-->

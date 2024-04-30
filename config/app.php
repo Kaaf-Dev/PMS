@@ -179,6 +179,8 @@ return [
         App\Providers\GlobalFunctionsServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Alkoumi\LaravelArabicNumbers\LaravelArabicNumbersServiceProvider::class,
+
 
     ],
 
