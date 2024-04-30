@@ -44,7 +44,7 @@ class GenerateMonthlyInvoices extends Command
         info('[Executing Job - '. date('Y-m-d H:i:sa') .']: Generate monthly invoices for contracts ');
 
         // Get all contracts that are eligible for monthly invoices
-        $contracts = Contract::all();
+        $contracts = Contract::ContractGenerateActive()->get();
 
         foreach ($contracts as $contract) {
 

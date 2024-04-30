@@ -12,6 +12,9 @@ class Contract extends Model
     use HasFactory;
     use SoftDeletes;
 
+    const CONTRACT_STATUS_ACTIVE = 1;
+    const CONTRACT_STATUS_INACTIVE = 0;
+
     protected $fillable = [
         'user_id',
         'notes',
@@ -101,6 +104,11 @@ class Contract extends Model
 //                ->orWhereRaw('`start_at` <= ? and `end_at` IS NULL', [$current_date->format('Y-m-01')]);
 //        });
         return $query;
+    }
+
+    public function scopeContractGenerateActive($query)
+    {
+        return $query->whereIn('active', [self::CONTRACT_STATUS_ACTIVE, self::CONTRACT_STATUS_INACTIVE]);
     }
 
     public function getActiveStatusAttribute()

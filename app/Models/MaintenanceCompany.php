@@ -21,6 +21,7 @@ class MaintenanceCompany extends Authenticatable
         'contact_address',
         'username',
         'password',
+        'email'
     ];
 
     protected $hidden = [
