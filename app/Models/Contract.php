@@ -14,7 +14,7 @@ class Contract extends Model
 
     const CONTRACT_STATUS_ACTIVE = 1;
     const CONTRACT_STATUS_INACTIVE = 0;
-    const CONTRACT_STATUS_EXPIRE = 0;
+    const CONTRACT_STATUS_EXPIRE = 2;
 
     protected $fillable = [
         'user_id',
