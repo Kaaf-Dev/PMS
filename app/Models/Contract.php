@@ -14,6 +14,7 @@ class Contract extends Model
 
     const CONTRACT_STATUS_ACTIVE = 1;
     const CONTRACT_STATUS_INACTIVE = 0;
+    const CONTRACT_STATUS_EXPIRE = 0;
 
     protected $fillable = [
         'user_id',
@@ -108,7 +109,7 @@ class Contract extends Model
 
     public function scopeContractGenerateActive($query)
     {
-        return $query->whereIn('active', [self::CONTRACT_STATUS_ACTIVE, self::CONTRACT_STATUS_INACTIVE]);
+        return $query->whereIn('active', [self::CONTRACT_STATUS_ACTIVE, self::CONTRACT_STATUS_EXPIRE]);
     }
 
     public function getActiveStatusAttribute()
