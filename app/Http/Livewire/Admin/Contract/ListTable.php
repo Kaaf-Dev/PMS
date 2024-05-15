@@ -2,10 +2,12 @@
 
 namespace App\Http\Livewire\Admin\Contract;
 
+use App\Exports\ContractListReport;
 use App\Models\Contract;
 use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ListTable extends Component
 {
@@ -34,7 +36,7 @@ class ListTable extends Component
 
     public function render()
     {
-        $contracts = ($this->ready_to_load) ? $this->loadContracts() : [];
+        $contracts = ($this->ready_to_load) ? $this->loadContracts()->paginate() : [];
         $view_data = [
             'contracts' => $contracts,
         ];
@@ -75,12 +77,17 @@ class ListTable extends Component
                 'apartments.property',
                 'user',
             ])
-            ->orderBy('id', 'desc')
-            ->paginate();
+            ->orderBy('id', 'desc');
     }
 
     public function showAddContract()
     {
         $this->emit('show-contract-new-modal', []);
+    }
+
+    public function exportContracts()
+    {
+        return Excel::download(new ContractListReport($this->loadContracts()->get()), 'contract.xlsx');
+
     }
 }

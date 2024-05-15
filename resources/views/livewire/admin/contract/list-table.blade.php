@@ -82,6 +82,14 @@
                         تسجيل عقد
                     </button>
                     <!--end::Primary button-->
+
+                    <!--begin::Menu toggle-->
+                    <button wire:click="exportContracts()" class="btn btn-sm btn-flex  btn-success btn-active-color-white fw-bold" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                        <i class="ki-duotone ki-file-up fs-6 text-white me-1">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>تصدير</button>
+                    <!--end::Menu toggle-->
                 </div>
                 <!--end::Actions-->
             </div>
