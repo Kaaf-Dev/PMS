@@ -31,7 +31,7 @@ class ContractListReport implements FromCollection, WithHeadings, WithEvents
             foreach ($contract->contractApartments as $apartment) {
                 $result[] = [
                     'user_name' => $contract->User->name,
-                    'user_phone' => $contract->User->phone,
+                    'user_phone' => $contract->User->phone ?? $contract->User->contact_phone ?? $contract->User->whatsapp_phone,
                     'property_name' => $apartment->apartment->property->name,
                     'apartment_name' => $apartment->apartment->name,
                     'contract_status' => $apartment->contract->active_status_string,
