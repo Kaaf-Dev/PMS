@@ -71,4 +71,6 @@ class Receipt extends Model
         return $payment_method_strings[$payment_method];
     }
 
+
+
 }

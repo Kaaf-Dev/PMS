@@ -31,7 +31,8 @@ class Invoice extends Model
         'due',
     ];
 
-    public static function boot() {
+    public static function boot()
+    {
         parent::boot();
 
         static::creating(function ($model) {
@@ -112,7 +113,7 @@ class Invoice extends Model
         $paid_amount = $this->paid_amount;
         $amount = $this->amount;
         return (
-            0 < $paid_amount and $paid_amount  < $amount
+            0 < $paid_amount and $paid_amount < $amount
         );
     }
 
@@ -121,7 +122,8 @@ class Invoice extends Model
         return $this->receipts->sum('amount');
     }
 
-    public function getUnPaidAmountAttribute(){
+    public function getUnPaidAmountAttribute()
+    {
         return $this->amount - $this->getPaidAmountAttribute();
     }
 
@@ -146,7 +148,7 @@ class Invoice extends Model
         if ($this->is_paid) {
             $status_class = 'success';
 
-        } elseif($this->is_partial_paid) {
+        } elseif ($this->is_partial_paid) {
             $status_class = 'warning';
 
         } else {
@@ -162,7 +164,7 @@ class Invoice extends Model
         if ($this->is_paid) {
             $paid_string = 'مدفوعة';
 
-        } elseif($this->is_partial_paid) {
+        } elseif ($this->is_partial_paid) {
             $paid_string = 'مدفوعة جزئيًا';
 
         } else {
@@ -176,6 +178,10 @@ class Invoice extends Model
     public function getDueHumanAttribute()
     {
         return $this->due->format('Y/m/d');
+    }
+    public function getDateHumanAttribute()
+    {
+        return $this->date->format('Y/m/d');
     }
 
     public function getAmountAttribute()
@@ -203,7 +209,7 @@ class Invoice extends Model
 
         if ($max_no) { // no exists and increase it by one
             $max_no_array = str_split($max_no, 6);
-            $no = (int) ($max_no_array[1] + 1);
+            $no = (int)($max_no_array[1] + 1);
             $next_no = $max_no_array[0];
             $next_no .= str_pad($no, 3, '0', STR_PAD_LEFT);
 
@@ -233,6 +239,27 @@ class Invoice extends Model
             }
         }
         return $payment_gateway;
+    }
+
+    public function getInvoiceApartmentTypeAttribute()
+    {
+        $apartment_type = 'pdf.receipt-kaaf';
+        if ($this->contract) {
+            if ($this->contract->apartments and isset($this->contract->apartments[0])) {
+                if ($this->contract->apartments[0]->property) {
+                    if ($this->contract->apartments[0]->property->category) {
+                        $category = $this->contract->apartments[0]->property->category;
+                        if ($category) {
+                            if ($category->payment_gateway === 'eslah') {
+                                $apartment_type = 'pdf.receipt-eslah';
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+        return $apartment_type;
     }
 
 }

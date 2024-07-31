@@ -5,6 +5,8 @@ namespace App\Http\Livewire\Admin\Invoice;
 use App\Exports\InvoicesListReport;
 use App\Models\Contract;
 use App\Models\Invoice;
+use App\Repository\printPDF;
+use Illuminate\Support\Facades\Response;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
@@ -78,5 +80,13 @@ class ListTable extends Component
             }
         }
 
+    }
+
+    public function printInvoice(Invoice $invoice)
+    {
+        $file = printPDF::createPdf($invoice, $invoice->invoice_apartment_type);
+        return Response::streamDownload(function () use ($file) {
+            echo $file;
+        }, 'invoice.pdf');
     }
 }
