@@ -200,7 +200,7 @@
                 <h1 style="color: #64327e; font-size: 16px;">المبلغ بالحروف<br>Amount in Words</h1>
             </td>
             <td style="width: 25%; vertical-align: top;">
-                <h2 style="font-size: 16px;">{{ \Alkoumi\LaravelArabicNumbers\Numbers::TafqeetMoney($data->amount_human, 'BHD') }}</h2>
+                <h2 style="font-size: 16px;">{{ \Alkoumi\LaravelArabicNumbers\Numbers::TafqeetMoney($data->amount, 'BHD') }}</h2>
             </td>
             <td style="width: 25%; vertical-align: top;">
                 <h1 style="color: #64327e; font-size: 16px;">إجمالي المبلغ<br>Total Amount</h1>
