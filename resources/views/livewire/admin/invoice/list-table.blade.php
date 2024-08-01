@@ -185,7 +185,7 @@
                             <!--begin::Table row-->
                             <tr>
                                 <td>
-                                    {{ $invoice->no }}
+                                    {{ $invoice->id }}
                                 </td>
 
                                 <td>
