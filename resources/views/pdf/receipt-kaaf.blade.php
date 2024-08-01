@@ -101,7 +101,7 @@
                 <h1>Invoice No</h1>
             </td>
             <td style="width: 33%; text-align: right;">
-                <h2>{{ $data->no }}</h2>
+                <h2>{{ $data->id }}</h2>
             </td>
             <td style="width: 28%; text-align: left;"> <!-- Adjusted to left alignment -->
                 <h1>التاريـخ</h1>
