@@ -70,6 +70,8 @@
                     </div>
                     <!--end:Menu item-->
 
+
+
                     <!--begin:Menu item-->
                     <div class="menu-item">
                         <!--begin:Menu link-->
@@ -214,6 +216,7 @@
                     </div>
                     <!--end:Menu item-->
 
+
                     <!--begin:Menu item-->
                     <div class="menu-item">
                         <!--begin:Menu link-->
@@ -247,6 +250,38 @@
                                 </i>
                             </span>
                             <span class="menu-title">الجهات القانونية</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+
+                    <!--begin:Menu item-->
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a class="menu-link" href="{{ route('admin.staff') }}">
+                            <span class="menu-icon">
+                                <i class="ki-duotone ki-abstract-29 fs-2">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                </i>
+                            </span>
+                            <span class="menu-title">الموظفين</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+
+                    <!--begin:Menu item-->
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a class="menu-link" href="{{ route('admin.role') }}">
+                            <span class="menu-icon">
+                                <i class="ki-duotone ki-abstract-29 fs-2">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                </i>
+                            </span>
+                            <span class="menu-title">الإدارة والصلاحيات</span>
                         </a>
                         <!--end:Menu link-->
                     </div>

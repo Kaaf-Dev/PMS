@@ -129,6 +129,24 @@ Route::prefix('admin')->group(function () {
             Route::get('/', Admin\Report\Index::class)->name('admin.reports');
         });
 
+        Route::group([
+            'prefix' => 'staff',
+            'middleware' => [
+                'auth:admin',
+            ],
+        ], function () {
+            Route::get('/', Admin\Staff\Index::class)->name('admin.staff');
+        });
+
+        Route::group([
+            'prefix' => 'roles',
+            'middleware' => [
+                'auth:admin',
+            ],
+        ], function () {
+            Route::get('/', Admin\Role\Index::class)->name('admin.role');
+        });
+
 
 
     });

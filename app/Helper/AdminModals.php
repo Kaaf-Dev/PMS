@@ -389,6 +389,38 @@ function getAdminGlobalModals()
                 'modal_dialog_class' => 'mw-650px',
             ]
         ],
+        [
+            'modal_id' => 'kt_modal_admin_staff_create',
+            'livewire_component' => 'admin.staff.forms.create',
+            'emit_show' => 'show-add-admin-modal',
+            'emit_hide' => 'hide-add-admin-modal',
+            'details' => [
+                'title' => 'إضافة موظف',
+                'modal_dialog_class' => 'mw-650px',
+            ]
+        ],
+
+        [
+            'modal_id' => 'kt_modal_admin_staff_update',
+            'livewire_component' => 'admin.staff.forms.update',
+            'emit_show' => 'show-update-admin-modal',
+            'emit_hide' => 'hide-update-admin-modal',
+            'details' => [
+                'title' => 'تعديل بيانات الموظف',
+                'modal_dialog_class' => 'mw-650px',
+            ]
+        ],
+
+        [
+            'modal_id' => 'kt_modal_admin_staff_delete',
+            'livewire_component' => 'admin.staff.forms.delete',
+            'emit_show' => 'show-delete-admin-modal',
+            'emit_hide' => 'hide-delete-admin-modal',
+            'details' => [
+                'title' => 'حذف الموظف',
+                'modal_dialog_class' => '',
+            ]
+        ],
 
         [
             'modal_id' => 'kt_modal_admin_contract_file_delete',
@@ -398,6 +430,17 @@ function getAdminGlobalModals()
             'details' => [
                 'title' => 'حذف المرفق',
                 'modal_dialog_class' => '',
+            ]
+        ],
+
+        [
+            'modal_id' => 'kt_modal_admin_role_create',
+            'livewire_component' => 'admin.role.forms.create',
+            'emit_show' => 'show-admin-create-role-modal',
+            'emit_hide' => 'hide-admin-create-role-modal',
+            'details' => [
+                'title' => 'إضافة صلاحية جديدة',
+                'modal_dialog_class' => 'mw-650px',
             ]
         ],
 
