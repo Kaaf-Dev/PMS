@@ -70,12 +70,11 @@
                     </div>
                     <!--end:Menu item-->
 
-
-
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ route('admin.users') }}">
+                    @can('viewAny', App\Models\User::class)
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link" href="{{ route('admin.users') }}">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-profile-user fs-2 text-white">
                                     <span class="path1"></span>
@@ -84,16 +83,19 @@
                                     <span class="path4"></span>
                                 </i>
                             </span>
-                            <span class="menu-title">المستأجرين</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
+                                <span class="menu-title">المستأجرين</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
+                    @endcan
 
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ route('admin.property') }}">
+
+                    @can('viewAny', App\Models\Property::class)
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link" href="{{ route('admin.property') }}">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-bank fs-2 text-white">
                                     <span class="path1"></span>
@@ -102,16 +104,18 @@
                                     <span class="path4"></span>
                                 </i>
                             </span>
-                            <span class="menu-title">العقارات</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
+                                <span class="menu-title">العقارات</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
+                    @endcan
 
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ route('admin.apartment') }}">
+                    @can('viewAny', App\Models\Apartment::class)
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link" href="{{ route('admin.apartment') }}">
                              <span class="menu-icon">
                             <i class="ki-duotone ki-cheque fs-2 text-white">
                                 <span class="path1"></span>
@@ -123,16 +127,18 @@
                                 <span class="path7"></span>
                             </i>
                              </span>
-                            <span class="menu-title">الوحدات السكنية</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
+                                <span class="menu-title">الوحدات السكنية</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
+                    @endcan
 
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ route('admin.contracts') }}">
+                    @can('viewAny', App\Models\Contract::class)
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link" href="{{ route('admin.contracts') }}">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-notepad-bookmark fs-2">
                                     <span class="path1"></span>
@@ -143,16 +149,18 @@
                                     <span class="path6"></span>
                                 </i>
                             </span>
-                            <span class="menu-title">إدارة العقود</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
+                                <span class="menu-title">إدارة العقود</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
+                    @endcan
 
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ route('admin.invoices') }}">
+                    @can('viewAny', App\Models\Invoice::class)
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link" href="{{ route('admin.invoices') }}">
                             <span class="menu-icon">
                             <i class="ki-duotone ki-dollar fs-2">
                                 <span class="path1"></span>
@@ -160,32 +168,34 @@
                                 <span class="path3"></span>
                             </i>
                             </span>
-                            <span class="menu-title">المالية والتسديدات</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
+                                <span class="menu-title">المالية والتسديدات</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
+                    @endcan
 
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ route('admin.tickets') }}">
+                    @can('viewAny', App\Models\Ticket::class)
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link" href="{{ route('admin.tickets') }}">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-wrench fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                 </i>
                             </span>
-                            <span class="menu-title">طلبات الصيانة</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
+                                <span class="menu-title">طلبات الصيانة</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
 
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ route('admin.maintenance-invoices') }}">
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link" href="{{ route('admin.maintenance-invoices') }}">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-dollar fs-2">
                                     <span class="path1"></span>
@@ -194,33 +204,32 @@
                                     <span class="path4"></span>
                                 </i>
                             </span>
-                            <span class="menu-title">فواتير الصيانة</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
+                                <span class="menu-title">فواتير الصيانة</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
 
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ route('admin.ticket-categories') }}">
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link" href="{{ route('admin.ticket-categories') }}">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-abstract-29 fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                 </i>
                             </span>
-                            <span class="menu-title">فئات طلبات الصيانة</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
+                                <span class="menu-title">فئات طلبات الصيانة</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
 
-
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ route('admin.maintenance-companies') }}">
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link" href="{{ route('admin.maintenance-companies') }}">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-badge fs-2">
                                     <span class="path1"></span>
@@ -230,16 +239,17 @@
                                     <span class="path5"></span>
                                 </i>
                             </span>
-                            <span class="menu-title">شركات الصيانة</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
-
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ route('admin.lawyers') }}">
+                                <span class="menu-title">شركات الصيانة</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
+                    @endcan
+                    @can('viewAny', App\Models\Lawyer::class)
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link" href="{{ route('admin.lawyers') }}">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-badge fs-2">
                                     <span class="path1"></span>
@@ -249,48 +259,57 @@
                                     <span class="path5"></span>
                                 </i>
                             </span>
-                            <span class="menu-title">الجهات القانونية</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
+                                <span class="menu-title">الجهات القانونية</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
+                    @endcan
 
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ route('admin.staff') }}">
+                    @can('viewAny', App\Models\Admin::class)
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link" href="{{ route('admin.staff') }}">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-abstract-29 fs-2">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                </i>
+                            <i class="ki-duotone ki-user-tick fs-2">
+                                 <span class="path1"></span>
+                                 <span class="path2"></span>
+                                 <span class="path3"></span>
+                            </i>
                             </span>
-                            <span class="menu-title">الموظفين</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
+                                <span class="menu-title">الموظفين</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
+                    @endcan
 
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ route('admin.role') }}">
+                    @can('viewAny', App\Models\Role::class)
+
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link" href="{{ route('admin.role') }}">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-abstract-29 fs-2">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                </i>
+                              <i class="ki-duotone ki-lock fs-2">
+                                 <span class="path1"></span>
+                                 <span class="path2"></span>
+                                 <span class="path3"></span>
+                              </i>
                             </span>
-                            <span class="menu-title">الإدارة والصلاحيات</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
+                                <span class="menu-title">الإدارة والصلاحيات</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
+                    @endcan
 
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ route('admin.reports') }}">
+                    @can('manage_reports')
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link" href="{{ route('admin.reports') }}">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-graph-up fs-2">
                                     <span class="path1"></span>
@@ -301,11 +320,12 @@
                                     <span class="path6"></span>
                                 </i>
                             </span>
-                            <span class="menu-title">التقارير</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
+                                <span class="menu-title">التقارير</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
+                    @endcan
 
                 </div>
                 <!--end::Menu-->

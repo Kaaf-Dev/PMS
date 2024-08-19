@@ -15,7 +15,7 @@
                 </label>
                 <!--end::Label-->
                 <!--begin::Input-->
-                <input wire:model.defer="role_name" class="form-control form-control-solid" placeholder="ادخل اسم الصلاحية" name="role_name"/>
+                <input wire:model.defer="Role.name" class="form-control form-control-solid" placeholder="ادخل اسم الصلاحية" name="role_name"/>
                 <!--end::Input-->
             </div>
             <!--end::Input group-->
@@ -35,7 +35,7 @@
                             <tr>
                                 <td class="text-gray-800">
                                     <div class="form-check form-check-custom form-check-solid">
-                                        <input wire:model.defer="role_permission" class="form-check-input" type="checkbox" value="{{$permission->id}}"/>
+                                        <input wire:model.defer="role_permission.{{$permission->id}}" class="form-check-input" type="checkbox" value="{{$permission->id}}"/>
                                         <label class="form-check-label text-gray-800" for="flexCheckDefault">
                                             {{$permission->name}}
                                         </label>

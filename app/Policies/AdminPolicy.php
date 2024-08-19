@@ -2,23 +2,18 @@
 
 namespace App\Policies;
 
-use App\Models\Admin;
-use App\Models\Contract;
-use App\Models\LawyerCase;
-use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Auth\Access\Response;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
-
-class LawyerCasePolicy
+class AdminPolicy
 {
     use HandlesAuthorization;
 
     public function viewAny(Admin $admin)
     {
-        return $admin->hasPermission('manage_lawyers')
+        return $admin->hasPermission('manage_admins')
             ? Response::allow()
             : Response::deny('you don’t have access to this page.');
     }
@@ -27,20 +22,12 @@ class LawyerCasePolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\LawyerCase  $lawyer_case
+     * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(Authenticatable $user, LawyerCase $lawyer_case)
+    public function view(User $user, Admin $admin)
     {
-        $allow = false;
-        if (Auth::guard('admin')->check()) {
-            $allow = true;
-        } elseif (Auth::guard('lawyer')->check()) {
-            if ($user->id == $lawyer_case->lawyer_id) {
-                $allow = true;
-            }
-        }
-        return $allow;
+        //
     }
 
     /**
@@ -49,7 +36,7 @@ class LawyerCasePolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(Authenticatable $user)
+    public function create(User $user)
     {
         //
     }
@@ -58,10 +45,10 @@ class LawyerCasePolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\LawyerCase  $lawyer_case
+     * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(Authenticatable $user, LawyerCase $lawyer_case)
+    public function update(User $user, Admin $admin)
     {
         //
     }
@@ -70,10 +57,10 @@ class LawyerCasePolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\LawyerCase  $lawyer_case
+     * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(Authenticatable $user, LawyerCase $lawyer_case)
+    public function delete(User $user, Admin $admin)
     {
         //
     }
@@ -82,10 +69,10 @@ class LawyerCasePolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\LawyerCase  $lawyer_case
+     * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(Authenticatable $user, LawyerCase $lawyer_case)
+    public function restore(User $user, Admin $admin)
     {
         //
     }
@@ -94,12 +81,11 @@ class LawyerCasePolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\LawyerCase  $lawyer_case
+     * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(Authenticatable $user, LawyerCase $lawyer_case)
+    public function forceDelete(User $user, Admin $admin)
     {
         //
     }
-
 }

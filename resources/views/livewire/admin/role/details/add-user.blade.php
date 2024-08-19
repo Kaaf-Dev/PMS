@@ -11,50 +11,32 @@
             <div class="fv-row mb-10">
                 <!--begin::Label-->
                 <label class="fs-5 fw-bold form-label mb-2">
-                    <span class="required">اسم الصلاحية</span>
+                    <span class="required">تحديد المستخدمين</span>
                 </label>
                 <!--end::Label-->
-                <!--begin::Input-->
-                <input wire:model.defer="role_name" class="form-control form-control-solid" placeholder="ادخل اسم الصلاحية" name="role_name"/>
-                <!--end::Input-->
+                <select id="user_role_selected" wire:model.defer="user_role_selected" class="form-select" data-control="select2" data-placeholder="الرجاء التحديد" multiple data-dropdown-parent="#kt_modal_admin_add_user_role">
+                    <option></option>
+                    @foreach($this->admins as $admin)
+                        <option value="{{$admin->id}}">{{$admin->name}}</option>
+                    @endforeach
+                </select>
             </div>
             <!--end::Input group-->
-            <!--begin::Permissions-->
-            <div class="fv-row">
-                <!--begin::Label-->
-                <label class="fs-5 fw-bold form-label mb-2">الأذونات </label>
-                <!--end::Label-->
-                <!--begin::Table wrapper-->
-                <div class="table-responsive">
-                    <!--begin::Table-->
-                    <table class="table align-middle table-row-dashed fs-6 gy-5">
-                        <!--begin::Table body-->
-                        <tbody class="text-gray-600 fw-semibold">
-                        <!--begin::Table row-->
-                        @foreach($this->permissions as $permission)
-                            <tr>
-                                <td class="text-gray-800">
-                                    <div class="form-check form-check-custom form-check-solid">
-                                        <input wire:model.defer="role_permission" class="form-check-input" type="checkbox" value="{{$permission->id}}"/>
-                                        <label class="form-check-label text-gray-800" for="flexCheckDefault">
-                                            {{$permission->name}}
-                                        </label>
-                                    </div>
-                                </td>
-
-                            </tr>
-                        @endforeach
-                        <!--end::Table row-->
-                        </tbody>
-                        <!--end::Table body-->
-                    </table>
-                    <!--end::Table-->
-                </div>
-                <!--end::Table wrapper-->
-            </div>
-            <!--end::Permissions-->
         </div>
         <!--end::Scroll-->
+        <script wire:ignore>
+            document.addEventListener('livewire:load', function (event) {
+                window.Livewire.hook('message.processed', () => {
+                    $('.form-select').select2();
+
+                    $('#user_role_selected').on('change', function (e) {
+                        let elementName = $(this).attr('id');
+                        var data = $(this).select2("val");
+                        @this.set(elementName, data);
+                    });
+                });
+            });
+        </script>
         <!--begin::Actions-->
         <div class="text-center pt-15">
             <!--begin::Button-->

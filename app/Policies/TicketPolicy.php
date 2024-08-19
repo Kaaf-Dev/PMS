@@ -2,9 +2,11 @@
 
 namespace App\Policies;
 
+use App\Models\Admin;
 use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -13,15 +15,11 @@ class TicketPolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * Determine whether the user can view any models.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function viewAny(Authenticatable $user)
+    public function viewAny(Admin $admin)
     {
-        //
+        return $admin->hasPermission('manage_tickets')
+            ? Response::allow()
+            : Response::deny('you don’t have access to this page.');
     }
 
     /**

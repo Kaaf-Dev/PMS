@@ -35,6 +35,7 @@ Route::prefix('admin')->group(function () {
             'prefix' => 'users',
             'middleware' => [
                 'auth:admin',
+                'can:viewAny,\App\Models\User'
             ],
         ], function () {
             Route::get('/', Admin\Users\Index::class)->name('admin.users');
@@ -46,11 +47,23 @@ Route::prefix('admin')->group(function () {
             'prefix' => 'property',
             'middleware' => [
                 'auth:admin',
+                'can:viewAny,\App\Models\Property'
+
             ],
         ], function () {
             Route::get('/', Admin\Property\Index::class)->name('admin.property');
-            Route::get('/apartment', Admin\Property\Apartment\Index::class)->name('admin.apartment');
             Route::get('/{property_id}/details', Admin\Property\Details::class)->name('admin.property.details');
+        });
+
+        Route::group([
+            'prefix' => 'apartment',
+            'middleware' => [
+                'auth:admin',
+                'can:viewAny,\App\Models\Apartment'
+
+            ],
+        ], function () {
+            Route::get('/', Admin\Property\Apartment\Index::class)->name('admin.apartment');
             Route::get('/{property_id}/apartment/{apartment_id}/details', Admin\Property\Apartment\Details::class)->name('admin.property.apartment.details');
         });
 
@@ -59,6 +72,8 @@ Route::prefix('admin')->group(function () {
             'prefix' => 'contracts',
             'middleware' => [
                 'auth:admin',
+                'can:viewAny,\App\Models\Contract'
+
             ],
         ], function () {
             Route::get('/', Admin\Contract\Index::class)->name('admin.contracts');
@@ -69,6 +84,8 @@ Route::prefix('admin')->group(function () {
             'prefix' => 'invoices',
             'middleware' => [
                 'auth:admin',
+                'can:viewAny,\App\Models\Invoice'
+
             ],
         ], function () {
             Route::get('/', Admin\Invoice\Index::class)->name('admin.invoices');
@@ -78,6 +95,8 @@ Route::prefix('admin')->group(function () {
             'prefix' => 'tickets',
             'middleware' => [
                 'auth:admin',
+                'can:viewAny,\App\Models\Ticket'
+
             ],
         ], function () {
             Route::get('/', Admin\Ticket\Index::class)->name('admin.tickets');
@@ -88,6 +107,8 @@ Route::prefix('admin')->group(function () {
             'prefix' => 'maintenance-companies',
             'middleware' => [
                 'auth:admin',
+                'can:viewAny,\App\Models\Ticket'
+
             ],
         ], function () {
             Route::get('/', Admin\MaintenanceCompany\Index::class)->name('admin.maintenance-companies');
@@ -97,6 +118,8 @@ Route::prefix('admin')->group(function () {
             'prefix' => 'ticket-categories',
             'middleware' => [
                 'auth:admin',
+                'can:viewAny,\App\Models\Ticket'
+
             ],
         ], function () {
             Route::get('/', Admin\TicketCategory\Index::class)->name('admin.ticket-categories');
@@ -106,6 +129,8 @@ Route::prefix('admin')->group(function () {
             'prefix' => 'lawyers',
             'middleware' => [
                 'auth:admin',
+                'can:viewAny,\App\Models\Lawyer'
+
             ],
         ], function () {
             Route::get('/', Admin\Lawyer\Index::class)->name('admin.lawyers');
@@ -115,6 +140,8 @@ Route::prefix('admin')->group(function () {
             'prefix' => 'maintenance-invoices',
             'middleware' => [
                 'auth:admin',
+                'can:viewAny,\App\Models\Ticket'
+
             ],
         ], function () {
             Route::get('/', Admin\MaintenanceInvoice\Index::class)->name('admin.maintenance-invoices');
@@ -124,6 +151,7 @@ Route::prefix('admin')->group(function () {
             'prefix' => 'reports',
             'middleware' => [
                 'auth:admin',
+                'can:manage_reports'
             ],
         ], function () {
             Route::get('/', Admin\Report\Index::class)->name('admin.reports');
@@ -133,6 +161,8 @@ Route::prefix('admin')->group(function () {
             'prefix' => 'staff',
             'middleware' => [
                 'auth:admin',
+                'can:viewAny,\App\Models\Admin'
+
             ],
         ], function () {
             Route::get('/', Admin\Staff\Index::class)->name('admin.staff');
@@ -142,9 +172,12 @@ Route::prefix('admin')->group(function () {
             'prefix' => 'roles',
             'middleware' => [
                 'auth:admin',
+                'can:viewAny,\App\Models\Role'
+
             ],
         ], function () {
             Route::get('/', Admin\Role\Index::class)->name('admin.role');
+            Route::get('/details/{role_id}', Admin\Role\Details::class)->name('admin.details');
         });
 
 

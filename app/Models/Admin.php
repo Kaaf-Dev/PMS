@@ -40,4 +40,23 @@ class Admin extends Authenticatable
      */
     protected $appends = [
     ];
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'admin_roles', 'admin_id', 'role_id');
+    }
+
+    public function hasPermission($slug)
+    {
+        $status = false;
+        if ($this->roles) {
+            foreach ($this->roles as $role) {
+                $has_role = $role->permissions->where('slug', $slug)->first();
+                if ($has_role) {
+                    $status = true;
+                }
+            }
+        }
+        return $status;
+    }
 }

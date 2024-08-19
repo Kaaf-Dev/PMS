@@ -444,6 +444,28 @@ function getAdminGlobalModals()
             ]
         ],
 
+        [
+            'modal_id' => 'kt_modal_admin_role_update',
+            'livewire_component' => 'admin.role.forms.update',
+            'emit_show' => 'show-admin-update-role-modal',
+            'emit_hide' => 'hide-admin-update-role-modal',
+            'details' => [
+                'title' => 'تعديل الصلاحية',
+                'modal_dialog_class' => 'mw-650px',
+            ]
+        ],
+
+        [
+            'modal_id' => 'kt_modal_admin_add_user_role',
+            'livewire_component' => 'admin.role.details.add-user',
+            'emit_show' => 'show-add-user-role-modal',
+            'emit_hide' => 'hide-add-user-role-modal',
+            'details' => [
+                'title' => 'إضافة مستخدمين للصلاحية',
+                'modal_dialog_class' => 'mw-650px',
+            ]
+        ],
+
 
     ];
 }
