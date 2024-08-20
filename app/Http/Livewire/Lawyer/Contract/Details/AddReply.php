@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Lawyer\Contract\Details;
 
+use App\Events\LawyerReply;
 use App\Models\Contract;
 use App\Traits\WithAlert;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -59,6 +60,7 @@ class AddReply extends Component
         if ($reply) {
             $this->contract->touch();
             $this->resetInputs();
+            event(new LawyerReply($reply));
             $this->emit('reply-added');
         } else {
             $this->showErrorAlert('لا يمكن إضافة الرد في الوقت الحالي');

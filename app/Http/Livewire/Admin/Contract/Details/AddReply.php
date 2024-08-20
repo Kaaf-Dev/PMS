@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Admin\Contract\Details;
 
+use App\Events\LawyerReply;
+use App\Events\ReceiptCreated;
 use App\Models\Contract;
 use App\Traits\WithAlert;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
