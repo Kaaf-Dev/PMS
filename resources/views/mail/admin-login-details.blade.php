@@ -39,13 +39,11 @@
                                         style="display:inline-block; vertical-align:middle; margin:29px 0 26px; border-bottom:1px solid #cecece; width:100px;"></span>
                                     <p style="color:#455056; font-size:15px;line-height:24px; margin:0;">
                                         لقد قمنا بتحديث نظام دفع الإيجارات لدينا لتحسين تجربتكم وجعلها أكثر سهولة وأماناً.
-
-                                        فيما يلي بيانات تسجيل الدخول الجديدة للوصول إلى النظام:
+                                        فيما يلي بيانات تسجيل الدخول الجديدة للوصول إلى النظام
                                         <br/>
-                                        البريد الإلكتروني: <br/> {{$admin->username}}
-                                        كلمة المرور: <br/> {{$password}}
+                                        البريد الإلكتروني <br/> {{$admin->username}}<br/>
+                                        كلمة المرور <br/> {{$password}}
                                         <br/>
-                                        يرجى زيارة <a href="{{route('admin.auth.login')}}">النظام الجديد</a>
 
                                     </p>
                                     <a href="{{route('admin.auth.login')}}"
