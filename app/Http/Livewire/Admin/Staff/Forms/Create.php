@@ -58,6 +58,7 @@ class Create extends Component
         $data['password'] = Hash::make($data['password']);
         $admin = new Admin($data);
         if ($admin->save()) {
+            dispatch(new \App\Jobs\AdminLoginDetails($admin, $this->password));
             $this->emit('staff-updated');
             $this->showSuccessAlert('تمت عملية الحفظ بنجاح');
             $this->discard();
