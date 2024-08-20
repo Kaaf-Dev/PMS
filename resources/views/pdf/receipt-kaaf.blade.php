@@ -181,7 +181,7 @@
         <tr>
             <td colspan="3" style="text-align: right; padding: 10px;">
                 <ul style="list-style-type: none; padding: 0; text-align: right;">
-                    <li>وذلك عن عقد رقم {{$data->Contract->id}} المكون من :</li>
+                    <li>وذلك عن تاريخ {{$data->date_name}} عقد رقم {{$data->Contract->id}} المكون من :</li>
                     @foreach($data->Contract->contractApartments as $apartment)
                         <li>{{$apartment->apartment->name ?? ''}}</li>
                     @endforeach

@@ -184,6 +184,11 @@ class Invoice extends Model
         return $this->date->format('Y/m/d');
     }
 
+    public function getDateNameAttribute()
+    {
+        return $this->date->format('Y-M');
+    }
+
     public function getAmountAttribute()
     {
         return $this->getRawOriginal('amount') - $this->discounts()->sum('amount');
