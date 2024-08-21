@@ -4,6 +4,7 @@ namespace App\Http\Livewire\User\Contract\Details;
 
 use App\Models\Invoice;
 use App\Repository\printPDF;
+use Illuminate\Support\Facades\Response;
 use Livewire\Component;
 
 class InvoicesList extends Component
@@ -50,7 +51,14 @@ class InvoicesList extends Component
 
     public function printReceipt($invoice_id)
     {
-        $invoice = Invoice::findOrFail($invoice_id);
-        return printPDF::createPdf($invoice, 'pdf.invoice', [400, 295], 'invoices_file');
+        $invoice = Invoice::where([
+            ['contract_id', '=', $this->contract_id]
+        ])->findOrFail($invoice_id);
+        if ($invoice) {
+            $file = printPDF::createPdf($invoice, $invoice->invoice_apartment_type);
+            return Response::streamDownload(function () use ($file) {
+                echo $file;
+            }, 'invoice.pdf');
+        }
     }
 }
