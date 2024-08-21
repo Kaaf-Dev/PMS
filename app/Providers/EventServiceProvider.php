@@ -7,6 +7,7 @@ use App\Events\CompanySetTicketTime;
 use App\Events\LawyerChangeCaseDetails;
 use App\Events\LawyerCreateInvoice;
 use App\Events\LawyerReply;
+use App\Events\ReceiptCreated;
 use App\Events\TicketReply;
 use App\Events\UserCreateTicket;
 use App\Listeners\SendNotificationForAdminWhenCompanyFinishTicket;
@@ -14,6 +15,7 @@ use App\Listeners\SendNotificationForAdminWhenCompanySetTicketTime;
 use App\Listeners\SendNotificationForAdminWhenLawyerChangeCaseDetails;
 use App\Listeners\SendNotificationForAdminWhenLawyerCreateInvoice;
 use App\Listeners\SendNotificationForAdminWhenLawyerReply;
+use App\Listeners\SendNotificationForAdminWhenReceiptCreated;
 use App\Listeners\SendNotificationForAdminWhenTicketReply;
 use App\Listeners\SendNotificationForAdminWhenUserCreateTicket;
 use App\Notifications\TicketReplyNotification;
@@ -53,6 +55,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         CompanyFinishTicket::class => [
             SendNotificationForAdminWhenCompanyFinishTicket::class,
+        ],
+        ReceiptCreated::class => [
+            SendNotificationForAdminWhenReceiptCreated::class,
         ],
     ];
 

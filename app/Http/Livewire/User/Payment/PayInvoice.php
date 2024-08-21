@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\User\Payment;
 
+use App\Events\ReceiptCreated;
 use App\Models\Invoice;
 use App\Repository\paymentGateway;
 use App\Repository\saveCardToken;
@@ -95,6 +96,7 @@ class PayInvoice extends Component
             if ($payment_result['status']) {
                 $this->showSuccessAlert('شكرًا لك، تمت العملية بنجاح');
                 $this->emit('invoice-paid');
+
                 $this->closeMe();
             } else {
                 $this->addError('card_number', $payment_result['errors']);

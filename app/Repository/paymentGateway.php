@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Events\ReceiptCreated;
 use App\Models\Invoice;
 use App\Models\PaymentTransaction;
 use App\Models\Receipt;
@@ -67,6 +68,8 @@ class paymentGateway
             $receipt->transaction_id = $transaction->id;
             $receipt->payment_method = Receipt::PAYMENT_METHOD_VISA;
             $receipt->save();
+
+            event(new ReceiptCreated($receipt));
             $result = [
                 'status' => true,
                 'msg' => 'تمت العملية بنجاح',
