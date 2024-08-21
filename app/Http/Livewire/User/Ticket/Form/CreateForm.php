@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\User\Ticket\Form;
 
+use App\Events\UserCreateTicket;
 use App\Models\ContractApartment;
 use App\Models\Property;
 use App\Models\Ticket;
@@ -202,6 +203,7 @@ class CreateForm extends Component
             }
             $ticket_attachments = $ticket->ticketAttachments()->createMany($attachments);
             $this->showSuccessAlert('تمت إضافة الطلب بنجاح');
+            event(new UserCreateTicket($ticket));
             $this->hideMe();
             $this->emit('ticket-added');
             $this->resetInputs();

@@ -5,9 +5,11 @@ namespace App\Providers;
 use App\Events\LawyerChangeCaseDetails;
 use App\Events\LawyerCreateInvoice;
 use App\Events\LawyerReply;
+use App\Events\UserCreateTicket;
 use App\Listeners\SendNotificationForAdminWhenLawyerChangeCaseDetails;
 use App\Listeners\SendNotificationForAdminWhenLawyerCreateInvoice;
 use App\Listeners\SendNotificationForAdminWhenLawyerReply;
+use App\Listeners\SendNotificationForAdminWhenUserCreateTicket;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -32,6 +34,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         LawyerChangeCaseDetails::class => [
             SendNotificationForAdminWhenLawyerChangeCaseDetails::class,
+        ],
+        UserCreateTicket::class => [
+            SendNotificationForAdminWhenUserCreateTicket::class,
         ],
     ];
 

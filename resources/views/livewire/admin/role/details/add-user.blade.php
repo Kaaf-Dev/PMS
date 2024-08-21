@@ -27,7 +27,7 @@
         <script wire:ignore>
             document.addEventListener('livewire:load', function (event) {
                 window.Livewire.hook('message.processed', () => {
-                    $('.form-select').select2();
+                    $('#user_role_selected').select2();
 
                     $('#user_role_selected').on('change', function (e) {
                         let elementName = $(this).attr('id');
