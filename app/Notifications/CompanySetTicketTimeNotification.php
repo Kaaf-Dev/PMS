@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class UserCreateTicketNotification extends Notification
+class CompanySetTicketTimeNotification extends Notification
 {
     use Queueable;
 
@@ -28,9 +28,9 @@ class UserCreateTicketNotification extends Notification
         return [
             'id' => $this->ticket->id,
             'route' => route('admin.tickets.details', ['notification_id' => $this->id, 'ticket_id' => $this->ticket->id]),
-            'title' => 'قام المستأجر بإضافة طلب صيانة',
-            'desc' => 'أضاف المستأجر طلب صيانة جديد. يُرجى مراجعة التفاصيل.',
-            'icon' => 'ki-outline ki-wrench fs-2 text-danger'
+            'title' => 'تم تحديد موعد الزيارة',
+            'desc' => 'قامت شركة الصيانة بتحديد موعد الزيارة. يُرجى مراجعة التفاصيل.',
+            'icon' => 'ki-outline ki-time fs-2 text-warning'
         ];
     }
 }

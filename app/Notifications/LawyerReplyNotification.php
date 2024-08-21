@@ -32,10 +32,10 @@ class LawyerReplyNotification extends Notification
     {
         return [
             'id' => $this->reply->contract_id,
-            'route' => route('admin.contracts.details', $this->reply->contract_id),
+            'route' => route('admin.contracts.details', ['notification_id' => $this->id, 'contract_id' => $this->reply->contract_id]),
             'title' => 'قام المحامي بإضافة تعليق',
             'desc' => 'أضاف المحامي تعليقًا جديدًا على العقد. يُرجى مراجعة التفاصيل.',
-            'icon' => 'ki-outline ki-briefcase fs-2 text-warning'
+            'icon' => 'ki-outline ki-briefcase fs-2 text-primary'
         ];
     }
 }

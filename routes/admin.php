@@ -77,7 +77,7 @@ Route::prefix('admin')->group(function () {
             ],
         ], function () {
             Route::get('/', Admin\Contract\Index::class)->name('admin.contracts');
-            Route::get('/{contract_id}/details', Admin\Contract\Details::class)->name('admin.contracts.details');
+            Route::get('/{contract_id}/details/{notification_id?}', Admin\Contract\Details::class)->name('admin.contracts.details');
         });
 
         Route::group([
@@ -100,7 +100,7 @@ Route::prefix('admin')->group(function () {
             ],
         ], function () {
             Route::get('/', Admin\Ticket\Index::class)->name('admin.tickets');
-            Route::get('/{ticket_id}/details', Admin\Ticket\Details::class)->name('admin.tickets.details');
+            Route::get('/{ticket_id}/details/{notification_id?}', Admin\Ticket\Details::class)->name('admin.tickets.details');
         });
 
         Route::group([

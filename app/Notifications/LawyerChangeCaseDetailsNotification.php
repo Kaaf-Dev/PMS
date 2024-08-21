@@ -28,10 +28,10 @@ class LawyerChangeCaseDetailsNotification extends Notification
 
         return [
             'id' => $this->case->contract_id,
-            'route' => route('admin.contracts.details', $this->case->contract_id),
+            'route' => route('admin.contracts.details', ['notification_id' => $this->id, 'contract_id' => $this->case->contract_id]),
             'title' => 'قام المحامي بتحديث القضية',
             'desc' => 'أضاف المحامي تحديث على بيانات القضية. يُرجى مراجعة التفاصيل.',
-            'icon' => 'ki-outline ki-pencil fs-2 text-success'
+            'icon' => 'ki-outline ki-pencil fs-2 text-warning'
         ];
     }
 }

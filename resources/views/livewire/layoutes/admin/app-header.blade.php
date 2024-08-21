@@ -33,7 +33,9 @@
                         <!--begin::Menu wrapper-->
                         <div class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-30px h-30px w-md-40px h-md-40px position-relative" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" id="kt_menu_item_wow">
                             <i class="ki-outline ki-notification fs-2 fs-lg-1"></i>
-                            <span class="bullet bullet-dot bg-success h-6px w-6px position-absolute translate-middle top-0 start-50 animation-blink"></span>
+                            @if(count($notifications) > 0)
+                            <span class="bullet bullet-dot bg-danger h-6px w-6px position-absolute translate-middle top-0 start-50 animation-blink"></span>
+                            @endif
                         </div>
                         <!--end::Menu wrapper-->
                         <!--begin::My apps-->

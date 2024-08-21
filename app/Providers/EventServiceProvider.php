@@ -2,14 +2,21 @@
 
 namespace App\Providers;
 
+use App\Events\CompanyFinishTicket;
+use App\Events\CompanySetTicketTime;
 use App\Events\LawyerChangeCaseDetails;
 use App\Events\LawyerCreateInvoice;
 use App\Events\LawyerReply;
+use App\Events\TicketReply;
 use App\Events\UserCreateTicket;
+use App\Listeners\SendNotificationForAdminWhenCompanyFinishTicket;
+use App\Listeners\SendNotificationForAdminWhenCompanySetTicketTime;
 use App\Listeners\SendNotificationForAdminWhenLawyerChangeCaseDetails;
 use App\Listeners\SendNotificationForAdminWhenLawyerCreateInvoice;
 use App\Listeners\SendNotificationForAdminWhenLawyerReply;
+use App\Listeners\SendNotificationForAdminWhenTicketReply;
 use App\Listeners\SendNotificationForAdminWhenUserCreateTicket;
+use App\Notifications\TicketReplyNotification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -37,6 +44,15 @@ class EventServiceProvider extends ServiceProvider
         ],
         UserCreateTicket::class => [
             SendNotificationForAdminWhenUserCreateTicket::class,
+        ],
+        CompanySetTicketTime::class => [
+            SendNotificationForAdminWhenCompanySetTicketTime::class,
+        ],
+        TicketReply::class => [
+            SendNotificationForAdminWhenTicketReply::class,
+        ],
+        CompanyFinishTicket::class => [
+            SendNotificationForAdminWhenCompanyFinishTicket::class,
         ],
     ];
 

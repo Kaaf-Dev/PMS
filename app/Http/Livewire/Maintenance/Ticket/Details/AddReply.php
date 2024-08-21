@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Maintenance\Ticket\Details;
 
+use App\Events\CompanySetTicketTime;
+use App\Events\TicketReply;
 use App\Models\Ticket;
 use App\Traits\WithAlert;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -96,6 +98,8 @@ class AddReply extends Component
                 ];
             }
             $reply->attachments()->createMany($attachments);
+            event(new TicketReply($reply));
+
             $this->ticket->touch();
             $this->resetInputs();
             $this->emit('reply-added');

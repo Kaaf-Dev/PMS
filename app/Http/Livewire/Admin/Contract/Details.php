@@ -10,9 +10,17 @@ class Details extends Component
 
     public $contract_id;
 
-    public function mount($contract_id)
+    public function mount($contract_id, $notification_id = null)
     {
         $this->contract_id = $contract_id;
+
+        //********** MarkReadNotifications ************
+        if ($notification_id) {
+            $notification = auth('admin')->user()->notifications()->where('id', $notification_id)->first();
+            if ($notification) {
+                $notification->markAsRead();
+            }
+        }
     }
 
     public function getListeners()

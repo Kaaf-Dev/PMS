@@ -10,9 +10,17 @@ class Details extends Component
 
     public $ticket_id;
 
-    public function mount($ticket_id)
+    public function mount($ticket_id, $notification_id = null)
     {
         $this->ticket_id = $ticket_id;
+
+        //********** MarkReadNotifications ************
+        if ($notification_id) {
+            $notification = auth('admin')->user()->notifications()->where('id', $notification_id)->first();
+            if ($notification) {
+                $notification->markAsRead();
+            }
+        }
     }
 
     public function render()

@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Maintenance\Ticket\Details;
 
+use App\Events\CompanyFinishTicket;
+use App\Events\TicketReply;
 use App\Models\Ticket;
 use App\Traits\WithAlert;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -70,10 +72,15 @@ class FinishTicket extends Component
         $verification_code = $validated_data['verification_code'];
         if ($this->ticket->verification_code == $verification_code) {
             $this->ticket->finish();
-            $this->ticket->save();
-            $this->emit('ticket-updated');
-            $this->showSuccessAlert('تمت العملية بنجاح');
-            $this->closeMe();
+            if ($this->ticket->save()) {
+                event(new CompanyFinishTicket($this->ticket));
+                $this->emit('ticket-updated');
+                $this->showSuccessAlert('تمت العملية بنجاح');
+                $this->closeMe();
+            } else {
+                $this->showErrorAlert('حدث خطأ');
+            }
+
         } else {
             $this->addError('verification_code', 'رمز التأكيد غير صحيح، يرجى التأكد من الرمز والمحاولة مرة أخرى!');
         }

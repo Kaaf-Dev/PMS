@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Maintenance\Ticket\Details;
 
+use App\Events\CompanySetTicketTime;
 use App\Models\Ticket;
 use App\Traits\WithAlert;
 use Illuminate\Validation\Rule;
@@ -41,10 +42,18 @@ class Manage extends Component
     public function save()
     {
         $this->validate();
-        $this->ticket->status = Ticket::STATUS_UNDER_PROCESSING;
-        $this->ticket->save();
-        $this->emit('ticket-updated');
-        $this->showSuccessAlert('تمت العملية بنجاح');
+        if ($this->ticket->isDirty()){
+            $this->ticket->status = Ticket::STATUS_UNDER_PROCESSING;
+            if ($this->ticket->save()){
+                event(new CompanySetTicketTime($this->ticket));
+                $this->emit('ticket-updated');
+                $this->showSuccessAlert('تمت العملية بنجاح');
+            }
+        }else{
+            $this->showInfoAlert('لم يتم تحديد موعد الزيارة');
+
+        }
+
     }
 
     public function discard()

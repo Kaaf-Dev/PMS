@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\User\Ticket\Details;
 
+use App\Events\TicketReply;
 use App\Models\Ticket;
 use App\Traits\WithAlert;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -92,6 +93,7 @@ class AddReply extends Component
             $reply->attachments()->createMany($attachments);
             $this->ticket->touch();
             $this->resetInputs();
+            event(new TicketReply($reply));
             $this->emit('reply-added');
         } else {
             $this->showErrorAlert('لا يمكن إضافة الرد في الوقت الحالي');
