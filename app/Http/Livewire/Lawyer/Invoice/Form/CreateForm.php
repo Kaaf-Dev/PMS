@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Lawyer\Invoice\Form;
 
+use App\Events\LawyerCreateInvoice;
+use App\Events\LawyerReply;
 use App\Models\LawyerInvoice;
 use App\Traits\WithAlert;
 use Livewire\Component;
@@ -73,7 +75,8 @@ class CreateForm extends Component
         $validated_data = $this->validate();
         $lawyer_invoice = LawyerInvoice::create($validated_data);
         if ($lawyer_invoice) {
-             $this->showSuccessAlert('شكرًا لك، تمت العملية بنجاح');
+            event(new LawyerCreateInvoice($lawyer_invoice));
+            $this->showSuccessAlert('شكرًا لك، تمت العملية بنجاح');
              $this->emit('lawyer-invoices-added');
              $this->closeModal();
         } else {

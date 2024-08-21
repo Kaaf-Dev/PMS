@@ -2,7 +2,11 @@
 
 namespace App\Providers;
 
+use App\Events\LawyerChangeCaseDetails;
+use App\Events\LawyerCreateInvoice;
 use App\Events\LawyerReply;
+use App\Listeners\SendNotificationForAdminWhenLawyerChangeCaseDetails;
+use App\Listeners\SendNotificationForAdminWhenLawyerCreateInvoice;
 use App\Listeners\SendNotificationForAdminWhenLawyerReply;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -22,6 +26,12 @@ class EventServiceProvider extends ServiceProvider
         ],
         LawyerReply::class => [
             SendNotificationForAdminWhenLawyerReply::class,
+        ],
+        LawyerCreateInvoice::class => [
+            SendNotificationForAdminWhenLawyerCreateInvoice::class,
+        ],
+        LawyerChangeCaseDetails::class => [
+            SendNotificationForAdminWhenLawyerChangeCaseDetails::class,
         ],
     ];
 

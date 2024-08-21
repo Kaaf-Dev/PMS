@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Lawyer\LawyerCase\Details;
 
+use App\Events\LawyerChangeCaseDetails;
+use App\Events\LawyerCreateInvoice;
 use App\Http\Middleware\PreventRequestsDuringMaintenance;
 use App\Models\Court;
 use App\Models\LawyerCase;
@@ -65,11 +67,13 @@ class Overview extends Component
     public function save()
     {
         $this->validate();
-        if ($this->lawyer_case->save()) {
-            $this->showSuccessAlert('تمت العملية بنجاح');
-        } else {
-            $this->showWarningAlert('يرجى المحاولة مرة أخرى!');
+        if ($this->lawyer_case->isDirty()) {
+            if ($this->lawyer_case->save()) {
+                event(new LawyerChangeCaseDetails($this->lawyer_case));
+                $this->showSuccessAlert('تمت العملية بنجاح');
+            } else {
+                $this->showWarningAlert('يرجى المحاولة مرة أخرى!');
+            }
         }
-
     }
 }
