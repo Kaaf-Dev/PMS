@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PaymentCallbackApi;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,5 +16,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    Route::any('benefit-kaaf-response', [PaymentCallbackApi::class, 'benefitKaafResponse'])->name('benefit.kaaf.response');
+    Route::any('benefit-eslah-response', [PaymentCallbackApi::class, 'benefitEslahResponse'])->name('benefit.eslah.response');
 });

@@ -7,6 +7,8 @@ use App\Models\Invoice;
 use App\Models\PaymentTransaction;
 use App\Models\Receipt;
 use App\Models\UserToken;
+use App\Repository\BenefitPay\benefitPayCheckStatus;
+use App\Repository\BenefitPay\benefitPayWindow;
 use App\Repository\mastercardAPI\MasterCardPay;
 use Carbon\Carbon;
 
@@ -40,7 +42,44 @@ class paymentGateway
         $this->payment_gateway = $payment_gateway;
     }
 
+    public function BenefitPayCalculateHash($invoice_id)
+    {
 
+        $invoice = Invoice::findOrFail($invoice_id);
+        $transaction = $this->initiateTransaction('BenefitPay', $invoice_id);
+        $benefitPayWindow = new benefitPayWindow($transaction, $invoice, $this->getPaymentGateway());
+        $benefitPayWindow->calculateHash();
+
+        return $benefitPayWindow->getTransaction();
+    }
+
+    public function PayByBenefitPay($referenceNumber, $merchantId)
+    {
+        $check_status = new benefitPayCheckStatus($referenceNumber, $merchantId, $this->getPaymentGateway());
+        $result = $check_status->check_status();
+        $transaction = PaymentTransaction::where('track_id', '=', $referenceNumber)->first();
+        if ($transaction && $transaction->exists()) {
+            $invoice = $transaction->Invoice;
+            if ($invoice) {
+                if ($result['down']) {
+                    return [
+                        'status' => false,
+                        'down' => true,
+                    ];
+                }
+                if ($result['status']) {
+                    return [
+                        'status' => true,
+                        'down' => false,
+                    ];
+                }
+            }
+        }
+        return [
+            'status' => false,
+            'down' => false,
+        ];
+    }
 
     public function PayByMasterCardDirectPay($card_token, $invoice_id)
     {
@@ -69,12 +108,14 @@ class paymentGateway
             $receipt->payment_method = Receipt::PAYMENT_METHOD_VISA;
             $receipt->save();
 
+            $transaction->close();
             event(new ReceiptCreated($receipt));
             $result = [
                 'status' => true,
                 'msg' => 'تمت العملية بنجاح',
             ];
         } else {
+            $transaction->failed();
             $result = [
                 'status' => false,
                 'errors' => $masterCardPayResult['errorMsg'],

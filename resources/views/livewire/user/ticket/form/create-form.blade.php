@@ -187,10 +187,3 @@
     </form>
 
 </div>
-
-
-<script>
-    var $country = $(
-        '<span class="d-flex align-center gap-7"><img src="{{ asset("home-assets/images/") }}' + country.flag + '-flag.svg" class="select-2-flag"></span> ' + country.text + '</span>'
-    );
-</script>
