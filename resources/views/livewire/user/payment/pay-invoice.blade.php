@@ -208,10 +208,10 @@
     @endif
 
         <script>
-            livewire.on('benefit-by-benefit-pay', function (params) {
+            window.livewire.on('benefit-by-benefit-pay', function (params) {
                 InApp.open(params,
                     function (success) {
-                       livewire.emit('benefitPaySuccessPayment', success);
+                       window.livewire.emit('benefitPaySuccessPayment', success);
                     },
                     function (error) {
                         console.log(error)
