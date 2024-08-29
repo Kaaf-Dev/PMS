@@ -24,7 +24,7 @@ class PayInvoice extends Component
     {
         return [
             'invoice_id' => 'required|exists:invoices,id',
-            'payment_type' => 'required|in:2'
+            'payment_type' => 'required|in:1,2'
         ];
     }
 
