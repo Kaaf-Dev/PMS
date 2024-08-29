@@ -55,7 +55,7 @@ class paymentGateway
 
     public function PayByBenefitPay($referenceNumber, $merchantId)
     {
-        dd($referenceNumber);
+        dd($merchantId);
         $check_status = new benefitPayCheckStatus($referenceNumber, $merchantId, $this->getPaymentGateway());
         $result = $check_status->check_status();
         $transaction = PaymentTransaction::where('trx_id', '=', $referenceNumber)->first();
