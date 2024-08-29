@@ -67,11 +67,11 @@ class paymentGateway
                         'down' => true,
                     ];
                 }
-                if ($result['status']) {
-                    return redirect()->route('user.success.payment', encrypt($invoice->id));
-                } else {
-                    return redirect()->route('user.failed.payment', encrypt($invoice->id));
-                }
+//                if ($result['status']) {
+//                    return redirect()->route('user.success.payment', encrypt($invoice->id));
+//                } else {
+//                    return redirect()->route('user.failed.payment', encrypt($invoice->id));
+//                }
             }
         }
 

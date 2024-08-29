@@ -117,7 +117,6 @@ class benefitPayCheckStatus
         ]);
 
         $payResponse = $response->json();
-        dd($payResponse);
         if ($payResponse) {
             if ($payResponse['response']['status'] === "success") {
                 return [
