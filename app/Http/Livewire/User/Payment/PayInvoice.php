@@ -39,7 +39,7 @@ class PayInvoice extends Component
     {
         return [
             'show-user-pay-invoice-modal' => 'resolveParams',
-            'benefit-pay-make-payment' => 'PayByBenefitPay'
+            'benefitPaySuccessPayment' => 'PayByBenefitPay',
         ];
     }
 
@@ -77,7 +77,7 @@ class PayInvoice extends Component
 
     public function PayByBenefitPay($success_response)
     {
-        dd($success_response);
+        dd('heeko');
         $payment_gateway = new paymentGateway();
         $result = $payment_gateway->PayByBenefitPay($success_response['referenceNumber'], $success_response['merchantId']);
 
