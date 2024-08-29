@@ -57,7 +57,7 @@ class paymentGateway
     {
         $check_status = new benefitPayCheckStatus($referenceNumber, $merchantId, $this->getPaymentGateway());
         $result = $check_status->check_status();
-        $transaction = PaymentTransaction::where('track_id', '=', $referenceNumber)->first();
+        $transaction = PaymentTransaction::where('trx_id', '=', $referenceNumber)->first();
         if ($transaction && $transaction->exists()) {
             $invoice = $transaction->Invoice;
             if ($invoice) {
