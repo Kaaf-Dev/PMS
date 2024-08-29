@@ -79,17 +79,7 @@ class PayInvoice extends Component
     public function PayByBenefitPay($success_response)
     {
         $payment_gateway = new paymentGateway();
-        $result = $payment_gateway->PayByBenefitPay($success_response['referenceNumber'], $success_response['merchantId']);
-        if ($result['down']) {
-            $this->showErrorAlert("حدث خطأ غير متوقع");
-        }
-        if ($result['status']) {
-            $this->showSuccessAlert('شكرًا لك، تمت العملية بنجاح');
-            $this->emit('invoice-paid');
-            $this->closeMe();
-        } else {
-            $this->showErrorAlert("لم تتم العملية بنجاح");
-        }
+        $payment_gateway->PayByBenefitPay($success_response['referenceNumber'], $success_response['merchantId']);
     }
 
     public function pay()
