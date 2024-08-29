@@ -55,7 +55,6 @@ class paymentGateway
 
     public function PayByBenefitPay($referenceNumber, $merchantId)
     {
-        dd($merchantId);
         $check_status = new benefitPayCheckStatus($referenceNumber, $merchantId, $this->getPaymentGateway());
         $result = $check_status->check_status();
         $transaction = PaymentTransaction::where('trx_id', '=', $referenceNumber)->first();
@@ -68,11 +67,11 @@ class paymentGateway
                         'down' => true,
                     ];
                 }
-//                if ($result['status']) {
-//                    return redirect()->route('user.success.payment', encrypt($invoice->id));
-//                } else {
-//                    return redirect()->route('user.failed.payment', encrypt($invoice->id));
-//                }
+                if ($result['status']) {
+                    return redirect()->route('user.success.payment', encrypt($invoice->id));
+                } else {
+                    return redirect()->route('user.failed.payment', encrypt($invoice->id));
+                }
             }
         }
 

@@ -15,8 +15,8 @@ class benefitPayCheckStatus
 
     public function __construct($referenceNumber, $merchantId, $payment_gateway = 'kaaf')
     {
-        $this->referenceNumber = $referenceNumber;
-        $this->merchantId = $merchantId;
+        $this->setReferenceNumber($referenceNumber);
+        $this->setMerchantId($merchantId);
 
         if ($payment_gateway == 'kaaf') {
             $this->setAppId(env('BENEFIT_PAY_APP_ID_KAAF'));

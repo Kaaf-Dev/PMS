@@ -4,6 +4,7 @@ namespace App\Http\Livewire\User\Payment;
 
 use App\Events\ReceiptCreated;
 use App\Models\Invoice;
+use App\Models\PaymentTransaction;
 use App\Repository\paymentGateway;
 use App\Repository\saveCardToken;
 use App\Traits\WithAlert;
@@ -78,8 +79,17 @@ class PayInvoice extends Component
 
     public function PayByBenefitPay($success_response)
     {
-        $payment_gateway = new paymentGateway();
-        $payment_gateway->PayByBenefitPay($success_response['referenceNumber'], $success_response['merchantId']);
+        $payment_gateway = 'kaaf';
+        $transaction = PaymentTransaction::where('trx_id', '=', $success_response['referenceNumber'])->first();
+        if ($transaction and $transaction->exists()) {
+            if ($transaction->Invoice) {
+                $payment_gateway = $transaction->Invoice->payment_gateway;
+            }
+            $payment_gateway = new paymentGateway($payment_gateway);
+            $payment_gateway->PayByBenefitPay($success_response['referenceNumber'], $success_response['merchantId']);
+        }
+
+
     }
 
     public function pay()

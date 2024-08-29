@@ -50,7 +50,7 @@ class PaymentTransaction extends Model
     {
         $trxs_max_id = (PaymentTransaction::withTrashed()->max('id') ?? 0) + 1;
         $trxs_id = str_pad($trxs_max_id, 7, '0', STR_PAD_LEFT);
-        $trxs_id = 'PMS_TRX_' . $trxs_id;
+        $trxs_id = 'PMS_' . $trxs_id;
         return $trxs_id;
     }
 
