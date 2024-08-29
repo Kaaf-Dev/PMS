@@ -211,7 +211,6 @@
             livewire.on('benefit-by-benefit-pay', function (params) {
                 InApp.open(params,
                     function (success) {
-                    alert('hello')
                        livewire.emit('benefit-pay-make-payment', success);
                     },
                     function (error) {
