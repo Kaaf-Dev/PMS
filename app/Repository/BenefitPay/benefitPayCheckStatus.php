@@ -19,12 +19,12 @@ class benefitPayCheckStatus
         $this->merchantId = $merchantId;
 
         if ($payment_gateway == 'kaaf') {
-            $this->app_id = env('BENEFIT_PAY_APP_ID_KAAF');
-            $this->secret_key = env('BENEFIT_PAY_SECRET_KEY_KAAF');
+            $this->setAppId(env('BENEFIT_PAY_APP_ID_KAAF'));
+            $this->setSecretKey(env('BENEFIT_PAY_SECRET_KEY_KAAF'));
 
         } elseif ($payment_gateway == 'eslah') {
-            $this->app_id = env('BENEFIT_PAY_APP_ID_ESLAH');
-            $this->secret_key = env('BENEFIT_PAY_SECRET_KEY_ESLAH');
+            $this->setAppId(env('BENEFIT_PAY_APP_ID_ESLAH'));
+            $this->setSecretKey(env('BENEFIT_PAY_SECRET_KEY_ESLAH'));
 
         }
     }
@@ -117,7 +117,7 @@ class benefitPayCheckStatus
         ]);
 
         $payResponse = $response->json();
-
+        dd($payResponse);
         if ($payResponse) {
             if ($payResponse['response']['status'] === "success") {
                 return [
