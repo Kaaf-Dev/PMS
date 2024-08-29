@@ -207,11 +207,11 @@
 
     @endif
 
-        <script>
+        <script wire:ignore>
             window.livewire.on('benefit-by-benefit-pay', function (params) {
                 InApp.open(params,
                     function (success) {
-                       window.livewire.emit('benefitPaySuccessPayment', success);
+                       window.livewire.emit('benefit-pay-success-payment', success);
                     },
                     function (error) {
                         console.log(error)

@@ -20,6 +20,14 @@ class PayInvoice extends Component
     public $card_name, $card_number, $card_month_exp, $card_year_exp,
         $card_cvv;
 
+    public function getListeners()
+    {
+        return [
+            'show-user-pay-invoice-modal' => 'resolveParams',
+            'benefit-pay-success-payment' => 'PayByBenefitPay',
+        ];
+    }
+
     public function rules()
     {
         return [
@@ -35,13 +43,6 @@ class PayInvoice extends Component
         ];
     }
 
-    public function getListeners()
-    {
-        return [
-            'show-user-pay-invoice-modal' => 'resolveParams',
-            'benefitPaySuccessPayment' => 'PayByBenefitPay',
-        ];
-    }
 
     public function render()
     {
@@ -77,7 +78,6 @@ class PayInvoice extends Component
 
     public function PayByBenefitPay($success_response)
     {
-        dd('heeko');
         $payment_gateway = new paymentGateway();
         $result = $payment_gateway->PayByBenefitPay($success_response['referenceNumber'], $success_response['merchantId']);
 
