@@ -80,7 +80,6 @@ class PayInvoice extends Component
     {
         $payment_gateway = new paymentGateway();
         $result = $payment_gateway->PayByBenefitPay($success_response['referenceNumber'], $success_response['merchantId']);
-        dd($result);
         if ($result['down']) {
             $this->showErrorAlert("حدث خطأ غير متوقع");
         }

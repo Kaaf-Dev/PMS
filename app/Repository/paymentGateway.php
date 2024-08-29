@@ -68,17 +68,13 @@ class paymentGateway
                     ];
                 }
                 if ($result['status']) {
-                    return [
-                        'status' => true,
-                        'down' => false,
-                    ];
+                    return redirect()->route('user.success.payment', encrypt($invoice->id));
+                } else {
+                    return redirect()->route('user.success.failed', encrypt($invoice->id));
                 }
             }
         }
-        return [
-            'status' => false,
-            'down' => false,
-        ];
+
     }
 
     public function PayByMasterCardDirectPay($card_token, $invoice_id)
