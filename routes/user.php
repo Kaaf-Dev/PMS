@@ -29,6 +29,7 @@ Route::prefix('my')->group(function () {
             Route::get('/', User\Dashboard\Index::class)->name('user.dashboard');
             Route::get('/success-payment/{invoice_id}', User\Payment\Success::class)->name('user.success.payment');
             Route::get('/failed-payment/{invoice_id}', User\Payment\Failed::class)->name('user.failed.payment');
+            Route::get('/down-payment/{invoice_id}', User\Payment\DownPayment::class)->name('user.down.payment');
 //            Route::get('/profile', Admin\Dashboard\Index::class)->name('admin.account-settings');
         });
 

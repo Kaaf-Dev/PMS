@@ -62,10 +62,7 @@ class paymentGateway
             $invoice = $transaction->Invoice;
             if ($invoice) {
                 if ($result['down']) {
-                    return [
-                        'status' => false,
-                        'down' => true,
-                    ];
+                    return redirect()->route('user.down.payment', encrypt($invoice->id));
                 }
                 if ($result['status']) {
                     return redirect()->route('user.success.payment', encrypt($invoice->id));
