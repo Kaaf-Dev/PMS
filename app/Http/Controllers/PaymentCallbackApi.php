@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\PaymentTransaction;
 use App\Models\Receipt;
 use App\Repository\BenefitPay\benefitPayCheckStatus;
+use App\Repository\receiptProvider;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -49,14 +50,9 @@ class PaymentCallbackApi extends Controller
 
                                 if ($result['status']) { // Create receipt if successful payment
                                     if ($transaction->close()) {
-                                        //addReceipt
-                                        $receipt = new Receipt();
-                                        $receipt->invoice_id = $transaction->Invoice->id;
-                                        $receipt->amount = $amount;
-                                        $receipt->date = Carbon::now();
-                                        $receipt->transaction_id = $transaction->id;
-                                        $receipt->payment_method = Receipt::PAYMENT_METHOD_BENEFIT;
-                                        if ($receipt->save()){
+                                        $receipt = new receiptProvider($transaction->Invoice->id, $transaction->id, Receipt::PAYMENT_METHOD_BENEFIT, $result['response']['amount']);
+                                        if ($transaction->close()) {
+                                            $receipt = $receipt->createReceipt();
                                             event(new ReceiptCreated($receipt));
                                         }
                                     }
@@ -151,14 +147,9 @@ class PaymentCallbackApi extends Controller
 
                                 if ($result['status']) { // Create receipt if successful payment
                                     if ($transaction->close()) {
-                                        //addReceipt
-                                        $receipt = new Receipt();
-                                        $receipt->invoice_id = $transaction->Invoice->id;
-                                        $receipt->amount = $amount;
-                                        $receipt->date = Carbon::now();
-                                        $receipt->transaction_id = $transaction->id;
-                                        $receipt->payment_method = Receipt::PAYMENT_METHOD_BENEFIT;
-                                        if ($receipt->save()){
+                                        $receipt = new receiptProvider($transaction->Invoice->id, $transaction->id, Receipt::PAYMENT_METHOD_BENEFIT, $result['response']['amount']);
+                                        if ($transaction->close()) {
+                                            $receipt = $receipt->createReceipt();
                                             event(new ReceiptCreated($receipt));
                                         }
                                     }

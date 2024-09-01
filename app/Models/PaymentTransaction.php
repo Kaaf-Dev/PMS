@@ -54,6 +54,11 @@ class PaymentTransaction extends Model
         return $trxs_id;
     }
 
+    public function scopeDownTransaction($query)
+    {
+        return $query->where('status', '=', self::TRANSACTION_STATUS_DOWN);
+    }
+
     public function down()
     {
         $this->status = self::TRANSACTION_STATUS_DOWN;
