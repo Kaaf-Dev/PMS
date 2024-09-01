@@ -118,7 +118,7 @@ class PaymentCallbackApi extends Controller
     public function benefitEslahResponse()
     {
         $request = request();
-
+        info($request);
         // Check if x-foo-signature header exists
         if ($request->hasHeader('x-foo-signature')) {
             $foo_signature = $request->header("x-foo-signature");
