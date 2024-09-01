@@ -14,10 +14,9 @@ use Illuminate\Http\Request;
 class PaymentCallbackApi extends Controller
 {
 
-    public function benefitEslahResponse()
+    public function benefitResponse()
     {
         $request = request();
-        info($request);
         // Check if x-foo-signature header exists
         if ($request->hasHeader('x-foo-signature')) {
             $foo_signature = $request->header("x-foo-signature");
@@ -28,7 +27,7 @@ class PaymentCallbackApi extends Controller
             $app_id = $request->input('app_id');
             $paymentGateway = 'kaaf';
             $merchantIdCore = env("BENEFIT_PAY_MERCHANT_ID_KAAF");
-            $appIdCore =  env("BENEFIT_PAY_APP_ID_KAAF");
+            $appIdCore = env("BENEFIT_PAY_APP_ID_KAAF");
             $secret_token = env("BENEFIT_PAY_SECRET_CALLBACK_KEY_KAAF");
             $encodedJson = json_encode($request->all());
 
@@ -42,7 +41,7 @@ class PaymentCallbackApi extends Controller
                         if ($paymentGateway === 'eslah') {
                             $secret_token = env("BENEFIT_PAY_SECRET_CALLBACK_KEY_ESLAH");
                             $merchantIdCore = env("BENEFIT_PAY_MERCHANT_ID_ESLAH");
-                            $appIdCore =  env("BENEFIT_PAY_APP_ID_ESLAH");
+                            $appIdCore = env("BENEFIT_PAY_APP_ID_ESLAH");
                         }
                         $hmac = hash_hmac("sha256", $encodedJson, $secret_token, true);
                         // Compare signatures
@@ -63,7 +62,9 @@ class PaymentCallbackApi extends Controller
                                         $receipt = new receiptProvider($transaction->Invoice->id, $transaction->id, Receipt::PAYMENT_METHOD_BENEFIT, $amount);
                                         if ($transaction->close()) {
                                             $receipt = $receipt->createReceipt();
-                                            event(new ReceiptCreated($receipt));
+                                            if ($receipt['status']) {
+                                                event(new ReceiptCreated($receipt['receipt']));
+                                            }
                                         }
                                     }
                                 } else { // Failed payment
