@@ -16,9 +16,10 @@ class PaymentCallbackApi extends Controller
     public function benefitKaafResponse()
     {
         $request = request();
-        info($request);
         // Check if x-foo-signature header exists
         if ($request->hasHeader('x-foo-signature')) {
+            info(1);
+
             $foo_signature = $request->header("x-foo-signature");
             $referenceNumber = $request->input('reference_number');
             $merchantId = $request->input('merchant_id');
@@ -30,9 +31,13 @@ class PaymentCallbackApi extends Controller
 
             // Check if all required parameters are present
             if (isset($status) && $merchantId && $referenceNumber && $app_id) {
+                info(2);
+
                 $hmac = hash_hmac("sha256", $encodedJson, $secret_token, true);
                 // Compare signatures
                 if (hash_equals($foo_signature, base64_encode($hmac))) {
+                    info(3);
+
                     // Check if merchantId and app_id match with configured values
                     if (($merchantId === env("BENEFIT_PAY_MERCHANT_ID_KAAF")) && ($app_id === env("BENEFIT_PAY_APP_ID_KAAF")) && $status <= 1) {
                         $check_status = new benefitPayCheckStatus($referenceNumber, $merchantId, 'kaaf');
@@ -112,7 +117,6 @@ class PaymentCallbackApi extends Controller
     public function benefitEslahResponse()
     {
         $request = request();
-        info($request);
 
         // Check if x-foo-signature header exists
         if ($request->hasHeader('x-foo-signature')) {
