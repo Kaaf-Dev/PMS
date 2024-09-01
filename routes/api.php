@@ -16,8 +16,9 @@ use App\Http\Controllers\PaymentCallbackApi;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-
+    return $request->user();
 });
+
 Route::group([], function () {
     Route::any('benefit-kaaf-response', [PaymentCallbackApi::class, 'benefitKaafResponse'])->name('benefit.kaaf.response');
     Route::any('benefit-eslah-response', [PaymentCallbackApi::class, 'benefitEslahResponse'])->name('benefit.eslah.response');
