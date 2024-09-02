@@ -16,7 +16,7 @@ class PayInvoice extends Component
     use WithAlert;
 
     public $invoice_id;
-    public $payment_type = 2;
+    public $payment_type = 1;
 
     public $card_name, $card_number, $card_month_exp, $card_year_exp,
         $card_cvv;

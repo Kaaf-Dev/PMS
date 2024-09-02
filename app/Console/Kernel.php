@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('generate:monthly-invoices')->everyMinute();
+        $schedule->command('benefit:down')->everyMinute();
     }
 
     /**
