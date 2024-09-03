@@ -56,9 +56,7 @@ class PaymentCallbackApi extends Controller
 
                                 if ($result['down']) { // Check status down
                                     $transaction->down();
-                                }
-
-                                if ($result['status']) { // Create receipt if successful payment
+                                } elseif ($result['status']) { // Create receipt if successful payment
                                     if ($transaction->close()) {
                                         $receipt = new receiptProvider($transaction->Invoice->id, $transaction->id, Receipt::PAYMENT_METHOD_BENEFIT, $amount);
                                         if ($transaction->close()) {
