@@ -108,10 +108,22 @@ class PaymentCallbackApi extends Controller
                             ],
                         ];
                     }
+                } else {
+                    return [
+                        "response" => [
+                            "statusCode" => 300,
+                            "message" => 'Failure'
+                        ],
+                    ];
                 }
+            } else {
+                return [
+                    "response" => [
+                        "statusCode" => 400,
+                        "message" => 'Bad Request'
+                    ],
+                ];
             }
-
-
         } else {
             // x-foo-signature header is missing
             return [
