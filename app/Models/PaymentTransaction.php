@@ -23,6 +23,7 @@ class PaymentTransaction extends Model
         'trx_id',
         'invoice_id',
         'payment_gateway',
+        'status'
     ];
 
     public static function boot()

@@ -17,7 +17,6 @@ class PaymentCallbackApi extends Controller
     public function benefitResponse()
     {
         $request = request();
-        info($request);
         // Check if x-foo-signature header exists
         if ($request->hasHeader('x-foo-signature')) {
             $foo_signature = $request->header("x-foo-signature");
@@ -47,6 +46,8 @@ class PaymentCallbackApi extends Controller
                         $hmac = hash_hmac("sha256", $encodedJson, $secret_token, true);
                         // Compare signatures
                         if (hash_equals($foo_signature, base64_encode($hmac))) {
+                            info($request);
+
                             // Check if merchantId and app_id match with configured values
                             if (($merchantId === $merchantIdCore) && ($app_id === $appIdCore) && $status <= 1) {
                                 $check_status = new benefitPayCheckStatus($referenceNumber, $merchantId, $paymentGateway);
