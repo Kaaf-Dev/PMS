@@ -44,10 +44,11 @@ class PaymentCallbackApi extends Controller
                             $appIdCore = env("BENEFIT_PAY_APP_ID_ESLAH");
                         }
                         $hmac = hash_hmac("sha256", $encodedJson, $secret_token, true);
+                        info($foo_signature, $hmac);
                         // Compare signatures
                         if (hash_equals($foo_signature, base64_encode($hmac))) {
 
-                            info($request);
+
 
                             // Check if merchantId and app_id match with configured values
                             if (($merchantId === $merchantIdCore) && ($app_id === $appIdCore) && $status <= 1) {
