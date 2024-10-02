@@ -46,7 +46,7 @@ class PaymentCallbackApi extends Controller
                         $hmac = hash_hmac("sha256", $encodedJson, $secret_token, true);
                         info('Logging HMAC and Signature', [
                             'foo_signature' => $foo_signature,
-                            'hmac' => $hmac,
+                            'hmac' => base64_encode($hmac),
                         ]);
                         // Compare signatures
                         if (hash_equals($foo_signature, base64_encode($hmac))) {
