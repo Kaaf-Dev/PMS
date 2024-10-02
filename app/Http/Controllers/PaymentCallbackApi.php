@@ -44,7 +44,10 @@ class PaymentCallbackApi extends Controller
                             $appIdCore = env("BENEFIT_PAY_APP_ID_ESLAH");
                         }
                         $hmac = hash_hmac("sha256", $encodedJson, $secret_token, true);
-                        info($foo_signature, $hmac);
+                        info('Logging HMAC and Signature', [
+                            'foo_signature' => $foo_signature,
+                            'hmac' => $hmac,
+                        ]);
                         // Compare signatures
                         if (hash_equals($foo_signature, base64_encode($hmac))) {
 
