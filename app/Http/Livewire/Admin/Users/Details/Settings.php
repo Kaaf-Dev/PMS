@@ -32,6 +32,7 @@ class Settings extends Component
             'User.user_type' => 'required|integer',
             'User.gender' => Rule::requiredIf($this->User->is_person),
             'User.cpr' => 'nullable',
+            'User.key_id' => 'nullable',
             'User.corporate_id' => Rule::requiredIf($this->User->is_corporate),
             'User.contact_name' => Rule::requiredIf($this->User->is_corporate),
             'User.contact_phone' => Rule::requiredIf($this->User->is_corporate),

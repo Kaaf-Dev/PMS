@@ -351,6 +351,29 @@
             </div>
             <!--end::Input group-->
 
+
+            <!--begin::Input group-->
+            <div class="row mb-6">
+                <!--begin::Label-->
+                <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                    <span>الرقم بالنظام الخيري</span>
+                </label>
+                <!--end::Label-->
+                <!--begin::Col-->
+                <div class="col-lg-8 fv-row">
+                    <input type="tel" wire:model.defer="User.key_id"
+                           class="form-control form-control-lg form-control-solid"
+                           placeholder="الرقم بالنظام الخيري"/>
+                    @error('User.whatsapp_phone')
+                    <div class="alert alert-danger">
+                        {{$message}}
+                    </div>
+                    @enderror
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+
             @if($this->User->is_person)
                 <!--begin::Input group-->
                 <div class="row mb-6">

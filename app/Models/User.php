@@ -43,6 +43,7 @@ class User extends Authenticatable
         'contact_phone',
         'passport_path',
         'corporate_register_path',
+        'key_id'
     ];
 
     /**
