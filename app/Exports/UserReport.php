@@ -18,20 +18,21 @@ class UserReport implements FromCollection, WithHeadings, WithEvents
     public function collection()
     {
         $users = DB::table('users')
-            ->select('users.name as user_name',  'users.phone as user_phone','users.contact_phone as user_contact_phone','users.cpr as user_cpr',
+            ->select('users.name as user_name', 'users.phone as user_phone', 'users.contact_phone as user_contact_phone', 'users.cpr as user_cpr',
                 'users.username as username', 'users.email as user_email',
-            'users.phone as user_phone', 'users.blood as user_blood', 'users.date_of_berth as date_of_berth',
-                'users.whatsapp_phone as whatsapp_phone', 'users.contact_phone as contact_phone')
+                'users.phone as user_phone', 'users.blood as user_blood', 'users.date_of_berth as date_of_berth',
+                'users.whatsapp_phone as whatsapp_phone', 'users.contact_phone as contact_phone', 'users.key_id')
             ->join('contracts', 'contracts.user_id', '=', 'users.id')
             ->join('invoices', 'invoices.contract_id', '=', 'contracts.id')
             ->leftJoin('receipts', 'receipts.invoice_id', '=', 'invoices.id')
             ->selectRaw('COUNT(CASE WHEN receipts.invoice_id IS NULL THEN invoices.id END) as unpaid_invoices')
-            ->groupBy('users.name', 'users.phone','users.cpr', 'users.username', 'users.email', 'users.gender',
-                'users.phone', 'users.blood', 'users.date_of_berth', 'users.whatsapp_phone', 'users.contact_phone','users.contact_phone')
+            ->groupBy('users.name', 'users.phone', 'users.cpr', 'users.username', 'users.email', 'users.gender',
+                'users.phone', 'users.blood', 'users.date_of_berth', 'users.whatsapp_phone', 'users.contact_phone', 'users.contact_phone', 'users.key_id')
             ->get();
 
         return $users->map(function ($user) {
             return [
+                'key_id' => $user->key_id,
                 'user_name' => $user->user_name,
                 'user_phone' => $user->user_phone ?? $user->user_contact_phone,
                 'user_cpr' => $user->user_cpr,
@@ -50,6 +51,7 @@ class UserReport implements FromCollection, WithHeadings, WithEvents
     public function headings(): array
     {
         return [
+            "الرقم بالنظام الخيري",
             "أسم المستأجير",
             "رقم الهاتف",
             "الرقم الشخصي",
