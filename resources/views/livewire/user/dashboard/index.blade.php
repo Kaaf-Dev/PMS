@@ -26,31 +26,29 @@
     <!--begin::Content-->
     <div id="kt_app_content" class="app-content flex-column-fluid">
         <!--begin::Row-->
-        <div>
-            <livewire:user.dashboard.stats />
-        </div>
-        <!--end::Row-->
-        <!--begin::Row-->
-        <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
-            <!--begin::Col-->
-            <div class="col-xl-4">
-                <!--begin::contracts list-->
-                <livewire:user.dashboard.contracts-list />
-                <!--end::contracts list-->
-            </div>
-            <!--end::Col-->
+        <div class="row g-5 mb-xl-5">
             <!--begin::Col-->
             <div class="col-xl-8">
                 <!--begin::contracts list-->
-                <livewire:user.dashboard.invoices-list />
+                <livewire:user.dashboard.invoices-list/>
                 <!--end::contracts list-->
             </div>
             <!--end::Col-->
 
+            <!--begin::contracts list-->
+            <livewire:user.dashboard.contracts-list/>
+            <!--end::contracts list-->
+        </div>
+        <!--end::Row-->
+
+        <!--begin::Row-->
+        <div class="row mb-xl-5">
+            <livewire:user.dashboard.stats/>
+
             <!--begin::Col-->
-            <div class="col-xl-12">
+            <div class="col-xl-12 mb-xl-5">
                 <!--begin::contracts list-->
-                <livewire:user.dashboard.receipt-list />
+                <livewire:user.dashboard.receipt-list/>
                 <!--end::contracts list-->
             </div>
             <!--end::Col-->
