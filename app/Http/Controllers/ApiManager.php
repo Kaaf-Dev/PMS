@@ -12,8 +12,8 @@ class ApiManager extends Controller
         return Receipt::with([
             'Invoice',
             'Invoice.Contract',
-            'Contract.User',
-            'Contract.apartments.Property'
+            'Invoice.Contract.User',
+            'Invoice.Contract.apartments.Property'
         ])->paginate(10);
     }
 
