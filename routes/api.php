@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PaymentCallbackApi;
+use App\Http\Controllers\ApiManager;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,4 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group([], function () {
     Route::any('benefit-response', [PaymentCallbackApi::class, 'benefitResponse'])->name('benefit.response');
+    Route::post('receipts', [ApiManager::class, 'getAllReceipts'])->name('receipts');
 });
