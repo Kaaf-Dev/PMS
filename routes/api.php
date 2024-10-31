@@ -22,5 +22,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group([], function () {
     Route::any('benefit-response', [PaymentCallbackApi::class, 'benefitResponse'])->name('benefit.response');
+});
+Route::group([
+    'middleware' => ['ApiVerifyAccess'],
+], function () {
     Route::post('receipts', [ApiManager::class, 'getAllReceipts'])->name('receipts');
 });
