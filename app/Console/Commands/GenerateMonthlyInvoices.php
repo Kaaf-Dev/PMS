@@ -40,7 +40,6 @@ class GenerateMonthlyInvoices extends Command
      */
     public function handle()
     {
-
         info('[Executing Job - '. date('Y-m-d H:i:sa') .']: Generate monthly invoices for contracts ');
 
         // Get all contracts that are eligible for monthly invoices
@@ -49,7 +48,6 @@ class GenerateMonthlyInvoices extends Command
         foreach ($contracts as $contract) {
 
             $start_date = Carbon::parse($contract->start_at);
-
             $contract_end_date = Carbon::parse($contract->end_at);
             $now_end_date = Carbon::now();
 
@@ -61,8 +59,10 @@ class GenerateMonthlyInvoices extends Command
 
             while ($start_date <= $end_date) {
 
+                // Check if an invoice exists for the current month
                 if (!$this->hasInvoice($contract, $start_date)) {
 
+                    // Create a new invoice for the current month
                     $invoice = new Invoice([
                         'contract_id' => $contract->id,
                         'amount' => $contract->cost,
@@ -72,6 +72,24 @@ class GenerateMonthlyInvoices extends Command
                     ]);
 
                     $invoice->save();
+                }
+
+                // If the current date is the 20th or later, create an invoice for the next month
+                if (Carbon::now()->day >= 20 && $start_date->isCurrentMonth()) {
+
+                    // Create a new invoice for the next month
+                    $next_month = $start_date->copy()->addMonth();
+                    if (!$this->hasInvoice($contract, $next_month)) {
+                        $next_invoice = new Invoice([
+                            'contract_id' => $contract->id,
+                            'amount' => $contract->cost,
+                            'date' => $next_month->format('Y-m-1'),
+                            'due' => $next_month->format('Y-m-15'),
+                            'type' => 1,
+                        ]);
+
+                        $next_invoice->save();
+                    }
                 }
 
                 $start_date->addMonth();
@@ -89,5 +107,6 @@ class GenerateMonthlyInvoices extends Command
             ->where('type', 1)
             ->exists();
     }
+
 
 }
