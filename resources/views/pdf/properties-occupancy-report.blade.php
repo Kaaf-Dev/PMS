@@ -133,10 +133,10 @@
                 <td>{{$property['property']}}</td>
                 <td style="border-left: 2px solid #333;">{{$property['total']}}</td>
                 <td>{{$property['rented_count']}}</td>
-                <td>{{$property['rented_cost']}}</td>
+                <td>{{number_format($property['rented_cost'])?? 0, 2}}</td>
                 <td style="border-left: 2px solid #333;">{{ number_format($property['rented_percent'], 2) . '%' }}</td>
                 <td>{{$property['available_count']}}</td>
-                <td>{{$property['available_cost']}}</td>
+                <td>{{number_format($property['available_cost'])?? 0, 2}}</td>
                 <td style="border-left: 2px solid #333;">{{ number_format($property['available_percent'], 2) . '%' }}</td>
             </tr>
         @empty
@@ -149,20 +149,20 @@
         <tr style="background-color: #e1e1e1; border: 2px solid #333">
             <td colspan="2" style="text-align: center; font-weight: bold; border: 2px solid #333">المجموع:</td>
             <td style="font-weight: bold; border: 2px solid #333">
-                {{ $data['data']->sum('total') }}
+                {{ number_format($data['data']->sum('total'))?? 0, 2}}
             </td>
             <td style="font-weight: bold; border: 2px solid #333">
-                {{ $data['data']->sum('rented_count') }}
+                {{ number_format($data['data']->sum('rented_count'))?? 0, 2 }}
             </td>
             <td style="font-weight: bold; border: 2px solid #333">
-                {{ $data['data']->sum('rented_cost') }}
+                {{ number_format($data['data']->sum('rented_cost'))?? 0, 2 }}
             </td>
             <td>-</td>
             <td style="font-weight: bold; border: 2px solid #333">
                 {{ $data['data']->sum('available_count') }}
             </td>
             <td style="font-weight: bold; border: 2px solid #333">
-                {{ $data['data']->sum('available_cost') }}
+                {{ number_format($data['data']->sum('available_cost'))?? 0, 2 }}
             </td>
             <td style="border: 2px solid #333">-</td>
         </tr>

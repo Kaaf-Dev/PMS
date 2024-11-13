@@ -117,8 +117,8 @@
                 <td>{{$property['second_side']}}</td>
                 <td>{{$property['first_side']}}</td>
                 <td>{{$property['status']}}</td>
-                <td>{{$property['collected_amount']}}</td>
-                <td>{{$property['amount']}}</td>
+                <td>{{number_format($property['collected_amount'])?? 0, 2}}</td>
+                <td>{{number_format($property['amount'])?? 0, 2}}</td>
             </tr>
         @empty
             <tr>
@@ -131,10 +131,10 @@
         <tr style="border: 2px solid #333">
             <td colspan="5" style="text-align: center; font-weight: bold; border: 2px solid #333">المجموع:</td>
             <td style="font-weight: bold; border: 2px solid #333">
-                {{ collect($data['data'])->sum('collected_amount') }}
+                {{ number_format(collect($data['data'])->sum('collected_amount')?? 0, 2) }}
             </td>
             <td style="font-weight: bold; border: 2px solid #333">
-                {{ collect($data['data'])->sum('amount') }}
+                {{ number_format(collect($data['data'])->sum('amount')?? 0, 2) }}
             </td>
         </tr>
         </tfoot>

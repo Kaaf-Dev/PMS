@@ -127,7 +127,7 @@
                 <td>{{ $property['category'] }}</td>
                 <td>{{ $property['created_at'] }}</td>
                 <td>{{ $property['assigned_at'] }}</td>
-                <td>{{ $property['diffDays'] }} يوم</td>
+                <td>{{ $property['diffDays'] }}</td>
                 <td>{{ $property['visited_at'] }}</td>
                 <td>{{ $property['cost'] }}</td>
                 <td>{{ $property['status'] }}</td>

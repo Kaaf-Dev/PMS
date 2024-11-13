@@ -155,7 +155,7 @@
             <td style="text-align: center; font-weight: bold;">-</td>
             <td style="text-align: center; font-weight: bold;">-</td>
             <td style="text-align: center; font-weight: bold;">-</td>
-            <td style="text-align: center; font-weight: bold;">{{ intval($data['data']->sum('apartment_with_type_1_count')) + intval($data['data']->sum('apartment_with_type_2_count')) }}</td>
+            <td style="text-align: center; font-weight: bold;">{{ intval($data['data']->sum('apartment_with_type_1_count')) }}</td>
             <td style="text-align: center; font-weight: bold;">{{ intval($data['data']->sum('apartment_with_type_2_count')) }}</td>
             <td style="text-align: center; font-weight: bold;">{{ intval($data['data']->sum('sum_of_apartments')) }}</td>
             <td style="text-align: center; font-weight: bold;">BD {{ number_format($data['data']->sum('total_amount_for_active_contract'), 2) }}</td>

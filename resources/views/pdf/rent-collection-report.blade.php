@@ -115,8 +115,8 @@
                 <td>{{$loop->iteration}}</td>
                 <td>{{$property['contract_id']}}</td>
                 <td>{{$property['user']}}</td> <!-- Added user name -->
-                <td>{{$property['total']}}</td> <!-- Added total amount -->
-                <td>{{$property['paid']}}</td> <!-- Added paid amount -->
+                <td>{{number_format($property['total'])?? 0, 2}}</td> <!-- Added total amount -->
+                <td>{{number_format($property['paid'])?? 0, 2}}</td> <!-- Added paid amount -->
                 <td>{{$property['collect_percent']}}</td> <!-- Added collection percentage -->
             </tr>
         @empty

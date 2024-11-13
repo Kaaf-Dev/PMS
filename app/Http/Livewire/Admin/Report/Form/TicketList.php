@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin\Report\Form;
 use App\Exports\TicketListReport;
 use App\Models\Ticket;
 use App\Repository\printPDF;
+use Carbon\Carbon;
 use Livewire\Component;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -94,9 +95,20 @@ class TicketList extends Component
         $report = [];
 
         foreach ($tickets as $ticket) {
+
+            $diffDays = null;
+
+            // Check if assigned_at is not null and calculate the difference in days
+            if ($ticket->assigned_at) {
+                $createdAt = Carbon::parse($ticket->created_at);
+                $assignedAt = Carbon::parse($ticket->assigned_at);
+                $diffDays = $createdAt->diffInDays($assignedAt);
+            }
+
+            // Collect the report data
             $report[$ticket->id] = [
                 'id' => $ticket->id,
-                'user' => $ticket->contract ? $ticket->contract->User->name : '',
+                'user' => $ticket->contract ? $ticket->contract->user->name : '',
                 'apartment' => $ticket->apartment ? $ticket->apartment->name : '',
                 'property' => $ticket->apartment ? $ticket->apartment->property->name : '',
                 'property_no' => $ticket->apartment ? $ticket->apartment->property->ky_no : '',
@@ -104,7 +116,7 @@ class TicketList extends Component
                 'category' => $ticket->category->title ?? '-- غير محدد --',
                 'created_at' => $ticket->created_at,
                 'assigned_at' => $ticket->assigned_at,
-                'diffDays' => $ticket->diff_days,
+                'diffDays' => $diffDays, // Use the calculated diffDays
                 'visited_at' => $ticket->visited_at,
                 'cost' => $ticket->maintenance_invoices_sum_amount,
                 'status' => $ticket->statusString,
@@ -113,6 +125,7 @@ class TicketList extends Component
 
         return $report;
     }
+
 
 
     public function closeModal()

@@ -138,9 +138,9 @@
                 <td>{{$property['user_phone']}}</td>
                 <td>{{$property['property_no']}}</td>
                 <td>{{$property['property_name']}}</td>
-                <td>{{$property['apartment_cost']}}</td>
+                <td>{{number_format($property['apartment_cost'])?? 0,2}}</td>
                 <td>{{$property['unpaid_invoices']}}</td>
-                <td>{{$property['unpaid_invoices_sum']}}</td>
+                <td>{{number_format($property['unpaid_invoices_sum'])?? 0, 2}}</td>
             </tr>
         @empty
             <tr>
