@@ -9,7 +9,7 @@ class ApiManager extends Controller
 {
     public function getAllReceipts()
     {
-        return Receipt::with([
+        return Receipt::whereNotNull('transaction_id')->with([
             'Invoice',
             'Invoice.Contract',
             'Invoice.Contract.User',
