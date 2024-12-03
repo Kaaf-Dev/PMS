@@ -79,7 +79,14 @@ class ListTable extends Component
                 abort(404);
             }
         }
+    }
 
+    public function printReceipt(Invoice $invoice)
+    {
+        $file = printPDF::createPdf($invoice, $invoice->receipt_apartment_type);
+        return Response::streamDownload(function () use ($file) {
+            echo $file;
+        }, 'invoice.pdf');
     }
 
     public function printInvoice(Invoice $invoice)

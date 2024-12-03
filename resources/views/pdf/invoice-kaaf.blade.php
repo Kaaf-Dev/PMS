@@ -38,7 +38,7 @@
         }
 
         h1 {
-            color: #008752;
+            color: #64327EFF;
             font-size: 16px;
         }
 
@@ -54,7 +54,7 @@
         .table-title h2 {
             color: white;
             padding-right: 20px;
-            background-color: #008752;
+            background-color: #64327e;
         }
 
         .table-item {
@@ -70,10 +70,10 @@
         }
 
         .table-details .table-item th {
-            color: #008752;
+            color: #64327EFF;
             font-size: 20px;
             font-weight: bold;
-            border-bottom: 1px solid #008752;
+            border-bottom: 1px solid #64327EFF;
             padding: 5px 0;
         }
 
@@ -81,7 +81,7 @@
             color: black;
             font-size: 15px;
             font-weight: bold;
-            border-bottom: 1px solid #008752;
+            border-bottom: 1px solid #64327EFF;
             padding: 5px 0;
         }
     </style>
@@ -90,12 +90,11 @@
 <br/>
 
 <div class="header-image">
-    <img src="{{ public_path('admin-assets/media/pdf/eslah-header.jpg') }}" width="100%">
+    <img src="{{ public_path('admin-assets/media/pdf/kaaf-inv.png') }}" width="100%">
 </div>
 
 <div class="table">
     <table class="custom-table">
-
         <tr>
             <td style="width: 22%; text-align: right;">
                 <h1>رقـــم الفاتورة</h1>
@@ -109,7 +108,7 @@
                 <h1>Date</h1>
             </td>
             <td style="width: 17%; text-align: left;"> <!-- Adjusted to left alignment -->
-                <h2>{{$data->date_receipt_human}}</h2>
+                <h2>{{$data->date_human}}</h2>
             </td>
         </tr>
 
@@ -198,13 +197,13 @@
     <table class="custom-table" style="width: 100%; border-collapse: collapse; text-align: right;">
         <tr>
             <td style="width: 25%; vertical-align: top;">
-                <h1 style="color: #008752; font-size: 16px;">المبلغ بالحروف<br>Amount in Words</h1>
+                <h1 style="color: #64327EFF; font-size: 16px;">المبلغ بالحروف<br>Amount in Words</h1>
             </td>
             <td style="width: 25%; vertical-align: top;">
                 <h2 style="font-size: 16px;">{{ \Alkoumi\LaravelArabicNumbers\Numbers::TafqeetMoney($data->amount, 'BHD') }}</h2>
             </td>
             <td style="width: 25%; vertical-align: top;">
-                <h1 style="color: #008752; font-size: 16px;">إجمالي المبلغ<br>Total Amount</h1>
+                <h1 style="color: #64327EFF; font-size: 16px;">إجمالي المبلغ<br>Total Amount</h1>
             </td>
             <td style="width: 15%; vertical-align: top;">
                 <h2 style="font-size: 16px;">{{$data->amount_human}}</h2>
@@ -232,7 +231,7 @@
             </tr>
         </table>
     </div>
-    <img style="margin: auto 50px;" src="{{ public_path('admin-assets/media/pdf/eslah-footer.jpg') }}" width="100%">
+    <img style="margin: auto 50px;" src="{{ public_path('admin-assets/media/pdf/footer.svg') }}" width="100%">
 </footer>
 
 </body>

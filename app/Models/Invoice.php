@@ -184,6 +184,16 @@ class Invoice extends Model
         return $this->date->format('Y/m/d');
     }
 
+    public function getDateReceiptHumanAttribute()
+    {
+        if ($this->receipts)
+        {
+            $date = $this->receipts()->first()->date;
+            return $date->format('Y/m/d');
+        }
+        return 'غير محدد';
+    }
+
     public function getDateNameAttribute()
     {
         return $this->date->format('Y-M');
@@ -247,6 +257,27 @@ class Invoice extends Model
     }
 
     public function getInvoiceApartmentTypeAttribute()
+    {
+        $apartment_type = 'pdf.invoice-kaaf';
+        if ($this->contract) {
+            if ($this->contract->apartments and isset($this->contract->apartments[0])) {
+                if ($this->contract->apartments[0]->property) {
+                    if ($this->contract->apartments[0]->property->category) {
+                        $category = $this->contract->apartments[0]->property->category;
+                        if ($category) {
+                            if ($category->payment_gateway === 'eslah') {
+                                $apartment_type = 'pdf.invoice-eslah';
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+        return $apartment_type;
+    }
+
+    public function getReceiptApartmentTypeAttribute()
     {
         $apartment_type = 'pdf.receipt-kaaf';
         if ($this->contract) {

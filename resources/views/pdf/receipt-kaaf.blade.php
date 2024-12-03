@@ -108,7 +108,7 @@
                 <h1>Date</h1>
             </td>
             <td style="width: 17%; text-align: left;"> <!-- Adjusted to left alignment -->
-                <h2>{{$data->date_human}}</h2>
+                <h2>{{$data->date_receipt_human}}</h2>
             </td>
         </tr>
 
