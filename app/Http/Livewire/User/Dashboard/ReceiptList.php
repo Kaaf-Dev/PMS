@@ -27,8 +27,9 @@ class ReceiptList extends Component
     public function printReceipt($invoice_id)
     {
         $invoice = Auth::user()->invoices()->findOrFail($invoice_id);
+
         if ($invoice) {
-            $file = printPDF::createPdf($invoice, $invoice->invoice_apartment_type);
+            $file = printPDF::createPdf($invoice, $invoice->receipt_apartment_type);
             return Response::streamDownload(function () use ($file) {
                 echo $file;
             }, 'invoice.pdf');

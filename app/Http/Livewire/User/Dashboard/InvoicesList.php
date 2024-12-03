@@ -3,8 +3,10 @@
 namespace App\Http\Livewire\User\Dashboard;
 
 use App\Models\Invoice;
+use App\Repository\printPDF;
 use App\Traits\WithLazyLoad;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
 use Livewire\Component;
 
 class InvoicesList extends Component
@@ -35,4 +37,20 @@ class InvoicesList extends Component
             'invoice_id' => $invoice_id,
         ]);
     }
+
+    public function printInvoice($invoice_id)
+    {
+        $user = Auth::user();
+
+        // Query the user's invoices to find the specific invoice
+        $invoice = $user->invoices()->findOrFail($invoice_id);
+
+        if ($invoice) {
+            $file = printPDF::createPdf($invoice, $invoice->invoice_apartment_type);
+            return response()->streamDownload(function () use ($file) {
+                echo $file;
+            }, 'invoice.pdf');
+        }
+    }
+
 }

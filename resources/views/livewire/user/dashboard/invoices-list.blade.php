@@ -37,32 +37,56 @@
 
                         <!--begin::Table body-->
                         <tbody style="cursor: pointer">
-
-
                         @forelse($invoices as $invoice)
-                            <tr wire:click="payInvoice('{{ $invoice->id }}')">
+                            <tr wire:click="payInvoice('{{ $invoice->id }}')" class="align-middle">
+                                <!-- Invoice Number -->
                                 <td>
-                                    <span class="text-muted fw-semibold d-block fs-8">#الفاتورة</span>
-                                    <a href="#" class="text-dark fw-bold text-hover-primary mb-1 fs-6">{{ $invoice->no }}</a>
+                                    <div class="fw-semibold">
+                                        <span class="text-muted fs-8"># الفاتورة</span>
+                                        <a href="#" class="text-dark fw-bold text-hover-primary fs-6 d-block mt-1">
+                                            {{ $invoice->no }}
+                                        </a>
+                                    </div>
                                 </td>
-                                <td class="">
-                                    <span class="text-muted fw-semibold d-block fs-8">القيمة</span>
-                                    <span class="text-dark fw-bold d-block fs-7">{{ $invoice->amount_human }}</span>
-                                </td>
-                                <td class="">
-                                    <span class="text-muted fw-semibold d-block fs-8">الاستحقاق</span>
-                                    <span class="text-dark fw-bold d-block fs-7">{{ $invoice->due_human }}</span>
-                                </td>
-{{--                                <td class="">--}}
-{{--                                    <span class="badge badge-light-{{ $invoice->paid_class }} fs-7 fw-bold">--}}
-{{--                                        {{ $invoice->paid_string }}--}}
-{{--                                    </span>--}}
-{{--                                </td>--}}
 
-                                <td class="">
+                                <!-- Invoice Amount -->
+                                <td>
+                                    <div class="fw-semibold">
+                                        <span class="text-muted fs-8">القيمة</span>
+                                        <span class="text-dark fw-bold fs-7 d-block mt-1">
+                        {{ $invoice->amount_human }}
+                    </span>
+                                    </div>
+                                </td>
+
+                                <!-- Due Date -->
+                                <td>
+                                    <div class="fw-semibold">
+                                        <span class="text-muted fs-8">الاستحقاق</span>
+                                        <span class="text-dark fw-bold fs-7 d-block mt-1">{{ $invoice->due_human }}</span>
+                                    </div>
+                                </td>
+
+                                <!-- Unpaid Amount (Pay Button) -->
+                                <td>
                                     @if ($invoice->unPaidAmount > 0)
-                                        <button wire:click="payInvoice('{{ $invoice->id }}')" class="btn btn-sm btn-danger">دفع</button>
+                                        <button
+                                            wire:click.stop="payInvoice('{{ $invoice->id }}')"
+                                            class="btn btn-danger btn-sm fw-bold">
+                                            دفع
+                                        </button>
+                                    @else
+                                        <span class="badge badge-success fs-8 fw-bold">مدفوعة</span>
                                     @endif
+                                </td>
+
+                                <!-- Print Button -->
+                                <td>
+                                    <button
+                                        wire:click.stop="printInvoice('{{ $invoice->id }}')"
+                                        class="btn btn-sm btn-light btn-active-light-primary">
+                                        طباعة
+                                    </button>
                                 </td>
                             </tr>
                         @empty
@@ -73,6 +97,7 @@
                             @endif
                         @endforelse
                         </tbody>
+
                         <!--end::Table body-->
                     </table>
                 </div>
