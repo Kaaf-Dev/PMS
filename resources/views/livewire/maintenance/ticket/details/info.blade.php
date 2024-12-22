@@ -41,7 +41,11 @@
                 <div class="pb-5 fs-6">
                     <!--begin::Details item-->
                     <div class="fw-bold mt-5">العقار</div>
-                    <div class="text-gray-600">{{ $this->ticket->property->name }}</div>
+                    <div class="text-gray-600">{{ $this->ticket->property->name ?? 'none' }}</div>
+                    <!--begin::Details item-->
+                    <!--begin::Details item-->
+                    <div class="fw-bold mt-5">الشقة</div>
+                    <div class="text-gray-600">{{ $this->ticket->apartment->name ?? 'none' }}</div>
                     <!--begin::Details item-->
                     <!--begin::Details item-->
                     <div class="fw-bold mt-5">رقم الهاتف</div>
