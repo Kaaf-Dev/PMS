@@ -26,7 +26,7 @@ class benefitPayWindow
         $this->transaction['hideMobileQR'] = 0;
         $this->transaction['referenceNumber'] = $transaction->trx_id;
         $this->transaction['showResult'] = 1;
-        $this->transaction['transactionAmount'] = number_format($invoice->amount, 3);
+        $this->transaction['transactionAmount'] = number_format($invoice->unPaidAmount, 3);
         $this->transaction['transactionCurrency'] = 'BHD';
     }
 

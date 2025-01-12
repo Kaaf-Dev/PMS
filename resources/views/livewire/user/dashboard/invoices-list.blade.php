@@ -54,7 +54,7 @@
                                     <div class="fw-semibold">
                                         <span class="text-muted fs-8">القيمة</span>
                                         <span class="text-dark fw-bold fs-7 d-block mt-1">
-                        {{ $invoice->amount_human }}
+                        {{ $invoice->unPaidAmount }} دب 
                     </span>
                                     </div>
                                 </td>
