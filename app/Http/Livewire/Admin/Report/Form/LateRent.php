@@ -58,7 +58,7 @@ class LateRent extends Component
             echo $file;
         }, 200, [
             'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="properties-occupancy-report.pdf"'
+            'Content-Disposition' => 'inline; filename="Late Rent Report.pdf"'
         ]);
     }
 

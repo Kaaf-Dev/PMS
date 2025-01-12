@@ -11,10 +11,12 @@ use Maatwebsite\Excel\Events\AfterSheet;
 
 class PropertiesOccupancyReport implements FromCollection, WithHeadings, WithEvents
 {
-    protected $category;
-    public function __construct($category = null)
+    protected $data;
+
+    public function __construct($data = null)
     {
-        $this->category = $category;
+
+        $this->data = $data;
     }
 
 
@@ -24,46 +26,7 @@ class PropertiesOccupancyReport implements FromCollection, WithHeadings, WithEve
     public function collection()
     {
 
-        $properties = Property::with([
-            'apartments',
-        ]);
-
-        if ($this->category > 0) {
-            $properties = $properties->where('category_id', '=', $this->category);
-        }
-        $properties = $properties->get();
-
-        foreach ($properties as $property) {
-            $report[$property->id] = [
-                'property' => '',
-
-                'rented_count' => 0,
-                'rented_cost' => 0,
-                'rented_percent' => 0,
-
-                'available_count' => 0,
-                'available_cost' => 0,
-                'available_percent' => 0,
-            ];
-
-            $report[$property->id]['property'] = $property->name;
-            foreach ($property->apartments as $apartment) {
-                if ($apartment->isRented) {
-                    $report[$property->id]['rented_count'] = ($report[$property->id]['rented_count'] ?? 0) + 1;
-                    $report[$property->id]['rented_cost'] = ($report[$property->id]['rented_cost'] ?? 0) + $apartment->currentRentedCost;
-                } else {
-                    $report[$property->id]['available_count'] = ($report[$property->id]['available_count'] ?? 0) + 1;
-                    $report[$property->id]['available_cost'] = ($report[$property->id]['available_cost'] ?? 0) + $apartment->cost;
-                }
-            }
-            $report[$property->id]['total'] = $report[$property->id]['rented_count'] + $report[$property->id]['available_count'];
-            if ($report[$property->id]['total'] > 0) {
-                $report[$property->id]['rented_percent'] = $report[$property->id]['rented_count'] / $report[$property->id]['total'];
-                $report[$property->id]['available_percent'] = $report[$property->id]['available_count'] / $report[$property->id]['total'];
-            }
-        }
-
-        return collect($report);
+        return collect($this->data);
     }
 
     public function headings(): array
