@@ -2,16 +2,17 @@
 
 namespace App\Http\Livewire\User\Dashboard;
 
+use App\Models\Contract;
 use App\Models\Invoice;
-use App\Repository\printPDF;
+use App\Traits\WithAlert;
 use App\Traits\WithLazyLoad;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Response;
 use Livewire\Component;
 
 class InvoicesList extends Component
 {
     use WithLazyLoad;
+    use WithAlert;
 
     public function getListeners()
     {
@@ -23,7 +24,7 @@ class InvoicesList extends Component
     public function render()
     {
         $invoices = ($this->ready_to_load)
-            ? Auth::user()->invoices()->unPaid()->limit(4)->get()
+            ? Auth::user()->invoices()->unPaid()->orderByDesc('due')->limit(4)->get()
             : [];
         return view('livewire.user.dashboard.invoices-list', [
             'invoices' => $invoices,
@@ -33,23 +34,25 @@ class InvoicesList extends Component
     public function payInvoice($invoice_id)
     {
         $invoice = Invoice::findOrFail($invoice_id);
-        $this->emit('show-user-pay-invoice-modal', [
-            'invoice_id' => $invoice_id,
-        ]);
-    }
+        $contract = Contract::find($invoice->contract_id);
 
-    public function printInvoice($invoice_id)
-    {
-        $user = Auth::user();
+        if (!$contract) {
+            $this->showWarningAlert('العقد غير موجود.');
+            return;
+        }
 
-        // Query the user's invoices to find the specific invoice
-        $invoice = $user->invoices()->findOrFail($invoice_id);
+        $unpaidInvoicesBefore = $contract->invoices()
+            ->unPaid()
+            ->where('due', '<', $invoice->due)
+            ->orderBy('due', 'asc')
+            ->get();
 
-        if ($invoice) {
-            $file = printPDF::createPdf($invoice, $invoice->invoice_apartment_type);
-            return response()->streamDownload(function () use ($file) {
-                echo $file;
-            }, 'invoice.pdf');
+        if ($unpaidInvoicesBefore->isNotEmpty()) {
+            $this->showWarningAlert('يرجى تسديد الفواتير غير المدفوعة للأشهر السابقة أولًا.');
+        } else {
+            $this->emit('show-user-pay-invoice-modal', [
+                'invoice_id' => $invoice_id,
+            ]);
         }
     }
 

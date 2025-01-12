@@ -2,13 +2,16 @@
 
 namespace App\Http\Livewire\User\Contract\Details;
 
+use App\Models\Contract;
 use App\Models\Invoice;
 use App\Repository\printPDF;
+use App\Traits\WithAlert;
 use Illuminate\Support\Facades\Response;
 use Livewire\Component;
 
 class InvoicesList extends Component
 {
+    use WithAlert;
     public $contract_id;
 
     public function getListeners()
@@ -44,9 +47,27 @@ class InvoicesList extends Component
 
     public function payInvoice($invoice_id)
     {
-        $this->emit('show-user-pay-invoice-modal', [
-            'invoice_id' => $invoice_id,
-        ]);
+        $invoice = Invoice::findOrFail($invoice_id);
+        $contract = Contract::find($invoice->contract_id);
+
+        if (!$contract) {
+            $this->showWarningAlert('العقد غير موجود.');
+            return;
+        }
+
+        $unpaidInvoicesBefore = $contract->invoices()
+            ->unPaid()
+            ->where('due', '<', $invoice->due)
+            ->orderBy('due', 'asc')
+            ->get();
+
+        if ($unpaidInvoicesBefore->isNotEmpty()) {
+            $this->showWarningAlert('يرجى تسديد الفواتير غير المدفوعة للأشهر السابقة أولًا.');
+        } else {
+            $this->emit('show-user-pay-invoice-modal', [
+                'invoice_id' => $invoice_id,
+            ]);
+        }
     }
 
     public function printReceipt($invoice_id)

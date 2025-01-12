@@ -111,7 +111,8 @@ class ListTable extends Component
         $per_page = ($this->for_dashboard)
             ? 4
             : 15;
-        return $tickets->paginate($per_page, ['*'], 'ticketsPage');
+        return $tickets->orderByDesc('created_at')
+            ->paginate($per_page, ['*'], 'ticketsPage');
 
     }
 
