@@ -14,11 +14,11 @@ use Maatwebsite\Excel\Events\AfterSheet;
 
 class LawyerCasesReport implements FromCollection, WithHeadings, WithEvents
 {
-    protected $selected_lawyer;
+    protected $data;
 
-    public function __construct($selected_lawyer)
+    public function __construct($data)
     {
-        $this->selected_lawyer = $selected_lawyer;
+        $this->data = $data;
     }
 
 
@@ -27,38 +27,7 @@ class LawyerCasesReport implements FromCollection, WithHeadings, WithEvents
     */
     public function collection()
     {
-
-        $lawyer_cases = LawyerCase::query();
-
-        if ($this->selected_lawyer > 0) {
-            $lawyer_cases = $lawyer_cases->where('lawyer_id', '=', $this->selected_lawyer);
-        }
-
-        $lawyer_cases = $lawyer_cases
-            ->with([
-                'lawyer',
-                'contract',
-                'court',
-                'status',
-            ])
-            ->get();
-
-        $report = [];
-
-        foreach ($lawyer_cases as $lawyer_case) {
-            $report[$lawyer_case->id] = [
-                'id' => $lawyer_case->id,
-                'collected_amount' => $lawyer_case->collected_amount,
-                'amount' => $lawyer_case->amount,
-                'status' => optional($lawyer_case->status)->title,
-                'first_side' => $lawyer_case->first_side,
-                'second_side' => $lawyer_case->second_side,
-                'case_no' => $lawyer_case->case_no,
-            ];
-        }
-
-
-        return collect($report);
+        return collect($this->data);
     }
 
     public function headings(): array
