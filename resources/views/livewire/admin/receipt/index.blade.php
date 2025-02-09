@@ -24,7 +24,7 @@
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">
-                        <a href="{{ route('admin.invoices') }}" class="text-muted text-hover-primary">الفواتير</a>
+                        <a href="{{ route('admin.receipts') }}" class="text-muted text-hover-primary">سندات القبض</a>
                     </li>
                     <!--end::Item-->
                 </ul>
@@ -39,7 +39,7 @@
     <div id="kt_app_content" class="app-content flex-column-fluid">
         <!--begin::Content container-->
         <div id="kt_app_content_container" class="app-container container-xxl">
-            @livewire('admin.invoice.list-table')
+            @livewire('admin.receipt.list-table')
         </div>
         <!--end::Content container-->
     </div>

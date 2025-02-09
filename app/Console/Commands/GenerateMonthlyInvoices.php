@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Events\InvoiceCreated;
 use App\Models\Contract;
 use App\Models\Invoice;
 use Carbon\Carbon;
@@ -72,6 +73,8 @@ class GenerateMonthlyInvoices extends Command
                     ]);
 
                     $invoice->save();
+                    event(new InvoiceCreated($invoice));
+
                 }
 
                 // If the current date is the 20th or later, create an invoice for the next month
@@ -89,6 +92,7 @@ class GenerateMonthlyInvoices extends Command
                         ]);
 
                         $next_invoice->save();
+                        event(new InvoiceCreated($next_invoice));
                     }
                 }
 

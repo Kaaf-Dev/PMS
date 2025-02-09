@@ -168,12 +168,31 @@
                                 <span class="path3"></span>
                             </i>
                             </span>
-                                <span class="menu-title">المالية والتسديدات</span>
+                                <span class="menu-title">الفواتير</span>
                             </a>
                             <!--end:Menu link-->
                         </div>
                         <!--end:Menu item-->
                     @endcan
+
+
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link" href="{{ route('admin.receipts') }}">
+                            <span class="menu-icon">
+                            <i class="ki-duotone ki-receipt-square fs-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                                <span class="path3"></span>
+                            </i>
+                            </span>
+                                <span class="menu-title">سندات القبض</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
+
 
                     @can('viewAny', App\Models\Ticket::class)
                         <!--begin:Menu item-->
@@ -326,6 +345,26 @@
                         </div>
                         <!--end:Menu item-->
                     @endcan
+
+                    <!--begin:Menu item-->
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a class="menu-link" href="{{ route('admin.notifications') }}">
+                            <span class="menu-icon">
+                                <i class="ki-duotone ki-notification fs-2">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                    <span class="path4"></span>
+                                    <span class="path5"></span>
+                                    <span class="path6"></span>
+                                </i>
+                            </span>
+                            <span class="menu-title">الإشعارات</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
 
                 </div>
                 <!--end::Menu-->

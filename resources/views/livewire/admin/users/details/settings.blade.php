@@ -400,6 +400,108 @@
                 </div>
                 <!--end::Input group-->
             @endif
+            <!--begin::Section - Current Residence Information-->
+            <div class="mb-10">
+                <label class="fw-bold fs-4 mb-4 d-block">🏡 بيانات السكن الحالية</label>
+                <div class="separator border-2 my-6"></div>
+
+                <!--begin::Input group - Block-->
+                <div class="row mb-6">
+                    <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                        <span>🏢 المجمع</span>
+                    </label>
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" wire:model="User.block"
+                               class="form-control form-control-lg form-control-solid"
+                               placeholder="أدخل المجمع"/>
+                        @error('User.block')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group - Road-->
+                <div class="row mb-6">
+                    <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                        <span>🛣️ الطريق</span>
+                    </label>
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" wire:model="User.road"
+                               class="form-control form-control-lg form-control-solid"
+                               placeholder="أدخل الطريق"/>
+                        @error('User.road')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group - Building-->
+                <div class="row mb-6">
+                    <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                        <span>🏠 المبنى</span>
+                    </label>
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" wire:model="User.building"
+                               class="form-control form-control-lg form-control-solid"
+                               placeholder="أدخل رقم المبنى"/>
+                        @error('User.building')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group - Flat-->
+                <div class="row mb-6">
+                    <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                        <span>🚪 الشقة</span>
+                    </label>
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" wire:model="User.flat"
+                               class="form-control form-control-lg form-control-solid"
+                               placeholder="أدخل رقم الشقة"/>
+                        @error('User.flat')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group - Mailbox-->
+                <div class="row mb-6">
+                    <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                        <span>📬 صندوق البريد</span>
+                    </label>
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" wire:model="User.mail_box"
+                               class="form-control form-control-lg form-control-solid"
+                               placeholder="أدخل صندوق البريد"/>
+                        @error('User.mail_box')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <!--end::Input group-->
+                <!--begin::Input group - Mailbox-->
+                <div class="row mb-6">
+                    <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                        <span>🏙️ المنطقة</span>
+                    </label>
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" wire:model="User.city"
+                               class="form-control form-control-lg form-control-solid"
+                               placeholder="أدخل المنطقة"/>
+                        @error('User.city')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <!--end::Input group-->
+            </div>
+            <!--end::Section - Current Residence Information-->
+
 
             <!--begin::Action buttons-->
             <div class="d-flex justify-content-end align-items-center mt-12">

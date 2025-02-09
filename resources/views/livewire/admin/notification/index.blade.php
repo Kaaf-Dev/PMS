@@ -7,7 +7,7 @@
             <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
                 <!--begin::Title-->
                 <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
-                    المالية والتسديدات
+                    قائمة الإشعارات
                 </h1>
                 <!--end::Title-->
                 <!--begin::Breadcrumb-->
@@ -24,7 +24,7 @@
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">
-                        <a href="{{ route('admin.invoices') }}" class="text-muted text-hover-primary">الفواتير</a>
+                        <a href="{{ route('admin.notifications') }}" class="text-muted text-hover-primary">قائمة الإشعارات</a>
                     </li>
                     <!--end::Item-->
                 </ul>
@@ -39,7 +39,7 @@
     <div id="kt_app_content" class="app-content flex-column-fluid">
         <!--begin::Content container-->
         <div id="kt_app_content_container" class="app-container container-xxl">
-            @livewire('admin.invoice.list-table')
+            @livewire('admin.notification.list-table')
         </div>
         <!--end::Content container-->
     </div>

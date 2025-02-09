@@ -15,8 +15,8 @@ class ListTable extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $filters;
-    public $order_by = 'updated_at';
-    public $order_as = 'asc';
+    public $order_by = 'created_at';
+    public $order_as = 'desc';
 
     public $for_dashboard = false;
 

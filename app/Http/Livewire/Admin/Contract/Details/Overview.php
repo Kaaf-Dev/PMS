@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin\Contract\Details;
 
 use App\Models\Contract;
+use App\Repository\printPDF;
 use Livewire\Component;
 
 class Overview extends Component
@@ -86,6 +87,20 @@ class Overview extends Component
     {
         $this->emit('show-contract-update-notes-modal', [
             'contract_id' => $this->contract_id,
+        ]);
+    }
+
+    public function exportContract()
+    {
+        $printPDF = new printPDF();
+
+        $file = $printPDF->createContractPdf($this->getContractProperty(), 'pdf.rent-contract', 'A4', true);
+
+        return response()->stream(function () use ($file) {
+            echo $file;
+        }, 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="Rent Contract.pdf"'
         ]);
     }
 }

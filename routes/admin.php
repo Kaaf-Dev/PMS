@@ -92,6 +92,16 @@ Route::prefix('admin')->group(function () {
         });
 
         Route::group([
+            'prefix' => 'receipts',
+            'middleware' => [
+                'auth:admin'
+
+            ],
+        ], function () {
+            Route::get('/', Admin\Receipt\Index::class)->name('admin.receipts');
+        });
+
+        Route::group([
             'prefix' => 'tickets',
             'middleware' => [
                 'auth:admin',
@@ -180,7 +190,14 @@ Route::prefix('admin')->group(function () {
             Route::get('/details/{role_id}', Admin\Role\Details::class)->name('admin.details');
         });
 
+        Route::group([
+            'prefix' => 'notifications',
+            'middleware' => [
+                'auth:admin'
 
-
+            ],
+        ], function () {
+            Route::get('/', Admin\Notification\Index::class)->name('admin.notifications');
+        });
     });
 });

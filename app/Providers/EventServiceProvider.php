@@ -4,12 +4,14 @@ namespace App\Providers;
 
 use App\Events\CompanyFinishTicket;
 use App\Events\CompanySetTicketTime;
+use App\Events\InvoiceCreated;
 use App\Events\LawyerChangeCaseDetails;
 use App\Events\LawyerCreateInvoice;
 use App\Events\LawyerReply;
 use App\Events\ReceiptCreated;
 use App\Events\TicketReply;
 use App\Events\UserCreateTicket;
+use App\Listeners\SendInvoiceMail;
 use App\Listeners\SendNotificationForAdminWhenCompanyFinishTicket;
 use App\Listeners\SendNotificationForAdminWhenCompanySetTicketTime;
 use App\Listeners\SendNotificationForAdminWhenLawyerChangeCaseDetails;
@@ -58,6 +60,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         ReceiptCreated::class => [
             SendNotificationForAdminWhenReceiptCreated::class,
+        ],
+        InvoiceCreated::class => [
+            SendInvoiceMail::class,
         ],
     ];
 

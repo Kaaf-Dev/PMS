@@ -24,7 +24,13 @@ class AddUserModal extends Component
             $user_nationality_id,
             $corporate_id,
             $contact_name,
-            $contact_phone;
+            $contact_phone,
+            $user_block,
+            $user_road,
+            $user_building,
+            $user_flat,
+            $user_mail_box,
+            $user_city;
 
     public $user_id;
 
@@ -48,6 +54,12 @@ class AddUserModal extends Component
                 'corporate_id' => Rule::requiredIf($this->user_type == 2),
                 'contact_name' => Rule::requiredIf($this->user_type == 2),
                 'contact_phone' => Rule::requiredIf($this->user_type == 2),
+                'user_block' => 'nullable',
+                'user_road' => 'nullable',
+                'user_building' => 'nullable',
+                'user_flat' => 'nullable',
+                'user_mail_box' => 'nullable',
+                'user_city' => 'nullable',
             ]
         ];
 
@@ -111,6 +123,12 @@ class AddUserModal extends Component
             $user->corporate_id = $this->corporate_id;
             $user->contact_name = $this->contact_name;
             $user->contact_phone = $this->contact_phone;
+            $user->block = $this->user_block;
+            $user->road = $this->user_road;
+            $user->building = $this->user_building;
+            $user->flat = $this->user_flat;
+            $user->mail_box = $this->user_mail_box;
+            $user->city = $this->user_city;
             if (isset($this->user_image)) {
                 $user->user_image_path = $this->user_image->store($this->user_cpr, 'user_image');
             }
@@ -152,6 +170,11 @@ class AddUserModal extends Component
             'corporate_id',
             'contact_name',
             'contact_phone',
+            'user_block',
+            'user_building',
+            'user_road',
+            'user_flat',
+            'user_mail_box',
         ]);
         $this->step = 1;
     }

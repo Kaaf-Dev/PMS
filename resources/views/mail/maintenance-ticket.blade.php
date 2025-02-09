@@ -34,15 +34,13 @@
     <tr>
         <th>Ticket Number</th>
         <th>Tenant Name</th>
-        <th>Unit Number</th>
         <th>Building Name</th>
-        <th>Flat Name</th>
+        <th>Apartment Name</th>
         <th>Details</th>
     </tr>
     <tr>
         <td>{{$ticket->no}}</td>
         <td>{{$ticket->contract->User->name ?? ''}}</td>
-        <td>{{$ticket->property->ky_no ?? ''}}</td>
         <td>{{$ticket->property->name ?? 'none' }}</td>
         <td>{{$ticket->apartment->name ?? ''}}</td>
         <td>{{$ticket->description ?? ''}}</td>

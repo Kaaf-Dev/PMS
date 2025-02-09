@@ -107,6 +107,33 @@ class Contract extends Model
         return $query;
     }
 
+    public function getPropertyDetailsAttribute()
+    {
+        $details = [];
+
+        if ($this->contractApartments()) {
+            foreach ($this->contractApartments as $apartment) {
+                if ($apartment->apartment()) {
+                    if ($apartment->apartment->Property()) {
+
+                        $details [$apartment->id] = [
+                            'id' => $apartment->apartment->Property->id,
+                            'name' => $apartment->apartment->Property->name,
+                            'cost' => $apartment->cost,
+                            'flat' => $apartment->apartment->name,
+                            'block' => $apartment->apartment->Property->block,
+                            'road' => $apartment->apartment->Property->road,
+                            'place' => $apartment->apartment->Property->place
+                        ];
+
+
+                    }
+                }
+            }
+        }
+        return $details;
+    }
+
     public function scopeContractGenerateActive($query)
     {
         return $query->whereIn('active', [self::CONTRACT_STATUS_ACTIVE, self::CONTRACT_STATUS_EXPIRE]);
