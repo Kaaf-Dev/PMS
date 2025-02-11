@@ -48,15 +48,19 @@ class ListTable extends Component
             $query->where('no', 'like', '%' . $this->search . '%');
         })
             ->when($this->contract_id, function ($query) {
-                $query->where('contract_id', $this->contract_id);
+                $query->whereHas('invoice', function ($query) {
+                    $query->where('contract_id', $this->contract_id); // هنا يتم تصفية الاستعلام بناءً على contract_id في جدول الفواتير
+                });
             })
             ->when($this->due_at, function ($query) {
-                $query->whereDate('date', '>=', $this->due_at);
+                $query->whereDate('created_at', '>=', $this->due_at);
             })
             ->when($this->due_end, function ($query) {
-                $query->whereDate('date', '<=', $this->due_end);
-            });
+                $query->whereDate('created_at', '<=', $this->due_end);
+            })
+            ->orderBy('created_at', 'desc');
     }
+
 
     public function exportExcel()
     {

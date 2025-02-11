@@ -191,7 +191,7 @@
 
                                 <td>{{$receipt->amount ?? ''}}</td>
 
-                                <td>{{ \Carbon\Carbon::parse($receipt->date)->format('Y-m-d') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($receipt->created_at)->format('Y-m-d') }}</td>
 
                                 <td>{{$receipt->payment_method_string ?? ''}}</td>
 
