@@ -21,19 +21,27 @@ class ReportService
             ? $year
             : Date('Y');
 
-        $contract_ids = ContractApartment::select('contract_apartment.contract_id')
+        $contract_ids = ContractApartment::when($type, function ($query) use ($type) {
+            return $query->whereHas('apartment.property', function ($query) use ($type) {
+                $query->where('category_id', $type);
+            });
+        })
+            ->select('contract_apartment.contract_id')
             ->groupBy('contract_apartment.contract_id')
             ->get()
             ->toArray();
 
-        $receipts = Invoice::selectRaw('YEAR(receipts.created_at) as year, MONTH(receipts.created_at) as month, SUM(receipts.amount) as total_amount')
-            ->leftJoin('receipts', 'invoices.id', '=', 'receipts.invoice_id')
-            ->whereIn('contract_id', $contract_ids)
-            ->whereYear('receipts.date', $year)
+        $receipts = Receipt::selectRaw('YEAR(receipts.created_at) as year, MONTH(receipts.created_at) as month, SUM(receipts.amount) as total_amount')
+            ->join('invoices', 'receipts.invoice_id', '=', 'invoices.id')  // اصلاح هنا: تم تغيير 'receipts.invoice_id' إلى 'invoices.id'
+            ->whereIn('invoices.contract_id', $contract_ids)
+            ->whereYear('receipts.created_at', $year)  // تعديل التاريخ إلى 'created_at' بدلاً من 'date'
             ->groupBy('year', 'month')
             ->orderBy('year', 'asc')
             ->orderBy('month', 'asc')
             ->get();
+
+
+        dd($receipts);
 
 
 //        $receipts = Receipt::selectRaw('YEAR(date) as year, MONTH(date) as month, SUM(amount) as total_amount')
