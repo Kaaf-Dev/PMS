@@ -4,9 +4,11 @@ namespace App\Classes\Report;
 
 use App\Models\Apartment;
 use App\Models\Contract;
+use App\Models\ContractApartment;
 use App\Models\Discount;
 use App\Models\Invoice;
 use App\Models\MaintenanceInvoice;
+use App\Models\Property;
 use App\Models\Receipt;
 use App\Models\Ticket;
 use Illuminate\Support\Facades\DB;
@@ -19,6 +21,25 @@ class ReportService
             ? $year
             : Date('Y');
 
+        $contract_ids = ContractApartment::when($type, function ($query) use ($type) {
+            return $query->whereHas('apartment.property', function ($query) use ($type) {
+                $query->where('category_id', $type);
+            });
+        })
+            ->select('contract_apartment.contract_id')
+            ->groupBy('contract_apartment.contract_id')
+            ->get()
+            ->toArray();
+
+        $receipts = Invoice::selectRaw('YEAR(receipts.date) as year, MONTH(receipts.date) as month, SUM(receipts.amount) as total_amount')
+            ->join('receipts', 'invoices.id', '=', 'receipts.invoice_id')
+            ->whereIn('contract_id', $contract_ids)
+            ->whereYear('receipts.date', $year)
+            ->groupBy('year', 'month')
+            ->orderBy('year', 'asc')
+            ->orderBy('month', 'asc')
+            ->get();
+
 //        $receipts = Receipt::selectRaw('YEAR(date) as year, MONTH(date) as month, SUM(amount) as total_amount')
 //            ->whereYear('date', $year)
 //            ->groupBy('year', 'month')
@@ -26,20 +47,20 @@ class ReportService
 //            ->orderBy('month', 'asc')
 //            ->get();
 
-        $receipts = DB::table('properties')
-            ->when($type, function ($query) use ($type) {
-                $query->where('properties.category_id', '=', $type);
-            })
-            ->selectRaw('YEAR(receipts.date) as year, MONTH(receipts.date) as month, SUM(receipts.amount) as total_amount')
-            ->join('apartments', 'properties.id', '=', 'apartments.property_id')
-            ->join('contract_apartment', 'apartments.id', '=', 'contract_apartment.apartment_id')
-            ->join('invoices', 'contract_apartment.contract_id', '=', 'invoices.contract_id')
-            ->join('receipts', 'invoices.id', '=', 'receipts.invoice_id')
-            ->whereYear('receipts.date', $year)
-            ->groupBy('year', 'month')
-            ->orderBy('year', 'asc')
-            ->orderBy('month', 'asc')
-            ->get();
+//        $receipts = DB::table('properties')
+//            ->when($type, function ($query) use ($type) {
+//                $query->where('properties.category_id', '=', $type);
+//            })
+//            ->selectRaw('YEAR(receipts.date) as year, MONTH(receipts.date) as month, SUM(receipts.amount) as total_amount')
+//            ->join('apartments', 'properties.id', '=', 'apartments.property_id')
+//            ->join('contract_id', 'apartments.id', '=', 'contract_apartment.apartment_id')
+//            ->join('invoices', 'contract_apartment.contract_id', '=', 'invoices.contract_id')
+//            ->join('receipts', 'invoices.id', '=', 'receipts.invoice_id')
+//            ->whereYear('receipts.date', $year)
+//            ->groupBy('year', 'month')
+//            ->orderBy('year', 'asc')
+//            ->orderBy('month', 'asc')
+//            ->get();
 
 //        $maintenance_invoices = MaintenanceInvoice::selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, SUM(amount) as total_amount')
 //            ->whereYear('created_at', $year)
