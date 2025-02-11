@@ -31,7 +31,7 @@ class ReportService
             ->get()
             ->toArray();
 
-        $receipts = Invoice::selectRaw('YEAR(receipts.date) as year, MONTH(receipts.date) as month, SUM(receipts.amount) as total_amount')
+        $receipts = Invoice::selectRaw('YEAR(receipts.created_at) as year, MONTH(receipts.created_at) as month, SUM(receipts.amount) as total_amount')
             ->join('receipts', 'invoices.id', '=', 'receipts.invoice_id')
             ->whereIn('contract_id', $contract_ids)
             ->whereYear('receipts.date', $year)

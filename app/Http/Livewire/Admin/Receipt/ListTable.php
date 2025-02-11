@@ -53,10 +53,10 @@ class ListTable extends Component
                 });
             })
             ->when($this->due_at, function ($query) {
-                $query->whereDate('date', '>=', $this->due_at);
+                $query->whereDate('created_at', '>=', $this->due_at);
             })
             ->when($this->due_end, function ($query) {
-                $query->whereDate('date', '<=', $this->due_end);
+                $query->whereDate('created_at', '<=', $this->due_end);
             })
             ->orderBy('created_at', 'desc');
     }
