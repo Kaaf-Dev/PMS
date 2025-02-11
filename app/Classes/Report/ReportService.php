@@ -41,7 +41,6 @@ class ReportService
             ->get();
 
 
-        dd($receipts);
 
 
 //        $receipts = Receipt::selectRaw('YEAR(date) as year, MONTH(date) as month, SUM(amount) as total_amount')
