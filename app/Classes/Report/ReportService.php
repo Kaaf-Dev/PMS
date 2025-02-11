@@ -21,12 +21,7 @@ class ReportService
             ? $year
             : Date('Y');
 
-        $contract_ids = ContractApartment::when($type, function ($query) use ($type) {
-            return $query->whereHas('apartment.property', function ($query) use ($type) {
-                $query->where('category_id', $type);
-            });
-        })
-            ->select('contract_apartment.contract_id')
+        $contract_ids = ContractApartment::select('contract_apartment.contract_id')
             ->groupBy('contract_apartment.contract_id')
             ->get()
             ->toArray();
@@ -39,6 +34,7 @@ class ReportService
             ->orderBy('year', 'asc')
             ->orderBy('month', 'asc')
             ->get();
+
 
 //        $receipts = Receipt::selectRaw('YEAR(date) as year, MONTH(date) as month, SUM(amount) as total_amount')
 //            ->whereYear('date', $year)
