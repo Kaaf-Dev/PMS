@@ -196,7 +196,7 @@ class Invoice extends Model
 
     public function getDateNameAttribute()
     {
-        return $this->date->format('Y-M');
+        return $this->date->format('M-Y');
     }
 
     public function getAmountAttribute()

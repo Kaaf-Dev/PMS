@@ -108,7 +108,7 @@
                 <h1>Date</h1>
             </td>
             <td style="width: 17%; text-align: left;"> <!-- Adjusted to left alignment -->
-                <h2>{{$data->Invoice->date_receipt_human}}</h2>
+                <h2>{{$data->date_receipt_human}}</h2>
             </td>
         </tr>
 
@@ -118,14 +118,14 @@
                 <h1>Tenant Name</h1>
             </td>
             <td style="width: 35%; text-align: right;">
-                <h2>{{ $data->Invoice->Contract->User->name }}</h2>
+                <h2>{{ $data->Contract->User->name }}</h2>
             </td>
             <td style="width: 25%; text-align: left;"> <!-- Adjusted to left alignment -->
                 <h1>حالة الدفع</h1>
                 <h1>Paid Status</h1>
             </td>
             <td style="width: 15%; text-align: left;"> <!-- Adjusted to left alignment -->
-                <h2>{{ $data->Invoice->paid_string}}</h2>
+                <h2>{{ $data->paid_string}}</h2>
             </td>
         </tr>
 
@@ -142,7 +142,7 @@
                 <h1>.Cheque No</h1>
             </td>
             <td style="width: 20%; text-align: left;"> <!-- Adjusted to left alignment -->
-                <h2>{{ $data->Invoice->cheque_number ?? '' }}</h2>
+                <h2>{{ $data->cheque_number ?? '' }}</h2>
             </td>
         </tr>
 
@@ -152,7 +152,7 @@
                 <h1>Bank Name</h1>
             </td>
             <td colspan="3" style="text-align: right;">
-                <h2>{{ $data->Invoice->bank_name ?? '' }}</h2>
+                <h2>{{ $data->bank_name ?? '' }}</h2>
             </td>
         </tr>
 
@@ -175,14 +175,14 @@
         <tbody>
         <tr>
             <td>01</td>
-            <td>{{$data->Invoice->type_string}}</td>
-            <td>{{$data->Invoice->amount_human}}</td>
+            <td>{{$data->type_string}}</td>
+            <td>{{$data->amount_human}}</td>
         </tr>
         <tr>
             <td colspan="3" style="text-align: right; padding: 10px;">
                 <ul style="list-style-type: none; padding: 0; text-align: right;">
-                    <li>وذلك عن تاريخ {{$data->date_name}} عقد رقم {{$data->Invoice->Contract->id}} المكون من :</li>
-                    @foreach($data->Invoice->Contract->contractApartments as $apartment)
+                    <li>وذلك عن شهر {{$data->date_name}} عقد رقم {{$data->Contract->id}} المكون من :</li>
+                    @foreach($data->Contract->contractApartments as $apartment)
                         <li>{{$apartment->apartment->name ?? ''}}</li>
                     @endforeach
                 </ul>

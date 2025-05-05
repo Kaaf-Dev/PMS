@@ -69,7 +69,7 @@ class ListTable extends Component
 
     public function printReceipt(Receipt $receipt)
     {
-        $file = printPDF::createPdf($receipt, $receipt->invoice->receipt_apartment_type);
+        $file = printPDF::createPdf($receipt->Invoice, $receipt->invoice->receipt_apartment_type);
         return Response::streamDownload(function () use ($file) {
             echo $file;
         }, 'receipt.pdf');
