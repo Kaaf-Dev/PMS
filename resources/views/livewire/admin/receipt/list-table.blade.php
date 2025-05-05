@@ -182,7 +182,7 @@
                                 </td>
 
                                 <td>
-                                    <a href="{{ route('admin.users.details', ['user_id' => $receipt->Contract->User->id ?? 1]) }}"
+                                    <a href="{{ route('admin.users.details', ['user_id' => $receipt->Invoice->Contract->User->id]) }}"
                                        class="text-gray-800 text-hover-primary mb-1">{{ $receipt->Invoice->Contract->User->name ?? '' }}</a>
                                 </td>
                                 <!--end::Property-->
