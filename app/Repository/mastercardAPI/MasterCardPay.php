@@ -139,7 +139,7 @@ class MasterCardPay
                 'response' => $payResponse,
             ];
         }
-
+        info($payResponse);
         $this->setErrorMsg($payResponse['response']['acquirerMessage']);
         return [
             'status' => false,
