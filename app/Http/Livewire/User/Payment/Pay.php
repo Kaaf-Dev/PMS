@@ -63,9 +63,10 @@ class Pay extends Component
 
     public function mount($invoice_id)
     {
-        $this->reset();
-        $this->invoice_id = $invoice_id;
-
+        $invoice = auth()->user()->invoices()->findOrFail($invoice_id);
+        if ($invoice) {
+            $this->invoice_id = $invoice->id;
+        }
     }
 
     public function getInvoiceProperty()

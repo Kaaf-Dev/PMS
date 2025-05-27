@@ -30,7 +30,7 @@ Route::prefix('my')->group(function () {
             Route::get('/success-payment/{invoice_id}', User\Payment\Success::class)->name('user.success.payment');
             Route::get('/failed-payment/{invoice_id}', User\Payment\Failed::class)->name('user.failed.payment');
             Route::get('/down-payment/{invoice_id}', User\Payment\DownPayment::class)->name('user.down.payment');
-            Route::get('/pay/{invoice_id}', User\Payment\Pay::class)->name('user.pay');
+            Route::get('/pay/{invoice_id}', User\Payment\Pay::class)->name('user.pay')->middleware('IsLastInvoicePaid');
 //            Route::get('/profile', Admin\Dashboard\Index::class)->name('admin.account-settings');
         });
 

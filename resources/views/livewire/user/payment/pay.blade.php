@@ -1,5 +1,5 @@
-<div>
-
+<div class="card">
+    <div class="card-body">
     @if($this->invoice)
 
         <!--begin::Input group-->
@@ -196,8 +196,8 @@
 
             <!--begin::Actions-->
             <div class="text-center pt-15">
-                <button wire:click="closeMe" type="reset" id="kt_modal_new_card_cancel" class="btn btn-light me-3">الغاء
-                </button>
+                <a href="{{route('user.dashboard')}}" class="btn btn-light me-3">الرجوع
+                </a>
                 <button type="submit" wire:loading.attr="disabled" class="btn btn-primary">
                     <span wire:loading.remove class="indicator-label">دفع</span>
                     <span wire:loading class="indicator-progress">الرجاء الانتظار
@@ -224,7 +224,5 @@
                 )
             })
         </script>
-
-
-
+    </div>
 </div>
