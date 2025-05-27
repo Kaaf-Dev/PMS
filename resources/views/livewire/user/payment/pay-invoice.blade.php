@@ -198,7 +198,7 @@
         <div class="text-center pt-15">
             <button wire:click="closeMe" type="reset" id="kt_modal_new_card_cancel" class="btn btn-light me-3">الغاء
             </button>
-            <button wire:loading.attr="disabled" class="btn btn-primary">
+            <button type="submit" wire:loading.attr="disabled" class="btn btn-primary">
                 <span wire:loading.remove class="indicator-label">دفع</span>
                 <span wire:loading class="indicator-progress">الرجاء الانتظار
                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
