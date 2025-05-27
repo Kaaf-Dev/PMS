@@ -17,7 +17,6 @@ class PayInvoice extends Component
 
     public $invoice_id;
     public $payment_type = 1;
-    public $is_processing = false;
 
     public $card_name, $card_number, $card_month_exp, $card_year_exp,
         $card_cvv;
@@ -95,58 +94,47 @@ class PayInvoice extends Component
 
     public function pay()
     {
-        if ($this->is_processing) {
-            return;
-        }
+        $validated_data = $this->validate();
 
-        $this->is_processing = true;
+        $payment_gateway = $this->invoice->payment_gateway;
+        $creditCardProvider = new saveCardToken($payment_gateway);
+        $payment_gateway = new paymentGateway($payment_gateway);
 
-        try {
-            $validated_data = $this->validate();
+        if ($this->payment_type == 1) {
+            $params = $payment_gateway->BenefitPayCalculateHash($this->invoice->id);
+            if ($params) {
+                $this->emit('benefit-by-benefit-pay', $params);
+            }
+        } else {
+            $card_data = [
+                'user_id' => auth()->user()->id,
+                'card_name' => $this->card_name,
+                'card_number' => $this->card_number,
+                'card_month' => $this->card_month_exp,
+                'card_year' => $this->card_year_exp,
+                'card_cvv' => $this->card_cvv,
+            ];
+            $store_card = $creditCardProvider->storeCreditCard($card_data);
+            if ($store_card['status']) {
+                $card_token = $store_card['data'];
+                $payment_result = $payment_gateway->PayByMasterCardDirectPay($card_token, $this->invoice_id);
+                if ($payment_result['status']) {
+                    $this->showSuccessAlert('شكرًا لك، تمت العملية بنجاح');
+                    $this->emit('invoice-paid');
 
-            $payment_gateway = $this->invoice->payment_gateway;
-            $creditCardProvider = new saveCardToken($payment_gateway);
-            $payment_gateway = new paymentGateway($payment_gateway);
-
-            if ($this->payment_type == 1) {
-                $params = $payment_gateway->BenefitPayCalculateHash($this->invoice->id);
-                if ($params) {
-                    $this->emit('benefit-by-benefit-pay', $params);
+                    $this->closeMe();
+                } else {
+                    $this->addError('card_number', $payment_result['errors']);
                 }
             } else {
-                $card_data = [
-                    'user_id' => auth()->user()->id,
-                    'card_name' => $this->card_name,
-                    'card_number' => $this->card_number,
-                    'card_month' => $this->card_month_exp,
-                    'card_year' => $this->card_year_exp,
-                    'card_cvv' => $this->card_cvv,
-                ];
-                $store_card = $creditCardProvider->storeCreditCard($card_data);
-
-                if ($store_card['status']) {
-                    $card_token = $store_card['data'];
-                    $payment_result = $payment_gateway->PayByMasterCardDirectPay($card_token, $this->invoice_id);
-                    if ($payment_result['status']) {
-                        $this->showSuccessAlert('شكرًا لك، تمت العملية بنجاح');
-                        $this->emit('invoice-paid');
-                        $this->closeMe();
-                    } else {
-                        $this->addError('card_number', $payment_result['errors']);
-                    }
-                } else {
-                    $errors = $store_card['errors']->toArray();
-                    foreach ($errors as $key => $error) {
-                        $this->addError($key, $error[0]);
-                    }
+                $errors = $store_card['errors']->toArray();
+                foreach ($errors as $key => $error) {
+                    $this->addError($key, $error[0]);
                 }
             }
-
-        } finally {
-            $this->is_processing = false;
         }
-    }
 
+    }
 
     public function closeMe()
     {
