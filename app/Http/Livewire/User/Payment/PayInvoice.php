@@ -103,7 +103,7 @@ class PayInvoice extends Component
         if ($this->payment_type == 1) {
             $params = $payment_gateway->BenefitPayCalculateHash($this->invoice->id);
             if ($params) {
-                $this->emit('benefit-by-benefit-pay1', $params);
+                $this->emit('benefit-by-benefit-pay', $params);
             }
         } else {
             $card_data = [
