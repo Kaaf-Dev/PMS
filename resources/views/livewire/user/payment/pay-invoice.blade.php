@@ -212,7 +212,7 @@
         <script wire:ignore>
             let benefitPayProcessing = false;
 
-            window.livewire.on('benefit-by-benefit-pay', function (params) {
+            window.livewire.on('benefit-by-benefit-pay1', function (params) {
                 if (benefitPayProcessing) return;
                 benefitPayProcessing = true;
 
