@@ -54,7 +54,7 @@
                                     <div class="fw-semibold">
                                         <span class="text-muted fs-8">القيمة</span>
                                         <span class="text-dark fw-bold fs-7 d-block mt-1">
-                        {{ $invoice->unPaidAmount }} دب 
+                        {{ $invoice->unPaidAmount }} دب
                     </span>
                                     </div>
                                 </td>
@@ -70,11 +70,10 @@
                                 <!-- Unpaid Amount (Pay Button) -->
                                 <td>
                                     @if ($invoice->unPaidAmount > 0)
-                                        <button
-                                            wire:click.stop="payInvoice('{{ $invoice->id }}')"
+                                        <a href="{{route('user.pay', $invoice->id)}}"
                                             class="btn btn-danger btn-sm fw-bold">
                                             دفع
-                                        </button>
+                                        </a>
                                     @else
                                         <span class="badge badge-success fs-8 fw-bold">مدفوعة</span>
                                     @endif
