@@ -209,8 +209,8 @@
     @endif
 
 
-   @push('js')
             <script wire:ignore>
+                window.livewire.off('benefit-by-benefit-pay');
                 window.livewire.on('benefit-by-benefit-pay', function (params) {
                     console.log(1)
                     InApp.open(params,
@@ -226,5 +226,5 @@
                     )
                 })
             </script>
-   @endpush
+
 </div>
