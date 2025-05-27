@@ -38,7 +38,7 @@
                         <!--begin::Table body-->
                         <tbody style="cursor: pointer">
                         @forelse($invoices as $invoice)
-                            <tr wire:click="payInvoice('{{ $invoice->id }}')" class="align-middle">
+                            <tr class="align-middle">
                                 <!-- Invoice Number -->
                                 <td>
                                     <div class="fw-semibold">
