@@ -209,20 +209,30 @@
     @endif
 
 
-    <script wire:ignore>
+        <script wire:ignore>
+            let benefitPayProcessing = false;
+
             window.livewire.on('benefit-by-benefit-pay', function (params) {
-                console.log(1)
+                if (benefitPayProcessing) return;
+                benefitPayProcessing = true;
+
+                console.log('Opening BenefitPay...');
+
                 InApp.open(params,
                     function (success) {
-                       window.livewire.emit('benefit-pay-success-payment', success);
+                        window.livewire.emit('benefit-pay-success-payment', success);
+                        benefitPayProcessing = false;
                     },
                     function (error) {
-                        console.log(error)
+                        console.log('BenefitPay Error:', error);
+                        benefitPayProcessing = false;
                     },
                     function (cancel) {
-                        console.log(cancel)
-                    },
-                )
-            })
+                        console.log('BenefitPay Cancelled:', cancel);
+                        benefitPayProcessing = false;
+                    }
+                );
+            });
         </script>
+
 </div>
