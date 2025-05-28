@@ -75,7 +75,7 @@
                                             </td>
                                             <td class="">
                                                 @if ($invoice->unPaidAmount > 0)
-                                                    <button wire:click="payInvoice('{{ $invoice->id }}')" class="btn btn-sm btn-light btn-active-light-primary">دفع</button>
+                                                    <a href="{{route('user.pay', $invoice->id)}}" class="btn btn-sm btn-light btn-active-light-primary">دفع</a>
                                                 @else
 
                                                     <button wire:click="printReceipt('{{$invoice->id}}')" class="btn btn-sm btn-light btn-active-light-primary">
