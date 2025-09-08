@@ -116,10 +116,7 @@ class Pay extends Component
                 $card_token = $store_card['data'];
                 $payment_result = $payment_gateway->PayByMasterCardDirectPay($card_token, $this->invoice_id);
                 if ($payment_result['status']) {
-                    $this->showSuccessAlert('شكرًا لك، تمت العملية بنجاح');
-                    $this->emit('invoice-paid');
-
-                    $this->closeMe();
+                    return redirect()->route('user.success.payment', encrypt($this->invoice_id));
                 } else {
                     $this->addError('card_number', $payment_result['errors']);
                 }
