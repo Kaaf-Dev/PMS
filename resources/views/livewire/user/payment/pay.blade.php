@@ -208,21 +208,27 @@
         </form>
     @endif
 
-        <script wire:ignore>
-            window.livewire.on('benefit-by-benefit-pay', function (params) {
-                console.log(1)
-                InApp.open(params,
-                    function (success) {
-                        window.livewire.emit('benefit-pay-success-payment', success);
-                    },
-                    function (error) {
-                        console.log(error)
-                    },
-                    function (cancel) {
-                        console.log(cancel)
-                    },
-                )
-            })
-        </script>
+        <div wire:ignore>
+            <script>
+                document.addEventListener("livewire:load", () => {
+                    window.livewire.on('benefit-by-benefit-pay', function (params) {
+                        console.log(1);
+                        InApp.open(
+                            params,
+                            function (success) {
+                                window.livewire.emit('benefit-pay-success-payment', success);
+                            },
+                            function (error) {
+                                console.log(error);
+                            },
+                            function (cancel) {
+                                console.log(cancel);
+                            },
+                        );
+                    });
+                });
+            </script>
+        </div>
+
     </div>
 </div>
