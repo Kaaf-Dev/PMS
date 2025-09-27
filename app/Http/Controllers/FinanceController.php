@@ -16,12 +16,6 @@ class FinanceController extends Controller
 {
     public function eazyPayCallback(Request $request)
     {
-        $log = [
-            'headers' => $request->headers,
-            'body' => $request->all(),
-        ];
-        info($log);
-
         info('========== EAZY WEBHOOK ==========');
 
         $rules = [
@@ -88,7 +82,6 @@ class FinanceController extends Controller
                     if ($transaction->Invoice->payment_gateway === 'eslah') {
                         $secret_key = env('ESLAH_EAZY_PAY_SECRET_KEY');
                     }
-                    info($secret_key);
                     // start Eazy
 
                     $eazy_timestamp = $request->header('Eazy-Timestamp');
@@ -113,7 +106,6 @@ class FinanceController extends Controller
 
 
                             if ($is_paid == 1) {
-                                info($is_paid);
 
                                 $payment_method = PaymentTransaction::MASTERCARD;
                                 if ($eazy_payment_method == 'Apple Pay') {
