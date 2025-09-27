@@ -83,7 +83,7 @@ class paymentGateway
         //createTransaction
         $transaction = $this->initiateTransaction('directPay', $invoice_id, $invoice->Contract?->User->user_id);
         $pay = new EazyPayCore($transaction, [PaymentTransaction::ALL], $transaction_amount, $payment_gateway);
-
+        $this->initiateTransactionRequest($transaction, $pay['response']);
         $pay = $pay->generatePaymentUrl();
         if ($pay['status']) {
             return redirect($pay['transaction']->payment_url);
