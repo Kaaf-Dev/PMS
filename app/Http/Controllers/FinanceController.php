@@ -16,11 +16,11 @@ class FinanceController extends Controller
 {
     public function eazyPayCallback(Request $request)
     {
-//        $log = [
-//            'headers' => $request->headers,
-//            'body' => $request->all(),
-//        ];
-//        info($log);
+        $log = [
+            'headers' => $request->headers,
+            'body' => $request->all(),
+        ];
+        info($log);
 
         info('========== EAZY WEBHOOK ==========');
 
@@ -83,8 +83,10 @@ class FinanceController extends Controller
 
                 $transaction = PaymentTransaction::where('global_transaction_id', $global_transaction_id)->first();
                 if ($transaction) {
-
-
+                    $secret_key = env('KAAF_EAZY_PAY_SECRET_KEY');
+                    if ($transaction->Invoice->payment_gateway === 'eslah') {
+                        $secret_key = env('ESLAH_EAZY_PAY_SECRET_KEY');
+                    }
                     // start Eazy
 
                     $eazy_timestamp = $request->header('Eazy-Timestamp');
@@ -104,7 +106,7 @@ class FinanceController extends Controller
                         if (Str::lower($eazy_signature) == Str::lower(hash_hmac(
                                 algo: 'sha256',
                                 data: $msg,
-                                key: env('EAZY_PAY_SECRET_KEY')))
+                                key: $secret_key))
                         ) {
 
 

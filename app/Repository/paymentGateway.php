@@ -2,7 +2,6 @@
 
 namespace App\Repository;
 
-use App\Enums\EazyPaymentMethods;
 use App\Models\Invoice;
 use App\Models\PaymentTransaction;
 use App\Repository\BenefitPay\benefitPayCheckStatus;

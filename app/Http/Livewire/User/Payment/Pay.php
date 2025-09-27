@@ -94,7 +94,6 @@ class Pay extends Component
         $validated_data = $this->validate();
 
         $payment_gateway = $this->invoice->payment_gateway;
-        $creditCardProvider = new saveCardToken($payment_gateway);
         $payment_gateway = new paymentGateway($payment_gateway);
 
         if ($this->payment_type == 1) {
