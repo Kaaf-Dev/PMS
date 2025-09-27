@@ -2,15 +2,12 @@
 
 namespace App\Repository;
 
-use App\Events\ReceiptCreated;
+use App\Enums\EazyPaymentMethods;
 use App\Models\Invoice;
 use App\Models\PaymentTransaction;
-use App\Models\Receipt;
-use App\Models\UserToken;
 use App\Repository\BenefitPay\benefitPayCheckStatus;
 use App\Repository\BenefitPay\benefitPayWindow;
-use App\Repository\mastercardAPI\MasterCardPay;
-use Carbon\Carbon;
+use App\Repository\EazyPay\EazyPayCore;
 
 class paymentGateway
 {
@@ -76,47 +73,56 @@ class paymentGateway
 
     }
 
-    public function PayByMasterCardDirectPay($card_token, $invoice_id)
+    public function PayByMasterCardDirectPay($invoice_id)
     {
         $payment_gateway = $this->getPaymentGateway();
 
-        $userToken = UserToken::findOrFail($card_token->id);
+        //$userToken = UserToken::findOrFail($card_token->id);
         $invoice = Invoice::findOrFail($invoice_id);
         $transaction_amount = $invoice->unPaidAmount;
 
         //createTransaction
-        $transaction = $this->initiateTransaction('directPay', $invoice_id, $userToken->user_id);
-        $masterCardPay = new MasterCardPay($userToken->cvv, $userToken->token, $transaction_amount, $transaction->trx_id, $payment_gateway);
-        $masterCardPayResult = $masterCardPay->pay();
+        $transaction = $this->initiateTransaction('directPay', $invoice_id, $invoice->Contract?->User->user_id);
+        $pay = new EazyPayCore($transaction, [PaymentTransaction::ALL], $transaction_amount, $payment_gateway);
 
-        //createTransaction
-        $this->initiateTransactionRequest($transaction, $masterCardPayResult['response']);
-
-        //isPayCorrect
-        if ($masterCardPayResult['status']) {
-            //addReceipt
-            $receipt = new Receipt();
-            $receipt->invoice_id = $invoice_id;
-            $receipt->amount = $masterCardPayResult['response']['order']['amount'];
-            $receipt->date = Carbon::now();
-            $receipt->transaction_id = $transaction->id;
-            $receipt->payment_method = Receipt::PAYMENT_METHOD_VISA;
-            $receipt->save();
-
-            $transaction->close();
-            event(new ReceiptCreated($receipt));
-            $result = [
-                'status' => true,
-                'msg' => 'تمت العملية بنجاح',
-            ];
+        $pay = $pay->generatePaymentUrl();
+        if ($pay['status']) {
+            return redirect($pay['transaction']->payment_url);
         } else {
-            $transaction->failed();
-            $result = [
-                'status' => false,
-                'errors' => $masterCardPayResult['errorMsg'],
-            ];
+            info('error payment:' . ' ' . $pay['error']);
         }
-        return $result;
+
+//        $masterCardPay = new MasterCardPay($userToken->cvv, $userToken->token, $transaction_amount, $transaction->trx_id, $payment_gateway);
+//        $masterCardPayResult = $masterCardPay->pay();
+//
+//        //createTransaction
+//        $this->initiateTransactionRequest($transaction, $masterCardPayResult['response']);
+//
+//        //isPayCorrect
+//        if ($masterCardPayResult['status']) {
+//            //addReceipt
+//            $receipt = new Receipt();
+//            $receipt->invoice_id = $invoice_id;
+//            $receipt->amount = $masterCardPayResult['response']['order']['amount'];
+//            $receipt->date = Carbon::now();
+//            $receipt->transaction_id = $transaction->id;
+//            $receipt->payment_method = Receipt::PAYMENT_METHOD_VISA;
+//            $receipt->save();
+//
+//            $transaction->close();
+//            event(new ReceiptCreated($receipt));
+//            $result = [
+//                'status' => true,
+//                'msg' => 'تمت العملية بنجاح',
+//            ];
+//        } else {
+//            $transaction->failed();
+//            $result = [
+//                'status' => false,
+//                'errors' => $masterCardPayResult['errorMsg'],
+//            ];
+//        }
+
 
     }
 

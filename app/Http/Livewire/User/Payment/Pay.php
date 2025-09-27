@@ -18,8 +18,8 @@ class Pay extends Component
     public $invoice_id;
     public $payment_type = 1;
 
-    public $card_name, $card_number, $card_month_exp, $card_year_exp,
-        $card_cvv;
+//    public $card_name, $card_number, $card_month_exp, $card_year_exp,
+//        $card_cvv;
 
     public function getListeners()
     {
@@ -103,31 +103,33 @@ class Pay extends Component
                 $this->emit('benefit-by-benefit-pay', $params);
             }
         } else {
-            $card_data = [
-                'user_id' => auth()->user()->id,
-                'card_name' => $this->card_name,
-                'card_number' => $this->card_number,
-                'card_month' => $this->card_month_exp,
-                'card_year' => $this->card_year_exp,
-                'card_cvv' => $this->card_cvv,
-            ];
-            $store_card = $creditCardProvider->storeCreditCard($card_data);
-            if ($store_card['status']) {
-                $card_token = $store_card['data'];
-                $payment_result = $payment_gateway->PayByMasterCardDirectPay($card_token, $this->invoice_id);
-                if ($payment_result['status']) {
-                    return redirect()->route('user.success.payment', encrypt($this->invoice_id));
-                } else {
-                    $this->addError('card_number', $payment_result['errors']);
-                }
-            } else {
-                $errors = $store_card['errors']->toArray();
-                foreach ($errors as $key => $error) {
-                    $this->addError($key, $error[0]);
-                }
-            }
-        }
+            $payment_gateway->PayByMasterCardDirectPay($this->invoice_id);
 
+//            $card_data = [
+//                'user_id' => auth()->user()->id,
+//                'card_name' => $this->card_name,
+//                'card_number' => $this->card_number,
+//                'card_month' => $this->card_month_exp,
+//                'card_year' => $this->card_year_exp,
+//                'card_cvv' => $this->card_cvv,
+//            ];
+//            $store_card = $creditCardProvider->storeCreditCard($card_data);
+//            if ($store_card['status']) {
+//                $card_token = $store_card['data'];
+//                if ($payment_result['status']) {
+//                    return redirect()->route('user.success.payment', encrypt($this->invoice_id));
+//                } else {
+//                    $this->addError('card_number', $payment_result['errors']);
+//                }
+//            } else {
+//                $errors = $store_card['errors']->toArray();
+//                foreach ($errors as $key => $error) {
+//                    $this->addError($key, $error[0]);
+//                }
+//            }
+//        }
+
+        }
     }
 
     public function closeMe()

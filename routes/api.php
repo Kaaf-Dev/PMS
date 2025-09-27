@@ -19,7 +19,10 @@ use App\Http\Controllers\ApiManager;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+Route::prefix('eazy')->group(function () {
+    Route::match(['get', 'post'], '/callback', [\App\Http\Controllers\FinanceController::class, 'eazyPayCallback'])
+        ->name('eazy.callback');
+});
 Route::group([], function () {
     Route::any('benefit-response', [PaymentCallbackApi::class, 'benefitResponse'])->name('benefit.response');
 });

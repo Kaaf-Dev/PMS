@@ -32,6 +32,9 @@ Route::prefix('my')->group(function () {
             Route::get('/down-payment/{invoice_id}', User\Payment\DownPayment::class)->name('user.down.payment');
             Route::get('/pay/{invoice_id}', User\Payment\Pay::class)->name('user.pay')->middleware('IsLastInvoicePaid');
 //            Route::get('/profile', Admin\Dashboard\Index::class)->name('admin.account-settings');
+
+            Route::match(['get', 'post'], 'callback/{globalTransactionsId}', User\Payment\Callback::class)->name('callback');
+
         });
 
         Route::group([

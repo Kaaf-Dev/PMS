@@ -17,14 +17,25 @@ class PaymentTransaction extends Model
     const TRANSACTION_STATUS_CLOSE = 3;
     const TRANSACTION_STATUS_FAILED = 4;
 
+    const ALL = 'ALL';
+
+
+    const MASTERCARD = 'mastercard';
+    const BENEFIT = 'benefit';
+    const APPLE = 'apple';
+    const VISA = 'visa';
+
     protected $table = 'payment_transactions';
 
     protected $fillable = [
         'trx_id',
         'invoice_id',
         'payment_gateway',
-        'status'
+        'status',
+        'global_transaction_id',
+        'payment_url'
     ];
+
 
     public static function boot()
     {
