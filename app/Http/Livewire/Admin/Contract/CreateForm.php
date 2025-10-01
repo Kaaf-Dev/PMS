@@ -184,7 +184,7 @@ class CreateForm extends Component
                 $this->end_at_year,
                 $this->end_at_month,
                 1)
-                ->startOfMonth()
+                ->endOfMonth()
                 ->format('Y-m-d');
             $Contract->start_at = $start_at;
             $Contract->end_at = $end_at;

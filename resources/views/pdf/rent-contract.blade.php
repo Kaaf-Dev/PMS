@@ -56,28 +56,30 @@
                 acknowledge that they are in full legal capacity to conclude a contract and agreed on the following
                 terms and conditions.</p>
 
+            @php
+                $apartment = optional($data->apartments->first());
+                $typeLabelEn = $apartment->is_type_house ? 'apartment' : ($apartment->is_type_store ? 'shop' : 'land');
+            @endphp
+
             <h2>Preamble</h2>
-            <p>The Landlord owned a property of Flat
-                <?php
-                $index = 0;
-                ?>
+            <p>
+                The Landlord owned a {{ $typeLabelEn }}
+                @php $index = 0; @endphp
+
                 @foreach($data->property_details as $detail)
                     , {{$detail['flat']}}
                 @endforeach
+
                 @foreach($data->property_details as $detail)
                     @if($index == 0)
-
-                        Building {{$detail['name']}}, Road {{$detail['road']}},
-                        Block {{$detail['block']}}, {{$detail['place']}} -
-                        Kingdom of Bahrain.
+                        , Building {{$detail['name']}}, Road {{$detail['road']}}, Block {{$detail['block']}}, {{$detail['place']}} - Kingdom of Bahrain.
                     @endif
-                        <?php
-                        $index++;
-                        ?>
+                    @php $index++; @endphp
                 @endforeach
-                The Landlord offers to tenant the property and the tenant accepts to lease it with
-                the specified rent value subject to the following terms and conditions: This preamble is an integral
-                part of the contract and considered.</p>
+                The Landlord offers to the tenant the property and the tenant accepts to lease it with
+                the specified rent value subject to the following terms and conditions. This preamble is an integral
+                part of the contract.
+            </p>
         </div>
         <div class="en-second">
             <h3>Article One: Definitions and General Provisions</h3>
@@ -93,13 +95,18 @@
                             @endforeach
                         </p></li>
 
+                    @php
+                        $apartment = optional($data->apartments->first());
+                        $typeLabelEn = $apartment->is_type_house ? 'apartment' : ($apartment->is_type_store ? 'shop' : 'land');
+                        $purposeEn   = $apartment->is_type_store ? 'commercial' : 'residential';
+                    @endphp
+
                     <li><b>Leased Property:</b>
                         @if(count($data['property_details']) > 1)
-                            The following flats:
-                            {{ implode(', ', array_column($data['property_details'], 'flat')) }}, will be used for
-                            residential purposes.
+                            The following {{ $typeLabelEn }}s:
+                            {{ implode(', ', array_column($data['property_details'], 'flat')) }}, will be used for {{ $purposeEn }} purposes.
                         @else
-                            Flat {{$data['property_details'][$index]['flat']}}, will be used for residential purposes.
+                            A {{ $typeLabelEn }} {{$data['property_details'][$index]['flat']}}, will be used for {{ $purposeEn }} purposes.
                         @endif
                     </li>
                 @endif
@@ -142,7 +149,14 @@
 
 
             <h3>Article Three – The Intended Purpose</h3>
-            <p>The leased property is a residential apartment for residence purpose only.</p>
+            @php
+                $apartment = optional($data->apartments->first());
+                $typeLabelEn = $apartment->is_type_house ? 'apartment' : ($apartment->is_type_store ? 'shop' : 'land');
+                $purposeEn   = $apartment->is_type_store ? 'commercial' : 'residential';
+            @endphp
+
+            <p>The leased property is a {{ $purposeEn }} {{ $typeLabelEn }} for {{ $purposeEn }} purpose only.</p>
+
 
             <h3>Article Four – Rent</h3>
             <p>The tenant shall pay to the landlord, as a monthly rental,
@@ -157,12 +171,12 @@
 
             <h3>Article Five - Landlord's Obligations</h3>
             <ul>
-                <li>1. A landlord shall handover the leased property and all its annexes to the tenant in a state that
+                <li> A landlord shall handover the leased property and all its annexes to the tenant in a state that
                     is intended to benefit therefrom in accordance with what has been agreed upon or the nature of the
                     property.
                 </li>
-                <li>2. A landlord shall carry out the necessary maintenance of the leased property.</li>
-                <li>3. A landlord shall not commit any act likely to prevent a tenant from benefiting from one of his
+                <li> A landlord shall carry out the necessary maintenance of the leased property.</li>
+                <li> A landlord shall not commit any act likely to prevent a tenant from benefiting from one of his
                     rights or any privilege by virtue of this agreement or in accordance with what the leased property
                     is intended for.
                 </li>
@@ -175,26 +189,26 @@
             <br>
             <h3>Article Six - Tenant’s Obligations</h3>
             <ul>
-                <li>1. A tenant shall pay the rent on the due date specified in the agreement to the landlord as
+                <li> A tenant shall pay the rent on the due date specified in the agreement to the landlord as
                     stipulated in Article Four above. He shall have a receipt acknowledgement voucher signed by the
                     landlord after he deposited the amount in the landlord’s bank account.
                 </li>
-                <li>2. A tenant shall maintain the leased property in accordance with the usual care of an ordinary
+                <li> A tenant shall maintain the leased property in accordance with the usual care of an ordinary
                     person, and shall not make any alterations to it without a written permission from the landlord.
                 </li>
-                <li>3. The tenant shall comply with public order and not disturb other resident by immoral or indecent
+                <li> The tenant shall comply with public order and not disturb other resident by immoral or indecent
                     conduct while he is occupying the leased property.
                 </li>
-                <li>4. The Landlord shall have the right, subject to the tenant’s consent and prior reasonable notice to
+                <li> The Landlord shall have the right, subject to the tenant’s consent and prior reasonable notice to
                     him, to enter the leased property in order to inspect the premises, and make necessary repair and
                     maintenance.
                 </li>
-                <li>5. A tenant shall pay the costs of water, electricity, telephone services, joint services and any
+                <li> A tenant shall pay the costs of water, electricity, telephone services, joint services and any
                     other charges related to the leased property.
                 </li>
-                <li>6. A tenant shall utilize the leased property as per the intended purpose.</li>
-                <li>7. A tenant shall carry out rental maintenance on the leased property.</li>
-                <li>8. The lessee should give one months prior written notice termination of the lease to the lessor if
+                <li> A tenant shall utilize the leased property as per the intended purpose.</li>
+                <li> A tenant shall carry out rental maintenance on the leased property.</li>
+                <li> The lessee should give one months prior written notice termination of the lease to the lessor if
                     he decided to vacate the building.
                 </li>
             </ul>
@@ -235,22 +249,22 @@
                 <li>The landlord may request the tenant to vacate the leased property, and the agreement shall be deemed
                     automatically terminated in any of the following events:
                 </li>
-                <li>1. If the tenant refuses to pay the rent on the due date as specified in this agreement.</li>
-                <li>2. If a tenant assigns the lease or subleases all or part of the leased property, or vacates it for
+                <li> If the tenant refuses to pay the rent on the due date as specified in this agreement.</li>
+                <li> If a tenant assigns the lease or subleases all or part of the leased property, or vacates it for
                     a party other than the owner without a written consent of the owner.
                 </li>
-                <li>3. If a tenant uses the leased property for accommodating a number of people in excess of the
+                <li> If a tenant uses the leased property for accommodating a number of people in excess of the
                     norm.
                 </li>
-                <li>4. If a tenant uses the leased property or allows it to be used in a manner not consistent with the
+                <li> If a tenant uses the leased property or allows it to be used in a manner not consistent with the
                     terms of the agreement or the purpose for which it was built, or in violation of public order or
                     decency, or in a manner that harms the financial interests of the landlord.
                 </li>
-                <li>5. If the leased property becomes dilapidated and is feared to pose a threat to the safety of its
+                <li> If the leased property becomes dilapidated and is feared to pose a threat to the safety of its
                     occupants, or if a final administrative decision is issued by the competent municipality to demolish
                     it
                 </li>
-                <li>6. If a tenant uses the leased property or allows it to be used for a purpose other than the one for
+                <li> If a tenant uses the leased property or allows it to be used for a purpose other than the one for
                     which it was leased in accordance with its nature or if he makes alterations to it that may damage
                     its structural safety.
                 </li>
@@ -264,13 +278,14 @@
 
             <h3>Article Ten – Governing Law and Jurisdiction</h3>
             <ul>
-                <li>1. This contract is subject to the terms and provisions of the prevailing laws in the Kingdom of
+                <li> This contract is subject to the terms and provisions of the prevailing laws in the Kingdom of
                     Bahrain, as well as it is subject to the jurisdiction of Courts of Bahrain.
                 </li>
-                <li>2. The parties shall exert every effort to amicably resolve any dispute of any kind whatsoever
+                <li> The parties shall exert every effort to amicably resolve any dispute of any kind whatsoever
                     arising out of the interpretation of this agreement. The parties hereto shall submit the dispute to
                     the court if they fail to amicably settle it.
                 </li>
+                <br>
                 <br>
                 <br>
                 <br>
@@ -315,25 +330,25 @@
             <br>
             <h2>تمهيد</h2>
 
-            <p>يمتلك المؤجر شقة
-                <?php
-                $index = 0;
-                ?>
+            <p>
+                يمتلك المؤجر
+                {{ $data->apartments->first()->is_type_house ? 'شقة' : ($data->apartments->first()->is_type_store ? 'محل' : 'قطعة أرض') }}
+                @php $index = 0; @endphp
+
                 @foreach($data->property_details as $detail)
                     , {{$detail['flat']}}
                 @endforeach
+
                 @foreach($data->property_details as $detail)
                     @if($index == 0)
-                        ، مبنى {{$detail['name']}} ، طريق {{$detail['road']}}، مجمع {{$detail['block']}}
-                        ، {{$detail['place']}}
+                        ، مبنى {{$detail['name']}} ، طريق {{$detail['road']}}، مجمع {{$detail['block']}}, {{$detail['place']}}
                     @endif
-                        <?php
-                        $index++;
-                        ?>
+                    @php $index++; @endphp
                 @endforeach
-                - مملكة البحرين. ورغبة منه في
-                تأجيرها، فقد تلاقت إرادة المؤجر مع إرادة المستأجر للانتفاع مقابل مبلغ محدد ووفقاً للبنود التالية: يعتبر
-                هذا التمهيد جزءاً لا يتجزأ من العقد.</p>
+                - مملكة البحرين. ورغبة منه في تأجيرها، فقد تلاقت إرادة المؤجر مع إرادة المستأجر للانتفاع مقابل مبلغ محدد
+                ووفقاً للبنود التالية: يعتبر هذا التمهيد جزءاً لا يتجزأ من العقد.
+            </p>
+
 
         </div>
         <br>
@@ -357,13 +372,20 @@
                     <br>
 
                     <li><b>العين المؤجرة:</b>
+                        @php
+                            $apartment = optional($data->apartments->first());
+                            $typeLabel = $apartment->is_type_house ? 'شقة' : ($apartment->is_type_store ? 'محل' : 'قطعة أرض');
+                            $purpose   = $apartment->is_type_store ? 'تجاري' : 'سكني';
+                        @endphp
+
                         @if(count($data['property_details']) > 1)
-                            الشقق التالية:
-                            {{ implode(', ', array_column($data['property_details'], 'flat')) }}، تستخدم لغرض سكني.
+                            {{ $typeLabel }}{{ count($data['property_details']) > 1 ? ' التالية:' : '' }}
+                            {{ implode(', ', array_column($data['property_details'], 'flat')) }}، تستخدم لغرض {{ $purpose }}.
                         @else
-                            شقة {{$data['property_details'][$index]['flat']}}, تستخدم لغرض سكني.
+                            {{ $typeLabel }} {{$data['property_details'][$index]['flat']}}, تستخدم لغرض {{ $purpose }}.
                         @endif
                     </li>
+
 
                 @endif
 
@@ -407,7 +429,14 @@
                 يتجدد إلا باتفاق صريح ومكتوب وموقع عليه من كلا الطرفين.</p>
             <br>
             <h3>البند الثالث: الغرض</h3>
-            <p>العين المؤجرة معدة كشقة تستخدم لغرض سكني.</p>
+            @php
+                $apartment = optional($data->apartments->first());
+                $typeLabel = $apartment->is_type_house ? 'شقة' : ($apartment->is_type_store ? 'محل' : 'قطعة أرض');
+                $purpose   = $apartment->is_type_store ? 'تجاري' : 'سكني';
+            @endphp
+
+            <p>العين المؤجرة معدة ك{{ $typeLabel }} تستخدم لغرض {{ $purpose }}.</p>
+
 
             <h3>البند الرابع: الأجرة</h3>
 
@@ -419,13 +448,13 @@
 
             <h3>البند الخامس: التزامات المؤجر</h3>
             <ul>
-                <li>1. يلتزم المؤجر بتسليم المستأجر العين المؤجرة وملحقاتها فور انعقاد العقد في حالة تصلح معها لاستيفاء
+                <li> يلتزم المؤجر بتسليم المستأجر العين المؤجرة وملحقاتها فور انعقاد العقد في حالة تصلح معها لاستيفاء
                     المنفعة التي أعدت لها وفقا لطبيعة العين المؤجرة.
                 </li>
                 <br>
-                <li>2. يلتزم المؤجر بإجراء الصيانة الضرورية للعين المؤجرة.</li>
+                <li> يلتزم المؤجر بإجراء الصيانة الضرورية للعين المؤجرة.</li>
                 <br>
-                <li>3. يلتزم المؤجر بالامتناع عن كل ما من شأنه أن يحول دون انتفاع المستأجر بالعين المؤجرة.</li>
+                <li> يلتزم المؤجر بالامتناع عن كل ما من شأنه أن يحول دون انتفاع المستأجر بالعين المؤجرة.</li>
             </ul>
             <br>
             <br>
@@ -437,30 +466,30 @@
             <br>
             <h3>البند السادس: التزامات المستأجر</h3>
             <ul>
-                <li>1. يلتزم المستأجر بسداد الأجرة في الموعد المحدد لها وفقا للبند الرابع أعلاه ويستلم بموجب ذلك إيصالا
+                <li> يلتزم المستأجر بسداد الأجرة في الموعد المحدد لها وفقا للبند الرابع أعلاه ويستلم بموجب ذلك إيصالا
                     موقعا من المؤجر وذلك بعد إيداع مبلغ الشيك بحساب المؤجر.
                 </li>
                 <br>
                 <br>
                 <br>
-                <li>2. يلتزم المستأجر بالمحافظة على العين المؤجرة وفقاً لعناية الشخص المعتاد، ولا يجوز له إحداث أي تغيير
+                <li> يلتزم المستأجر بالمحافظة على العين المؤجرة وفقاً لعناية الشخص المعتاد، ولا يجوز له إحداث أي تغيير
                     بها دون إذن كتابي من المؤجر.
                 </li>
                 <br>
-                <li>3. يلتزم المستأجر بالآداب العامة وعدم إزعاج باقي ساكني العين المؤجرة أثناء مدة إقامته.</li>
+                <li> يلتزم المستأجر بالآداب العامة وعدم إزعاج باقي ساكني العين المؤجرة أثناء مدة إقامته.</li>
                 <br>
-                <li>4. للمؤجر الحق بناءً على موافقة المستأجر بعد إخطاره بذلك الدخول للعين المؤجرة متى ما دعت الحاجة
+                <li> للمؤجر الحق بناءً على موافقة المستأجر بعد إخطاره بذلك الدخول للعين المؤجرة متى ما دعت الحاجة
                     وإجراء
                     التصليحات اللازمة.
                 </li>
                 <br>
-                <li>5. يلتزم المستأجر بسداد فواتير الكهرباء والماء والهاتف وأي رسوم وخدمات أخرى.</li>
+                <li> يلتزم المستأجر بسداد فواتير الكهرباء والماء والهاتف وأي رسوم وخدمات أخرى.</li>
                 <br>
-                <li>6. يلتزم المستأجر باستخدام العين المؤجرة ووفقاً للغرض المعدة له.</li>
+                <li> يلتزم المستأجر باستخدام العين المؤجرة ووفقاً للغرض المعدة له.</li>
                 <br>
-                <li>7. يلتزم المستأجر بإجراء الصيانة الإيجارية للعين المؤجرة.</li>
+                <li> يلتزم المستأجر بإجراء الصيانة الإيجارية للعين المؤجرة.</li>
                 <br>
-                <li>8. يلتزم المستأجر بإرسال إشعار مكتوب للمؤجر قبل شهر واحد اذا قرر إخلاء العين المؤجرة وسداد الأجرة
+                <li> يلتزم المستأجر بإرسال إشعار مكتوب للمؤجر قبل شهر واحد اذا قرر إخلاء العين المؤجرة وسداد الأجرة
                     حتى
                     نهاية مدة الإشعار.
                 </li>
@@ -518,27 +547,27 @@
                     التالية:
                 </li>
                 <br>
-                <li>1. إذا امتنع المستأجر عن سداد مبلغ الأجرة المستحقة في ذمته في الموعد المحدد لها وفقاً لهذا العقد.
+                <li> إذا امتنع المستأجر عن سداد مبلغ الأجرة المستحقة في ذمته في الموعد المحدد لها وفقاً لهذا العقد.
                 </li>
                 <br>
-                <li>2. إذا تنازل المستأجر أو أجر من الباطن كل أو بعض العين المؤجرة أو أخلاها لغير مالكها دون إذن كتابي
+                <li> إذا تنازل المستأجر أو أجر من الباطن كل أو بعض العين المؤجرة أو أخلاها لغير مالكها دون إذن كتابي
                     مسبق من المؤجر.
                 </li>
                 <br>
-                <li>3. إذا شغل المستأجر العين المؤجرة للسكنى بما يجاوز العدد المألوف.</li>
+                <li> إذا شغل المستأجر العين المؤجرة للسكنى بما يجاوز العدد المألوف.</li>
                 <br>
-                <li>4. إذا استعمل المستأجر العين المؤجرة بشكل يخالف النظام العام والآداب العامة أو بشكل يضر بمصلحة
+                <li> إذا استعمل المستأجر العين المؤجرة بشكل يخالف النظام العام والآداب العامة أو بشكل يضر بمصلحة
                     المؤجر.
                 </li>
                 <br>
                 <br>
                 <br>
-                <li>5. إذا أصبحت العين المؤجرة آيلة للسقوط ويخشى منها على سلامة السكان، أو صدر قرار إداري نهائي بالهدم
+                <li> إذا أصبحت العين المؤجرة آيلة للسقوط ويخشى منها على سلامة السكان، أو صدر قرار إداري نهائي بالهدم
                     من البلدية المختصة.
                 </li>
                 <br>
                 <br>
-                <li>6. إذا استعمل المستأجر العين المؤجرة في غير الغرض المعدة من اجله أو أحدث تغييرا من شأنه الأضرار
+                <li> إذا استعمل المستأجر العين المؤجرة في غير الغرض المعدة من اجله أو أحدث تغييرا من شأنه الأضرار
                     بسلامتها الإنشائية.
                 </li>
             </ul>
@@ -565,13 +594,13 @@
             <br>
             <h3>البند العاشر: القانون الواجب التطبيق والاختصاص القضائي</h3>
             <ul>
-                <li>1. يخضع هذا العقد ويفسر وفقاً لأحكام وقوانين مملكة البحرين، وتختص محاكم مملكة البحرين بنظر أي نزاع
+                <li> يخضع هذا العقد ويفسر وفقاً لأحكام وقوانين مملكة البحرين، وتختص محاكم مملكة البحرين بنظر أي نزاع
                     ينشأ
                     عن هذا العقد.
                 </li>
                 <br>
                 <br>
-                <li>2. يتعين على الطرفين بذل كل جهد ممكن لتسوية أي نزاع أو خلاف ينشأ عن تفسير أي من أحكام هذا العقد
+                <li> يتعين على الطرفين بذل كل جهد ممكن لتسوية أي نزاع أو خلاف ينشأ عن تفسير أي من أحكام هذا العقد
                     ودياً،
                     وفي حالة عدم توصل الطرفين لتسوية ودية، يحال النزاع للقضاء للبت فيه.
                 </li>
