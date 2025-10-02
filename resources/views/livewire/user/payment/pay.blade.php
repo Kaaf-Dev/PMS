@@ -78,7 +78,7 @@
                         <!--begin::Price-->
                         <div class="ms-5 d-flex align-items-center gap-3">
                         <span class="fs-2x fw-bold">
-                            <img src="{{asset('user-assets/media/logos/visa_cards.svg')}}" width="50">
+                            <img src="{{asset('user-assets/media/logos/visa_cards1.svg')}}" width="60">
                         </span>
                             <span class="fs-2x fw-bold">
                             <img src="{{asset('user-assets/media/logos/apple_pay.svg')}}" width="40" alt="Apple Pay">
