@@ -65,7 +65,7 @@
                             <!--begin::Info-->
                             <div class="flex-grow-1">
                                 <h2 class="d-flex align-items-center fs-2 fw-bold flex-wrap">
-                                    Cards/Apple Pay
+                                    Credit / Debit
                                     <span class="badge badge-light-success ms-2 fs-7">Most popular</span>
                                 </h2>
                                 <div class="fw-semibold opacity-50">
