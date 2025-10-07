@@ -107,9 +107,9 @@ class FinanceController extends Controller
 
                             if ($is_paid == 1) {
 
-                                $payment_method = PaymentTransaction::MASTERCARD;
+                                $payment_method = Receipt::PAYMENT_METHOD_VISA;
                                 if ($eazy_payment_method == 'Apple Pay') {
-                                    $payment_method = PaymentTransaction::APPLE;
+                                    $payment_method = Receipt::PAYMENT_METHOD_APPLE;
                                 }
 
                                 if ($transaction->close()) {

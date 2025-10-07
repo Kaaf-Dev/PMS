@@ -16,6 +16,7 @@ class Receipt extends Model
     const PAYMENT_METHOD_CHEQUE = 'cheque';
     const PAYMENT_METHOD_BANK = 'bank';
     const PAYMENT_METHOD_BENEFIT = 'benefit';
+    const PAYMENT_METHOD_APPLE = 'apple';
     const PAYMENT_METHOD_FREE = 'free';
 
     protected $fillable = [
@@ -48,6 +49,7 @@ class Receipt extends Model
             SELF::PAYMENT_METHOD_BANK => 'تحويل بنكي',
             SELF::PAYMENT_METHOD_BENEFIT => 'بينيفت',
             SELF::PAYMENT_METHOD_FREE => 'فترة مجانية',
+            SELF::PAYMENT_METHOD_APPLE => 'ابل باي',
         ];
     }
 
