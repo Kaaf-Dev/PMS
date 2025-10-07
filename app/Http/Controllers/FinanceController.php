@@ -7,9 +7,9 @@ use App\Enums\PaymentMethods;
 use App\Events\ReceiptCreated;
 use App\Models\PaymentTransaction;
 use App\Models\Receipt;
+use App\Repository\receiptProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
 class FinanceController extends Controller
@@ -113,15 +113,13 @@ class FinanceController extends Controller
                                 }
 
                                 if ($transaction->close()) {
-                                    $receipt = new Receipt();
-                                    $receipt->invoice_id = $transaction->invoice_id;
-                                    $receipt->amount = $amount;
-                                    $receipt->date = Carbon::now();
-                                    $receipt->transaction_id = $transaction->id;
-                                    $receipt->payment_method = $payment_method;
-                                    $receipt->save();
-
-                                    event(new ReceiptCreated($receipt));
+                                    if (!$transaction->receipt) {
+                                        $receipt = new receiptProvider($transaction->Invoice->id, $transaction->id, $payment_method, $amount);
+                                        $receipt = $receipt->createReceipt();
+                                        if ($receipt['status']) {
+                                            event(new ReceiptCreated($receipt['receipt']));
+                                        }
+                                    }
                                 }
 
                             } else {

@@ -89,6 +89,7 @@ class receiptProvider
 
     public function createReceipt()
     {
+
         $receipt = new Receipt();
         $receipt->invoice_id = $this->getInvoiceId();
         $receipt->amount = $this->getAmount();

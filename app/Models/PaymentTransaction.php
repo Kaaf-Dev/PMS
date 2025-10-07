@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Validation\Rules\In;
 
 class PaymentTransaction extends Model
 {
@@ -56,6 +56,11 @@ class PaymentTransaction extends Model
     public function Invoice()
     {
         return $this->belongsTo(Invoice::class, 'invoice_id');
+    }
+
+    public function receipt(): HasOne
+    {
+        return $this->hasOne(Receipt::class, 'transaction_id');
     }
 
     public function getTrxId()

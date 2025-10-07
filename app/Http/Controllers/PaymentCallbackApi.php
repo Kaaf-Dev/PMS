@@ -3,13 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Events\ReceiptCreated;
-use App\Http\Controllers\Controller;
 use App\Models\PaymentTransaction;
 use App\Models\Receipt;
 use App\Repository\BenefitPay\benefitPayCheckStatus;
 use App\Repository\receiptProvider;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class PaymentCallbackApi extends Controller
 {
@@ -59,7 +56,7 @@ class PaymentCallbackApi extends Controller
                                 } elseif ($result['status']) { // Create receipt if successful payment
                                     if ($transaction->close()) {
                                         $receipt = new receiptProvider($transaction->Invoice->id, $transaction->id, Receipt::PAYMENT_METHOD_BENEFIT, $amount);
-                                        if ($transaction->close()) {
+                                        if (!$transaction->receipt) {
                                             $receipt = $receipt->createReceipt();
                                             if ($receipt['status']) {
                                                 event(new ReceiptCreated($receipt['receipt']));
