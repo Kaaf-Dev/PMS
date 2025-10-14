@@ -2,7 +2,7 @@
     <!--begin::Input group-->
     <div class="mb-0">
         @can('reply', $this->ticket)
-        <textarea wire:model.defer="reply" class="form-control form-control-solid placeholder-gray-600 fw-bold fs-4 ps-9 pt-7" rows="6" name="message" placeholder="إضافة جديد.."></textarea>
+        <textarea wire:model.defer="reply" class="form-control form-control-solid placeholder-gray-600 fw-bold fs-4 ps-9 pt-7" rows="6" name="message" placeholder="{{__("إنشاء جديد")}}"></textarea>
         <!--begin::Submit-->
         <button wire:click="sendReply" class="btn btn-primary mt-n20 mb-20 position-relative float-end me-7">
             <span wire:loading.remove wire:target="sendReply">إرسال</span>
@@ -16,7 +16,7 @@
 
             <!--begin::Input group-->
             <div class="fv-row mt-4 mb-8">
-                <label class="fs-6 fw-semibold mb-2">إضافة مرفقات مع التعليق</label>
+                <label class="fs-6 fw-semibold mb-2">{{ __("إضافة مرفقات مع التعليق") }}</label>
 
                 <div class="input-group input-group-solid mb-5">
                     <input wire:model="attachment" type="file" class="form-control form-control-solid" />
@@ -38,7 +38,7 @@
             @if($attachments)
                 <!--begin::Input group-->
                 <div class="fv-row mb-8">
-                    <label class="fs-6 fw-semibold mb-2">المرفقات</label>
+                    <label class="fs-6 fw-semibold mb-2">{{ __("المرفقات") }}</label>
 
                     <div class="card-body pt-3">
                         @foreach($attachments ?? [] as $key => $attachment)
@@ -55,7 +55,7 @@
                                 <div class="d-flex flex-row-fluid align-items-center flex-wrap my-lg-0 me-2">
                                     <!--begin::Title-->
                                     <div class="flex-grow-1 my-lg-0 my-2 me-2">
-                                        <a href="#" class="text-gray-800 fw-bold text-hover-primary fs-6">مرفق</a>
+                                        <a href="#" class="text-gray-800 fw-bold text-hover-primary fs-6">{{__("مرفق")}}</a>
                                         <span class="text-muted fw-semibold d-block pt-1">{{ $attachment->getClientOriginalName() }}</span>
                                     </div>
                                     <!--end::Title-->

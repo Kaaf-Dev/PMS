@@ -14,7 +14,7 @@
                 <!--end::Svg Icon-->
                 <div class="fw-bolder fs-2x text-dark mb-2 mt-5">{{ $invoices_amount }}</div>
                 <i wire:loading wire:target="fetch" class="fa fa-spin fa-spinner fs-2"></i>
-                <div class="fw-semibold text-gray-500">قيمة الفواتير المستحقة</div>
+                <div class="fw-semibold text-gray-500">{{ __("قيمة الفواتير المستحقة") }}</div>
             </div>
             <!--end::Body-->
         </a>

@@ -18,13 +18,13 @@
                                     <!--begin::Input wrapper-->
                                     <div class="position-relative">
                                         <i class="ki-outline ki-magnifier fs-1 text-primary position-absolute top-50 translate-middle ms-9"></i>
-                                        <input wire:model.debounce.500ms="search" type="text" class="form-control form-control-lg form-control-solid ps-14" placeholder="البحث في طلبات الصيانة" />
+                                        <input wire:model.debounce.500ms="search" type="text" class="form-control form-control-lg form-control-solid ps-14" placeholder="{{ __("البحث في طلبات الصيانة") }}" />
                                     </div>
                                     <!--end::Input wrapper-->
                                 </div>
                                 <div class="col-md-4">
                                     <select wire:model.debounce.500ms="contract_id" class="form-select form-select-lg form-select-solid">
-                                        <option value="">اختيار العقد</option>
+                                        <option value="">{{ __("اختيار العقد") }}</option>
                                         @foreach($this->contracts ?? [] as $contract)
                                             <option value="{{ $contract->id }}">(#{{ $contract->id }}): {{ $contract->start_at_human }}</option>
                                         @endforeach
@@ -33,7 +33,7 @@
 
                                 <div class="col-md-4">
                                     <select wire:model.debounce.500ms="status" class="form-select form-select-lg form-select-solid">
-                                        <option value="">الحالة</option>
+                                        <option value="">{{__("الحالة")}}</option>
                                         @foreach($this->status_list ?? [] as $key => $status)
                                             <option value="{{ $key }}">{{ $status }}</option>
                                         @endforeach
@@ -46,11 +46,11 @@
 
                             <div wire:loading class="flex-column flex-center my-5">
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                                الرجاء الانتظار...
+                                {{__("الرجاء الانتظار...")}}
                             </div>
 
                             <!--begin::Heading-->
-                            <h1 class="text-dark mt-15 mb-10">طلبات الصيانة</h1>
+                            <h1 class="text-dark mt-15 mb-10">{{__("طلبات الصيانة")}}</h1>
                             <!--end::Heading-->
                             <!--begin::Tickets List-->
                             <div class="mb-10">
@@ -68,7 +68,7 @@
                                                 <div class="d-flex flex-column">
                                                     <!--begin::Content-->
                                                     <div class="d-flex align-items-center mb-2">
-                                                        <span class="badge badge-primary badge-outline my-1 me-2">الرقم المرجعي: {{ $ticket->no ?? '-' }}</span>
+                                                        <span class="badge badge-primary badge-outline my-1 me-2">{{ __("الرقم المرجعي") }}: {{ $ticket->no ?? '-' }}</span>
                                                         <span class="badge badge-{{ $ticket->status_class }} my-1">{{ $ticket->status_string }}</span>
                                                     </div>
 
@@ -98,7 +98,7 @@
                                             <div class="">
                                                 <img src="{{ asset('user-assets/media/illustrations/sigma-1/5.png') }}"
                                                      class="mw-350px">
-                                                <div class="fs-3 fw-bolder text-dark mb-4">لا يوجد طلبات صيانة بعد.</div>
+                                                <div class="fs-3 fw-bolder text-dark mb-4">{{__("لا يوجد بيانات")}}</div>
                                                 <div class="fs-6"></div>
                                             </div>
                                         </div>

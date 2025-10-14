@@ -16,7 +16,8 @@
                             <div class="d-flex flex-column">
                                 <!--begin::Title-->
                                 <h1 class="text-gray-800 fw-semibold mb-10">
-                                    التعليقات
+                                    {{ __("التعليقات") }}
+
 
                                     <div wire:loading wire:target="load">
                                         <span class="spinner-border spinner-border-sm align-middle"></span>
@@ -83,7 +84,7 @@
                                                                 <div class="d-flex flex-row-fluid align-items-center flex-wrap my-lg-0 me-2">
                                                                     <!--begin::Title-->
                                                                     <div class="flex-grow-1 my-lg-0 my-2 me-2">
-                                                                        <a href="{{ $attachment->url }}" target="_blank" class="text-gray-800 fw-bold text-hover-primary fs-6">مرفق</a>
+                                                                        <a href="{{ $attachment->url }}" target="_blank" class="text-gray-800 fw-bold text-hover-primary fs-6">{{__("مرفق")}}</a>
                                                                         <span class="text-muted fw-semibold d-block pt-1">{{ $attachment->file_name }}</span>
                                                                     </div>
                                                                     <!--end::Title-->

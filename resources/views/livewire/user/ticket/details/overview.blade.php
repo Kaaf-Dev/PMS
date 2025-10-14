@@ -28,13 +28,13 @@
                                     <!--end::Label-->
                                     <!--begin::Label-->
                                     <span class="fw-semibold text-muted me-6">
-                                        العقد:
+                                        {{ __("العقد") }}:
                                         <a href="#" class="text-muted text-hover-primary">#{{ $this->ticket->contract->id }}</a>
                                     </span>
                                     <!--end::Label-->
                                     <!--begin::Label-->
                                     <span class="fw-semibold text-muted">
-                                        آخر تحديث:
+                                        {{ __("آخر تحديث") }}:
                                         <span class="fw-bold text-gray-600 me-1">{{ $this->ticket->updated_at_human }}</span>({{ $this->ticket->updated_at->format('Y.m.d H:i a') }})
                                     </span>
                                     <!--end::Label-->
@@ -77,12 +77,12 @@
                                     <!--begin::Wrapper-->
                                     <div class="d-flex flex-column">
                                         <!--begin::Title-->
-                                        <h4 class="mb-1 text-dark">ملاحظات</h4>
+                                        <h4 class="mb-1 text-dark">{{ __("ملاحظات") }}</h4>
                                         <!--end::Title-->
 
                                         <!--begin::Content-->
                                         <span>
-                                            الوقت المتاح للزيارة
+                                            {{ __("الوقت المتاح للزيارة") }}
                                             <b>
                                                 {{ $this->ticket->visit_availability_at_string }}
                                             </b>
@@ -116,7 +116,7 @@
                                         <div class="d-flex flex-row-fluid align-items-center flex-wrap my-lg-0 me-2">
                                             <!--begin::Title-->
                                             <div class="flex-grow-1 my-lg-0 my-2 me-2">
-                                                <a href="{{ $attachment->url }}" target="_blank" class="text-gray-800 fw-bold text-hover-primary fs-6">مرفق</a>
+                                                <a href="{{ $attachment->url }}" target="_blank" class="text-gray-800 fw-bold text-hover-primary fs-6">{{ __("مرفق") }}</a>
                                                 <span class="text-muted fw-semibold d-block pt-1">{{ $attachment->file_name }}</span>
                                             </div>
                                             <!--end::Title-->
@@ -156,12 +156,12 @@
                                     <!--begin::Wrapper-->
                                     <div class="d-flex flex-column pe-0 pe-sm-10">
                                         <!--begin::Title-->
-                                        <h5 class="mb-1">تحديد موعد الزيارة</h5>
+                                        <h5 class="mb-1">{{ __("تحديد موعد الزيارة") }}</h5>
                                         <!--end::Title-->
 
                                         <!--begin::Content-->
                                         <span class="">
-                                            تم تحديد موعد الزيارة بتاريخ:
+                                            {{ __("تم تحديد موعد الزيارة بتاريخ") }}:
                                             <br>
                                             <strong>
                                                 {{ $this->ticket->visit_in_date_human }} ({{ $this->ticket->visit_in_human }})
@@ -191,12 +191,12 @@
                                     <!--begin::Wrapper-->
                                     <div class="d-flex flex-column pe-0 pe-sm-10">
                                         <!--begin::Title-->
-                                        <h5 class="mb-1">تمت الزيارة</h5>
+                                        <h5 class="mb-1">{{ __("تمت الزيارة") }}</h5>
                                         <!--end::Title-->
 
                                         <!--begin::Content-->
                                         <span class="">
-                                            تمت الزيارة بتاريخ:
+                                            {{ __("تمت الزيارة بتاريخ") }}:
                                             <br>
                                             <strong>
                                                 {{ $this->ticket->visited_at_date_human }} ({{ $this->ticket->visited_at_human }})
@@ -226,13 +226,12 @@
                                     <!--begin::Wrapper-->
                                     <div class="d-flex flex-column pe-0 pe-sm-10">
                                         <!--begin::Title-->
-                                        <h5 class="mb-1">اعتماد أعمال الصيانة</h5>
+                                        <h5 class="mb-1">{{ __("اعتماد أعمال الصيانة") }}</h5>
                                         <!--end::Title-->
 
                                         <!--begin::Content-->
                                         <span class="mb-8">
-                                        تم إرسال طلب اعتماد أعمال الصيانة من قِبل مندوب شركة الصيانة
-                                        في حال انتهاء المندوب من الأعمال المطلوبة يرجى تزويده برمز التأكيد لإنهاء هذا الطلب
+                                            {{ __("تم إرسال طلب اعتماد أعمال الصيانة من قِبل مندوب شركة الصيانة في حال انتهاء المندوب من الأعمال المطلوبة يرجى تزويده برمز التأكيد لإنهاء هذا الطلب") }}
                                     </span>
 
                                         <span>
@@ -245,7 +244,8 @@
                                                 <button wire:click="showVerificationCode" type="button" class="btn btn-sm btn-primary">
                                                     <div wire:loading.remove wire:target="showVerificationCode">
 
-                                                        عرض رمز التأكيد
+{{ __("عرض رمز التأكيد") }}
+
 
                                                     </div>
                                                     <!--begin::Indicator progress-->

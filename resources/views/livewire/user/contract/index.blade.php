@@ -11,7 +11,8 @@
                     <!--begin::Title-->
                     <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bold fs-lg-2x gap-2">
                         <span>
-                            عقود الإيجار
+{{ __("عقود الإيجار") }}
+
                         </span>
                     </h1>
                     <!--end::Title-->

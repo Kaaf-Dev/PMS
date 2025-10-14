@@ -5,7 +5,7 @@
             <!--begin::Title-->
             <h3 class="card-title align-items-start flex-column">
                 <span class="card-label fw-bold text-gray-800">
-                    التسديدات
+                    {{ __("التسديدات") }}
                 </span>
             </h3>
             <!--end::Title-->
@@ -42,15 +42,15 @@
                         @forelse($invoices as $invoice)
                             <tr>
                                 <td>
-                                    <span class="text-muted fw-semibold d-block fs-8">#الفاتورة</span>
+                                    <span class="text-muted fw-semibold d-block fs-8">#{{__("الفاتورة")}}</span>
                                     <a href="#" class="text-dark fw-bold text-hover-primary mb-1 fs-6">{{ $invoice->no }}</a>
                                 </td>
                                 <td class="">
-                                    <span class="text-muted fw-semibold d-block fs-8">القيمة</span>
+                                    <span class="text-muted fw-semibold d-block fs-8">{{__("القيمة")}}</span>
                                     <span class="text-dark fw-bold d-block fs-7">{{ $invoice->amount_human }}</span>
                                 </td>
                                 <td class="">
-                                    <span class="text-muted fw-semibold d-block fs-8">الاستحقاق</span>
+                                    <span class="text-muted fw-semibold d-block fs-8">{{__("تاريخ الاستحقاق")}}</span>
                                     <span class="text-dark fw-bold d-block fs-7">{{ $invoice->due_human }}</span>
                                 </td>
                                 <td class="">
@@ -62,16 +62,16 @@
                                 <td class="">
 
                                     <button wire:click="printReceipt('{{$invoice->id}}')" class="btn btn-sm btn-light btn-active-light-primary">
-                                        طباعة
+                                        {{__("طباعة")}}
                                     </button>
 
                                 </td>
                             </tr>
                         @empty
                             @if (empty($invoices))
-                                الرجاء الانتظار...
+                                {{__("الرجاء الانتظار...")}}
                             @else
-                                لا يوجد بيانات
+                                {{__("لا يوجد بيانات")}}
                             @endif
                         @endforelse
                         </tbody>

@@ -11,7 +11,7 @@
                     <!--begin::Title-->
                     <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bold fs-lg-2x gap-2">
                         <span>
-                            طلبات الصيانة
+{{ __("طلبات الصيانة") }}
                         </span>
                     </h1>
                     <!--end::Title-->
@@ -23,7 +23,7 @@
             <div class="d-flex align-self-center flex-center flex-shrink-0">
                 <a wire:click="newTicket" class="btn btn-sm btn-success d-flex flex-center ms-3 px-4 py-3">
                     <i class="ki-outline ki-plus-square fs-2"></i>
-                    <span>إنشاء جديد</span>
+                    <span>{{ __("إنشاء جديد") }}</span>
                 </a>
             </div>
             <!--end::Actions-->

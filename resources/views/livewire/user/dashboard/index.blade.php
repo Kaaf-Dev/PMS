@@ -11,7 +11,7 @@
                     <!--begin::Title-->
                     <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bold fs-lg-2x gap-2">
                         <span>
-                            <span class="fw-light">مرحبًا،</span>&nbsp;{{ Auth::user()->name }}
+                            <span class="fw-light">{{__("مرحبًا")}}،</span>&nbsp;{{ Auth::user()->name }}
                         </span>
                     </h1>
                     <!--end::Title-->

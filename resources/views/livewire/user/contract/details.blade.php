@@ -10,7 +10,7 @@
                 <div class="page-title d-flex align-items-center me-3">
                     <!--begin::Title-->
                     <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bold fs-lg-2x gap-2">
-                        <span>عقد الإيجار</span>
+                        <span>{{ __("عقد الإيجار") }}</span>
                     </h1>
                     <!--end::Title-->
                 </div>

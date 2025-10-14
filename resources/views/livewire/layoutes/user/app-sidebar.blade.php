@@ -6,7 +6,7 @@
             <!--begin::Links-->
             <div class="mb-0">
                 <!--begin::Title-->
-                <h3 class="text-gray-800 fw-bold mb-8">لوحة التحكم</h3>
+                <h3 class="text-gray-800 fw-bold mb-8">{{ __("لوحة التحكم") }}</h3>
                 <!--end::Title-->
                 <!--begin::Row-->
                 <div class="row g-5" data-kt-buttons="true" data-kt-buttons-target="[data-kt-button]">
@@ -20,7 +20,7 @@
                             </span>
                             <!--end::Icon-->
                             <!--begin::Label-->
-                            <span class="fs-7 fw-bold">العقود</span>
+                            <span class="fs-7 fw-bold">{{ __("العقود") }}</span>
                             <!--end::Label-->
                         </a>
                         <!--end::Link-->
@@ -36,7 +36,7 @@
                             </span>
                             <!--end::Icon-->
                             <!--begin::Label-->
-                            <span class="fs-7 fw-bold">الصيانة</span>
+                            <span class="fs-7 fw-bold">{{ __("الصيانة") }}</span>
                             <!--end::Label-->
                         </a>
                         <!--end::Link-->

@@ -28,7 +28,7 @@
                         <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="{{ getDataKtMenuPlacementBottomValue() }}" data-kt-menu-offset="-100,0" class="menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2">
                             <!--begin:Menu link-->
                             <span class="menu-link">
-                                <span class="menu-title">لوحة التحكم</span>
+                                <span class="menu-title">{{__("لوحة التحكم")}}</span>
                                 <span class="menu-arrow d-lg-none"></span>
                             </span>
                             <!--end:Menu link-->
@@ -52,8 +52,7 @@
                                                                 <i class="ki-outline ki-cheque text-primary fs-1"></i>
                                                             </span>
                                                             <span class="d-flex flex-column">
-                                                                <span class="fs-6 fw-bold text-gray-800">العقود</span>
-                                                                <span class="fs-7 fw-semibold text-muted">عقود التأجير</span>
+                                                                <span class="fs-6 fw-bold text-gray-800">{{__("العقود")}}</span>
                                                             </span>
                                                         </a>
                                                         <!--end:Menu link-->
@@ -71,8 +70,7 @@
 																				<i class="ki-outline ki-office-bag text-danger fs-1"></i>
 																			</span>
                                                             <span class="d-flex flex-column">
-																				<span class="fs-6 fw-bold text-gray-800">طلبات الصيانة</span>
-																				<span class="fs-7 fw-semibold text-muted">متابعة طلبات الصيانة</span>
+																				<span class="fs-6 fw-bold text-gray-800">{{__("طلبات الصيانة")}}</span>
 																			</span>
                                                         </a>
                                                         <!--end:Menu link-->
@@ -134,7 +132,7 @@
                         <!--begin::Menu item-->
                         <div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="left-start" data-kt-menu-offset="-15px, 0">
                             <a href="#" class="menu-link px-5">
-												<span class="menu-title position-relative">المظهر
+												<span class="menu-title position-relative">{{__("المظهر")}}
 												<span class="ms-5 position-absolute translate-middle-y top-50 end-0">
 													<i class="ki-outline ki-night-day theme-light-show fs-2"></i>
 													<i class="ki-outline ki-moon theme-dark-show fs-2"></i>
@@ -148,7 +146,7 @@
 														<span class="menu-icon" data-kt-element="icon">
 															<i class="ki-outline ki-night-day fs-2"></i>
 														</span>
-                                        <span class="menu-title">فاتح</span>
+                                        <span class="menu-title">{{__("نهاري")}}</span>
                                     </a>
                                 </div>
                                 <!--end::Menu item-->
@@ -158,7 +156,7 @@
 														<span class="menu-icon" data-kt-element="icon">
 															<i class="ki-outline ki-moon fs-2"></i>
 														</span>
-                                        <span class="menu-title">داكن</span>
+                                        <span class="menu-title">{{__("ليلي")}}</span>
                                     </a>
                                 </div>
                                 <!--end::Menu item-->
@@ -168,7 +166,7 @@
 														<span class="menu-icon" data-kt-element="icon">
 															<i class="ki-outline ki-screen fs-2"></i>
 														</span>
-                                        <span class="menu-title">تلقائي</span>
+                                        <span class="menu-title">{{__("تلقائي")}}</span>
                                     </a>
                                 </div>
                                 <!--end::Menu item-->
@@ -178,13 +176,24 @@
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
                         <div class="menu-item px-5">
-                            <a href="{{ route('user.auth.logout') }}" class="menu-link px-5">تسجيل الخروج</a>
+                            <a href="{{ route('user.auth.logout') }}" class="menu-link px-5">{{__("تسجيل الخروج")}}</a>
                         </div>
                         <!--end::Menu item-->
                     </div>
                     <!--end::User account menu-->
                     <!--end::Menu wrapper-->
+                    <!--begin::Menu item-->
+                    <div class="menu-item px-5">
+                        <a href="{{ LaravelLocalization::getLocalizedURL(app()->getLocale() === 'ar' ? 'en' : 'ar') }}" class="menu-link px-5">
+        <span class="menu-title position-relative">
+            {{ app()->getLocale() === 'ar' ? 'EN' : 'AR' }}
+        </span>
+                        </a>
+                    </div>
+                    <!--end::Menu item-->
+
                 </div>
+
                 <!--end::User menu-->
                 <!--begin::Header menu toggle-->
                 <div class="app-navbar-item d-lg-none ms-2 me-n3" title="Show header menu">

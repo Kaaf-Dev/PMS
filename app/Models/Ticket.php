@@ -240,10 +240,10 @@ class Ticket extends Model
     public static function getStatusList()
     {
         return [
-            Ticket::STATUS_NEW => 'جديد',
-            Ticket::STATUS_UNDER_PROCESSING => 'قيد الإنجاز',
-            Ticket::STATUS_COMPLETE => 'مكتملة',
-            Ticket::STATUS_REJECTED => 'مرفوض',
+            Ticket::STATUS_NEW => __("جديد"),
+            Ticket::STATUS_UNDER_PROCESSING => __("قيد الإنجاز"),
+            Ticket::STATUS_COMPLETE => __("مكتملة"),
+            Ticket::STATUS_REJECTED => __("مرفوض"),
         ];
     }
 
@@ -294,8 +294,8 @@ class Ticket extends Model
     public static function getPriorityList()
     {
         return [
-            Ticket::PRIORITY_NORMAL => 'عادية',
-            Ticket::PRIORITY_URGENT => 'طارئة',
+            Ticket::PRIORITY_NORMAL => __("عادية"),
+            Ticket::PRIORITY_URGENT => __("طارئة"),
         ];
     }
 
@@ -339,9 +339,9 @@ class Ticket extends Model
     public static function getVisitAvailabilityAtList()
     {
         return [
-            Ticket::VISIT_AVAILABILITY_AT_FIRST => 'فترة أولى: من 7 إلى 10 صباحًا',
-            Ticket::VISIT_AVAILABILITY_AT_SECOND => 'فترة ثانية: من 10 إلى 1 مساءً',
-            Ticket::VISIT_AVAILABILITY_AT_THIRD => 'فترة ثالثة: من 1 إلى 4 مساءً',
+            Ticket::VISIT_AVAILABILITY_AT_FIRST => __("فترة أولى: من 7 إلى 10 صباحًا"),
+            Ticket::VISIT_AVAILABILITY_AT_SECOND => __("فترة ثانية: من 10 إلى 1 مساءً"),
+            Ticket::VISIT_AVAILABILITY_AT_THIRD => __("فترة ثالثة: من 1 إلى 4 مساءً"),
         ];
     }
 
@@ -495,7 +495,7 @@ class Ticket extends Model
 
     public function getTicketNameAttribute()
     {
-        $userName = 'صيانة عامة';
+        $userName = __("صيانة عامة");
         if ($this->contract) {
             $userName = $this->contract->user->name;
         }

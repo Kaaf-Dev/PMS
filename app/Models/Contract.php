@@ -162,9 +162,9 @@ class Contract extends Model
     public function getActiveStatusStringAttribute()
     {
         $strings = [
-            0 => 'غير فعّال',
-            1 => 'فعّال',
-            2 => 'العقد منتهي',
+            0 => __("غير فعّال"),
+            1 => __("فعّال"),
+            2 => __("العقد منتهي"),
         ];
 
         return $strings[$this->active_status ?? 0];
@@ -188,7 +188,7 @@ class Contract extends Model
 
     public function getCostHumanAttribute()
     {
-        return number_format($this->cost ?? 0, 2) . ' د.ب.';
+        return number_format($this->cost ?? 0, 2) . ' ' .__("دب");
     }
 
     public function cancel()

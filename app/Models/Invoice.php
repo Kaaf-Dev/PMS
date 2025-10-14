@@ -135,9 +135,9 @@ class Invoice extends Model
     public function getTypeStringAttribute()
     {
         $strings = [
-            self::TYPE_RENTAL => 'بدل إيجار',
-            self::TYPE_SERVICES => 'بدل خدمات',
-            self::TYPE_OTHER => 'أخرى',
+            self::TYPE_RENTAL => __("بدل إيجار"),
+            self::TYPE_SERVICES => __("بدل خدمات"),
+            self::TYPE_OTHER => __("أخرى"),
         ];
 
         return $strings[$this->type ?? 1];
@@ -162,13 +162,13 @@ class Invoice extends Model
     public function getPaidStringAttribute()
     {
         if ($this->is_paid) {
-            $paid_string = 'مدفوعة';
+            $paid_string = __("مدفوعة");
 
         } elseif ($this->is_partial_paid) {
-            $paid_string = 'مدفوعة جزئيًا';
+            $paid_string = __("مدفوعة جزئيًا");
 
         } else {
-            $paid_string = 'غير مدفوعة';
+            $paid_string = __("غير مدفوعة");
 
         }
 

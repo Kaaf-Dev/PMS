@@ -4,7 +4,7 @@
         <div class="card-header">
             <!--begin::Card title-->
             <div class="card-title">
-                <h2>الفواتير</h2>
+                <h2>{{ __("الفواتير") }}</h2>
             </div>
             <!--end::Card title-->
             <!--begin::Toolbar-->
@@ -37,13 +37,12 @@
                                     <!--begin::Thead-->
                                     <thead class="border-bottom border-gray-200 fs-7 text-uppercase fw-bold">
                                     <tr class="text-start text-gray-400">
-                                        <th class="min-w-100px">رقم الفاتورة</th>
-                                        <th class="min-w-100px align-left">المبلغ</th>
-                                        <th class="min-w-100px">الحالة</th>
-                                        <th class="min-w-100px">الاستحقاق</th>
-                                        <th class="min-w-100px">البيان</th>
-                                        <th class="min-w-100px">ملاحظات</th>
-                                        <th class="w-100px">الفاتورة</th>
+                                        <th class="min-w-100px">{{ __("رقم الفاتورة") }}</th>
+                                        <th class="min-w-100px align-left">{{ __("المبلغ") }}</th>
+                                        <th class="min-w-100px">{{__("الحالة")}}</th>
+                                        <th class="min-w-100px">{{__("تاريخ الاستحقاق")}}</th>
+                                        <th class="min-w-100px">{{ __("البيان") }}</th>
+                                        <th class="w-100px"></th>
                                     </tr>
                                     </thead>
                                     <!--end::Thead-->
@@ -66,20 +65,13 @@
                                             <td>
                                                 {{ $invoice->type_string }}
                                             </td>
-                                            <td>
-                                                @if($invoice->notes)
-                                                    {{ $invoice->notes }}
-                                                @else
-                                                    <span class="badge badge-square bg-gray-700 text-white p-1">لا يوجد</span>
-                                                @endif
-                                            </td>
                                             <td class="">
                                                 @if ($invoice->unPaidAmount > 0)
-                                                    <a href="{{route('user.pay', $invoice->id)}}" class="btn btn-sm btn-light btn-active-light-primary">دفع</a>
+                                                    <a href="{{route('user.pay', $invoice->id)}}" class="btn btn-sm btn-light btn-active-light-primary">{{__("دفع")}}</a>
                                                 @else
 
                                                     <button wire:click="printReceipt('{{$invoice->id}}')" class="btn btn-sm btn-light btn-active-light-primary">
-                                                        طباعة
+                                                        {{__("طباعة")}}
                                                     </button>
 
                                                 @endif
@@ -100,7 +92,7 @@
             @else
                 <div class="text-center px-4">
                     <img class="mw-100 mh-300px" alt="" src="{{ asset('admin-assets/media/illustrations/unitedpalms-1/19.png') }}">
-                    <h4>لا يوجد فواتير مستحقة</h4>
+                    <h4>{{__("لا يوجد بيانات")}}</h4>
                 </div>
             @endif
         </div>

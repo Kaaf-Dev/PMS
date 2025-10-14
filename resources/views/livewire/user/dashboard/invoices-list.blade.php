@@ -5,7 +5,8 @@
             <!--begin::Title-->
             <h3 class="card-title align-items-start flex-column">
                 <span class="card-label fw-bold text-gray-800">
-                    الفواتير المستحقة
+                    {{ __("الفواتير المستحقة") }}
+
                 </span>
             </h3>
             <!--end::Title-->
@@ -42,7 +43,7 @@
                                 <!-- Invoice Number -->
                                 <td>
                                     <div class="fw-semibold">
-                                        <span class="text-muted fs-8"># الفاتورة</span>
+                                        <span class="text-muted fs-8"># {{ __("الفاتورة") }}</span>
                                         <a href="#" class="text-dark fw-bold text-hover-primary fs-6 d-block mt-1">
                                             {{ $invoice->no }}
                                         </a>
@@ -52,9 +53,10 @@
                                 <!-- Invoice Amount -->
                                 <td>
                                     <div class="fw-semibold">
-                                        <span class="text-muted fs-8">القيمة</span>
+                                        <span class="text-muted fs-8">{{ __("القيمة") }}</span>
                                         <span class="text-dark fw-bold fs-7 d-block mt-1">
-                        {{ $invoice->unPaidAmount }} دب
+                        {{ $invoice->unPaidAmount }} {{ __("دب") }}
+
                     </span>
                                     </div>
                                 </td>
@@ -62,7 +64,7 @@
                                 <!-- Due Date -->
                                 <td>
                                     <div class="fw-semibold">
-                                        <span class="text-muted fs-8">الاستحقاق</span>
+                                        <span class="text-muted fs-8">{{ __("تاريخ الاستحقاق") }}</span>
                                         <span class="text-dark fw-bold fs-7 d-block mt-1">{{ $invoice->due_human }}</span>
                                     </div>
                                 </td>
@@ -72,10 +74,10 @@
                                     @if ($invoice->unPaidAmount > 0)
                                         <a href="{{route('user.pay', $invoice->id)}}"
                                             class="btn btn-danger btn-sm fw-bold">
-                                            دفع
+                                            {{ __("دفع") }}
                                         </a>
                                     @else
-                                        <span class="badge badge-success fs-8 fw-bold">مدفوعة</span>
+                                        <span class="badge badge-success fs-8 fw-bold">{{ __("مدفوعة") }}</span>
                                     @endif
                                 </td>
 
@@ -84,15 +86,15 @@
                                     <button
                                         wire:click.stop="printInvoice('{{ $invoice->id }}')"
                                         class="btn btn-sm btn-light btn-active-light-primary">
-                                        طباعة
+                                        {{ __("طباعة") }}
                                     </button>
                                 </td>
                             </tr>
                         @empty
                             @if (empty($invoices))
-                                الرجاء الانتظار...
+                                {{ __("الرجاء الانتظار...") }}
                             @else
-                                لا يوجد بيانات
+                                {{ __("لا يوجد بيانات") }}
                             @endif
                         @endforelse
                         </tbody>

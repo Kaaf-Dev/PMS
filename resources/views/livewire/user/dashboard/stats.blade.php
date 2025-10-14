@@ -8,10 +8,9 @@
                     <!--begin::Title-->
                     <h3 class="card-title align-items-start flex-column">
                 <span class="card-label fw-bold text-gray-800">
-                    عقود الإيجار
+                    {{ __("عقود الإيجار") }}
                 </span>
-                        <a href="{{ route('user.contracts') }}" class="text-gray-400 mt-1 fw-semibold fs-6 mt-2">عرض
-                            الجميع</a>
+                        <a href="{{ route('user.contracts') }}" class="text-gray-400 mt-1 fw-semibold fs-6 mt-2">{{ __("عرض الجميع") }}</a>
                     </h3>
                     <!--end::Title-->
                     <!--begin::Toolbar-->
@@ -41,8 +40,8 @@
                                     <div class="me-5">
                                         <!--begin::Title-->
                                         <a href="{{ route('user.contracts.details',['contract_id' => $contract->id]) }}"
-                                           class="text-gray-800 fw-bold text-hover-primary fs-6">رقم
-                                            العقد: {{ $contract->id }}</a>
+                                           class="text-gray-800 fw-bold text-hover-primary fs-6">{{ __("رقم العقد") }}
+                                            {{ $contract->id }}</a>
                                         <!--end::Title-->
                                         <!--begin::Desc-->
                                         <span
@@ -75,9 +74,9 @@
 
                         @empty
                             @if (empty($contracts))
-                                الرجاء الانتظار...
+                                {{ __("الرجاء الانتظار...") }}
                             @else
-                                لا يوجد بيانات
+                                {{ __("الرجاء الانتظار...") }}
                             @endif
                         @endforelse
 
@@ -102,7 +101,7 @@
                     <!--end::Svg Icon-->
                     <div class="fw-bolder fs-2x text-dark mb-2 mt-5">{{ $contracts_count }}</div>
                     <i wire:loading wire:target="fetch" class="fa fa-spin fa-spinner fs-2"></i>
-                    <div class="fw-semibold text-gray-500">عقود الإيجار</div>
+                    <div class="fw-semibold text-gray-500"> {{ __("عقود الإيجار") }}</div>
                 </div>
                 <!--end::Body-->
             </a>
@@ -125,7 +124,7 @@
                     <!--end::Svg Icon-->
                     <div class="fw-bolder fs-2x text-dark mb-2 mt-5">{{ $tickets_count }}</div>
                     <i wire:loading wire:target="fetch" class="fa fa-spin fa-spinner fs-2"></i>
-                    <div class="fw-semibold text-gray-500">طلبات الصيانة المفتوحة</div>
+                    <div class="fw-semibold text-gray-500">{{ __("طلبات الصيانة المفتوحة") }}</div>
                 </div>
                 <!--end::Body-->
             </a>

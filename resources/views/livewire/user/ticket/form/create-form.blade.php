@@ -4,7 +4,7 @@
         <div class="d-flex flex-column mb-8 fv-row">
             <!--begin::Label-->
             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                <span class="required">الموضوع</span>
+                <span class="required">{{ __("الموضوع") }}</span>
             </label>
             <!--end::Label-->
             <input wire:model.defer="subject" type="text" class="form-control form-control" />
@@ -19,9 +19,9 @@
         <div class="row g-9 mb-8">
             <!--begin::Col-->
             <div class="col-md-6 fv-row">
-                <label class="required fs-6 fw-semibold mb-2">العقار</label>
+                <label class="required fs-6 fw-semibold mb-2">{{__("العقار")}}</label>
                 <select wire:model="selected_property" class="form-select form-select" data-control="select2" data-hide-search="true" data-placeholder="Select a product" name="product">
-                    <option value="">-- اختيار --</option>
+                    <option value="">-- {{ __("اختيار") }} --</option>
                     @foreach($this->properties ?? [] as $property)
                         <option value="{{ $property->id }}">{{ $property->name }}</option>
                     @endforeach
@@ -36,9 +36,9 @@
 
             <!--begin::Col-->
             <div class="col-md-6 fv-row">
-                <label class="required fs-6 fw-semibold mb-2">الوحدة السكنية</label>
+                <label class="required fs-6 fw-semibold mb-2">{{ __("الوحدة السكنية") }}</label>
                 <select wire:model.defer="selected_contract_apartment" class="form-select form-select" data-control="select2" data-hide-search="true" data-placeholder="Select a product" name="product">
-                    <option value="">-- اختيار --</option>
+                    <option value="">-- {{ __("اختيار") }} --</option>
                     @foreach($this->apartments ?? [] as $apartment)
                         <option value="{{ $apartment->contract_apartment_id }}">{{ $apartment->name }}</option>
                     @endforeach
@@ -56,11 +56,11 @@
         <div class="row g-9 mb-8">
             <!--begin::Col-->
             <div class="col-md-12 fv-row">
-                <label class="fs-6 fw-semibold mb-2 required">الوقت المتاح للزيارة</label>
+                <label class="fs-6 fw-semibold mb-2 required">{{__("الوقت المتاح للزيارة")}}</label>
                 <div class="row">
                     <div class="col-md-12">
                         <select wire:model.defer="visit_availability_at" class="form-select" >
-                            <option value="">اختيار</option>
+                            <option value="">{{ __("اختيار") }}</option>
                             @foreach($this->VisitAvailabilityAtList ?? [] as $key => $visit_at)
                                 <option value="{{ $key }}">{{ $visit_at }}</option>
                             @endforeach
@@ -79,8 +79,8 @@
         <!--end::Input group-->
         <!--begin::Input group-->
         <div class="d-flex flex-column mb-8 fv-row">
-            <label class="fs-6 fw-semibold mb-2">وصف طلب الصيانة</label>
-            <textarea wire:model.defer="description" class="form-control form-control" rows="4" name="description" placeholder="ادخل وصفًا بالتفاصيل للمشكلة"></textarea>
+            <label class="fs-6 fw-semibold mb-2">{{ __("وصف طلب الصيانة") }}</label>
+            <textarea wire:model.defer="description" class="form-control form-control" rows="4" name="description" placeholder="{{ __("ادخل وصفًا بالتفاصيل للمشكلة") }}"></textarea>
             @error('description')
             <span class="text-danger">
                 {{ $message }}
@@ -90,7 +90,7 @@
         <!--end::Input group-->
         <!--begin::Input group-->
         <div class="fv-row mb-8">
-            <label class="fs-6 fw-semibold mb-2">إرفاق مرفقات</label>
+            <label class="fs-6 fw-semibold mb-2">{{ __("إرفاق مرفقات") }}</label>
 
             <div class="input-group input-group mb-5">
                 <input wire:model="attachment" type="file" class="form-control form-control" />
@@ -112,7 +112,7 @@
         @if($attachments)
             <!--begin::Input group-->
             <div class="fv-row mb-8">
-                <label class="fs-6 fw-semibold mb-2">المرفقات</label>
+                <label class="fs-6 fw-semibold mb-2">{{__("المرفقات")}}</label>
 
                 <div class="card-body pt-3">
                     @foreach($attachments ?? [] as $key => $attachment)
@@ -129,7 +129,7 @@
                             <div class="d-flex flex-row-fluid align-items-center flex-wrap my-lg-0 me-2">
                                 <!--begin::Title-->
                                 <div class="flex-grow-1 my-lg-0 my-2 me-2">
-                                    <a href="#" class="text-gray-800 fw-bold text-hover-primary fs-6">مرفق</a>
+                                    <a href="#" class="text-gray-800 fw-bold text-hover-primary fs-6">{{__("مرفق")}}</a>
                                     <span class="text-muted fw-semibold d-block pt-1">{{ $attachment->getClientOriginalName() }}</span>
                                 </div>
                                 <!--end::Title-->
@@ -171,13 +171,13 @@
         <!--begin::Actions-->
         <div class="text-center">
             <button wire:click="hideMe" type="button" id="kt_modal_new_ticket_cancel" class="btn btn-light me-3">
-                إلغاء
+                {{ __("إلغاء") }}
             </button>
             <button type="submit" id="kt_modal_new_ticket_submit" class="btn btn-primary">
-                <span wire:loading.remove wire:target="submit">تأكيد</span>
+                <span wire:loading.remove wire:target="submit">{{ __("تأكيد") }}</span>
                 <!--begin::Indicator progress-->
                 <span wire:loading wire:target="submit">
-                    الرجاء الانتظار
+                    {{__("الرجاء الانتظار...")}}
 					<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                 </span>
                 <!--end::Indicator progress-->

@@ -13,12 +13,13 @@
             <!--begin::Wrapper-->
             <div class="d-flex flex-column pe-0 pe-sm-10">
                 <!--begin::Title-->
-                <h4 class="mb-4">كيف ترى جودة خدمات الصيانة؟</h4>
+                <h4 class="mb-4">{{ __("كيف ترى جودة خدمات الصيانة؟") }}</h4>
                 <!--end::Title-->
 
                 <!--begin::Content-->
                 <span class="mb-4">
-                    يهمنا مدى رضاك عن الخدمة
+{{ __("يهمنا مدى رضاك عن الخدمة") }}
+
                 </span>
 
                 <!--begin::Rating-->
@@ -45,14 +46,15 @@
                 <!--end::Rating-->
 
                 <div class="mb-4 w-100">
-                    <textarea wire:model.defer="rate_notes" class="form-control form-control placeholder-gray-600 fw-bold fs-4 ps-9 pt-7" rows="6" cols="50%" placeholder="ملاحظات"></textarea>
+                    <textarea wire:model.defer="rate_notes" class="form-control form-control placeholder-gray-600 fw-bold fs-4 ps-9 pt-7" rows="6" cols="50%" placeholder="{{__("ملاحظات")}}"></textarea>
                 </div>
 
 
                 <span>
                     <button wire:click="submit" type="button" class="btn btn-sm btn-primary">
                         <div wire:loading.remove wire:target="submit">
-                            إرسال التقييم
+{{ __("إرسال التقييم") }}
+
                         </div>
                         <!--begin::Indicator progress-->
                         <span wire:loading wire:target="submit">

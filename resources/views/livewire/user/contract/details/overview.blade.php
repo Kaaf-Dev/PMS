@@ -5,7 +5,7 @@
         <div class="card-header">
             <!--begin::Card title-->
             <div class="card-title">
-                <h2 class="fw-bold">بيانات عقد الإيجار</h2>
+                <h2 class="fw-bold">{{ __("بيانات عقد الإيجار") }}</h2>
             </div>
             <!--begin::Card title-->
         </div>
@@ -26,7 +26,7 @@
                                 <table class="table fs-6 fw-semibold gs-0 gy-2 gx-2 m-0">
                                     <!--begin::Row-->
                                     <tr>
-                                        <td class="text-gray-400 min-w-175px w-175px">الحالة:</td>
+                                        <td class="text-gray-400 min-w-175px w-175px">{{ __("الحالة") }}:</td>
 
                                         <td class="text-gray-800">
                                             <span class="badge badge-{{ $this->contract->active_status_class }}">
@@ -37,25 +37,25 @@
                                     <!--end::Row-->
                                     <!--begin::Row-->
                                     <tr>
-                                        <td class="text-gray-400">المستأجر:</td>
+                                        <td class="text-gray-400">{{ __("المستأجر") }}:</td>
                                         <td class="text-gray-800">{{ $this->contract->user->name }}</td>
                                     </tr>
                                     <!--end::Row-->
                                     <!--begin::Row-->
                                     <tr>
-                                        <td class="text-gray-400">قيمة الإيجار</td>
+                                        <td class="text-gray-400">{{ __("قيمة الإيجار") }}</td>
                                         <td class="text-gray-800">{{ $this->contract->costHuman }}</td>
                                     </tr>
                                     <!--end::Row-->
                                     <!--begin::Row-->
                                     <tr>
-                                        <td class="text-gray-400">بداية العقد</td>
+                                        <td class="text-gray-400">{{ __("بداية العقد") }}</td>
                                         <td class="text-gray-800">{{ $this->contract->startAtHuman }}</td>
                                     </tr>
                                     <!--end::Row-->
                                     <!--begin::Row-->
                                     <tr>
-                                        <td class="text-gray-400">نهاية العقد</td>
+                                        <td class="text-gray-400">{{ __("نهاية العقد") }}</td>
                                         <td class="text-gray-800">{{ $this->contract->endAtHuman }}</td>
                                     </tr>
                                     <!--end::Row-->
@@ -81,7 +81,8 @@
                                         <span class="path5"></span>
                                         <span class="path6"></span>
                                     </i>
-                                    إخفاء
+                                    {{ __("إخفاء") }}
+
                                 @else
                                     <i class="ki-duotone ki-eye fs-2">
                                         <span class="path1"></span>
@@ -91,7 +92,8 @@
                                         <span class="path5"></span>
                                         <span class="path6"></span>
                                     </i>
-                                    عرض الوحدات
+                                    {{ __("عرض الوحدات") }}
+
                                 @endif
 
                             </a>
@@ -108,8 +110,8 @@
                                     <!--begin::Table row-->
                                     <tr class="border-bottom border-gray-200 text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                         <th class="min-w-25px"></th>
-                                        <th class="min-w-75px">العقار</th>
-                                        <th class="min-w-125px">الوحدة السكنية</th>
+                                        <th class="min-w-75px">{{ __("العقار") }}</th>
+                                        <th class="min-w-125px">{{ __("الوحدة السكنية") }}</th>
                                     </tr>
                                     <!--end::Table row-->
                                     </thead>
@@ -134,7 +136,7 @@
 
                                                 <div class="d-flex flex-column flex-center">
                                                     <img src="{{ asset('user-assets/media/illustrations/sigma-1/5.png') }}" class="mw-350px">
-                                                    <div class="fs-3 fw-bolder text-dark mb-4">No data found.</div>
+                                                    <div class="fs-3 fw-bolder text-dark mb-4">{{__("لا يوجد بيانات")}}</div>
                                                     <div class="fs-6"></div>
                                                 </div>
 

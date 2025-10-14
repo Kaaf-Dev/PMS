@@ -15,8 +15,10 @@
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.5",
         "maatwebsite/excel": "^3.1",
+        "mcamara/laravel-localization": "^2.0",
         "mpdf/mpdf": "^8.2",
-        "rmunate/spell-number": "^1.0"
+        "rmunate/spell-number": "^1.0",
+        "spatie/laravel-translatable": "^5.2"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",
