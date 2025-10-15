@@ -84,31 +84,50 @@
         <div class="en-second">
             <h3>Article One: Definitions and General Provisions</h3>
             <ul>
-                @if(count($data['property_details']) > 0)
-                    <li><p><b>Building:</b>
-                            @foreach($data['property_details'] as $index => $detail)
-                                Building {{$detail['name']}}, Road {{$detail['road']}}, Block {{$detail['block']}}
-                                , {{$detail['place']}} - Kingdom of Bahrain
-                                @if(!$loop->last)
-                                    ,
-                                @endif
-                            @endforeach
-                        </p></li>
+                @php
+                    // Ensure property details are always an array
+                    $propertyDetails = is_array($data['property_details'])
+                        ? $data['property_details']
+                        : (method_exists($data['property_details'], 'toArray') ? $data['property_details']->toArray() : []);
 
-                    @php
-                        $apartment = optional($data->apartments->first());
-                        $typeLabelEn = $apartment->is_type_house ? 'apartment' : ($apartment->is_type_store ? 'shop' : 'land');
-                        $purposeEn   = $apartment->is_type_store ? 'commercial' : 'residential';
-                    @endphp
+                    // Group units by building name to avoid repeating
+                    $groupedByBuilding = collect($propertyDetails)->groupBy('name');
 
-                    <li><b>Leased Property:</b>
-                        @if(count($data['property_details']) > 1)
-                            The following {{ $typeLabelEn }}s:
-                            {{ implode(', ', array_column($data['property_details'], 'flat')) }}, will be used for {{ $purposeEn }} purposes.
-                        @else
-                            A {{ $typeLabelEn }} {{$data['property_details'][$index]['flat']}}, will be used for {{ $purposeEn }} purposes.
-                        @endif
-                    </li>
+                    $apartment = optional($data->apartments->first());
+                    $typeLabelEn = $apartment->is_type_house ? 'apartment' : ($apartment->is_type_store ? 'shop' : 'land');
+                    $typeLabelPlural = $apartment->is_type_house ? 'apartments' : ($apartment->is_type_store ? 'shops' : 'lands');
+                    $purposeEn   = $apartment->is_type_store ? 'commercial' : 'residential';
+                @endphp
+                @if($groupedByBuilding->count() > 0)
+                    @foreach($groupedByBuilding as $buildingName => $items)
+                        @php
+                            $detail = $items->first();
+                        @endphp
+
+                        <li>
+                            <p><b>Building:</b>
+                                Building {{ $detail['name'] ?? 'Not specified' }},
+                                Road {{ $detail['road'] ?? 'Not specified' }},
+                                Block {{ $detail['block'] ?? 'Not specified' }},
+                                {{ $detail['place'] ?? 'Not specified' }} – Kingdom of Bahrain
+                            </p>
+                        </li>
+
+                        {{-- 🏠 Leased Property --}}
+                        <li><b>Leased Property:</b>
+                            @if($items->count() > 1)
+                                The following {{ $typeLabelPlural }}:
+                                {{ implode(', ', array_filter(array_column($items->toArray(), 'flat'))) }},
+                                will be used for {{ $purposeEn }} purposes.
+                            @else
+                                A {{ $typeLabelEn }} {{ $detail['flat'] ?? 'not specified' }},
+                                will be used for {{ $purposeEn }} purposes.
+                            @endif
+                        </li>
+                        <br>
+                    @endforeach
+                @else
+                    <p><b>Building:</b> Not available</p>
                 @endif
 
                 <br>
@@ -359,37 +378,48 @@
             <br>
             <h3>البند الأول: التعاريف والأحكام العامة</h3>
             <ul>
-                @if(count($data['property_details']) > 0)
-                    <p><b>البناية:</b>
-                        @foreach($data['property_details'] as $index => $detail)
-                            مبنى {{$detail['name']}}, طريق {{$detail['road']}}, مجمع {{$detail['block']}}
-                            , {{$detail['place']}} - مملكة البحرين
-                            @if(!$loop->last)
-                                ،
-                            @endif
-                        @endforeach
-                    </p>
-                    <br>
+                @php
+                    // Ensure we always have property details as array
+                    $propertyDetails = is_array($data['property_details'])
+                        ? $data['property_details']
+                        : (method_exists($data['property_details'], 'toArray') ? $data['property_details']->toArray() : []);
 
-                    <li><b>العين المؤجرة:</b>
+                    // Group units by building name to avoid repeating
+                    $groupedByBuilding = collect($propertyDetails)->groupBy('name');
+
+                    $apartment = optional($data->apartments->first());
+                    $typeLabel = $apartment->is_type_house ? 'شقة / الشقق' : ($apartment->is_type_store ? 'محل / محلات' : 'قطعة أرض');
+                    $purpose   = $apartment->is_type_store ? 'تجاري' : 'سكني';
+                @endphp
+
+                {{-- 🏢 Building --}}
+                @if($groupedByBuilding->count() > 0)
+                    @foreach($groupedByBuilding as $buildingName => $items)
                         @php
-                            $apartment = optional($data->apartments->first());
-                            $typeLabel = $apartment->is_type_house ? 'شقة' : ($apartment->is_type_store ? 'محل' : 'قطعة أرض');
-                            $purpose   = $apartment->is_type_store ? 'تجاري' : 'سكني';
+                            $detail = $items->first();
                         @endphp
 
-                        @if(count($data['property_details']) > 1)
-                            {{ $typeLabel }}{{ count($data['property_details']) > 1 ? ' التالية:' : '' }}
-                            {{ implode(', ', array_column($data['property_details'], 'flat')) }}، تستخدم لغرض {{ $purpose }}.
-                        @else
-                            {{ $typeLabel }} {{$data['property_details'][$index]['flat']}}, تستخدم لغرض {{ $purpose }}.
-                        @endif
-                    </li>
+                        <p><b>البناية:</b>
+                            مبنى {{ $detail['name'] ?? 'غير محدد' }},
+                            طريق {{ $detail['road'] ?? 'غير محدد' }},
+                            مجمع {{ $detail['block'] ?? 'غير محدد' }},
+                            {{ $detail['place'] ?? 'غير محدد' }} - مملكة البحرين
+                        </p>
 
-
+                        {{-- 🏠 Leased Property --}}
+                        <li><b>العين المؤجرة:</b>
+                            @if($items->count() > 1)
+                                {{ $typeLabel }} التالية:
+                                {{ implode(', ', array_filter(array_column($items->toArray(), 'flat'))) }}، تستخدم لغرض {{ $purpose }}.
+                            @else
+                                {{ $typeLabel }} {{ $detail['flat'] ?? 'غير محددة' }}، تستخدم لغرض {{ $purpose }}.
+                            @endif
+                        </li>
+                        <br>
+                    @endforeach
+                @else
+                    <p><b>البناية:</b> غير متوفرة</p>
                 @endif
-
-                <br>
                 <br>
                 <li><b>المؤجر:</b> مالك العين المؤجرة/ أو من ينوب عنه، أو من يخول قانوناً بإبرام عقد الإيجار.</li>
                 <br>
