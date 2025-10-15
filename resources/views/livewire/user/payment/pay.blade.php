@@ -6,7 +6,7 @@
             <div class="d-flex flex-column mb-7 fv-row">
                 <!--begin::Label-->
                 <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-                    <span class="required">قيمة الفاتورة المستحقة</span>
+                    <span class="required">{{ __("قيمة الفاتورة المستحقة") }}</span>
                 </label>
                 <!--end::Label-->
                 <input type="number" class="form-control form-control-solid" value="{{ $this->invoice->unPaidAmount }}" readonly/>
@@ -66,7 +66,6 @@
                             <div class="flex-grow-1">
                                 <h2 class="d-flex align-items-center fs-2 fw-bold flex-wrap">
                                     Credit / Debit
-                                    <span class="badge badge-light-success ms-2 fs-7">Most popular</span>
                                 </h2>
                                 <div class="fw-semibold opacity-50">
                                 </div>
@@ -95,11 +94,12 @@
 
                 <!--begin::Actions-->
                 <div class="text-center pt-15">
-                    <a href="{{route('user.dashboard')}}" class="btn btn-light me-3">الرجوع
+                    <a href="{{route('user.dashboard')}}" class="btn btn-light me-3">{{__("الرجوع")}}
                     </a>
                     <button type="submit" wire:loading.attr="disabled" class="btn btn-primary">
-                        <span wire:loading.remove class="indicator-label">دفع</span>
-                        <span wire:loading class="indicator-progress">الرجاء الانتظار
+                        <span wire:loading.remove class="indicator-label">{{__("دفع")}}</span>
+                        <span wire:loading class="indicator-progress">
+                            {{__("الرجاء الانتظار...")}}
                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                     </button>
                 </div>

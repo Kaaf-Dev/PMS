@@ -16,8 +16,8 @@
                             <!--end:Media-->
                             <!--begin:Text-->
                             <div style="font-size: 14px; font-weight: 500; margin-bottom: 27px; font-family: Arial, Helvetica, sans-serif;">
-                                <p style="margin-bottom: 9px; color: #D9534F; font-size: 22px; font-weight: 700;">حدث خطأ، لم تتم العملية بنجاح</p>
-                                <p style="margin-bottom: 2px; color: #7E8299;">نأسف، ولكن لم تتم عملية الدفع بنجاح. يرجى المحاولة مرة أخرى أو التواصل مع فريق الدعم للحصول على المساعدة اللازمة. يمكنك التحقق من التفاصيل المتعلقة بالعملية أو تجربة طريقة دفع مختلفة. نحن هنا لمساعدتك.</p>
+                                <p style="margin-bottom: 9px; color: #D9534F; font-size: 22px; font-weight: 700;">{{__("حدث خطأ، لم تتم العملية بنجاح")}}</p>
+                                <p style="margin-bottom: 2px; color: #7E8299;">{{__("نأسف، ولكن لم تتم عملية الدفع بنجاح. يرجى المحاولة مرة أخرى أو التواصل مع فريق الدعم للحصول على المساعدة اللازمة. يمكنك التحقق من التفاصيل المتعلقة بالعملية أو تجربة طريقة دفع مختلفة. نحن هنا لمساعدتك.")}}</p>
                             </div>
 
 

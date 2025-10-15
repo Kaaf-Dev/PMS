@@ -16,14 +16,14 @@
                             <!--end:Media-->
                             <!--begin:Text-->
                             <div style="font-size: 14px; font-weight: 500; margin-bottom: 27px; font-family: Arial, Helvetica, sans-serif;">
-                                <p style="margin-bottom: 9px; color: #D9534F; font-size: 22px; font-weight: 700;">المعاملة تحت الإنتظار</p>
-                                <p style="margin-bottom: 2px; color: #7E8299;">نأسف، يرجى الإنتظار والتحقق من عملية الدفع في وقت لاحق أو التواصل مع فريق الدعم للحصول على المساعدة اللازمة. نحن هنا لمساعدتك.</p>
+                                <p style="margin-bottom: 9px; color: #D9534F; font-size: 22px; font-weight: 700;">{{__("المعاملة تحت الإنتظار")}}</p>
+                                <p style="margin-bottom: 2px; color: #7E8299;">{{__("نأسف، يرجى الإنتظار والتحقق من عملية الدفع في وقت لاحق أو التواصل مع فريق الدعم للحصول على المساعدة اللازمة. نحن هنا لمساعدتك.")}}</p>
                             </div>
 
 
                             <!--end:Text-->
                             <!--begin:Action-->
-                            <a href='{{route('user.dashboard')}}' target="_self" style="background-color:#50cd89; border-radius:6px;display:inline-block; padding:11px 19px; color: #FFFFFF; font-size: 14px; font-weight:500;">العودة للرئيسية</a>
+                            <a href='{{route('user.dashboard')}}' target="_self" style="background-color:#50cd89; border-radius:6px;display:inline-block; padding:11px 19px; color: #FFFFFF; font-size: 14px; font-weight:500;">{{__("العودة للرئيسية")}}</a>
                             <!--begin:Action-->
                         </div>
                         <!--end:Email content-->

@@ -92,6 +92,13 @@
     "ليلي" : "Dark",
     "تلقائي" : "Automatic",
     "تسجيل الخروج" : "Logout",
-
+    "قيمة الفاتورة المستحقة": "Outstanding Invoice Amount",
+    "الرجوع": "Back",
+    "تمت عملية الدفع بنجاح": "Your payment was successful!",
+    "العودة للرئيسية": "Return to Home",
+    "حدث خطأ، لم تتم العملية بنجاح": "Something went wrong. Please try again.",
+    "نأسف، ولكن لم تتم عملية الدفع بنجاح. يرجى المحاولة مرة أخرى أو التواصل مع فريق الدعم للحصول على المساعدة اللازمة. يمكنك التحقق من التفاصيل المتعلقة بالعملية أو تجربة طريقة دفع مختلفة. نحن هنا لمساعدتك.": "We’re sorry, but your payment was not successful. Please try again or contact our support team for assistance. You may also review your transaction details or try a different payment method. We’re here to help you.",
+    "المعاملة تحت الإنتظار": "Transaction Pending",
+    "نأسف، يرجى الإنتظار والتحقق من عملية الدفع في وقت لاحق أو التواصل مع فريق الدعم للحصول على المساعدة اللازمة. نحن هنا لمساعدتك.": "We’re sorry. Please wait and check your payment status later, or contact our support team for further assistance. We’re here to help you.",
     "": ""
 }

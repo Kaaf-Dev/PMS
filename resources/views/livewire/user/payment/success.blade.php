@@ -15,12 +15,12 @@
                                 <!--end:Media-->
                                 <!--begin:Text-->
                                 <div style="font-size: 14px; font-weight: 500; margin-bottom: 27px; font-family: Arial, Helvetica, sans-serif;">
-                                    <p style="margin-bottom: 9px; color: #181C32; font-size: 22px; font-weight: 700;">تمت عملية الدفع بنجاح</p>
+                                    <p style="margin-bottom: 9px; color: #181C32; font-size: 22px; font-weight: 700;">{{__("تمت عملية الدفع بنجاح")}}</p>
                                 </div>
 
                                 <!--end:Text-->
                                 <!--begin:Action-->
-                                <a href='{{route('user.dashboard')}}' target="_self" style="background-color:#50cd89; border-radius:6px;display:inline-block; padding:11px 19px; color: #FFFFFF; font-size: 14px; font-weight:500;">العودة للرئيسية</a>
+                                <a href='{{route('user.dashboard')}}' target="_self" style="background-color:#50cd89; border-radius:6px;display:inline-block; padding:11px 19px; color: #FFFFFF; font-size: 14px; font-weight:500;">{{__("العودة للرئيسية")}}</a>
                                 <!--begin:Action-->
                             </div>
                             <!--end:Email content-->
