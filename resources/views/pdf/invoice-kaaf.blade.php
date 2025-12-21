@@ -225,7 +225,7 @@
                     <h1>Received By</h1>
                 </td>
                 <td style="width: 50%; text-align: right;">
-                    <h2>{{auth()->user()->name}}</h2>
+                    <h2>{{auth('admin')->user()->name ?? 'website'}}</h2>
                     <p>{{ now() }}</p>
                 </td>
             </tr>
