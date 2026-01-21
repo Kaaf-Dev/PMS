@@ -13,11 +13,15 @@ class TicketList extends Component
 {
 
     public $selected_year;
+    public $from_year;
+    public $to_year;
 
     public function rules()
     {
         return [
             'selected_year' => 'nullable',
+            'from_year' => 'nullable|integer',
+            'to_year'   => 'nullable|integer|gte:from_year',
         ];
     }
 
@@ -77,14 +81,22 @@ class TicketList extends Component
     {
         $tickets = Ticket::query();
 
-        if ($this->selected_year > 0) {
-            $tickets = $tickets->whereYear('created_at', '>=', $this->selected_year);
+        if ($this->from_year && $this->to_year) {
+            $tickets->whereBetween(
+                'created_at',
+                [
+                    Carbon::create($this->from_year, 1, 1)->startOfDay(),
+                    Carbon::create($this->to_year, 12, 31)->endOfDay(),
+                ]
+            );
+        } elseif ($this->from_year) {
+            $tickets->whereYear('created_at', $this->from_year);
         }
 
         $tickets = $tickets
             ->with([
                 'contract',
-                'contract.user',  // Ensure user relationship is loaded
+                'contract.user',
                 'apartment',
                 'apartment.property',
                 'maintenanceInvoices',
@@ -95,36 +107,33 @@ class TicketList extends Component
         $report = [];
 
         foreach ($tickets as $ticket) {
-
             $diffDays = null;
 
-            // Check if assigned_at is not null and calculate the difference in days
             if ($ticket->assigned_at) {
-                $createdAt = Carbon::parse($ticket->created_at);
-                $assignedAt = Carbon::parse($ticket->assigned_at);
-                $diffDays = $createdAt->diffInDays($assignedAt);
+                $diffDays = Carbon::parse($ticket->created_at)
+                    ->diffInDays(Carbon::parse($ticket->assigned_at));
             }
 
-            // Collect the report data
             $report[$ticket->id] = [
-                'id' => $ticket->id,
-                'user' => $ticket->contract ? $ticket->contract->user->name : '',
-                'apartment' => $ticket->apartment ? $ticket->apartment->name : '',
-                'property' => $ticket->apartment ? $ticket->apartment->property->name : '',
-                'property_no' => $ticket->apartment ? $ticket->apartment->property->ky_no : '',
-                'subject' => $ticket->subject,
-                'category' => $ticket->category->title ?? '-- غير محدد --',
-                'created_at' => $ticket->created_at,
+                'id'          => $ticket->id,
+                'user'        => $ticket->contract?->user?->name ?? '',
+                'apartment'   => $ticket->apartment?->name ?? '',
+                'property'    => $ticket->apartment?->property?->name ?? '',
+                'property_no' => $ticket->apartment?->property?->ky_no ?? '',
+                'subject'     => $ticket->subject,
+                'category'    => $ticket->category->title ?? '-- غير محدد --',
+                'created_at'  => $ticket->created_at,
                 'assigned_at' => $ticket->assigned_at,
-                'diffDays' => $diffDays, // Use the calculated diffDays
-                'visited_at' => $ticket->visited_at,
-                'cost' => $ticket->maintenance_invoices_sum_amount,
-                'status' => $ticket->statusString,
+                'diffDays'    => $diffDays,
+                'visited_at'  => $ticket->visited_at,
+                'cost'        => $ticket->maintenance_invoices_sum_amount,
+                'status'      => $ticket->statusString,
             ];
         }
 
         return $report;
     }
+
 
 
 
