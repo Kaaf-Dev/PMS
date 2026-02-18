@@ -72,7 +72,7 @@
 
                 @foreach($data->property_details as $detail)
                     @if($index == 0)
-                        , Building {{$detail['name']}}, Road {{$detail['road']}}, Block {{$detail['block']}}, {{$detail['place']}} - Kingdom of Bahrain.
+                        , Building {{$detail['place']}}, Road {{$detail['road']}}, Block {{$detail['block']}}, Kingdom of Bahrain.
                     @endif
                     @php $index++; @endphp
                 @endforeach
@@ -106,10 +106,9 @@
 
                         <li>
                             <p><b>Building:</b>
-                                Building {{ $detail['name'] ?? 'Not specified' }},
+                                Building {{ $detail['place'] ?? 'Not specified' }},
                                 Road {{ $detail['road'] ?? 'Not specified' }},
-                                Block {{ $detail['block'] ?? 'Not specified' }},
-                                {{ $detail['place'] ?? 'Not specified' }} – Kingdom of Bahrain
+                                Block {{ $detail['block'] ?? 'Not specified' }}, – Kingdom of Bahrain
                             </p>
                         </li>
 
@@ -358,7 +357,7 @@
 
                 @foreach($data->property_details as $detail)
                     @if($index == 0)
-                        ، مبنى {{$detail['name']}} ، طريق {{$detail['road']}}، مجمع {{$detail['block']}}, {{$detail['place']}}
+                        ، مبنى {{$detail['place']}} ، طريق {{$detail['road']}}، مجمع {{$detail['block']}},
                     @endif
                     @php $index++; @endphp
                 @endforeach
@@ -399,10 +398,10 @@
                         @endphp
 
                         <p><b>البناية:</b>
-                            مبنى {{ $detail['name'] ?? 'غير محدد' }},
+                            مبنى {{ $detail['place'] ?? 'غير محدد' }},
                             طريق {{ $detail['road'] ?? 'غير محدد' }},
                             مجمع {{ $detail['block'] ?? 'غير محدد' }},
-                            {{ $detail['place'] ?? 'غير محدد' }} - مملكة البحرين
+                            - مملكة البحرين
                         </p>
 
                         {{-- 🏠 Leased Property --}}
