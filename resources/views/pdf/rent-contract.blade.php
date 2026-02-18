@@ -81,6 +81,8 @@
                 part of the contract.
             </p>
         </div>
+        <br>
+        <br>
         <div class="en-second">
             <h3>Article One: Definitions and General Provisions</h3>
             <ul>
