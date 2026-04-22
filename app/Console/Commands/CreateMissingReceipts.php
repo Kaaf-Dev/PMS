@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Receipt;
 use Illuminate\Console\Command;
 use App\Models\PaymentTransaction;
 use App\Events\ReceiptCreated;
@@ -14,26 +15,24 @@ class CreateMissingReceipts extends Command
     public function handle()
     {
         $transactions = [
-            'PMS_0001989' => 250,
-            'PMS_0001990' => 200,
-            'PMS_0002002' => 200,
-            'PMS_0002003' => 270,
-            'PMS_0002004' => 350,
-            'PMS_0002012' => 170,
-            'PMS_0002020' => 250,
-            'PMS_0002021' => 170,
-            'PMS_0002024' => 150,
-            'PMS_0002028' => 200,
-            'PMS_0002029' => 200,
-            'PMS_0002038' => 240,
-            'PMS_0002039' => 300,
-            'PMS_0002042' => 250,
-            'PMS_0002043' => 300,
-            'PMS_0002046' => 250,
-            'PMS_0002047' => 250,
-            'PMS_0002048' => 150,
-            'PMS_0002052' => 200,
+            'PMS_0001972' => 260,
+            'PMS_0001974' => 280,
+            'PMS_0001991' => 150,
+            'PMS_0001996' => 300,
+            'PMS_0001997' => 250,
+            'PMS_0001999' => 150,
+            'PMS_0002007' => 190,
+            'PMS_0002008' => 250,
+            'PMS_0002009' => 200,
+            'PMS_0002013' => 250,
+            'PMS_0002019' => 250,
+            'PMS_0002050' => 260,
+            'PMS_0002051' => 160,
+            'PMS_0002053' => 250,
+            'PMS_0002054' => 350,
         ];
+
+        $payment_method = Receipt::PAYMENT_METHOD_BENEFIT;
 
         foreach ($transactions as $trx_id => $amount) {
             $transaction = PaymentTransaction::where('trx_id', $trx_id)->first();
@@ -45,7 +44,6 @@ class CreateMissingReceipts extends Command
 
             if ($transaction->close()) {
                 if (!$transaction->receipt) {
-                    $payment_method = $transaction->payment_gateway;
                     $receipt = new \App\Repository\receiptProvider($transaction->Invoice->id, $transaction->id, $payment_method, $amount);
                     $receipt = $receipt->createReceipt();
                     if ($receipt['status']) {
