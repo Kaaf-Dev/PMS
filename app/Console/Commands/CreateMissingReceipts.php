@@ -15,21 +15,18 @@ class CreateMissingReceipts extends Command
     public function handle()
     {
         $transactions = [
-            'PMS_0001972' => 260,
-            'PMS_0001974' => 280,
-            'PMS_0001991' => 150,
-            'PMS_0001996' => 300,
-            'PMS_0001997' => 250,
-            'PMS_0001999' => 150,
-            'PMS_0002007' => 190,
-            'PMS_0002008' => 250,
-            'PMS_0002009' => 200,
-            'PMS_0002013' => 250,
-            'PMS_0002019' => 250,
             'PMS_0002050' => 260,
             'PMS_0002051' => 160,
             'PMS_0002053' => 250,
             'PMS_0002054' => 350,
+            'PMS_0002057' => 0.1,
+            'PMS_0002060' => 220,
+            'PMS_0002063' => 250,
+            'PMS_0002069' => 150,
+            'PMS_0002071' => 150,
+            'PMS_0002072' => 170,
+            'PMS_0002076' => 150,
+            'PMS_0002078' => 0.1,
         ];
 
         $payment_method = Receipt::PAYMENT_METHOD_BENEFIT;
