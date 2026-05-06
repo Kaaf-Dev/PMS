@@ -20,7 +20,20 @@ class UserCreateTicketNotification extends Notification
 
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database', 'mail'];
+    }
+
+    public function toMail($notifiable)
+    {
+        $ticket = $this->ticket;
+
+        return (new MailMessage)
+            ->subject('New Maintenance Request - ' . $ticket->no)
+            ->view('mail.admin-maintenance-ticket', [
+                'ticket' => $ticket,
+                'notification_id' => $this->id,
+                'admin' => $notifiable,
+            ]);
     }
 
     public function toDatabase($notifiable)

@@ -62,4 +62,9 @@ class Admin extends Authenticatable
         }
         return $status;
     }
+
+    public function routeNotificationForMail()
+    {
+        return $this->username;
+    }
 }
