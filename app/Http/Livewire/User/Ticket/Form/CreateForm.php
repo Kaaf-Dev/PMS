@@ -35,6 +35,7 @@ class CreateForm extends Component
     public $attachment;
 
     public $visit_availability_at;
+    public $fileInputKey = 0;
 
     public function rules()
     {
@@ -201,12 +202,19 @@ class CreateForm extends Component
                     'file_name' => $attachment->getClientOriginalName(),
                 ];
             }
-            $ticket_attachments = $ticket->ticketAttachments()->createMany($attachments);
-            $this->showSuccessAlert('تمت إضافة الطلب بنجاح');
+            $ticket->ticketAttachments()->createMany($attachments);
+
             event(new UserCreateTicket($ticket));
-            $this->hideMe();
-            $this->emit('ticket-added');
+
+            // Reset state FIRST
             $this->resetInputs();
+            $this->resetErrorBag();
+            $this->resetValidation();
+
+            // Then notify UI
+            $this->emit('ticket-added');
+            $this->hideMe();
+            $this->showSuccessAlert('تمت إضافة الطلب بنجاح');
         } else {
             $this->showErrorAlert('لا يمكن تسجيل الطلب في الوقت الحالي، يرجى المحاولة لاحقًا!');
         }
@@ -228,5 +236,9 @@ class CreateForm extends Component
             'attachments',
             'visit_availability_at',
         ]);
+
+        $this->attachments   = [];
+        $this->attachment    = null;
+        $this->fileInputKey++;
     }
 }

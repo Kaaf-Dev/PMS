@@ -93,7 +93,10 @@
             <label class="fs-6 fw-semibold mb-2">{{ __("إرفاق مرفقات") }}</label>
 
             <div class="input-group input-group mb-5">
-                <input wire:model="attachment" type="file" class="form-control form-control" />
+                <input wire:model="attachment"
+                       type="file"
+                       class="form-control form-control"
+                       wire:key="ticket-attachment-{{ $fileInputKey }}" />
                 <span class="input-group-text">
                     <span wire:loading wire:target="attachment">
                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
