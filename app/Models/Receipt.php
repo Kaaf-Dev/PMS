@@ -70,7 +70,7 @@ class Receipt extends Model
     {
         $payment_method = $this->payment_method ?? SELF::PAYMENT_METHOD_CASH;
         $payment_method_strings = $this->getPaymentMethodList();
-        return $payment_method_strings[$payment_method];
+        return $payment_method_strings[$payment_method] ?? $payment_method;
     }
 
 
